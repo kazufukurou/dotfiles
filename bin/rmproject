@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm -rf bin
+rm -rf .settings
+rm -rf gen
+rm .project
+rm .classpath
+rm project.properties

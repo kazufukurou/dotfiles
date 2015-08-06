@@ -1,0 +1,103 @@
+#!/bin/bash
+
+name=$(basename $PWD)
+jars=($(find build -name "*.jar" ! -path "*/pre-dexed/*"))
+
+
+read -d '' projectProperties <<"EOF"
+target=android-22
+EOF
+
+read -d '' settings <<"EOF"
+eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
+org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
+org.eclipse.jdt.core.compiler.compliance=1.8
+org.eclipse.jdt.core.compiler.debug.lineNumber=generate
+org.eclipse.jdt.core.compiler.debug.localVariable=generate
+org.eclipse.jdt.core.compiler.debug.sourceFile=generate
+org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+org.eclipse.jdt.core.compiler.source=1.8
+EOF
+
+read -d '' project <<"EOF"
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+    <name>:name:</name>
+    <comment></comment>
+    <projects>
+    </projects>
+    <buildSpec>
+        <buildCommand>
+            <name>com.android.ide.eclipse.adt.ResourceManagerBuilder</name>
+            <arguments>
+            </arguments>
+        </buildCommand>
+        <buildCommand>
+            <name>com.android.ide.eclipse.adt.PreCompilerBuilder</name>
+            <arguments>
+            </arguments>
+        </buildCommand>
+        <buildCommand>
+            <name>org.eclipse.jdt.core.javabuilder</name>
+            <arguments>
+            </arguments>
+        </buildCommand>
+        <buildCommand>
+            <name>com.android.ide.eclipse.adt.ApkBuilder</name>
+            <arguments>
+            </arguments>
+        </buildCommand>
+    </buildSpec>
+    <natures>
+        <nature>com.android.ide.eclipse.adt.AndroidNature</nature>
+        <nature>org.eclipse.jdt.core.javanature</nature>
+    </natures>
+    <linkedResources>
+        <link>
+            <name>AndroidManifest.xml</name>
+            <type>1</type>
+            <locationURI>PROJECT_LOC/src/main/AndroidManifest.xml</locationURI>
+        </link>
+        <link>
+            <name>res</name>
+            <type>2</type>
+            <locationURI>PROJECT_LOC/src/main/res</locationURI>
+        </link>
+    </linkedResources>
+</projectDescription>
+EOF
+
+read -d '' classpath <<"EOF"
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src/main/java"/>
+    <classpathentry kind="src" path="build/generated/source/r/debug"/>
+    <classpathentry kind="src" path="build/generated/source/buildConfig/debug"/>
+    <classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+    <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+    <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+    :projectDependencies:
+    <classpathentry kind="output" path="build/outputs/apk"/>
+</classpath>
+EOF
+
+projectDependenciesStr=""
+for jar in ${jars[@]} ; do
+    projectDependenciesStr=${projectDependenciesStr}"<classpathentry kind=\"lib\" path=\"$jar\"/>
+    "
+done
+
+project="${project//:name:/${name}}" 
+classpath="${classpath//:projectDependencies:/${projectDependenciesStr}}"
+
+rm -rf bin
+rm -rf .settings
+mkdir .settings
+
+echo "$settings" > .settings/org.eclipse.jdt.core.prefs
+echo "$project" > .project
+echo "$classpath" > .classpath
+echo "$projectProperties" > project.properties

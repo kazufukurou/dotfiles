@@ -1,0 +1,12 @@
+#!/bin/bash
+# Moves files like my_awesome_icon-xhdpi.png to drawable-xdhpi/my_awesome_icon.png 
+# Usage: mvdrawable [prefix]
+
+for file in *.*
+do
+    [ -z $1 ] && PREFIX=drawable || PREFIX=$1
+    NAME=${file%\.*}
+    DIR=$PREFIX-${NAME##*-}
+    mkdir $DIR
+    mv $file $DIR/${file%-*}.${file##*\.}
+done

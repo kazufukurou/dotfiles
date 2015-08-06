@@ -1,0 +1,34 @@
+xterm*termName: xterm-256color
+xterm*faceName: M+ 1m:size=12:antialias=true
+xterm*saveLines: 100000
+
+xterm*background: #333333
+xterm*foreground: #cccccc
+xterm*cursorColor: #99cc66
+xterm*colorBD: #ffffff
+xterm*colorUL: #ffff99
+
+!BLK
+xterm*color0: #666666
+xterm*color8: #999999
+!RED
+xterm*color1: #cc6699
+xterm*color9: #ff99cc
+!GRN
+xterm*color2: #99cc66
+xterm*color10: #ccff99
+!YEL
+xterm*color3: #cc9966
+xterm*color11: #ffcc99
+!BLU
+xterm*color4: #6699cc
+xterm*color12: #99ccff
+!MAG
+xterm*color5:  #9966cc
+xterm*color13: #cc99ff
+!CYN
+xterm*color6: #66cc99
+xterm*color14: #99ffcc
+!WHT
+xterm*color7: #cccccc
+xterm*color15: #ffffff

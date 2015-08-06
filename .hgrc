@@ -1,0 +1,28 @@
+[ui]
+username=artem.mironov
+ssh = ssh -C
+
+%include .hgrc-private
+
+[extensions]
+color=
+hgext.purge=
+bookmarks=
+graphlog=
+mq=
+shelve=
+hgext.churn=
+
+[defaults]
+glog=--style=$HOME/.mercurial/glog
+
+[bookmarks]
+track.current=True
+
+[merge-tools]
+meld.priority=100
+kdiff3.args=$base $local $other -o $output
+meld.args=$local $base $other -o $output --auto-merge
+vimdiff.executable=vim
+vimdiff.args=-d $base $local $output $other +close +close
+

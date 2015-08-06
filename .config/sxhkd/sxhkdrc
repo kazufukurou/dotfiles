@@ -1,0 +1,89 @@
+#
+# bspwm hotkeys
+#
+
+super + shift + Escape
+    killall panel; \
+    killall bgcolor; \
+    bspc quit
+
+super + {_,ctrl + }Escape
+    bspc window {-c,-k}
+
+super + space
+    bspc desktop -l next
+
+super + {ctrl,shift} + space
+    bspc window -t {fullscreen,floating}
+
+super + {_,ctrl + }Tab
+    bspc window -f {next,prev}
+
+super + {_,shift + }BackSpace
+    bspc {monitor -f next, window -m next}
+
+super + {semicolon,period}
+    bspc desktop -R {270,90}
+
+super + {_,ctrl + ,shift + }{a,e,comma,o}
+    bspc window {-f,-p,-s} {left,right,up,down}
+
+super + {_,shift + }{g,c,r,h,t,n,m,w,v}
+    bspc {desktop -f,window -d} {1-9}
+
+~button1
+    bspc pointer -g focus
+
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+super + @button{1-3}
+    bspc pointer -u
+
+#
+# wm independent hotkeys
+#
+
+super + Return
+    xterm
+
+super + apostrophe
+    ~/bin/mydmenu
+
+super + j
+    ~/bin/toggletray
+
+super + q
+    slock
+
+# make sxhkd reload its configuration files:
+super + shift + apostrophe
+    pkill -USR1 -x sxhkd
+
+# Increase volume
+XF86AudioRaiseVolume
+    amixer set Master playback 1+
+
+# Decrease volume
+XF86AudioLowerVolume
+    amixer set Master playback 1-
+
+# Toggle mute
+XF86AudioMute
+    amixer set Master toggle;
+
+# Music next
+XF86AudioNext
+    cmus-remote --next
+
+# Music prev
+XF86AudioPrev
+    cmus-remote --prev
+
+# Music play/pause
+XF86AudioPlay
+    cmus-remote --pause
+

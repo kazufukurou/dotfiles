@@ -1,0 +1,36 @@
+[user]
+    name = Artyom Mironov
+    email = kazufukurou@gmail.com
+[core]
+    autocrlf = input
+    safecrlf = false
+    editor = vim
+[push]
+    default = simple
+[color]
+    ui = true
+    status = auto
+    branch = auto
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%C(blue)%h%C(reset) %C(black)%ad%C(reset) %s %C(black)%an%C(reset)%C(yellow)%d%C(reset)\" --graph --date=short
+[credential]
+    helper = cache --timeout=3600
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[merge]
+    tool = meld
+[mergetool "meld"]
+    prompt = false
+[mergetool "splice"]
+    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    trustExitCode = true
+[mergetool "diffconflicts"]
+    cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+    trustExitCode = true
+    keepBackup = false
