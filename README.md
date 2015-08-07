@@ -1,1 +1,1 @@
-Arch linux, programmer dvorak, bspwm, zsh, vim, eclim
+Arch linux, programmer dvorak, bspwm, zsh, vim
