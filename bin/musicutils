@@ -30,7 +30,7 @@ def isMusic(str):
 if args.query:
     sys.stdout.write("\nQuery tag info...\n\n")
     for fn in os.listdir('.'):
-        if isMusic(fn): 
+        if isMusic(fn):
             f = mutagen.File(fn, easy=True)
             sys.stdout.write(fn + "\n")
             sys.stdout.write(f.pprint() + "\n\n")
@@ -79,17 +79,17 @@ elif args.guess:
     dir = os.getcwd()
     for fn in os.listdir('.'):
         if isMusic(fn):
-            artist = os.path.basename(os.path.dirname(dir)) 
-            album = os.path.basename(dir).split(' ', 1)[1] 
+            artist = os.path.basename(os.path.dirname(dir))
+            album = os.path.basename(dir).split(' ', 1)[1]
             date = os.path.basename(dir).split(' ', 1)[0]
             tracknumber = fn.split(' ', 1)[0].lstrip('0')
-            title = os.path.splitext(fn)[0].split(' ', 1)[1] 
+            title = os.path.splitext(fn)[0].split(' ', 1)[1]
             sys.stdout.write(fn + "\n")
             sys.stdout.write("Artist: " + artist + "\n")
             sys.stdout.write("Album: " + album + "\n")
             sys.stdout.write("Date: " + date + "\n")
             sys.stdout.write("Title: " + title + "\n")
-            sys.stdout.write("Tracknumber: " + tracknumber + "\n") 
+            sys.stdout.write("Tracknumber: " + tracknumber + "\n")
             sys.stdout.write("\n")
             if args.force:
                 f = mutagen.File(fn, easy=True)

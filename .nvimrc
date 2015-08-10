@@ -1,16 +1,10 @@
 call plug#begin()
-Plug 'guns/xterm-color-table.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'sjl/splice.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'L9'
-Plug 'EasyMotion'
+Plug 'Valloric/YouCompleteMe'
+Plug 'Raimondi/delimitMate'
+Plug 'adinapoli/vim-markmultiple'
 Plug 'haya14busa/incsearch.vim'
 Plug 'osyo-manga/vim-over'
-Plug 'snipMate'
-Plug 'Raimondi/delimitMate'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 color mycolorscheme
@@ -139,6 +133,8 @@ nnoremap <leader>es :JavaSearch<cr>
 nnoremap <leader>ed :JavaDocSearch<cr>
 nnoremap <leader>eo :JavaImpl<cr>
 nnoremap <leader>ei :JavaImport<cr>
+nnoremap <leader>eg :JavaGet<cr>
+nnoremap <leader>egs :JavaGetSet<cr>
 
 "incsearch
 let g:incsearch#auto_nohlsearch=1
