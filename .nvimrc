@@ -5,6 +5,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'adinapoli/vim-markmultiple'
 Plug 'haya14busa/incsearch.vim'
 Plug 'osyo-manga/vim-over'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 color mycolorscheme
