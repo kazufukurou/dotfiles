@@ -13,8 +13,7 @@ call plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
-set showmode
-set showcmd
+set noshowmode
 set scrolloff=4
 set hidden "allow to have unwritten changes to a file and open a new file
 set nonumber "dont show line numbers
@@ -35,7 +34,7 @@ set smartcase "if a pattern contains an uppercase letter, it is case sensitive, 
 set gdefault "all matches in a line are substituted instead of one
 set showmatch "show matching brackets when text indicator is over them
 set smartindent "automatically inserts one extra level of indentation in some cases
-set wrap "don't wrap lines
+set wrap "wrap lines
 set nolist "don't show whitespaces
 set clipboard=unnamedplus "make yank copy to the global system clipboard
 set shortmess+=I "no startup messages
@@ -154,15 +153,33 @@ map g# <Plug>(incsearch-nohl-g#)
 
 "Status line
 if has("statusline")
-    set statusline=%<%f "path to the file relative to current directory
+    let g:last_mode=""
+    function! Mode()
+        redraw
+        let l:mode = mode()
+        if     mode ==# "n"  | exec 'hi User1 ctermbg=10 ctermfg=0' | return "N"
+        elseif mode ==# "i"  | exec 'hi User1 ctermbg=15 ctermfg=0' | return "I"
+        elseif mode ==# "R"  | exec 'hi User1 ctermbg=9 ctermfg=0'  | return "R"
+        elseif mode ==# "v"  | exec 'hi User1 ctermbg=12 ctermfg=0' | return "V"
+        elseif mode ==# "V"  | exec 'hi User1 ctermbg=12 ctermfg=0' | return "VL"
+        elseif mode ==# "" | exec 'hi User1 ctermbg=12 ctermfg=0' | return "VB"
+        else                 | return l:mode
+        endif
+    endfunc
+    hi User2 ctermbg=15 ctermfg=0
+    hi User3 ctermbg=14 ctermfg=0
+    hi User4 ctermbg=12 ctermfg=0
+
+    set statusline=
+    set statusline+=%1*\ %{Mode()}\ %0*
+    set statusline+=\ %<%f "path to the file relative to current directory
     set statusline+=\ %h "help file flag
     set statusline+=%m "modified flag
     set statusline+=%r "read only flag
     set statusline+=%= "separation point between left and right items
-    set statusline+=\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\")}] " encoding
-    set statusline+=%k "keymap
-    set statusline+=\ %{(&expandtab?\"S\":\"T\")} "expand tab mode
-    set statusline+=\ %{(&wrap?\"W\":\"N\")} "wrap line mode
-    set statusline+=\ %-14.(%l/%L,%c%V%) "line, column
-    set statusline+=\ %P "percent through file
+    set statusline+=\ %l:%c\ %0* "line, column
+    set statusline+=\ %P\ %0* "percent through file
+    set statusline+=%4*%{(&wrap?\"\ W\ \":\"\")}%0* "wrap line mode
+    set statusline+=%3*\ %{(&expandtab?\"S\":\"T\")}\ %0* "expand tab mode
+    set statusline+=%2*\ %{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\")}\ %0* "encoding
 endif
