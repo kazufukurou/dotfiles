@@ -9,8 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
-Plug 'git://repo.or.cz/vcscommand'
-call plug#end()
+all plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
@@ -124,6 +123,9 @@ let g:TypesFileIncludeLocals=1
 "vim-over
 nnoremap <leader>o :OverCommandLine<cr>
 
+"vim-surrond
+let g:surround_45 = "«\r»"
+
 "CtrlP
 let g:ctrlp_show_hidden=1
 let g:ctrlp_use_caching=0
@@ -132,28 +134,27 @@ let g:ctrlp_map='<leader>p'
 "Eclim
 let g:EclimCompletionMethod='omnifunc'
 let g:EclimJavaSearchSingleResult='edit'
-nnoremap <leader>ec :JavaCorrect<cr>
-nnoremap <leader>es :JavaSearch<cr>
-nnoremap <leader>ed :JavaDocSearch<cr>
-nnoremap <leader>eo :JavaImpl<cr>
-nnoremap <leader>ei :JavaImport<cr>
-nnoremap <leader>eg :JavaGet<cr>
-nnoremap <leader>egs :JavaGetSet<cr>
+nnoremap <silent> <leader>ec :JavaCorrect<cr>
+nnoremap <silent> <leader>es :JavaSearch<cr>
+nnoremap <silent> <leader>ed :JavaDocSearch<cr>
+nnoremap <silent> <leader>eo :JavaImpl<cr>
+nnoremap <silent> <leader>ei :JavaImport<cr>
+nnoremap <silent> <leader>eg :JavaGet<cr>
+nnoremap <silent> <leader>egs :JavaGetSet<cr>
 
 "incsearch
 let g:incsearch#auto_nohlsearch=1
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-map n <Plug>(incsearch-nohl-n)
-map N <Plug>(incsearch-nohl-N)
-map * <Plug>(incsearch-nohl-*)
-map # <Plug>(incsearch-nohl-#)
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-"Status line
-
+"status line
 function! SetBranch()
   let l:gitbranch=substitute(system("git branch --no-color | grep --color=never '*' | cut -d' ' -f2"), '\n', '', '')
   if l:gitbranch =~ 'fatal'
