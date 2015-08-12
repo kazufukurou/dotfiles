@@ -9,6 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
+Plug 'git://repo.or.cz/vcscommand'
 call plug#end()
 
 color mycolorscheme
@@ -152,6 +153,21 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 "Status line
+
+function! SetBranch()
+  let l:gitbranch=substitute(system("git branch --no-color | grep --color=never '*' | cut -d' ' -f2"), '\n', '', '')
+  if l:gitbranch =~ 'fatal'
+    let g:gitbranch = 'N/A'
+  else
+    let g:gitbranch = l:gitbranch
+  endif
+endfunction
+
+augroup statusline
+  autocmd!
+  au BufEnter,FileChangedShell,CursorHold * call SetBranch()
+augroup END
+
 if has("statusline")
     let g:last_mode=""
     function! Mode()
@@ -160,18 +176,20 @@ if has("statusline")
         if     mode ==# "n"  | exec 'hi User1 ctermbg=10 ctermfg=0' | return "N"
         elseif mode ==# "i"  | exec 'hi User1 ctermbg=15 ctermfg=0' | return "I"
         elseif mode ==# "R"  | exec 'hi User1 ctermbg=9 ctermfg=0'  | return "R"
-        elseif mode ==# "v"  | exec 'hi User1 ctermbg=12 ctermfg=0' | return "V"
-        elseif mode ==# "V"  | exec 'hi User1 ctermbg=12 ctermfg=0' | return "VL"
-        elseif mode ==# "" | exec 'hi User1 ctermbg=12 ctermfg=0' | return "VB"
+        elseif mode ==# "v"  | exec 'hi User1 ctermbg=13 ctermfg=0' | return "V"
+        elseif mode ==# "V"  | exec 'hi User1 ctermbg=13 ctermfg=0' | return "VL"
+        elseif mode ==# "" | exec 'hi User1 ctermbg=13 ctermfg=0' | return "VB"
         else                 | return l:mode
         endif
     endfunc
+
     hi User2 ctermbg=15 ctermfg=0
     hi User3 ctermbg=14 ctermfg=0
     hi User4 ctermbg=12 ctermfg=0
 
     set statusline=
     set statusline+=%1*\ %{Mode()}\ %0*
+    set statusline+=%3*\ %{g:gitbranch}\ %0*
     set statusline+=\ %<%f "path to the file relative to current directory
     set statusline+=\ %h "help file flag
     set statusline+=%m "modified flag
