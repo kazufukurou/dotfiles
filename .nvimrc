@@ -9,7 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
-all plug#end()
+call plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
