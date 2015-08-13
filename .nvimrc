@@ -155,49 +155,53 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 "status line
-function! SetBranch()
-  let l:gitbranch=substitute(system("git branch --no-color | grep --color=never '*' | cut -d' ' -f2"), '\n', '', '')
-  if l:gitbranch =~ 'fatal'
-    let g:gitbranch = 'N/A'
-  else
-    let g:gitbranch = l:gitbranch
-  endif
-endfunction
+if has('statusline')
+    augroup statusline
+        autocmd!
+        au BufEnter,FileChangedShell,CursorHold * call SetBranch()
+    augroup END
 
-augroup statusline
-  autocmd!
-  au BufEnter,FileChangedShell,CursorHold * call SetBranch()
-augroup END
+    let g:branch=''
+    function! SetBranch()
+        let l:branch=substitute(system("hg branch"), '\n', '', '')
+        if l:branch!~'abort'
+            let g:branch=l:branch
+        else
+            let l:branch=substitute(system("git name-rev --name-only HEAD"), '\n', '', '')
+            if l:branch!~'fatal'
+                let g:branch=l:branch
+            endif
+        endif
+    endfunction
 
-if has("statusline")
-    let g:last_mode=""
+    let g:last_mode=''
     function! Mode()
         redraw
-        let l:mode = mode()
+        let l:mode=mode()
         if     mode ==# "n"  | exec 'hi User1 ctermbg=10 ctermfg=0' | return "N"
-        elseif mode ==# "i"  | exec 'hi User1 ctermbg=15 ctermfg=0' | return "I"
+        elseif mode ==# "i"  | exec 'hi User1 ctermbg=0 ctermfg=15' | return "I"
         elseif mode ==# "R"  | exec 'hi User1 ctermbg=9 ctermfg=0'  | return "R"
         elseif mode ==# "v"  | exec 'hi User1 ctermbg=13 ctermfg=0' | return "V"
         elseif mode ==# "V"  | exec 'hi User1 ctermbg=13 ctermfg=0' | return "VL"
         elseif mode ==# "" | exec 'hi User1 ctermbg=13 ctermfg=0' | return "VB"
         else                 | return l:mode
         endif
-    endfunc
+    endfunction
 
-    hi User2 ctermbg=15 ctermfg=0
+    hi User2 ctermbg=10 ctermfg=0
     hi User3 ctermbg=14 ctermfg=0
     hi User4 ctermbg=12 ctermfg=0
+    hi User5 ctermbg=15 ctermfg=0
 
     set statusline=
-    set statusline+=%1*\ %{Mode()}\ %0*
-    set statusline+=%3*\ %{g:gitbranch}\ %0*
+    set statusline+=%1*\ %{Mode()}\ %0* "mode
+    set statusline+=%3*%{(empty(g:branch)?\"\":\"\ \".g:branch.\"\ \")}%0* "vcs branch
     set statusline+=\ %<%f "path to the file relative to current directory
     set statusline+=\ %h "help file flag
     set statusline+=%m "modified flag
     set statusline+=%r "read only flag
     set statusline+=%= "separation point between left and right items
-    set statusline+=\ %l:%c\ %0* "line, column
-    set statusline+=\ %P\ %0* "percent through file
+    set statusline+=\ %l:%c\ %P\ %0* "line, column, scroll position
     set statusline+=%4*%{(&wrap?\"\ W\ \":\"\")}%0* "wrap line mode
     set statusline+=%3*\ %{(&expandtab?\"S\":\"T\")}\ %0* "expand tab mode
     set statusline+=%2*\ %{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\")}\ %0* "encoding
