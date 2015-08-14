@@ -9,6 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
+Plug 'EasyMotion'
 call plug#end()
 
 color mycolorscheme
@@ -96,7 +97,7 @@ map <C-l> <C-w>l
 "vmap <Down> ]egv
 
 "wrap lines
-nnoremap <leader>w :set wrap!<CR>
+nnoremap <silent><leader>w :set wrap!<CR>
 
 "vimrc editing
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
