@@ -192,15 +192,11 @@ if has('statusline')
     hi User2 ctermbg=10 ctermfg=0
     hi User3 ctermbg=14 ctermfg=0
     hi User4 ctermbg=12 ctermfg=0
-    hi User5 ctermbg=15 ctermfg=0
 
-    set statusline=
-    set statusline+=%1*\ %{Mode()}\ %0* "mode
-    set statusline+=%3*%{(empty(g:branch)?\"\":\"\ \".g:branch.\"\ \")}%0* "vcs branch
+    set statusline=%1*\ %{Mode()}\ %0* "mode
+    set statusline+=%3*%(\ %{g:branch}\ %)%0* "vcs branch
+    set statusline+=%4*%(\ %H%M%R\ %)%0* "help, modified, read only flags
     set statusline+=\ %<%f "path to the file relative to current directory
-    set statusline+=\ %h "help file flag
-    set statusline+=%m "modified flag
-    set statusline+=%r "read only flag
     set statusline+=%= "separation point between left and right items
     set statusline+=\ %l:%c\ %P\ %0* "line, column, scroll position
     set statusline+=%4*%{(&wrap?\"\ W\ \":\"\")}%0* "wrap line mode
