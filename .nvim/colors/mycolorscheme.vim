@@ -70,7 +70,7 @@ hi SpecialChar     ctermfg=5
 hi SpecialComment  ctermfg=7                 cterm=bold
 hi Statement       ctermfg=1                 cterm=bold
 hi Tag             ctermfg=1
-hi Todo            ctermfg=15                cterm=bold
+hi Todo            ctermfg=11   ctermbg=none cterm=bold
 hi Type            ctermfg=4
 hi Underlined      ctermfg=7                 cterm=underline
 hi Error           ctermfg=9    ctermbg=1
