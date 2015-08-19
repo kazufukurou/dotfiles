@@ -2,7 +2,6 @@ call plug#begin()
 Plug 'kien/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Raimondi/delimitMate'
-Plug 'adinapoli/vim-markmultiple'
 Plug 'haya14busa/incsearch.vim'
 Plug 'osyo-manga/vim-over'
 Plug 'tpope/vim-surround'

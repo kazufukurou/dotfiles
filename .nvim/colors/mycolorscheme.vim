@@ -13,7 +13,7 @@ hi ColorColumn                  ctermbg=8
 hi Comment         ctermfg=8
 hi Conceal         ctermfg=15
 hi Constant        ctermfg=10
-hi Cursor                                    cterm=none
+hi Cursor          ctermfg=0    ctermbg=2    cterm=none
 hi CursorColumn                 ctermbg=8
 hi CursorLine                                cterm=none
 hi CursorLineNr    ctermfg=15
@@ -30,7 +30,7 @@ hi FoldColumn      ctermfg=7    ctermbg=8
 hi Folded          ctermfg=15   ctermbg=8
 hi Identifier      ctermfg=10
 hi Ignore          ctermfg=7
-hi IncSearch       ctermfg=10
+hi IncSearch       ctermfg=0    ctermbg=6    cterm=none
 hi Keyword         ctermfg=1                 cterm=bold
 hi LineNr          ctermfg=8
 hi MatchParen      ctermfg=0    ctermbg=11   cterm=bold
@@ -46,7 +46,7 @@ hi PmenuSel        ctermfg=15   ctermbg=2
 hi PmenuThumb      ctermfg=15
 hi PreProc         ctermfg=3
 hi Question        ctermfg=4                 cterm=bold
-hi Search          ctermfg=15   ctermbg=6    cterm=bold
+hi Search          ctermfg=14   ctermbg=0    cterm=none
 hi SignColumn      ctermfg=15   ctermbg=0    cterm=bold
 hi Special         ctermfg=4
 hi SpecialChar     ctermfg=5
@@ -71,4 +71,4 @@ hi VertSplit       ctermfg=8                 cterm=bold
 hi Visual                       ctermbg=0
 hi VisualNOS                    ctermbg=0
 hi WarningMsg      ctermfg=11                cterm=bold
-hi WildMenu        ctermfg=15   ctermbg=8    cterm=bold
+hi WildMenu        ctermfg=15   ctermbg=0    cterm=none
