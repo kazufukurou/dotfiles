@@ -58,7 +58,7 @@ hi SpellLocal                   ctermbg=4
 hi SpellRare       ctermfg=none ctermbg=none cterm=reverse
 hi Statement       ctermfg=1                 cterm=bold
 hi StatusLine      ctermfg=8    ctermbg=15   cterm=reverse
-hi StatusLineNC    ctermfg=8    ctermbg=0    cterm=reverse
+hi StatusLineNC    ctermfg=0    ctermbg=8    cterm=reverse
 hi TabLine         ctermfg=15   ctermbg=8    cterm=none
 hi TabLineFill     ctermfg=8    ctermbg=8    cterm=none
 hi TabLineSel      ctermfg=15                cterm=none
@@ -67,7 +67,7 @@ hi Title           ctermfg=15
 hi Todo            ctermfg=15   ctermbg=none cterm=bold
 hi Type            ctermfg=4
 hi Underlined      ctermfg=7                 cterm=underline
-hi VertSplit       ctermfg=8                 cterm=bold
+hi VertSplit       ctermfg=0    ctermbg=0    cterm=none
 hi Visual                       ctermbg=0
 hi VisualNOS                    ctermbg=0
 hi WarningMsg      ctermfg=11                cterm=bold

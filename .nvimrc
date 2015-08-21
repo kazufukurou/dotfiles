@@ -13,14 +13,12 @@ call plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
-set noshowmode
 set scrolloff=4
 set hidden "allow to have unwritten changes to a file and open a new file
 set nonumber "dont show line numbers
 set norelativenumber "line numbers are relative to current current line
 set ruler "always show current position
 set cursorline "highlight current line
-set laststatus=2 "always show the status line
 set visualbell "flash its screen instead of sounding a beep
 set tabstop=4 "1 tab=4 spaces
 set shiftwidth=4
@@ -75,25 +73,16 @@ nnoremap ; :
 "don't move cursor then exit insert mode
 inoremap <esc> <esc>`^
 inoremap hh <esc>`^
+inoremap uu <esc>`^
 
 "turn off Vim's crazy default regex characters
 "nnoremap / /\v
 
 "easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-"move text with arrows
-"nnoremap <Left> <<
-"nnoremap <Right> >>
-"vnoremap <Left> <gv
-"vnoremap <Right> >gv
-"nmap <Up> [e
-"nmap <Down> ]e
-"vmap <Up> [egv
-"vmap <Down> ]egv
+nnoremap <left> <C-w>h
+nnoremap <down> <C-w>j
+nnoremap <up> <C-w>k
+nnoremap <right> <C-w>l
 
 "wrap lines
 nnoremap <silent><leader>w :set wrap!<CR>
@@ -155,50 +144,68 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 "status line
-if has('statusline')
-    augroup statusline
-        autocmd!
-        au BufEnter,FileChangedShell,CursorHold * call SetBranch()
-    augroup END
+hi User2 ctermbg=10 ctermfg=0
+hi User3 ctermbg=14 ctermfg=0
+hi User4 ctermbg=12 ctermfg=0
+set noshowmode
+set laststatus=2 "always show the status line
 
-    let g:branch=''
-    function! SetBranch()
-        let l:branch=substitute(system("hg branch"), '\n', '', '')
-        if l:branch!~'abort'
+augroup statusline
+    autocmd!
+    autocmd BufEnter,FileChangedShell,CursorHold * call SetBranch()
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+augroup END
+
+function! s:RefreshStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+  endfor
+endfunction
+
+command! RefreshStatus :call <SID>RefreshStatus()
+
+function! Status(winnum)
+  let active = a:winnum == winnr()
+  let stat=''
+  if active
+      let stat.='%1* %{Mode()} %0*' "mode
+      let stat.='%3*%( %{g:branch} %)%0*' "vcs branch
+  endif
+  let stat.='%4*%( %H%M%R %)%0*' "help, modified, read only flags
+  let stat.=' %<%f' "path to the file relative to current directory
+  let stat.='%=' "separation point between left and right items
+  let stat.=' %l:%c %P ' "line, column, scroll position
+  if active
+      let stat.='%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
+      let stat.='%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
+      let stat.='%2* %{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} %0*' "encoding
+  endif
+  return stat
+endfunction
+
+
+let g:branch=''
+function! SetBranch()
+    let l:branch=substitute(system("hg branch"), '\n', '', '')
+    if l:branch!~'abort'
+        let g:branch=l:branch
+    else
+        let l:branch=substitute(system("git name-rev --name-only HEAD"), '\n', '', '')
+        if l:branch!~'fatal'
             let g:branch=l:branch
-        else
-            let l:branch=substitute(system("git name-rev --name-only HEAD"), '\n', '', '')
-            if l:branch!~'fatal'
-                let g:branch=l:branch
-            endif
         endif
-    endfunction
+    endif
+endfunction
 
-    let g:last_mode=''
-    function! Mode()
-        redraw
-        let l:mode=mode()
-        if     mode ==# "n"  | exec 'hi User1 ctermbg=10 ctermfg=0' | return "N"
-        elseif mode ==# "i"  | exec 'hi User1 ctermbg=0 ctermfg=15' | return "I"
-        elseif mode ==# "R"  | exec 'hi User1 ctermbg=9 ctermfg=0'  | return "R"
-        elseif mode ==# "v"  | exec 'hi User1 ctermbg=13 ctermfg=0' | return "V"
-        elseif mode ==# "V"  | exec 'hi User1 ctermbg=13 ctermfg=0' | return "VL"
-        elseif mode ==# "" | exec 'hi User1 ctermbg=13 ctermfg=0' | return "VB"
-        else                 | return l:mode
-        endif
-    endfunction
+function! Mode()
+    let l:mode=mode()
+    if     l:mode ==# "n"  | redraw | hi User1 ctermbg=10 ctermfg=0 | return "N"
+    elseif l:mode ==# "i"  | redraw | hi User1 ctermbg=0 ctermfg=15 | return "I"
+    elseif l:mode ==# "R"  | redraw | hi User1 ctermbg=9 ctermfg=0  | return "R"
+    elseif l:mode ==# "v"  | redraw | hi User1 ctermbg=13 ctermfg=0 | return "V"
+    elseif l:mode ==# "V"  | redraw | hi User1 ctermbg=13 ctermfg=0 | return "VL"
+    elseif l:mode ==# "" | redraw | hi User1 ctermbg=13 ctermfg=0 | return "VB"
+    else | return l:mode
+    endif
+endfunction
 
-    hi User2 ctermbg=10 ctermfg=0
-    hi User3 ctermbg=14 ctermfg=0
-    hi User4 ctermbg=12 ctermfg=0
-
-    set statusline=%1*\ %{Mode()}\ %0* "mode
-    set statusline+=%3*%(\ %{g:branch}\ %)%0* "vcs branch
-    set statusline+=%4*%(\ %H%M%R\ %)%0* "help, modified, read only flags
-    set statusline+=\ %<%f "path to the file relative to current directory
-    set statusline+=%= "separation point between left and right items
-    set statusline+=\ %l:%c\ %P\ %0* "line, column, scroll position
-    set statusline+=%4*%{(&wrap?\"\ W\ \":\"\")}%0* "wrap line mode
-    set statusline+=%3*\ %{(&expandtab?\"S\":\"T\")}\ %0* "expand tab mode
-    set statusline+=%2*\ %{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\")}\ %0* "encoding
-endif
