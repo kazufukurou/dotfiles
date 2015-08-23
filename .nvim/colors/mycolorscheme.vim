@@ -13,7 +13,7 @@ hi ColorColumn                  ctermbg=8
 hi Comment         ctermfg=8
 hi Conceal         ctermfg=15
 hi Constant        ctermfg=10
-hi Cursor          ctermfg=0    ctermbg=2    cterm=none
+hi Cursor          ctermfg=2    ctermbg=none cterm=reverse
 hi CursorColumn                 ctermbg=8
 hi CursorLine                                cterm=none
 hi CursorLineNr    ctermfg=15
@@ -30,7 +30,7 @@ hi FoldColumn      ctermfg=7    ctermbg=8
 hi Folded          ctermfg=15   ctermbg=8
 hi Identifier      ctermfg=10
 hi Ignore          ctermfg=7
-hi IncSearch       ctermfg=0    ctermbg=6    cterm=none
+hi IncSearch       ctermfg=6    ctermbg=none cterm=reverse
 hi Keyword         ctermfg=1                 cterm=bold
 hi LineNr          ctermfg=8
 hi MatchParen      ctermfg=0    ctermbg=11   cterm=bold
@@ -57,9 +57,9 @@ hi SpellCap                     ctermbg=4
 hi SpellLocal                   ctermbg=4
 hi SpellRare       ctermfg=none ctermbg=none cterm=reverse
 hi Statement       ctermfg=1                 cterm=bold
-hi StatusLine      ctermfg=8    ctermbg=15   cterm=reverse
-hi StatusLineNC    ctermfg=0    ctermbg=8    cterm=reverse
-hi TabLine         ctermfg=15   ctermbg=8    cterm=none
+hi StatusLine      ctermfg=15   ctermbg=8    cterm=none
+hi StatusLineNC    ctermfg=8    ctermbg=0    cterm=none
+hi TabLine         ctermfg=8    ctermbg=15   cterm=none
 hi TabLineFill     ctermfg=8    ctermbg=8    cterm=none
 hi TabLineSel      ctermfg=15                cterm=none
 hi Tag             ctermfg=1
