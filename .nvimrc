@@ -95,7 +95,7 @@ nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 
 "highlight 80th column
 highlight OverLength ctermbg=1 ctermfg=15
-match OverLength /\%81v.\+/
+match OverLength /\%81v/
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
@@ -110,6 +110,23 @@ let g:surround_45 = "«\r»"
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
 let g:ctrlp_map = '<leader>p'
+let g:ctrlp_status_func = { 'main': 'CtrlP_Statusline_1', 'prog': 'CtrlP_Statusline_2', }
+function! CtrlP_Statusline_1(...)
+    let focus = '%2* '.a:1.' %*'
+    let byfname = '%2* '.a:2.' %*'
+    let regex = a:3 ? '%2* regex %*' : ''
+    let prv = ' '.a:4.' '
+    let item = '%#WildMenu# '.a:5.' %*'
+    let nxt = ' '.a:6.' '
+    let marked = ' '.a:7.' '
+    let dir = ' %=%< '.getcwd().' '
+    return focus.byfname.regex.prv.item.nxt.marked.dir
+endfunction
+function! CtrlP_Statusline_2(...)
+    let len = '%2* '.a:1.' %*'
+    let dir = ' %=%< '.getcwd().' '
+    return len.dir
+endfunction
 
 "incsearch
 let g:incsearch#auto_nohlsearch = 1
@@ -160,7 +177,7 @@ function! Status(winnum)
       let stat .= '%3*%( %{g:branch} %)%0*' "vcs branch
   endif
   let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
-  if mode() ==# "i" | let stat .= '%5*' | endif
+  if active && mode() ==# "i" | let stat .= '%5*' | endif
   let stat .= ' %<%f' "path to the file relative to current directory
   let stat .= '%=' "separation point between left and right items
   if active

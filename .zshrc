@@ -20,7 +20,7 @@ alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
 precmd () { vcs_info }
 
 PROMPT='
-%B%F{4}%~ %f%F{10}%f${vcs_info_msg_0_}
+%B%F{4}%~ %f%(1j.%F{10}%j %f.)${vcs_info_msg_0_}
 %F{2}%(!.#.$) %f%b'
 
 h2d() {
