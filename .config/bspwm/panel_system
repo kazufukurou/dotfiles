@@ -75,7 +75,15 @@ cmus() {
     echo "$artist $cw$title$c" 
 }
 
-while true; do
+status() {
     echo "S$(cmus) T $(temp) V $(volume) B $(battery) $(datetime)"
-    sleep 1
-done
+}
+
+if [ "$1" = "-s" ]; then
+    while true; do
+        echo $(status)
+        sleep 1
+    done
+else 
+    echo $(status)
+fi

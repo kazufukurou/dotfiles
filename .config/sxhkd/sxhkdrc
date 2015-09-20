@@ -65,11 +65,13 @@ super + shift + apostrophe
 
 # Increase volume
 XF86AudioRaiseVolume
-    amixer set Master playback 1+
+    amixer set Master playback 1+; \
+    .config/bspwm/panel_system_update
 
 # Decrease volume
 XF86AudioLowerVolume
-    amixer set Master playback 1-
+    amixer set Master playback 1-; \
+    .config/bspwm/panel_system_update
 
 # Toggle mute
 XF86AudioMute

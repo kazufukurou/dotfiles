@@ -14,7 +14,7 @@ mkfifo "$PANEL_FIFO"
 
 bspc control --subscribe > "$PANEL_FIFO" &
 xtitle -sf "T%s" > "$PANEL_FIFO" &
-~/.config/bspwm/panel_system > $PANEL_FIFO &
+~/.config/bspwm/panel_system -s > $PANEL_FIFO &
 
 cat "$PANEL_FIFO" | ~/.config/bspwm/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$PANEL_COLOR_GRAY" -B "$PANEL_COLOR_BG" &
 wait

@@ -24,7 +24,7 @@ hi DiffChange      ctermfg=15   ctermbg=5
 hi DiffDelete      ctermfg=9    ctermbg=1
 hi DiffText        ctermfg=0    ctermbg=15   cterm=reverse,bold
 hi Directory       ctermfg=8
-hi Error           ctermfg=9    ctermbg=1
+hi Error           ctermfg=9    ctermbg=1    cterm=bold
 hi ErrorMsg        ctermfg=1                 cterm=bold
 hi FoldColumn      ctermfg=7    ctermbg=8
 hi Folded          ctermfg=15   ctermbg=8
@@ -33,7 +33,7 @@ hi Ignore          ctermfg=7
 hi IncSearch       ctermfg=6    ctermbg=none cterm=reverse
 hi Keyword         ctermfg=1                 cterm=bold
 hi LineNr          ctermfg=8
-hi MatchParen      ctermfg=0    ctermbg=11   cterm=bold
+hi MatchParen      ctermfg=10   ctermbg=0    cterm=bold
 hi ModeMsg         ctermfg=11
 hi MoreMsg         ctermfg=11
 hi NonText         ctermfg=8
@@ -70,5 +70,5 @@ hi Underlined      ctermfg=7                 cterm=underline
 hi VertSplit       ctermfg=0    ctermbg=0    cterm=none
 hi Visual                       ctermbg=0
 hi VisualNOS                    ctermbg=0
-hi WarningMsg      ctermfg=11                cterm=bold
+hi WarningMsg      ctermfg=11   ctermbg=3    cterm=bold
 hi WildMenu        ctermfg=15   ctermbg=0    cterm=none
