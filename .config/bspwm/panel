@@ -9,12 +9,126 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 . ~/.config/bspwm/panel_config
 
+WORKSPACES=('▘' '▀' '▝' '▌' '█' '▐' '▖' '▄' '▗' '')
+cw=%{F$PANEL_COLOR_WHITE}
+cm=%{F$PANEL_COLOR_MAGENTA}
+cb=%{F$PANEL_COLOR_BLUE}
+cr=%{F$PANEL_COLOR_RED}
+crb=%{F$PANEL_COLOR_RED_BOLD}
+c=%{F-}
+
+cpu() {
+    cpus=$(grep -c processor /proc/cpuinfo)
+    ps -eo pcpu | awk -v "cpus=$cpus" '/\s*[1-9]/ NR==1 {sum=0} {sum+=$1} END {printf "%d\n", sum/cpus}'
+}
+
+temp() {
+    temperature=$(sensors | grep 'Core 0' | cut -d + -f2 | cut -d . -f1)
+    if [ $temperature -gt 80 ]; then
+        color=$cr
+    elif [ $temperature -gt 60 ]; then
+        color=$cm
+    else
+        color=$cb
+    fi
+    echo "$color$temperature$c"
+}
+
+volume() {
+    if [[ -n $(amixer get Master | grep off) ]]; then
+        echo "$crMute$c"
+    else
+        echo $cw$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')$c
+    fi
+}
+
+battery() {
+    batteryInfo=$(acpi -b 2>/dev/null)
+    battery=$(echo $batteryInfo | grep -Po '[0-9]+(?=%)' | sort -n | head -n1)
+    batteryText=$battery
+
+    if [ -z $battery ]; then
+        battery=-1
+        batteryText=-
+    fi
+
+    if [ $battery -gt 75 ]; then
+        color=$cb
+    elif [ $battery -gt 50 ]; then
+        color=$cm
+    elif [ $battery -gt 25 ]; then
+        color=$cr
+    elif [ $battery -gt -1 ]; then
+        color=$crb
+    else 
+        color=$cw
+    fi
+
+    echo "$color$batteryText$c"
+
+    if [[ $battery -le 10 && `echo $batteryInfo | grep Discharging` ]]; then
+        notify-send "Low battery" -u critical
+    fi
+}
+
+datetime() {
+    template="%b $cw%e$c %a $cw%R$c"
+    echo $(date +"$template")
+}
+
+cmus() {
+    info=$(cmus-remote -Q | grep tag)
+    title=$(echo -e "$info" | grep 'tag title' | cut -d ' ' -f3-)
+    artist=$(echo -e "$info" | grep 'tag artist' | cut -d ' ' -f3-)
+    echo "$artist $cw$title$c" 
+}
+
+title_loop() {
+    while true; do echo T$(xdotool getactivewindow getwindowname); sleep .5; done
+}
+
+system_loop() {
+    while true; do
+        echo "S$(cmus) T $(temp) V $(volume) B $(battery) $(datetime)"
+        sleep 1
+    done
+}
+
+panel_bar() {
+    while read -r line ; do
+        case $line in
+            S*)
+                sys_infos="${line#?}"
+                ;;
+            T*)
+                title="${line#?}"
+                ;;
+            W*)
+                wm_infos=""
+                IFS=':'
+                set -- ${line#?}
+                while [ $# -gt 0 ] ; do
+                    item=$1
+                    name=${item#?}
+                    case $item in
+                        O*|F*|U*)
+                            wm_infos="${wm_infos}${WORKSPACES[${name} - 1]}"
+                            ;;
+                    esac
+                    shift
+                done
+                ;;
+        esac
+        printf "%s\n" "%{l} $cw${wm_infos}$c ${title}%{r}${sys_infos} "
+    done
+}
+
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
 bspc control --subscribe > "$PANEL_FIFO" &
-xtitle -sf "T%s" > "$PANEL_FIFO" &
-~/.config/bspwm/panel_system -s > $PANEL_FIFO &
+title_loop > $PANEL_FIFO &
+system_loop > $PANEL_FIFO &
 
-cat "$PANEL_FIFO" | ~/.config/bspwm/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$PANEL_COLOR_GRAY" -B "$PANEL_COLOR_BG" &
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$PANEL_COLOR_GRAY" -B "$PANEL_COLOR_BG" &
 wait
