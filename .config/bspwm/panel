@@ -9,6 +9,7 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 . ~/.config/bspwm/panel_config
 
+PANEL_FIFO=/tmp/panel-fifo
 WORKSPACES=('▘' '▀' '▝' '▌' '█' '▐' '▖' '▄' '▗' '')
 cw=%{F$PANEL_COLOR_WHITE}
 cm=%{F$PANEL_COLOR_MAGENTA}

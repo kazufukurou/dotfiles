@@ -1,6 +1,5 @@
 #! /bin/sh
 
-PANEL_FIFO=/tmp/panel-fifo
 PANEL_HEIGHT=24
 PANEL_FONT_FAMILY="M+ 1p:size=12:antialias=true"
 PANEL_COLOR_BG=$(~/bin/getxresource background)
