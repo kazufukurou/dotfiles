@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ~/.config/bspwm/panel_config
+. ~/.config/bspwm/panel_colors
 
 cw=%{F$PANEL_COLOR_WHITE}
 cm=%{F$PANEL_COLOR_MAGENTA}

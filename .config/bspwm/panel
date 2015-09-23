@@ -8,6 +8,7 @@ fi
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 . ~/.config/bspwm/panel_config
+. ~/.config/bspwm/panel_colors
 
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"

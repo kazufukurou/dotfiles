@@ -1,6 +1,7 @@
 #! /bin/sh
 
 . ~/.config/bspwm/panel_config
+. ~/.config/bspwm/panel_colors
 bspc config border_width 2
 bspc config window_gap 8
 bspc config split_ratio 0.5

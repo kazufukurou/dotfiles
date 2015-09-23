@@ -1,6 +1,6 @@
 #! /bin/sh
 
-. ~/.config/bspwm/panel_config
+. ~/.config/bspwm/panel_colors
 
 WORKSPACES=('▘' '▀' '▝' '▌' '█' '▐' '▖' '▄' '▗' '')
 
