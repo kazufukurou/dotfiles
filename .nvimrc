@@ -78,6 +78,9 @@ nnoremap <silent><leader>w :set wrap!<CR>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
 nnoremap <leader>rs :source $MYVIMRC<cr>
 
+"quick saving
+nnoremap <leader>s :w<cr>
+
 "save as root
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 

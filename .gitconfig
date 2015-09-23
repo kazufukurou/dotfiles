@@ -4,7 +4,7 @@
 [core]
     autocrlf = input
     safecrlf = false
-    editor = vim
+    editor = nvim
 [push]
     default = simple
 [color]
