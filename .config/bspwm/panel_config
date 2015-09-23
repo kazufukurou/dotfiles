@@ -1,5 +1,4 @@
 #! /bin/sh
 
-PANEL_FIFO=/tmp/panel-fifo
 PANEL_HEIGHT=24
 PANEL_FONT_FAMILY="M+ 1p:size=12:antialias=true"

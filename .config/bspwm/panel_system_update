@@ -1,7 +1,0 @@
-#! /bin/sh
-
-. ~/.config/bspwm/panel_config
-
-~/.config/bspwm/panel_system > $PANEL_FIFO
-
-
