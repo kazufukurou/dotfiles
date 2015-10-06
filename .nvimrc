@@ -9,6 +9,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'EasyMotion'
+Plug 'kazufukurou/vim-android'
 call plug#end()
 
 color mycolorscheme
@@ -146,6 +147,7 @@ map g# <Plug>(incsearch-nohl-g#)
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimJavaSearchSingleResult = 'edit'
+let g:EclimJavaCompilerAutoDetect = 0
 nnoremap <silent> <leader>ec :JavaCorrect<cr>
 nnoremap <silent> <leader>es :JavaSearch<cr>
 nnoremap <silent> <leader>ed :JavaDocSearch<cr>

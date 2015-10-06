@@ -5,3 +5,4 @@ export ANDROID_HOME=${HOME}/android-sdk
 export JAVA_HOME=/usr/lib/jvm/default
 export EDITOR=nvim
 export VISUAL="$EDITOR"
+export CLASSPATH=/usr/share/java/bsh.jar

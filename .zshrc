@@ -16,6 +16,8 @@ zstyle ':vcs_info:*' enable hg git
 
 alias v='nvim'
 alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
+alias adble='adb logcat "*:E"'
+alias adbld='adb logcat "*:D"'
 
 precmd () { vcs_info }
 
