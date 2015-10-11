@@ -51,7 +51,7 @@ super + Return
     xterm
 
 super + apostrophe
-    ~/bin/mydmenu
+    ~/bin/mydmenu_run
 
 super + j
     ~/bin/toggletray
