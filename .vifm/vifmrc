@@ -193,10 +193,15 @@ filetype *.o nm %f | less
 " Image
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
 "        \ {View in feh}
-""        \ fehbrowser,
+"        \ fehbrowser,
         \ {view in sxiv}
         \ sxivbrowser,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
+
+" SVG
+filextype *.svg
+        \ {View in uzbl}
+        \ uzbl-browser
 
 " MD5
 filetype *.md5

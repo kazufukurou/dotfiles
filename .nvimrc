@@ -10,6 +10,7 @@ Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'EasyMotion'
 Plug 'kazufukurou/vim-android'
+Plug g:plug_home.'/eclim'
 call plug#end()
 
 color mycolorscheme
@@ -94,7 +95,10 @@ function! TabHighlightModeMatch()
         match ExtraWhitespace /^\t*\zs \+\|\s\+$/
     endif
 endfunction
-call TabHighlightModeMatch()
+augroup tabHighlight
+    autocmd!
+    autocmd BufEnter * call TabHighlightModeMatch()
+augroup END
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 
 "highlight 80th column
@@ -167,31 +171,31 @@ augroup statusline
 augroup END
 
 function! s:RefreshStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
-  endfor
+    for nr in range(1, winnr('$'))
+        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+    endfor
 endfunction
 
 command! RefreshStatus :call <SID>RefreshStatus()
 
 function! Status(winnum)
-  let active = a:winnum == winnr()
-  let stat = ''
-  if active
-      let stat .= '%1* %{Mode()} %0*' "mode
-      let stat .= '%3*%( %{g:branch} %)%0*' "vcs branch
-  endif
-  let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
-  if active && mode() ==# "i" | let stat .= '%5*' | endif
-  let stat .= ' %<%f' "path to the file relative to current directory
-  let stat .= '%=' "separation point between left and right items
-  if active
-      let stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
-      let stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
-      let stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
-      let stat .= '%2* %-6.(%l:%c%) %P %0*' "line, column, scroll position
-  endif
-  return stat
+    let active = a:winnum == winnr()
+    let stat = ''
+    if active
+        let stat .= '%1* %{Mode()} %0*' "mode
+        let stat .= '%3*%( %{g:branch} %)%0*' "vcs branch
+    endif
+    let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
+    if active && mode() ==# "i" | let stat .= '%5*' | endif
+    let stat .= ' %<%f' "path to the file relative to current directory
+    let stat .= '%=' "separation point between left and right items
+    if active
+        let stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
+        let stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
+        let stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
+        let stat .= '%2* %-6.(%l:%c%) %P %0*' "line, column, scroll position
+    endif
+    return stat
 endfunction
 
 let g:branch = ''
