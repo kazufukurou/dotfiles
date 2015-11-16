@@ -22,9 +22,30 @@ alias adblc='adb logcat -c'
 
 precmd () { vcs_info }
 
+bindkey -M viins 'jk' vi-cmd-mode
+vim_ins_mode="%F{10}I%f"
+vim_cmd_mode="%F{8}N%f"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+}
+
 PROMPT='
 %B%F{4}%~ %f%(1j.%F{10}%j %f.)${vcs_info_msg_0_}
-%F{2}%(!.#.$) %f%b'
+${vim_mode} %F{2}%(!.#.$) %f%b'
 
 h2d() {
     echo "ibase=16; $@"|bc
