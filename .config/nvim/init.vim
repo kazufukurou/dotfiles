@@ -148,6 +148,12 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+"Ultisnips
+let g:UltiSnipsExpandTrigger = '<c-s>'
+let g:UltiSnipsJumpForwardTrigger = '<c-s>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsEditSplit = 'vertical'
+
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimJavaSearchSingleResult = 'edit'
