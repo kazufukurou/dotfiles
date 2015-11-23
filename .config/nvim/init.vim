@@ -154,7 +154,7 @@ let g:EclimJavaSearchSingleResult = 'edit'
 let g:EclimJavaCompilerAutoDetect = 0
 nnoremap <silent> <leader>ec :JavaCorrect<cr>
 nnoremap <silent> <leader>es :JavaSearch<cr>
-nnoremap <silent> <leader>ed :JavaDocSearch<cr>
+nnoremap <silent> <leader>ed :JavaDocPreview<cr>
 nnoremap <silent> <leader>eo :JavaImpl<cr>
 nnoremap <silent> <leader>ei :JavaImport<cr>
 nnoremap <silent> <leader>eg :JavaGet<cr>
