@@ -1,0 +1,25 @@
+snippet for "for" b
+for (int ${1:i} = 0; $1 < ${2:10}; $1++) {
+	$0
+}
+endsnippet
+
+snippet fore "for (each)" b
+for ($1 : $2) {
+	$0
+}
+endsnippet
+
+snippet if "if" b
+if ($1) {
+	$0${VISUAL}
+}
+endsnippet
+
+snippet try "try/catch" b
+try {
+	$1${VISUAL}
+} catch(${2:Exception} ${3:e}){
+	$4
+}
+endsnippet
