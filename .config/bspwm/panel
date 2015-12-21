@@ -10,7 +10,7 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 . ~/.config/bspwm/panel_config
 
 PANEL_FIFO=/tmp/panel-fifo
-WORKSPACES=('▘' '▀' '▝' '▌' '█' '▐' '▖' '▄' '▗' '')
+WORKSPACES="▘ ▀ ▝ ▌ █ ▐ ▖ ▄ ▗"
 cw=%{F$PANEL_COLOR_WHITE}
 cm=%{F$PANEL_COLOR_MAGENTA}
 cb=%{F$PANEL_COLOR_BLUE}
@@ -24,7 +24,7 @@ cpu() {
 }
 
 temp() {
-    temperature=$(sensors | grep 'Core 0' | cut -d + -f2 | cut -d . -f1)
+    temperature=$((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
     if [ $temperature -gt 80 ]; then
         color=$cr
     elif [ $temperature -gt 60 ]; then
@@ -36,16 +36,15 @@ temp() {
 }
 
 volume() {
-    if [[ -n $(amixer get Master | grep off) ]]; then
-        echo "$crMute$c"
+    if [ -n "$(amixer get Master | grep off)" ]; then
+       echo ${cr}Mute$c
     else
-        echo $cw$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')$c
+       echo $cw$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')$c
     fi
 }
 
 battery() {
-    batteryInfo=$(acpi -b 2>/dev/null)
-    battery=$(echo $batteryInfo | grep -Po '[0-9]+(?=%)' | sort -n | head -n1)
+    battery=$(cat /sys/class/power_supply/BAT0/capacity)
     batteryText=$battery
 
     if [ -z $battery ]; then
@@ -61,15 +60,15 @@ battery() {
         color=$cr
     elif [ $battery -gt -1 ]; then
         color=$crb
-    else 
+    else
         color=$cw
     fi
 
     echo "$color$batteryText$c"
 
-    if [[ $battery -le 10 && `echo $batteryInfo | grep Discharging` ]]; then
-        notify-send "Low battery" -u critical
-    fi
+    #if [ $battery -le 10 && `echo $batteryInfo | grep Discharging` ]; then
+    #    notify-send "Low battery" -u critical
+    #fi
 }
 
 datetime() {
@@ -81,11 +80,15 @@ cmus() {
     info=$(cmus-remote -Q | grep tag)
     title=$(echo -e "$info" | grep 'tag title' | cut -d ' ' -f3-)
     artist=$(echo -e "$info" | grep 'tag artist' | cut -d ' ' -f3-)
-    echo "$artist $cw$title$c" 
+    echo "$artist $cw$title$c"
 }
 
 title_loop() {
-    while true; do echo T$(xdotool getactivewindow getwindowname); sleep .5; done
+    while true; do
+        id=$(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5)
+        echo T$(xprop -id $id WM_NAME | cut -d \" -f2)
+        sleep .5
+    done
 }
 
 system_loop() {
@@ -110,10 +113,11 @@ panel_bar() {
                 set -- ${line#?}
                 while [ $# -gt 0 ] ; do
                     item=$1
-                    name=${item#?}
                     case $item in
                         O*|F*|U*)
-                            wm_infos="${wm_infos}${WORKSPACES[${name} - 1]}"
+                            name=${item#?}
+                            wm_name=$(echo $WORKSPACES | cut -d' ' -f${name})
+                            wm_infos="${wm_infos}${wm_name}"
                             ;;
                     esac
                     shift

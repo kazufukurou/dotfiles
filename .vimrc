@@ -15,6 +15,9 @@ call plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
+set noundofile
+set nobackup
+set nowritebackup
 set hidden "allow to have unwritten changes to a file and open a new file
 set nobackup nowritebackup noswapfile "don't keep backups
 set scrolloff=4 "keep cursor few lines away edge when scrolling

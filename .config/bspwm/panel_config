@@ -1,7 +1,7 @@
 #! /bin/sh
 
 PANEL_HEIGHT=24
-PANEL_FONT_FAMILY="M+ 1p:size=12:antialias=true"
+PANEL_FONT_FAMILY="M+ 1p:size=12"
 PANEL_COLOR_BG=$(~/bin/getxresource background)
 PANEL_COLOR_BLUE=$(~/bin/getxresource color4)
 PANEL_COLOR_MAGENTA=$(~/bin/getxresource color5)

@@ -1,5 +1,5 @@
 xterm*termName: xterm-256color
-xterm*faceName: M+ 1m:size=12:antialias=true
+xterm*faceName: M+ 1m:size=12
 xterm*saveLines: 100000
 
 xterm*background: #333333

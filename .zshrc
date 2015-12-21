@@ -54,11 +54,3 @@ h2d() {
 d2h() {
     echo "obase=16; $@"|bc
 }
-
-pacro() {
-    if [[ ! -n $(pacman -Qdt) ]]; then
-        echo "No orphans to remove."
-    else
-        sudo pacman -Rns $(pacman -Qdtq)
-    fi
-}
