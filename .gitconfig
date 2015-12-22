@@ -4,7 +4,7 @@
 [core]
     autocrlf = input
     safecrlf = false
-    editor = nvim
+    editor = $EDITOR
 [push]
     default = simple
 [color]
@@ -28,9 +28,9 @@
 [mergetool "meld"]
     prompt = false
 [mergetool "splice"]
-    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    cmd = "$EDITOR -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
 [mergetool "diffconflicts"]
-    cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+    cmd = diffconflicts $EDITOR $BASE $LOCAL $REMOTE $MERGED
     trustExitCode = true
     keepBackup = false

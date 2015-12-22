@@ -23,6 +23,6 @@ track.current=True
 meld.priority=100
 kdiff3.args=$base $local $other -o $output
 meld.args=$local $base $other -o $output --auto-merge
-vimdiff.executable=nvim
+vimdiff.executable=$EDITOR
 vimdiff.args=-d $base $local $output $other +close +close
 

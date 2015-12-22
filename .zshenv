@@ -4,6 +4,6 @@ path=(~/bin ~/bin/private ~/android-sdk/tools ~/android-sdk/platform-tools $path
 export LANG=en_US.utf8
 export ANDROID_HOME=${HOME}/android-sdk
 export JAVA_HOME=/usr/lib/jvm/default
-export EDITOR=nvim
+export EDITOR=vim
 export VISUAL="$EDITOR"
 export CLASSPATH=/usr/share/java/bsh.jar
