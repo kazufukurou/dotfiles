@@ -84,7 +84,11 @@ cmus() {
 title_loop() {
     while true; do
         id=$(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5)
-        echo T$(xprop -id $id WM_NAME | cut -d \" -f2)
+        if [ "$id" = "0x0" ]; then
+            echo "T-"
+        else
+            echo T$(xprop -id $id WM_NAME | cut -d \" -f2)
+        fi
         sleep .5
     done
 }
@@ -133,7 +137,7 @@ panel_bar() {
                 done
                 ;;
         esac
-        printf "%s\n" "%{l} $cw${wm_infos}$c ${title}%{c}$(alert)%{r}${sys_infos} "
+        printf "%s\n" "%%{l} $cw${wm_infos}$c ${title}%{c}$(alert)%{r}${sys_infos} "
     done
 }
 
