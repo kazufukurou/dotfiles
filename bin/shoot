@@ -40,4 +40,3 @@ if [ -f shot.png ]; then
     uploadImage "shot.png" | xclip -selection c
     rm "shot.png"
 fi
-notify-send "Done"
