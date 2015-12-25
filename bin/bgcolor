@@ -19,6 +19,8 @@ while true; do
     r=$(d $r)
     g=$(d $g)
     b=$(d $b)
-    xsetroot -solid "#$(h $r)$(h $g)$(h $b)"
+    rbg="#$(h $r)$(h $g)$(h $b)"
+    xsetroot -solid $rbg
+    bspc config normal_border_color "$rbg"
     sleep 1
 done

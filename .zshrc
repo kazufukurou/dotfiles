@@ -47,6 +47,8 @@ PROMPT='
 %B%F{4}%~ %f%(1j.%F{10}%j %f.)${vcs_info_msg_0_}
 ${vim_mode} %F{2}%(!.#.$) %f%b'
 
+stty -ixon
+
 h2d() {
     echo "ibase=16; $@"|bc
 }

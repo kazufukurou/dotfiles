@@ -2,7 +2,7 @@ snippet xml "XML declaration" b
 <?xml version="1.0" encoding="utf-8"?>
 endsnippet
 
-snippet l "Android layout" b
+snippet rl "Android RelativeLayout" b
 <${1:RelativeLayout}
     android:id="@+id/$2"
     android:layout_width="${3:match_parent}"
@@ -11,10 +11,29 @@ snippet l "Android layout" b
 </${1/([\w:._-]+).*/$1/}>
 endsnippet
 
-snippet v "Android view" b
+snippet ll "Android LinearLayout" b
+<${1:LinearLayout}
+    android:id="@+id/$2"
+    android:layout_width="${3:match_parent}"
+    android:layout_height="${4:wrap_content}"
+    android:orientation="${5:vertical}">
+    $0
+</${1/([\w:._-]+).*/$1/}>
+endsnippet
+
+snippet tv "Android TextView" b
 <${1:TextView}
     android:id="@+id/$2"
     android:layout_width="${3:match_parent}"
     android:layout_height="${4:wrap_content}"
     android:text="@string/$5"/>
+endsnippet
+
+snippet iv "Android ImageView" b
+<${1:TextView}
+    android:id="@+id/$2"
+    android:layout_width="${3:match_parent}"
+    android:layout_height="${4:wrap_content}"
+    android:scaleType="${5:centerInside}"
+    android:src="@drawable/$5"/>
 endsnippet

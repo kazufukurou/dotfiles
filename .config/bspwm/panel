@@ -81,18 +81,6 @@ cmus() {
     echo "$artist $cw$title$c"
 }
 
-title_loop() {
-    while true; do
-        id=$(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5)
-        if [ "$id" = "0x0" ]; then
-            echo "T-"
-        else
-            echo T$(xprop -id $id WM_NAME | cut -d \" -f2)
-        fi
-        sleep .5
-    done
-}
-
 system_loop() {
     while true; do
         echo "S$(cmus) T $(temp) V $(volume) B $(battery) $(datetime)"
@@ -113,39 +101,19 @@ alert() {
 
 panel_bar() {
     while read -r line ; do
-        case $line in
-            S*)
-                sys_infos="${line#?}"
-                ;;
-            T*)
-                title="${line#?}"
-                ;;
-            W*)
-                wm_infos=""
-                IFS=':'
-                set -- ${line#?}
-                while [ $# -gt 0 ] ; do
-                    item=$1
-                    case $item in
-                        O*|F*|U*)
-                            name=${item#?}
-                            wm_name=$(echo $WORKSPACES | cut -d' ' -f${name})
-                            wm_infos="${wm_infos}${wm_name}"
-                            ;;
-                    esac
-                    shift
-                done
-                ;;
-        esac
-        printf "%s\n" "%%{l} $cw${wm_infos}$c ${title}%{c}$(alert)%{r}${sys_infos} "
+        wm_name=$(bspc query -D -d focused)
+        wm_icon=$(echo $WORKSPACES | cut -d' ' -f${wm_name})
+        node_id=$(bspc query -N -n focused)
+        title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
+        case $line in S*) sys_info="${line#?}" ;; esac
+        printf "%s\n" "%%{l} $cw$wm_icon$c $title%{c}$(alert)%{r}$sys_info "
     done
 }
 
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
-bspc control --subscribe > "$PANEL_FIFO" &
-title_loop > $PANEL_FIFO &
+bspc subscribe desktop > "$PANEL_FIFO" &
 system_loop > $PANEL_FIFO &
 
 cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_1" -f "$PANEL_FONT_2" -F "$PANEL_COLOR_GRAY" -B "$PANEL_COLOR_BG" &
