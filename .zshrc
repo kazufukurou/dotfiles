@@ -19,6 +19,8 @@ alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
 alias adble='adb logcat "*:E"'
 alias adbld='adb logcat "*:D"'
 alias adblc='adb logcat -c'
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
 
 precmd () { vcs_info }
 

@@ -23,7 +23,7 @@ super + {_,shift + }BackSpace
     bspc {monitor -f next, node -m next}
 
 super + {semicolon,period}
-    bspc node -R {270,90}
+    bspc node @/ -R {-90,90}
 
 super + {_,ctrl + ,shift + }{a,e,comma,o}
     bspc node {-f,-p,-s} {west,east,north,south}
