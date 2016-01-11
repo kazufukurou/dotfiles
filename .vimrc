@@ -15,6 +15,7 @@ call plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
+set nocompatible
 set noundofile
 set nobackup
 set nowritebackup
@@ -168,6 +169,7 @@ nnoremap <silent> <leader>eo :JavaImpl<cr>
 nnoremap <silent> <leader>ei :JavaImport<cr>
 nnoremap <silent> <leader>eg :JavaGet<cr>
 nnoremap <silent> <leader>egs :JavaGetSet<cr>
+nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "status line
 set noshowmode

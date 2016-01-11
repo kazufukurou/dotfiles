@@ -21,6 +21,7 @@ alias adbld='adb logcat "*:D"'
 alias adblc='adb logcat -c'
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
+alias pm-suspend='sudo /usr/sbin/pm-suspend && setxkblayout && slock'
 
 precmd () { vcs_info }
 

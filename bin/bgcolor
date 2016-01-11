@@ -4,14 +4,14 @@ r=64
 g=64
 b=64
 
-function d() {
-    x=$[$1 + $RANDOM % 3 - 1]
+d() {
+    x=$(($1 + $RANDOM % 3 - 1))
     x=$((x < 0 ? 0 : x))
     x=$((x > 128 ? 128 : x))
     echo $x
 }
 
-function h() {
+h() {
     printf '%02x' "$1"
 }
 

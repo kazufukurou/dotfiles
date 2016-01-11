@@ -10,7 +10,6 @@ done
 echo ""
 
 for f in {0..7}; do
-    
     printf "${FGNAMES[f]} %3d " $((f))
     for b in {0..8}; do
         bg=$((b+39))
