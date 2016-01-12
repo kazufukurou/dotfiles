@@ -15,9 +15,11 @@ call plug#end()
 
 color mycolorscheme
 syntax on "enable syntax highlighting
+set nocompatible
 set noundofile
 set nobackup
 set nowritebackup
+set mouse=a
 set hidden "allow to have unwritten changes to a file and open a new file
 set nobackup nowritebackup noswapfile "don't keep backups
 set scrolloff=4 "keep cursor few lines away edge when scrolling
@@ -168,6 +170,7 @@ nnoremap <silent> <leader>eo :JavaImpl<cr>
 nnoremap <silent> <leader>ei :JavaImport<cr>
 nnoremap <silent> <leader>eg :JavaGet<cr>
 nnoremap <silent> <leader>egs :JavaGetSet<cr>
+nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "status line
 set noshowmode

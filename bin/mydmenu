@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 . ~/.config/bspwm/panel_config
 dmenu -i -nb $PANEL_COLOR_BG -nf $PANEL_COLOR_GRAY -sb $PANEL_COLOR_BG -sf $PANEL_COLOR_WHITE -fn "$PANEL_FONT_1"
