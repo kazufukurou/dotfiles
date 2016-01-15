@@ -24,13 +24,9 @@
 [difftool]
     prompt = false
 [merge]
-    tool = meld
-[mergetool "meld"]
-    prompt = false
-[mergetool "splice"]
-    cmd = "$EDITOR -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-    trustExitCode = true
+    tool = diffconflicts
 [mergetool "diffconflicts"]
     cmd = diffconflicts $EDITOR $BASE $LOCAL $REMOTE $MERGED
     trustExitCode = true
     keepBackup = false
+    prompt = false

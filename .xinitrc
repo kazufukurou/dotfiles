@@ -17,5 +17,6 @@ xrdb -merge ~/.Xresources
 
 sxhkd &
 xsetroot -cursor_name left_ptr
+xsetroot -solid $(~/bin/getxresource color8)
 xset b off
 exec bspwm

@@ -20,9 +20,6 @@ glog=--style=$HOME/.mercurial/glog
 track.current=True
 
 [merge-tools]
-meld.priority=100
-kdiff3.args=$base $local $other -o $output
-meld.args=$local $base $other -o $output --auto-merge
-vimdiff.executable=$EDITOR
-vimdiff.args=-d $base $local $output $other +close +close
-
+vimdiff.executable = vimdiff
+vimdiff.args = -f -d $output -M $local $base $other -c "wincmd J" -c "set modifiable" -c "set write"
+vimdiff.premerge = keep

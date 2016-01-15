@@ -88,6 +88,13 @@ nnoremap <leader>rs :source $MYVIMRC<cr>
 "quick saving
 nnoremap <leader>s :w<cr>
 
+"vimdiff
+nnoremap <leader>do :diffget //2<CR> :diffup<CR>
+nnoremap <leader>db :diffget //3<CR> :diffup<CR>
+nnoremap <leader>dr :diffget //4<CR> :diffup<CR>
+nnoremap <leader>dn ]c
+nnoremap <leader>dN [c
+
 "save as root
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 

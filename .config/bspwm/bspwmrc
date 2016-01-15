@@ -14,14 +14,7 @@ bspc config presel_feedback_color $PANEL_COLOR_GRAY
 
 bspc config border_width 3
 bspc config window_gap 6
-#BW=4
-#bspc config window_gap -$BW
-#bspc config left_padding $BW
-#bspc config right_padding $BW
-#bspc config bottom_padding $BW
-#bspc config top_padding $(($BW+$PANEL_HEIGHT))
 bspc config top_padding $PANEL_HEIGHT
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
-~/bin/bgcolor &
 ~/.config/bspwm/panel &

@@ -20,14 +20,14 @@ hi CursorLineNr    ctermfg=15
 hi Debug           ctermfg=13                cterm=bold
 hi Delimiter       ctermfg=7
 hi DiffAdd         ctermfg=15   ctermbg=4
-hi DiffChange      ctermfg=15   ctermbg=5
+hi DiffChange      ctermfg=7    ctermbg=5
 hi DiffDelete      ctermfg=9    ctermbg=1
-hi DiffText        ctermfg=0    ctermbg=15   cterm=reverse,bold
+hi DiffText        ctermfg=15   ctermbg=5    cterm=bold
 hi Directory       ctermfg=8
 hi Error           ctermfg=9    ctermbg=1    cterm=bold
 hi ErrorMsg        ctermfg=1                 cterm=bold
 hi FoldColumn      ctermfg=7    ctermbg=8
-hi Folded          ctermfg=15   ctermbg=8
+hi Folded          ctermfg=0    ctermbg=8
 hi Identifier      ctermfg=10
 hi Ignore          ctermfg=7
 hi IncSearch       ctermfg=6    ctermbg=none cterm=reverse
