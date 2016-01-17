@@ -4,7 +4,6 @@
 
 super + shift + Escape
     killall panel; \
-    killall bgcolor; \
     bspc quit
 
 super + {_,ctrl + }Escape
