@@ -68,6 +68,7 @@ nnoremap ; :
 "don't move cursor then exit insert mode
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
+inoremap см <esc>`^
 
 "turn off Vim's crazy default regex characters
 "nnoremap / /\v
@@ -178,6 +179,11 @@ nnoremap <silent> <leader>ei :JavaImport<cr>
 nnoremap <silent> <leader>eg :JavaGet<cr>
 nnoremap <silent> <leader>egs :JavaGetSet<cr>
 nnoremap <silent> <leader>er :ProjectRefresh<cr>
+
+"keyboard layout
+augroup xkbmap
+    autocmd InsertLeave * call system('initxkbmap')
+augroup END
 
 "status line
 set noshowmode

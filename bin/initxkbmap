@@ -1,0 +1,4 @@
+#!/bin/sh
+
+setxkbmap -layout us -variant dvp
+sleep 1 && setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle,ctrl:nocaps &
