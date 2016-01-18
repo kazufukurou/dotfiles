@@ -14,7 +14,16 @@ shelve=
 hgext.churn=
 
 [defaults]
-glog=--style=$HOME/.mercurial/glog
+glog=--color=always --template "{label('custom.rev',node|short)} {if(branches,'{label('custom.branch',branches)} ')}{desc|firstline|strip} {if(bookmarks,'{label('custom.rev',bookmarks)} ')}{if(tags,'{label('custom.rev',tags)} ')}{label('custom.author',author|person)} {label('custom.author',date|isodate)}\n"
+
+[alias]
+slog=!$HG glog | grep -v "^[| ]*$"
+
+[color]
+custom.rev=yellow
+custom.branch=magenta
+custom.author=black
+custom.date=blue
 
 [bookmarks]
 track.current=True
