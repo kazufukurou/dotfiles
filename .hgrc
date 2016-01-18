@@ -14,7 +14,7 @@ shelve=
 hgext.churn=
 
 [defaults]
-glog=--color=always --template "{label('custom.rev',node|short)} {if(branches,'{label('custom.branch',branches)} ')}{desc|firstline|strip} {if(bookmarks,'{label('custom.rev',bookmarks)} ')}{if(tags,'{label('custom.rev',tags)} ')}{label('custom.author',author|person)} {label('custom.author',date|isodate)}\n"
+glog=--color=always --template "{label('custom.rev',node|short)} {label('custom.author',date|isodate)} {if(branches,'{label('custom.branch',branches)} ')}{desc|firstline|strip} {if(bookmarks,'{label('custom.rev',bookmarks)} ')}{if(tags,'{label('custom.rev',tags)} ')}{label('custom.author',author|person)}\n"
 
 [alias]
 slog=!$HG glog | grep -v "^[| ]*$"

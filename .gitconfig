@@ -16,7 +16,7 @@
     ci = commit
     st = status
     br = branch
-    glog = log --pretty=format:\"%C(blue)%h%C(reset) %C(black)%ad%C(reset) %s %C(black)%an%C(reset)%C(yellow)%d%C(reset)\" --graph --date=short
+    glog = log --pretty=format:\"%C(blue)%h%C(reset) %C(black)%ad%C(reset) %s %C(black)%an%C(reset)%C(yellow)%d%C(reset)\" --graph --date=iso
 [credential]
     helper = cache --timeout=3600
 [diff]
