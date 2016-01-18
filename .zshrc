@@ -22,7 +22,7 @@ alias adblc='adb logcat -c'
 alias eclimd='$HOME/eclipse/eclimd'
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
-alias pm-suspend='sudo /usr/sbin/pm-suspend && setxkblayout && slock'
+alias pm-suspend='sudo /usr/sbin/pm-suspend && initxkbmap && slock'
 
 precmd () { vcs_info }
 
