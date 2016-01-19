@@ -1,0 +1,119 @@
+#! /bin/sh
+
+if [ $(pgrep -cx panel2) -gt 1 ] ; then
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+. ~/.config/bspwm/panel_config
+
+PANEL_FIFO=/tmp/panel-fifo
+WORKSPACES="▘ ▀ ▝ ▌ █ ▐ ▖ ▄ ▗"
+cw=$(tput bold)$(tput setaf 7)
+cm=$(tput bold)$(tput setaf 5)
+cb=$(tput bold)$(tput setaf 4)
+cr=$(tput bold)$(tput setaf 1)
+c=$(tput sgr0)
+br=%{B$PANEL_COLOR_RED}
+b=%{B-}
+
+cpu() {
+    cpus=$(grep -c processor /proc/cpuinfo)
+    ps -eo pcpu | awk -v "cpus=$cpus" '/\s*[1-9]/ NR==1 {sum=0} {sum+=$1} END {printf "%d\n", sum/cpus}'
+}
+
+temp() {
+    temperature=$((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
+    if [ $temperature -gt 80 ]; then
+        color=$cr
+    elif [ $temperature -gt 60 ]; then
+        color=$cm
+    else
+        color=$cb
+    fi
+    echo "$color$temperature$c"
+}
+
+volume() {
+    if [ -n "$(amixer get Master | grep off)" ]; then
+       echo ${cr}Mute$c
+    else
+       echo $cw$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')$c
+    fi
+}
+
+battery() {
+    battery=$(cat /sys/class/power_supply/BAT0/capacity)
+    batteryText=$battery
+
+    if [ -z $battery ]; then
+        battery=-1
+        batteryText=-
+    fi
+
+    if [ $battery -gt 75 ]; then
+        color=$cb
+    elif [ $battery -gt 50 ]; then
+        color=$cm
+    elif [ $battery -gt 25 ]; then
+        color=$cr
+    elif [ $battery -gt -1 ]; then
+        color=$crb
+    else
+        color=$cw
+    fi
+
+    echo "$color$batteryText$c"
+}
+
+datetime() {
+    template="%b $cw%e$c %a $cw%R$c"
+    echo $(date +"$template")
+}
+
+cmus() {
+    info=$(cmus-remote -Q | grep tag)
+    title=$(echo -e "$info" | grep 'tag title' | cut -d ' ' -f3-)
+    artist=$(echo -e "$info" | grep 'tag artist' | cut -d ' ' -f3-)
+    echo "$artist $cw$title$c"
+}
+
+system_loop() {
+    while true; do
+        echo "S T $(temp) V $(volume) B $(battery) $(datetime)"
+        sleep 1
+    done
+}
+
+alert() {
+    battery=$(cat /sys/class/power_supply/BAT0/capacity)
+    batteryStatus=$(cat /sys/class/power_supply/BAT0/status)
+
+    if [ $battery -le 10 ]; then
+        if [ "$batteryStatus" = "Discharging" ]; then
+            echo "%{T2}$br$cw BATTERY $c$b%{T-}"
+        fi
+    fi
+}
+
+panel_bar() {
+    while read -r line ; do
+        wm_name=$(bspc query -D -d focused)
+        wm_icon=$(echo $WORKSPACES | cut -d' ' -f${wm_name})
+        node_id=$(bspc query -N -n focused)
+        title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
+        case $line in S*) sys_info="${line#?}" ;; esac
+        echo -n "$(tput clear)$wm_icon$c $title $sys_info "
+    done
+}
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc subscribe desktop > "$PANEL_FIFO" &
+system_loop > $PANEL_FIFO &
+
+cat "$PANEL_FIFO" | panel_bar &
+wait
