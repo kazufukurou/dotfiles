@@ -1,17 +1,17 @@
 #! /bin/sh
 
-COLOR_GRAY=$(~/bin/getxresource color0)
-COLOR_MAGENTA=$(~/bin/getxresource color5)
+color_gray=$(~/bin/getxresource color0)
+color_magenta=$(~/bin/getxresource color5)
 bspc config split_ratio 0.5
 bspc config auto_cancel true
 bspc config borderless_monocle true
 bspc config gapless_monocle true
 bspc config focus_by_distance true
 bspc config history_aware_focus true
-bspc config active_border_color $COLOR_GRAY
-bspc config focused_border_color $COLOR_MAGENTA
-bspc config normal_border_color $COLOR_GRAY
-bspc config presel_feedback_color $COLOR_GRAY
+bspc config active_border_color $color_gray
+bspc config focused_border_color $color_magenta
+bspc config normal_border_color $color_gray
+bspc config presel_feedback_color $color_gray
 
 bspc config border_width 3
 bspc config -m next border_width 3
@@ -19,7 +19,7 @@ bspc config window_gap 6
 bspc config top_padding 24
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
-bspc rule -a XtermPanel manage=off sticky=on state=floating
+bspc rule -a XtermPanel manage=off
 xsetroot -cursor_name left_ptr
-xsetroot -solid $COLOR_GRAY
+xsetroot -solid $color_gray
 xterm -class XtermPanel -geometry 192x1+0+0 -b 0 -e ~/.config/bspwm/panel &

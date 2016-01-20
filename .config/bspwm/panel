@@ -7,15 +7,13 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-PANEL_FIFO=/tmp/panel-fifo
-WORKSPACES="▀ ,▀▀, ▀,█ ,██, █,▄ ,▄▄, ▄"
+panel_fifo=/tmp/panel-fifo
+workspaces="▀ ,▀▀, ▀,█ ,██, █,▄ ,▄▄, ▄"
 cw=$(tput bold)$(tput setaf 7)
 cm=$(tput bold)$(tput setaf 5)
 cb=$(tput bold)$(tput setaf 4)
 cr=$(tput bold)$(tput setaf 1)
 c=$(tput sgr0)
-#br=%{B$PANEL_COLOR_RED}
-#b=%{B-}
 
 cpu() {
     cpus=$(grep -c processor /proc/cpuinfo)
@@ -26,7 +24,7 @@ temp() {
     echo $((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
 }
 
-tempColor() {
+temp_color() {
     if [ $1 -gt 80 ]; then
         echo $cr
     elif [ $1 -gt 60 ]; then
@@ -44,22 +42,22 @@ volume() {
     fi
 }
 
-volumeColor() {
+volume_color() {
     if [ "Mute" = $1 ]; then echo $cr; else echo $cw; fi
 }
 
 battery() {
     battery=$(cat /sys/class/power_supply/BAT0/capacity)
-    batteryText=$battery
+    battery_text=$battery
 
     if [ -z $battery ]; then
         battery=-1
-        batteryText=-
+        battery_text=-
     fi
-    echo $batteryText
+    echo $battery_text
 }
 
-batteryColor() {
+battery_color() {
     if [ $1 -gt 75 ]; then
         echo $cb
     elif [ $battery -gt 50 ]; then
@@ -71,22 +69,6 @@ batteryColor() {
     else
         echo $cw
     fi
-}
-
-dateMonth() {
-    echo $(date +%b)
-}
-
-dateDay() {
-    echo $(date +%e)
-}
-
-dateWeekDay(){
-    echo $(date +%a)
-}
-
-dateTime(){
-    echo $(date +%R)
 }
 
 cmus() {
@@ -105,10 +87,10 @@ system_loop() {
 
 alert() {
     battery=$(cat /sys/class/power_supply/BAT0/capacity)
-    batteryStatus=$(cat /sys/class/power_supply/BAT0/status)
+    battery_status=$(cat /sys/class/power_supply/BAT0/status)
 
     if [ $battery -le 10 ]; then
-        if [ "$batteryStatus" = "Discharging" ]; then
+        if [ "$battery_status" = "Discharging" ]; then
            echo " BATTERY "
         fi
     fi
@@ -116,11 +98,11 @@ alert() {
 
 panel_bar() {
     while read -r line ; do
-        wmName=$(bspc query -D -d focused)
-        wmIcon=$(echo $WORKSPACES | cut -d, -f$wmName)
-        nodeId=$(bspc query -N -n focused)
-        if [ -n "$nodeId" ]; then
-            title=$(xprop -id $nodeId WM_NAME | cut -d \" -f2)
+        wm_name=$(bspc query -D -d focused)
+        wm_icon=$(echo $workspaces | cut -d, -f$wm_name)
+        node_id=$(bspc query -N -n focused)
+        if [ -n "$node_id" ]; then
+            title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
         else
             title=""
         fi
@@ -128,28 +110,28 @@ panel_bar() {
             t=$(temp)
             v=$(volume)
             b=$(battery)
-            dm=$(dateMonth)
-            dd=$(dateDay)
-            dw=$(dateWeekDay)
-            dt=$(dateTime)
-            tc=$(tempColor $t)
-            vc=$(volumeColor $v)
-            bc=$(batteryColor $b)
-            statusColor="T $tc$t$c V $vc$v$c B $bc$b$c $dm $cw$dd$c $dw $cw$dt$c"
-            statusClean="T $t V $v B $b $dm $dd $dw $dt"
+            dm=$(date +%b)
+            dd=$(date +%e)
+            dw=$(date +%a)
+            dt=$(date +%R)
+            tc=$(temp_color $t)
+            vc=$(volume_color $v)
+            bc=$(battery_color $b)
+            status_color="T $tc$t$c V $vc$v$c B $bc$b$c $dm $cw$dd$c $dw $cw$dt$c"
+            status_clean="T $t V $v B $b $dm $dd $dw $dt"
         fi
-        msgColor="$(tput clear)$(tput civis)$wmIcon $title"
-        msgClean="$wmIcon $title"
-        cols=$(($(tput cols)-${#msgClean}-${#statusClean}+${#statusColor}))
-        printf "%s%${cols}s" "$msgColor" "$statusColor"
+        msg_color="$(tput clear)$(tput civis)$wm_icon $title"
+        msg_clean="$wm_icon $title"
+        cols=$(($(tput cols)-${#msg_clean}-${#status_clean}+${#status_color}))
+        printf "%s%${cols}s" "$msg_color" "$status_color"
     done
 }
 
-[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-mkfifo "$PANEL_FIFO"
+[ -e "$panel_fifo" ] && rm "$panel_fifo"
+mkfifo "$panel_fifo"
 
-bspc subscribe desktop > "$PANEL_FIFO" &
-system_loop > $PANEL_FIFO &
+bspc subscribe desktop > "$panel_fifo" &
+system_loop > $panel_fifo &
 
-cat "$PANEL_FIFO" | panel_bar &
+cat "$panel_fifo" | panel_bar &
 wait
