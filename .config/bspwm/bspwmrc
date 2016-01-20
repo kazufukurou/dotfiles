@@ -19,6 +19,7 @@ bspc config window_gap 6
 bspc config top_padding 24
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
+bspc monitor next -d 10
 bspc rule -a XtermPanel manage=off sticky=on state=floating
 xsetroot -cursor_name left_ptr
 xsetroot -solid $COLOR_GRAY

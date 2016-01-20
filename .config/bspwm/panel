@@ -8,7 +8,7 @@ fi
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 PANEL_FIFO=/tmp/panel-fifo
-WORKSPACES="▀ ,▀▀, ▀,█ ,██, █,▄ ,▄▄, ▄"
+WORKSPACES="▀--,-▀-,--▀,█--,-█-,--█,▄--,-▄-,--▄,███"
 cw=$(tput bold)$(tput setaf 7)
 cm=$(tput bold)$(tput setaf 5)
 cb=$(tput bold)$(tput setaf 4)
