@@ -7,18 +7,15 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-. ~/.config/bspwm/panel_config
-
 PANEL_FIFO=/tmp/panel-fifo
-WORKSPACES="▘ ▀ ▝ ▌ █ ▐ ▖ ▄ ▗"
-cw=%{F$PANEL_COLOR_WHITE}
-cm=%{F$PANEL_COLOR_MAGENTA}
-cb=%{F$PANEL_COLOR_BLUE}
-cr=%{F$PANEL_COLOR_RED}
-crb=%{F$PANEL_COLOR_RED_BOLD}
-c=%{F-}
-br=%{B$PANEL_COLOR_RED}
-b=%{B-}
+WORKSPACES="▀ ,▀▀, ▀,█ ,██, █,▄ ,▄▄, ▄"
+cw=$(tput bold)$(tput setaf 7)
+cm=$(tput bold)$(tput setaf 5)
+cb=$(tput bold)$(tput setaf 4)
+cr=$(tput bold)$(tput setaf 1)
+c=$(tput sgr0)
+#br=%{B$PANEL_COLOR_RED}
+#b=%{B-}
 
 cpu() {
     cpus=$(grep -c processor /proc/cpuinfo)
@@ -26,23 +23,29 @@ cpu() {
 }
 
 temp() {
-    temperature=$((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
-    if [ $temperature -gt 80 ]; then
-        color=$cr
-    elif [ $temperature -gt 60 ]; then
-        color=$cm
+    echo $((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
+}
+
+tempColor() {
+    if [ $1 -gt 80 ]; then
+        echo $cr
+    elif [ $1 -gt 60 ]; then
+        echo $cm
     else
-        color=$cb
+        echo $cb
     fi
-    echo "$color$temperature$c"
 }
 
 volume() {
     if [ -n "$(amixer get Master | grep off)" ]; then
-       echo ${cr}Mute$c
+       echo Mute
     else
-       echo $cw$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')$c
+       echo $(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')
     fi
+}
+
+volumeColor() {
+    if [ "Mute" = $1 ]; then echo $cr; else echo $cw; fi
 }
 
 battery() {
@@ -53,25 +56,37 @@ battery() {
         battery=-1
         batteryText=-
     fi
-
-    if [ $battery -gt 75 ]; then
-        color=$cb
-    elif [ $battery -gt 50 ]; then
-        color=$cm
-    elif [ $battery -gt 25 ]; then
-        color=$cr
-    elif [ $battery -gt -1 ]; then
-        color=$crb
-    else
-        color=$cw
-    fi
-
-    echo "$color$batteryText$c"
+    echo $batteryText
 }
 
-datetime() {
-    template="%b $cw%e$c %a $cw%R$c"
-    echo $(date +"$template")
+batteryColor() {
+    if [ $1 -gt 75 ]; then
+        echo $cb
+    elif [ $battery -gt 50 ]; then
+        echo $cm
+    elif [ $battery -gt 25 ]; then
+        echo $cr
+    elif [ $battery -gt -1 ]; then
+        echo $crb
+    else
+        echo $cw
+    fi
+}
+
+dateMonth() {
+    echo $(date +%b)
+}
+
+dateDay() {
+    echo $(date +%e)
+}
+
+dateWeekDay(){
+    echo $(date +%a)
+}
+
+dateTime(){
+    echo $(date +%R)
 }
 
 cmus() {
@@ -83,7 +98,7 @@ cmus() {
 
 system_loop() {
     while true; do
-        echo "S$(cmus) T $(temp) V $(volume) B $(battery) $(datetime)"
+        echo "S"
         sleep 1
     done
 }
@@ -94,19 +109,39 @@ alert() {
 
     if [ $battery -le 10 ]; then
         if [ "$batteryStatus" = "Discharging" ]; then
-            echo "%{T2}$br$cw BATTERY $c$b%{T-}"
+           echo " BATTERY "
         fi
     fi
 }
 
 panel_bar() {
     while read -r line ; do
-        wm_name=$(bspc query -D -d focused)
-        wm_icon=$(echo $WORKSPACES | cut -d' ' -f${wm_name})
-        node_id=$(bspc query -N -n focused)
-        title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
-        case $line in S*) sys_info="${line#?}" ;; esac
-        printf "%s\n" "%%{l} $cw$wm_icon$c $title%{c}$(alert)%{r}$sys_info "
+        wmName=$(bspc query -D -d focused)
+        wmIcon=$(echo $WORKSPACES | cut -d, -f$wmName)
+        nodeId=$(bspc query -N -n focused)
+        if [ -n "$nodeId" ]; then
+            title=$(xprop -id $nodeId WM_NAME | cut -d \" -f2)
+        else
+            title=""
+        fi
+        if [ "$line" = "S" ]; then
+            t=$(temp)
+            v=$(volume)
+            b=$(battery)
+            dm=$(dateMonth)
+            dd=$(dateDay)
+            dw=$(dateWeekDay)
+            dt=$(dateTime)
+            tc=$(tempColor $t)
+            vc=$(volumeColor $v)
+            bc=$(batteryColor $b)
+            statusColor="T $tc$t$c V $vc$v$c B $bc$b$c $dm $cw$dd$c $dw $cw$dt$c"
+            statusClean="T $t V $v B $b $dm $dd $dw $dt"
+        fi
+        msgColor="$(tput clear)$(tput civis)$wmIcon $title"
+        msgClean="$wmIcon $title"
+        cols=$(($(tput cols)-${#msgClean}-${#statusClean}+${#statusColor}))
+        printf "%s%${cols}s" "$msgColor" "$statusColor"
     done
 }
 
@@ -116,5 +151,5 @@ mkfifo "$PANEL_FIFO"
 bspc subscribe desktop > "$PANEL_FIFO" &
 system_loop > $PANEL_FIFO &
 
-cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_1" -f "$PANEL_FONT_2" -F "$PANEL_COLOR_GRAY" -B "$PANEL_COLOR_BG" &
+cat "$PANEL_FIFO" | panel_bar &
 wait
