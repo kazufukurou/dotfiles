@@ -4,9 +4,9 @@
 
 for file in *.*
 do
-    [ -z $1 ] && PREFIX=drawable || PREFIX=$1
-    NAME=${file%\.*}
-    DIR=$PREFIX-${NAME##*-}
-    mkdir $DIR
-    mv $file $DIR/${file%-*}.${file##*\.}
+    [ -z $1 ] && prefix=drawable || prefix=$1
+    name=${file%\.*}
+    dir=$prefix-${name##*-}
+    mkdir $dir
+    mv $file $dir/${file%-*}.${file##*\.}
 done

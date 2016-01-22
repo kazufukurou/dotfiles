@@ -1,22 +1,22 @@
 #!/bin/bash
 
-FGNAMES=('blk' 'red' 'grn' 'yel' 'blu' 'mag' 'cyn' 'wht')
-BGNAMES=('DFT' 'BLK' 'RED' 'GRN' 'YEL' 'BLU' 'MAG' 'CYN' 'WHT')
+fgnames=('blk' 'red' 'grn' 'yel' 'blu' 'mag' 'cyn' 'wht')
+bgnames=('DFT' 'BLK' 'RED' 'GRN' 'YEL' 'BLU' 'MAG' 'CYN' 'WHT')
 
 printf "          "
 for b in {0..8}; do
-    printf "${BGNAMES[b]}    "
+    printf "${bgnames[b]}    "
 done
 echo ""
 
 for f in {0..7}; do
-    printf "${FGNAMES[f]} %3d " $((f))
+    printf "${fgnames[f]} %3d " $((f))
     for b in {0..8}; do
         bg=$((b+39))
         echo -en "\033[${bg}m\033[$((f+30))m ${bg} $((f+30)) "
     done
     echo -e "\033[0m\033[0m"
-    printf "${FGNAMES[f]} %3d " $((f+8))
+    printf "${fgnames[f]} %3d " $((f+8))
     for b in {0..8}; do
         bg=$((b+39))
         echo -en "\033[${bg}m\033[1;$((f+30))m ${bg} $((f+30)) "

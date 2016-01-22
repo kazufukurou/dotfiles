@@ -12,8 +12,9 @@ super + {_,ctrl + }Escape
 super + space
     bspc desktop -l next
 
-super + {ctrl,shift} + space
-    bspc node -t {fullscreen,floating}
+super + {shift,ctrl} + space
+   bspc node -t "~{floating,fullscreen}"'
+
 
 super + {_,ctrl + }Tab
     bspc node -f {next,prev}

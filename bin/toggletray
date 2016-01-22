@@ -1,8 +1,8 @@
 #!/bin/bash
 
 . ~/.config/bspwm/panel_config
-COMMAND=`ps -A|grep stalonetray| awk '{print $4}'`
-if [[ $COMMAND = "stalonetray" ]]; then
+cmd=`ps -A|grep stalonetray| awk '{print $4}'`
+if [[ $cmd = "stalonetray" ]]; then
     killall -s SIGKILL stalonetray
 else
     stalonetray -i $PANEL_HEIGHT -bg "$PANEL_COLOR_BG" -geometry 1000x1 &
