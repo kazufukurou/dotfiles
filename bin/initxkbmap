@@ -1,4 +1,5 @@
 #!/bin/sh
 
-setxkbmap -model pc104 -layout us -variant dvp
-sleep 1 && setxkbmap -model pc104 -layout us,ru -variant dvp, -option grp:alt_space_toggle,ctrl:nocaps &
+#setxkbmap -model pc104 -layout us -variant dvp
+#sleep 1 && setxkbmap -model pc104 -layout us,ru -variant dvp, -option grp:alt_space_toggle,ctrl:nocaps &
+setxkbmap -model pc104 -layout us,ru -variant dvp, -option grp:alt_space_toggle,ctrl:nocaps

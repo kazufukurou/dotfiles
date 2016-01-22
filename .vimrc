@@ -90,9 +90,9 @@ nnoremap <leader>rs :source $MYVIMRC<cr>
 nnoremap <leader>s :w<cr>
 
 "vimdiff
-nnoremap <leader>do :diffget //2<CR> :diffup<CR>
-nnoremap <leader>db :diffget //3<CR> :diffup<CR>
-nnoremap <leader>dr :diffget //4<CR> :diffup<CR>
+nnoremap <leader>do :diffget 2<cr> :diffup<CR>
+nnoremap <leader>db :diffget 3<cr> :diffup<CR>
+nnoremap <leader>dr :diffget 4<cr> :diffup<CR>
 nnoremap <leader>dn ]c
 nnoremap <leader>dN [c
 
@@ -181,9 +181,9 @@ nnoremap <silent> <leader>egs :JavaGetSet<cr>
 nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "keyboard layout
-augroup xkbmap
-    autocmd InsertLeave * call system('initxkbmap')
-augroup END
+" augroup xkbmap
+"     autocmd InsertLeave * call system('initxkbmap')
+" augroup END
 
 "status line
 set noshowmode
