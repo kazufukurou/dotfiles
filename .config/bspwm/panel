@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 if [ $(pgrep -cx panel) -gt 1 ] ; then
     printf "%s\n" "The panel is already running." >&2
@@ -7,17 +7,17 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-panel_fifo=/tmp/panel-fifo
 workspaces="▀··,·▀·,··▀,█··,·█·,··█,▄··,·▄·,··▄,███"
-cw=$(tput bold)$(tput setaf 7)
-cm=$(tput bold)$(tput setaf 5)
-cb=$(tput bold)$(tput setaf 4)
-cr=$(tput bold)$(tput setaf 1)
+fw=$(tput bold)$(tput setaf 7)
+fm=$(tput bold)$(tput setaf 5)
+fb=$(tput bold)$(tput setaf 4)
+fr=$(tput bold)$(tput setaf 1)
+blink=$(tput blink)
 c=$(tput sgr0)
 
 cpu() {
     cpus=$(grep -c processor /proc/cpuinfo)
-    ps -eo pcpu | awk -v "cpus=$cpus" '/\s*[1-9]/ NR==1 {sum=0} {sum+=$1} END {printf "%d\n", sum/cpus}'
+    echo $(ps -eo pcpu | awk -v "cpus=$cpus" '/\s*[1-9]/ NR==1 {sum=0} {sum+=$1} END {printf "%d\n", sum/cpus}')
 }
 
 temp() {
@@ -26,11 +26,11 @@ temp() {
 
 temp_color() {
     if [ $1 -gt 80 ]; then
-        echo $cr
+        echo $fr
     elif [ $1 -gt 60 ]; then
-        echo $cm
+        echo $fm
     else
-        echo $cb
+        echo $fb
     fi
 }
 
@@ -43,7 +43,7 @@ volume() {
 }
 
 volume_color() {
-    if [ "Mute" = $1 ]; then echo $cr; else echo $cw; fi
+    if [ "Mute" = $1 ]; then echo $fr; else echo $fw; fi
 }
 
 battery() {
@@ -57,17 +57,27 @@ battery() {
     echo $battery_text
 }
 
+battery_status() {
+    echo $(cat /sys/class/power_supply/BAT0/status)
+}
+
 battery_color() {
     if [ $1 -gt 75 ]; then
-        echo $cb
-    elif [ $battery -gt 50 ]; then
-        echo $cm
-    elif [ $battery -gt 25 ]; then
-        echo $cr
-    elif [ $battery -gt -1 ]; then
-        echo $crb
+        echo $fb
+    elif [ $1 -gt 50 ]; then
+        echo $fm
+    elif [ $1 -gt 25 ]; then
+        echo $fr
+    elif [ $1 -gt 10 ]; then
+        echo $fr
+    elif [ $1 -gt -1 ]; then
+        if [ "$2" = "Discharging" ]; then
+            echo $fr$blink
+        else
+            echo $fr
+        fi
     else
-        echo $cw
+        echo $fw
     fi
 }
 
@@ -75,25 +85,14 @@ cmus() {
     info=$(cmus-remote -Q | grep tag)
     title=$(echo -e "$info" | grep 'tag title' | cut -d ' ' -f3-)
     artist=$(echo -e "$info" | grep 'tag artist' | cut -d ' ' -f3-)
-    echo "$artist $cw$title$c"
+    echo "$artist $fw$title$c"
 }
 
 system_loop() {
     while true; do
-        echo "S"
+        bspc desktop -f
         sleep 1
     done
-}
-
-alert() {
-    battery=$(cat /sys/class/power_supply/BAT0/capacity)
-    battery_status=$(cat /sys/class/power_supply/BAT0/status)
-
-    if [ $battery -le 10 ]; then
-        if [ "$battery_status" = "Discharging" ]; then
-           echo " BATTERY "
-        fi
-    fi
 }
 
 panel_bar() {
@@ -106,32 +105,34 @@ panel_bar() {
         else
             title=""
         fi
-        if [ "$line" = "S" ]; then
-            t=$(temp)
-            v=$(volume)
-            b=$(battery)
-            dm=$(date +%b)
-            dd=$(date +%e)
-            dw=$(date +%a)
-            dt=$(date +%R)
-            tc=$(temp_color $t)
-            vc=$(volume_color $v)
-            bc=$(battery_color $b)
-            status_color="T $tc$t$c V $vc$v$c B $bc$b$c $dm $cw$dd$c $dw $cw$dt$c"
-            status_clean="T $t V $v B $b $dm $dd $dw $dt"
-        fi
-        msg_color="$(tput clear)$(tput civis)$wm_icon $title"
+        t=$(temp)
+        v=$(volume)
+        b=$(battery)
+        bs=$(battery_status)
+        dm=$(date +%b)
+        dd=$(date +%e)
+        dw=$(date +%a)
+        dt=$(date +%R)
+        bgc=""
+        case "$status_color" in
+            *$blink*) bgc=$(tput setab 5) ;;
+        esac
+        tc=$(temp_color $t)$bgc
+        vc=$(volume_color $v)$bgc
+        bc=$(battery_color $b $bs)$bgc
+        td=$fw$bgc
+        cc=$c$bgc
+
+        msg_color="$(tput clear)$(tput civis)$bgc$bgc$wm_icon $title"
         msg_clean="$wm_icon $title"
+        status_color=" T $tc$t$cc V $vc$v$cc B $bc$b$cc $dm $fw$dd$cc $dw $fw$dt$cc"
+        status_clean=" T $t V $v B $b $dm $dd $dw $dt"
+
         cols=$(($(tput cols)-${#msg_clean}-${#status_clean}+${#status_color}))
         printf "%s%${cols}s" "$msg_color" "$status_color"
     done
 }
 
-[ -e "$panel_fifo" ] && rm "$panel_fifo"
-mkfifo "$panel_fifo"
-
-bspc subscribe desktop > "$panel_fifo" &
-system_loop > $panel_fifo &
-
-cat "$panel_fifo" | panel_bar &
+system_loop &
+bspc subscribe desktop | panel_bar &
 wait

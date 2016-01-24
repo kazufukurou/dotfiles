@@ -13,7 +13,7 @@ super + space
     bspc desktop -l next
 
 super + {shift,ctrl} + space
-   bspc node -t "~{floating,fullscreen}"'
+   bspc node -t "~{floating,fullscreen}"
 
 
 super + {_,ctrl + }Tab
@@ -51,13 +51,13 @@ super + Return
     xterm
 
 super + apostrophe
-    ~/bin/mydmenu_run
+    slock
 
 super + j
     ~/bin/toggletray
 
 super + q
-    slock
+    firefox
 
 # make sxhkd reload its configuration files:
 super + shift + apostrophe
