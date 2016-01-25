@@ -7,7 +7,7 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-workspaces=(▀·· ·▀· ··▀ █·· ·█· ··█ ▄·· ·▄· ··▄ ███)
+workspaces=(▀·· ·▀· ··▀ █·· ·█· ··█ ▄·· ·▄· ··▄ ···)
 fw=$(tput bold)$(tput setaf 7)
 fm=$(tput bold)$(tput setaf 5)
 fb=$(tput bold)$(tput setaf 4)
