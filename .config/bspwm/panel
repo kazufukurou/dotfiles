@@ -7,7 +7,7 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-workspaces="▀··,·▀·,··▀,█··,·█·,··█,▄··,·▄·,··▄,███"
+workspaces=(▀·· ·▀· ··▀ █·· ·█· ··█ ▄·· ·▄· ··▄ ███)
 fw=$(tput bold)$(tput setaf 7)
 fm=$(tput bold)$(tput setaf 5)
 fb=$(tput bold)$(tput setaf 4)
@@ -98,7 +98,7 @@ system_loop() {
 panel_bar() {
     while read -r line ; do
         wm_name=$(bspc query -D -d focused)
-        wm_icon=$(echo $workspaces | cut -d, -f$wm_name)
+        wm_icon=${workspaces[$wm_name]}
         node_id=$(bspc query -N -n focused)
         if [ -n "$node_id" ]; then
             title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
@@ -113,19 +113,14 @@ panel_bar() {
         dd=$(date +%e)
         dw=$(date +%a)
         dt=$(date +%R)
-        bgc=""
-        case "$status_color" in
-            *$blink*) bgc=$(tput setab 5) ;;
-        esac
-        tc=$(temp_color $t)$bgc
-        vc=$(volume_color $v)$bgc
-        bc=$(battery_color $b $bs)$bgc
-        td=$fw$bgc
-        cc=$c$bgc
+        case "$status_color" in *$blink*) ;; esac
+        tc=$(temp_color $t)
+        vc=$(volume_color $v)
+        bc=$(battery_color $b $bs)
 
-        msg_color="$(tput clear)$(tput civis)$bgc$bgc$wm_icon $title"
+        msg_color="$(tput clear)$(tput civis)$fw$wm_icon$c $title"
         msg_clean="$wm_icon $title"
-        status_color=" T $tc$t$cc V $vc$v$cc B $bc$b$cc $dm $fw$dd$cc $dw $fw$dt$cc"
+        status_color=" T $tc$t$c V $vc$v$c B $bc$b$c $dm $fw$dd$c $dw $fw$dt$c"
         status_clean=" T $t V $v B $b $dm $dd $dw $dt"
 
         cols=$(($(tput cols)-${#msg_clean}-${#status_clean}+${#status_color}))

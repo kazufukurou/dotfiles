@@ -29,7 +29,7 @@ super + {_,ctrl + ,shift + }{a,e,comma,o}
     bspc node {-f,-p,-s} {west,east,north,south}
 
 super + {_,shift + }{g,c,r,h,t,n,m,w,v}
-    bspc {desktop -f,node -d} {1-9}
+    bspc {desktop -f,node -d} {0-8}
 
 ~button1
     bspc pointer -g focus
