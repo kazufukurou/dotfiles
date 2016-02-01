@@ -168,7 +168,7 @@ filextype *.djvu apvlv %f
 " Audio
 filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a
        \ {Play using mplayer}
-       \ mplayer %f,
+       \ mplayer %f &,
        \ {Play using Cmus}
        \ cmus-remote -c -l %f; sleep 1; cmus-remote -n,
 fileviewer *.mp3 mp3info

@@ -19,10 +19,10 @@ hi CursorLine                                cterm=none
 hi CursorLineNr    ctermfg=15
 hi Debug           ctermfg=13                cterm=bold
 hi Delimiter       ctermfg=7
-hi DiffAdd         ctermfg=15   ctermbg=4
-hi DiffChange      ctermfg=7    ctermbg=5
+hi DiffAdd         ctermfg=12   ctermbg=none
+hi DiffChange      ctermfg=13   ctermbg=none
 hi DiffDelete      ctermfg=9    ctermbg=none
-hi DiffText        ctermfg=15   ctermbg=5    cterm=bold
+hi DiffText        ctermfg=15   ctermbg=none cterm=bold
 hi Directory       ctermfg=8
 hi Error           ctermfg=9    ctermbg=1    cterm=bold
 hi ErrorMsg        ctermfg=1                 cterm=bold
