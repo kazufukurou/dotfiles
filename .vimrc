@@ -151,6 +151,7 @@ endfunction
 
 "incsearch
 let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#magic = '\v'
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)

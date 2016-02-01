@@ -4,6 +4,12 @@ for (int ${1:i} = 0; $1 < ${2:10}; $1++) {
 }
 endsnippet
 
+snippet forr "for reversed" b
+for (int ${1:i} = ${2:list.size()} - 1; $1 >= 0; $1--) {
+	$0
+}
+endsnippet
+
 snippet fore "for (each)" b
 for ($1 : $2) {
 	$0

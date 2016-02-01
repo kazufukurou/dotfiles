@@ -2,53 +2,102 @@ snippet xml "XML declaration" b
 <?xml version="1.0" encoding="utf-8"?>
 endsnippet
 
-snippet xmlns "XML namespace" b
+snippet xmlns "Android XML namespace" b
     xmlns:android="http://schemas.android.com/apk/res/android"
 endsnippet
 
-snippet xmlnsa "XML namespace" b
+snippet xmlnsa "Android XML custom namespace" b
     xmlns:app="http://schemas.android.com/apk/res-auto"
 endsnippet
 
+snippet l "Android XML layout" b
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:layout_centerInParent="true"
+    android:layout_toLeftOf="@id/$1"
+    android:layout_toRightOf="@id/$2"
+    android:layout_above="@id/$3"
+    android:layout_below="@id/$4"
+    android:layout_alignLeft="@id/$5"
+    android:layout_alignRight="@id/$6"
+    android:layout_alignTop="@id/$7"
+    android:layout_alignBottom="@id/$8"
+    android:layout_marginLeft="$9dp"
+    android:layout_marginRight="$10dp"
+    android:layout_marginTop="$11dp"
+    android:layout_marginBottom="$12dp"
+endsnippet
+
+snippet p "Android XML padding" b
+    android:paddingLeft="$1dp"
+    android:paddingRight="$2dp"
+    android:paddingTop="$3dp"
+    android:paddingBottom="$4dp"
+endsnippet
+
 snippet rl "Android RelativeLayout" b
-<${1:RelativeLayout}
-    android:id="@+id/$2"
-    android:layout_width="${3:match_parent}"
-    android:layout_height="${4:wrap_content}">
+<RelativeLayout
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}">
     $0
-</${1/([\w:._-]+).*/$1/}>
+</RelativeLayout>
 endsnippet
 
 snippet ll "Android LinearLayout" b
-<${1:LinearLayout}
-    android:id="@+id/$2"
-    android:layout_width="${3:match_parent}"
-    android:layout_height="${4:wrap_content}"
-    android:orientation="${5:vertical}">
+<LinearLayout
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}"
+    android:orientation="${4:vertical}">
     $0
-</${1/([\w:._-]+).*/$1/}>
+</LinearLayout>
 endsnippet
 
 snippet v "Android View" b
-<${1:View}
-    android:id="@+id/$2"
-    android:layout_width="${3:match_parent}"
-    android:layout_height="${4:wrap_content}"/>
+<View
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}"/>
 endsnippet
 
 snippet tv "Android TextView" b
-<${1:TextView}
-    android:id="@+id/$2"
-    android:layout_width="${3:match_parent}"
-    android:layout_height="${4:wrap_content}"
-    android:text="@string/$5"/>
+<TextView
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}"
+    android:text="@string/$4"
+    android:textAppearance="@style/$5"/>
 endsnippet
 
 snippet iv "Android ImageView" b
-<${1:TextView}
-    android:id="@+id/$2"
-    android:layout_width="${3:match_parent}"
-    android:layout_height="${4:wrap_content}"
-    android:scaleType="${5:centerInside}"
+<ImageView
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}"
+    android:scaleType="${4:centerInside}"
     android:src="@drawable/$5"/>
+endsnippet
+
+snippet rv "Android RecyclerView" b
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:match_parent}"
+    android:clipToPadding="false"
+    android:scrollbars="vertical"/>
+endsnippet
+
+snippet cv "Android CardView" b
+<android.support.v7.widget.CardView
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}"
+    app:cardCornerRadius="$4dp">
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@color/$5">
+    $0
+</android.support.v7.widget.CardView>
 endsnippet
