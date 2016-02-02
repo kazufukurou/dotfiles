@@ -181,9 +181,9 @@ nnoremap <silent> <leader>egs :JavaGetSet<cr>
 nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "keyboard layout
-augroup xkbmap
-    autocmd InsertLeave * call system('initxkbmap')
-augroup END
+" augroup xkbmap
+"     autocmd InsertLeave * call system('initxkbmap')
+" augroup END
 
 "status line
 set noshowmode
