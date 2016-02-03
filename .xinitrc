@@ -8,7 +8,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 xrdb -merge ~/.Xresources
-~/bin/initxkbmap
+setxkbmap -model pc104 -layout us,ru -variant dvp, -option grp:alt_space_toggle,ctrl:nocaps &
 
 export GTK_IM_MODULE='uim'
 export QT_IM_MODULE='uim'
