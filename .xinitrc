@@ -10,10 +10,10 @@ fi
 xrdb -merge ~/.Xresources
 ~/bin/initxkbmap
 
-#export XMODIFIERS=@im=SCIM
-#export GTK_IM_MODULE="scim"
-#export QT_IM_MODULE="scim"
-#scim -d
+export GTK_IM_MODULE='uim'
+export QT_IM_MODULE='uim'
+export XMODIFIERS='@im=uim'
+uim-xim &
 
 sxhkd &
 xset b off
