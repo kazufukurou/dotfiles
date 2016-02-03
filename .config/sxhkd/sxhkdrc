@@ -18,13 +18,13 @@ super + {shift,ctrl} + space
 super + {_,ctrl + }Tab
     bspc node -f {next,prev}
 
-super + {semicolon,period}
+super + {q,e}
     bspc node @/ -R {-90,90}
 
-super + {_,ctrl + ,shift + }{a,e,comma,o}
+super + {_,ctrl + ,shift + }{a,d,w,s}
     bspc node {-f ,-p "~",-s }{west,east,north,south}
 
-super + {_,shift + }{g,c,r,h,t,n,m,w,v}
+super + {_,shift + }{u,i,o,j,k,l,m,r,comma,period}
     bspc {desktop -f,node -d} {0-8}
 
 super + {_,shift + }BackSpace
@@ -49,17 +49,17 @@ super + @button{1-3}
 super + Return
     xterm
 
-super + apostrophe
-    slock
+super + z
+    slock & xset dpms force off
 
-super + j
+super + c
     ~/bin/toggletray
 
-super + q
+super + x
     firefox
 
 # make sxhkd reload its configuration files:
-super + shift + apostrophe
+super + shift + z
     pkill -USR1 -x sxhkd
 
 # Increase volume

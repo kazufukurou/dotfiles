@@ -20,9 +20,10 @@ alias adble='adb logcat "*:E"'
 alias adbld='adb logcat "*:D"'
 alias adblc='adb logcat -c'
 alias eclimd='$HOME/eclipse/eclimd'
-alias reboot='sudo /sbin/reboot'
-alias poweroff='sudo /sbin/poweroff'
-alias pm-suspend='sudo /usr/sbin/pm-suspend && initxkbmap && slock'
+alias lock='slock & xset dpms force off'
+alias reb='sudo /sbin/reboot'
+alias off='sudo /sbin/poweroff'
+alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap'
 
 precmd () { vcs_info }
 
