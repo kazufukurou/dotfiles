@@ -1,18 +1,20 @@
 #!/bin/sh
 
 if [ -f "$1" ] ; then
+    ext1=${1%.*}
+    ext2=${ext1%.*}
     case "$1" in
-        *.7z) 7z x "$1" -o"${1%.*}" ;;
-        *.tar.bz2) mkdir "${1%%.*}" && tar xjf "$1" -C "${1%%.*}" ;;
-        *.tar.gz) mkdir "${1%%.*}" && tar xzf "$1" -C "${1%%.*}" ;;
-        *.tar.xz) mkdir "${1%%.*}" && tar xf "$1" -C "${1%%.*}" ;;
+        *.7z) 7z x "$1" -o"$ext1" ;;
+        *.tar.bz2) mkdir "$ext2" && tar xjf "$1" -C "$ext2" ;;
+        *.tar.gz) mkdir "$ext2" && tar xzf "$1" -C "$ext2" ;;
+        *.tar.xz) mkdir "$ext2" && tar xf "$1" -C "$ext2" ;;
         *.bz2) bunzip2 "$1" ;;
-        *.rar) unrar x "$1" ${1%.*} ;;
+        *.rar) unrar x "$1" $ext1 ;;
         *.gz) gunzip "$1" ;;
-        *.tar) mkdir "${1%.*}" && tar xf "$1" -C $ "${1%.*}" ;;
-        *.tbz2) mkdir "${1%.*}" && tar xjf "$1" -C "${1%.*}" ;;
-        *.tgz) mkdir "${1%.*}" && tar xzf "$1" -C "${1%.*}" ;;
-        *.zip) unzip "$1" -d "${1%.*}" ;;
+        *.tar) mkdir "$ext1" && tar xf "$1" -C $ "$ext1" ;;
+        *.tbz2) mkdir "$ext1" && tar xjf "$1" -C "$ext1" ;;
+        *.tgz) mkdir "$ext1" && tar xzf "$1" -C "$ext1" ;;
+        *.zip) unzip "$1" -d "$ext1" ;;
         *.Z) uncompress "$1" ;;
         *) echo "'$1' cannot be extracted via extract()" ;;
     esac
