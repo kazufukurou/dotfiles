@@ -16,12 +16,11 @@ call plug#end()
 color mycolorscheme
 syntax on "enable syntax highlighting
 set nocompatible
-set noundofile
-set nobackup
-set nowritebackup
+set noundofile "don't create .un~ files
+set nobackup nowritebackup "don't create ~ files
+set noswapfile "don't create .swp files
 set mouse=a
 set hidden "allow to have unwritten changes to a file and open a new file
-set nobackup nowritebackup noswapfile "don't keep backups
 set scrolloff=4 "keep cursor few lines away edge when scrolling
 set nonumber "dont show line numbers
 set norelativenumber "line numbers are relative to current current line
@@ -128,9 +127,9 @@ nnoremap <leader>o :OverCommandLine<cr>
 let g:surround_45 = "«\r»"
 
 "CtrlP
+let g:ctrlp_map = '<leader>p'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
-let g:ctrlp_map = '<leader>p'
 let g:ctrlp_status_func = { 'main': 'CtrlP_Statusline_1', 'prog': 'CtrlP_Statusline_2', }
 function! CtrlP_Statusline_1(...)
     let focus = '%2* '.a:1.' %*'
