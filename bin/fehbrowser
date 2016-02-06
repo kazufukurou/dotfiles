@@ -20,4 +20,4 @@ for i in *; do
     [[ $i == $file ]] && c=$((${#arr[@]} - 1))
 done
 
-exec feh --title "feh [%u of %l][%wx%h] %n"  -. "$@" -- "${arr[@]:c}" "${arr[@]:0:c}" &> /dev/null &
+exec feh --action ';feh -t -b trans' --title "feh [%u of %l][%wx%h] %n" "$@" -- "${arr[@]:c}" "${arr[@]:0:c}" &> /dev/null &

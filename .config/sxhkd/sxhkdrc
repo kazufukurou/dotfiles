@@ -24,7 +24,7 @@ super + {q,e}
 super + {_,ctrl + ,shift + }{a,d,w,s}
     bspc node {-f ,-p "~",-s }{west,east,north,south}
 
-super + {_,shift + }{u,i,o,j,k,l,m,r,comma,period}
+super + {_,shift + }{u,i,o,j,k,l,m,comma,period}
     bspc {desktop -f,node -d} {0-8}
 
 super + {_,shift + }BackSpace
@@ -47,7 +47,7 @@ super + @button{1-3}
 #
 
 super + Return
-    xterm
+    urxvt
 
 super + z
     slock & xset dpms force off

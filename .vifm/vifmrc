@@ -192,10 +192,8 @@ filetype *.o nm %f | less
 
 " Image
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-"        \ {View in feh}
-"        \ fehbrowser,
-        \ {view in sxiv}
-        \ sxivbrowser,
+        \ {View in feh}
+        \ fehbrowser,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
 
 " SVG
