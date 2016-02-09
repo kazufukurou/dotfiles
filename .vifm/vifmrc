@@ -156,7 +156,7 @@ command vgrep nvim "+grep %a"
 " program.
 
 " Pdf
-filetype *.pdf zathura %f,apvlv %f,xpdf %f
+filetype *.pdf zathura %f,apvlv %f,xpdf %f,mupdf %f
 fileview *.pdf pdftotext -nopgbrk %c -
 
 " PostScript
@@ -168,7 +168,7 @@ filextype *.djvu apvlv %f
 " Audio
 filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a
        \ {Play using mplayer}
-       \ mplayer %f &,
+       \ mplayer %f,
        \ {Play using Cmus}
        \ cmus-remote -c -l %f; sleep 1; cmus-remote -n,
 fileviewer *.mp3 mp3info
