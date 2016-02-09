@@ -225,7 +225,7 @@ endfunction
 
 let g:branch = ''
 function! SetBranch()
-    let l:branch = substitute(system("hg branch"), '\n', '', '')
+    let l:branch = substitute(system("hg branch 2> /dev/null"), '\n', '', '')
     if l:branch !~ 'abort'
         let g:branch = l:branch
     else
