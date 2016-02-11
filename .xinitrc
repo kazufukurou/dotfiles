@@ -13,8 +13,8 @@ sxhkd &
 
 export GTK_IM_MODULE='uim'
 export QT_IM_MODULE='uim'
-export XMODIFIERS='@im=uim'
 uim-xim &
+export XMODIFIERS='@im=uim'
 
 xset b off
 exec bspwm
