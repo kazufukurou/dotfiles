@@ -1,6 +1,7 @@
 URxvt.perl-ext:
 URxvt.perl-ext-common:
 URxvt*font: xft:M+ 1m:size=12
+URxvt*inputMethod: uim
 URxvt*saveLines: 100000
 URxvt.scrollBar: false
 
