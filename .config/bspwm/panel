@@ -60,6 +60,19 @@ cmus() {
     echo "$artist $fw$title$c"
 }
 
+print_left_right() {
+    clean1=$(echo "$1" | sed -r "s/\x1B\[(\?)?([0-9]{1,3}((;[0-9]{1,3})*)?)?[lmgK](\x1B\(B)?//g")
+    clean2=$(echo "$2" | sed -r "s/\x1B\[(\?)?([0-9]{1,3}((;[0-9]{1,3})*)?)?[lmgK](\x1B\(B)?//g")
+    len1=$(echo "$1" | wc -L)
+    len2=$(echo "$2" | wc -L)
+    clean_len1=$(echo "$clean1" | wc -L)
+    clean_len2=$(echo "$clean2" | wc -L)
+    color1=$(($len1-$clean_len1))
+    color2=$(($len2-$clean_len2))
+    cols=$(($(tput cols)-$len1-$len2+$color1+$color2))
+    printf "%s%${cols}s%s" "$1" "" "$2"
+}
+
 system_loop() {
     while true; do
         bspc desktop -f
@@ -88,13 +101,9 @@ panel_bar() {
         vc=$(volume_color $v)
         bc=$(battery_color $b $bs)
 
-        msg_color="$(tput civis)$fw$wm_icon$c $title"
-        msg_clean="$wm_icon $title"
-        status_color=" T $tc$t$c V $vc$v$c B $bc$b$c $dm $fw$ddt$c $dw $fw$dt$c"
-        status_clean=" T $t V $v B $b $dm $ddt $dw $dt"
-
-        cols=$(($(tput cols)-${#msg_clean}-${#status_clean}+${#status_color}))
-        printf "%s%${cols}s" "$msg_color" "$status_color"
+        msg="$(tput civis)$fw$wm_icon$c $title"
+        sta="T $tc$t$c V $vc$v$c B $bc$b$c $dm $fw$ddt$c $dw $fw$dt$c"
+        print_left_right "$msg" "$sta"
     done
 }
 
