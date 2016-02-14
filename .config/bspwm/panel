@@ -87,6 +87,7 @@ panel_bar() {
         node_id=$(bspc query -N -n focused)
         title=""
         [ -n "$node_id" ] && title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
+        title=${title:0:160}
         t=$(temp)
         v=$(volume)
         b=$(battery)

@@ -2,8 +2,9 @@ call plug#begin()
 Plug 'kien/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Raimondi/delimitMate'
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
 Plug 'haya14busa/incsearch.vim'
-Plug 'osyo-manga/vim-over'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -120,9 +121,6 @@ match OverLength /\%81v/
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
-"vim-over
-nnoremap <leader>o :OverCommandLine<cr>
-
 "vim-surrond
 let g:surround_45 = "«\r»"
 
@@ -147,6 +145,10 @@ function! CtrlP_Statusline_2(...)
     let dir = ' %=%< '.getcwd().' '
     return len.dir
 endfunction
+
+"vim-operator-flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 "incsearch
 let g:incsearch#auto_nohlsearch = 1
@@ -225,11 +227,11 @@ endfunction
 
 let g:branch = ''
 function! SetBranch()
-    let l:branch = substitute(system("hg branch 2> /dev/null"), '\n', '', '')
+    silent let l:branch = substitute(system('hg branch'), '\n', '', '')
     if l:branch !~ 'abort'
         let g:branch = l:branch
     else
-        let l:branch = substitute(system("git name-rev --name-only HEAD"), '\n', '', '')
+        silent let l:branch = substitute(system('git name-rev --name-only HEAD'), '\n', '', '')
         if l:branch !~ 'fatal'
             let g:branch = l:branch
         endif
