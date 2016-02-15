@@ -9,7 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
-Plug 'EasyMotion'
+Plug 'easymotion/vim-easymotion'
 Plug 'kazufukurou/vim-android'
 Plug g:plug_home.'/eclim'
 call plug#end()
@@ -146,9 +146,13 @@ function! CtrlP_Statusline_2(...)
     return len.dir
 endfunction
 
-"vim-operator-flashy
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
+"vim-easymotion
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
 
 "incsearch
 let g:incsearch#auto_nohlsearch = 1
@@ -162,6 +166,10 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+"vim-operator-flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 "Ultisnips
 let g:UltiSnipsExpandTrigger = '<c-s>'
