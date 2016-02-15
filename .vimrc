@@ -9,6 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
+Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'kazufukurou/vim-android'
 Plug g:plug_home.'/eclim'
@@ -176,6 +177,30 @@ let g:UltiSnipsExpandTrigger = '<c-s>'
 let g:UltiSnipsJumpForwardTrigger = '<c-s>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsEditSplit = 'vertical'
+
+"vim-switch
+let g:switch_mapping = "-"
+autocmd FileType xml let b:switch_custom_definitions =
+    \ [
+    \   ['LinearLayout', 'RelativeLayout'],
+    \   ['TextView', 'ImageView'],
+    \   ['match_parent', 'wrap_content'],
+    \   ['horizontal', 'vertical'],
+    \   ['center_vertical', 'center_horizontal'],
+    \   ['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'],
+    \   ['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'],
+    \   ['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom'],
+    \   ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
+    \ ]
+autocmd FileType java let b:switch_custom_definitions =
+    \ [
+    \   ['LinearLayout', 'RelativeLayout'],
+    \   ['TextView', 'ImageView'],
+    \   ['@Nullable', '@NonNull'],
+    \   ['public', 'protected', 'private'],
+    \   ['extends', 'implements'],
+    \   ['int', 'long', 'float', 'double'],
+    \ ]
 
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
