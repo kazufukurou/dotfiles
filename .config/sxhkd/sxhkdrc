@@ -46,6 +46,9 @@ super + @button{1-3}
 # wm independent hotkeys
 #
 
+super + {_,ctrl + ,shift + }Return
+    urxvt{_, -e sh -c "bspc node -t floating && $SHELL -i -t", -e sh -c "bspc node -t floating && $SHELL"}
+
 super + Return
     urxvt
 

@@ -12,6 +12,7 @@ Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'kazufukurou/vim-android'
+Plug 'udalov/kotlin-vim'
 Plug g:plug_home.'/eclim'
 call plug#end()
 
