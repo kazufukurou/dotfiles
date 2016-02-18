@@ -13,69 +13,95 @@ endsnippet
 snippet lapr "Android XML layout align parent right" b
 android:layout_alignParentRight="true"
 endsnippet
+
 snippet lapb "Android XML layout align parent bottom" b
 android:layout_alignParentBottom="true"
 endsnippet
+
 snippet lawp "Android XML layout align with parent if missing" b
 android:layout_alignWithParentIfMissing="true"
 endsnippet
+
 snippet lch "Android XML layout center horizontal" b
 android:layout_centerHorizontal="true"
 endsnippet
+
 snippet lcv "Android XML layout center vertical" b
 android:layout_centerVertical="true"
 endsnippet
+
 snippet lcp "Android XML layout center in parent" b
 android:layout_centerInParent="true"
 endsnippet
+
 snippet ltl "Android XML layout to left of" b
 android:layout_toLeftOf="@id/$1"
 endsnippet
+
 snippet ltr "Android XML layout to right of" b
 android:layout_toRightOf="@id/$1"
 endsnippet
+
 snippet la "Android XML layout above" b
 android:layout_above="@id/$1"
 endsnippet
+
 snippet lb "Android XML layout below" b
 android:layout_below="@id/$1"
 endsnippet
+
 snippet lal "Android XML layout align left" b
 android:layout_alignLeft="@id/$1"
 endsnippet
+
 snippet lar "Android XML layout align right" b
 android:layout_alignRight="@id/$1"
 endsnippet
+
 snippet lat "Android XML layout align top" b
 android:layout_alignTop="@id/$1"
 endsnippet
+
 snippet lab "Android XML layout align bottom" b
 android:layout_alignBottom="@id/$1"
 endsnippet
+
 snippet lm "Android XML layout margin" b
-android:layout_marginLeft="$1dp"
-android:layout_marginRight="$2dp"
-android:layout_marginTop="$3dp"
-android:layout_marginBottom="$4dp"
+android:layout_marginLeft="${1:8}dp"
+android:layout_marginRight="${2:8}dp"
+android:layout_marginTop="${3:8}dp"
+android:layout_marginBottom="${4:8}dp"
 endsnippet
+
 snippet lml "Android XML layout margin left" b
-android:layout_marginLeft="$1dp"
+android:layout_marginLeft="${1:8}dp"
 endsnippet
+
 snippet lmr "Android XML layout margin right" b
-android:layout_marginRight="$1dp"
+android:layout_marginRight="${1:8}dp"
 endsnippet
+
 snippet lmt "Android XML layout margin top" b
-android:layout_marginTop="$1dp"
+android:layout_marginTop="${1:8}dp"
 endsnippet
+
 snippet lmb "Android XML layout margin bottom" b
-android:layout_marginBottom="$1dp"
+android:layout_marginBottom="${1:8}dp"
+endsnippet
+
+snippet g "Android XML gravity" b
+android:gravity="${1:center_vertical}"
 endsnippet
 
 snippet p "Android XML padding" b
-android:paddingLeft="$1dp"
-android:paddingRight="$2dp"
-android:paddingTop="$3dp"
-android:paddingBottom="$4dp"
+android:paddingLeft="${1:8}dp"
+android:paddingRight="${2:8}dp"
+android:paddingTop="${3:8}dp"
+android:paddingBottom="${4:8}dp"
+endsnippet
+
+snippet ta "Android XML text appearance" b
+android:textAppearance="@style/$1"
 endsnippet
 
 snippet rl "Android RelativeLayout" b

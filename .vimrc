@@ -72,8 +72,9 @@ inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap см <esc>`^
 
-"turn off Vim's crazy default regex characters
-"nnoremap / /\v
+"search
+nnoremap <leader>n :cn<cr>
+nnoremap <leader>N :cp<cr>
 
 "easy window navigation
 nnoremap <left> <C-w>h
@@ -82,7 +83,7 @@ nnoremap <up> <C-w>k
 nnoremap <right> <C-w>l
 
 "wrap lines
-nnoremap <silent><leader>w :set wrap!<CR>
+nnoremap <silent><leader>w :set wrap!<cr>
 
 "vimrc editing
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
@@ -92,9 +93,9 @@ nnoremap <leader>rs :source $MYVIMRC<cr>
 nnoremap <leader>s :w<cr>
 
 "vimdiff
-nnoremap <leader>do :diffget 2<cr> :diffup<CR>
-nnoremap <leader>db :diffget 3<cr> :diffup<CR>
-nnoremap <leader>dr :diffget 4<cr> :diffup<CR>
+nnoremap <leader>do :diffget 2<cr> :diffup<cr>
+nnoremap <leader>db :diffget 3<cr> :diffup<cr>
+nnoremap <leader>dr :diffget 4<cr> :diffup<cr>
 nnoremap <leader>dn ]c
 nnoremap <leader>dN [c
 
