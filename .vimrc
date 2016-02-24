@@ -8,12 +8,14 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'kazufukurou/vim-android'
+"Plug 'kazufukurou/vim-android'
 Plug 'udalov/kotlin-vim'
-Plug g:plug_home.'/eclim'
+Plug 'artur-shaik/vim-javacomplete2'
+"Plug 'hsanson/vim-android'
 call plug#end()
 
 color mycolorscheme
@@ -71,9 +73,6 @@ nnoremap ; :
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap см <esc>`^
-
-"turn off Vim's crazy default regex characters
-"nnoremap / /\v
 
 "easy window navigation
 nnoremap <left> <C-w>h
@@ -202,6 +201,11 @@ autocmd FileType java let b:switch_custom_definitions =
     \   ['extends', 'implements'],
     \   ['int', 'long', 'float', 'double'],
     \ ]
+
+"vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
+let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
 
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
