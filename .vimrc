@@ -16,6 +16,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'udalov/kotlin-vim'
 Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'hsanson/vim-android'
+Plug 'tyru/skk.vim'
 call plug#end()
 
 color mycolorscheme
@@ -220,6 +221,16 @@ nnoremap <silent> <leader>eg :JavaGet<cr>
 nnoremap <silent> <leader>egs :JavaGetSet<cr>
 nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
+"skk
+let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
+let g:skk_start_henkan_key = '<C-r>'
+let g:skk_use_face = 1
+let g:skk_ascii_mode_string = 'aA'
+let g:skk_hira_mode_string = 'あ'
+let g:skk_kata_mode_string = 'ア'
+let g:skk_zenei_mode_string = 'Ａ'
+let g:skk_abbrev_mode_string = 'aあ'
+
 "keyboard layout
 " augroup xkbmap
 "     autocmd InsertLeave * call system('initxkbmap')
@@ -255,6 +266,7 @@ function! Status(winnum)
     let stat .= ' %<%f' "path to the file relative to current directory
     let stat .= '%=' "separation point between left and right items
     if active
+        let stat .= '%{SkkGetModeStr()} '
         let stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
         let stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
         let stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
