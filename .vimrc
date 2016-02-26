@@ -8,12 +8,15 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'kazufukurou/vim-android'
+"Plug 'kazufukurou/vim-android'
 Plug 'udalov/kotlin-vim'
-Plug g:plug_home.'/eclim'
+Plug 'artur-shaik/vim-javacomplete2'
+"Plug 'hsanson/vim-android'
+Plug 'tyru/skk.vim'
 call plug#end()
 
 color mycolorscheme
@@ -204,6 +207,11 @@ autocmd FileType java let b:switch_custom_definitions =
     \   ['int', 'long', 'float', 'double'],
     \ ]
 
+"vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
+let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
+
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimJavaSearchSingleResult = 'edit'
@@ -216,6 +224,16 @@ nnoremap <silent> <leader>ei :JavaImport<cr>
 nnoremap <silent> <leader>eg :JavaGet<cr>
 nnoremap <silent> <leader>egs :JavaGetSet<cr>
 nnoremap <silent> <leader>er :ProjectRefresh<cr>
+
+"skk
+let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
+let g:skk_start_henkan_key = '<C-r>'
+let g:skk_use_face = 1
+let g:skk_ascii_mode_string = 'aA'
+let g:skk_hira_mode_string = 'あ'
+let g:skk_kata_mode_string = 'ア'
+let g:skk_zenei_mode_string = 'Ａ'
+let g:skk_abbrev_mode_string = 'aあ'
 
 "keyboard layout
 " augroup xkbmap
@@ -252,6 +270,7 @@ function! Status(winnum)
     let stat .= ' %<%f' "path to the file relative to current directory
     let stat .= '%=' "separation point between left and right items
     if active
+        let stat .= '%{SkkGetModeStr()} '
         let stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
         let stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
         let stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
