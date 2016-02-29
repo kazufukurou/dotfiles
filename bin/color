@@ -1,25 +1,35 @@
 #!/bin/bash
 
-fgnames=('blk' 'red' 'grn' 'yel' 'blu' 'mag' 'cyn' 'wht')
-bgnames=('DFT' 'BLK' 'RED' 'GRN' 'YEL' 'BLU' 'MAG' 'CYN' 'WHT')
+num=(0 7 1 3 2 6 4 5)
 
-printf "          "
-for b in {0..8}; do
-    printf "${bgnames[b]}    "
+for j in {0..7}; do
+    f=${num[j]}
+    echo -en "$(tput setaf $f) ███████ "
 done
 echo ""
-
-for f in {0..7}; do
-    printf "${fgnames[f]} %3d " $((f))
-    for b in {0..8}; do
-        bg=$((b+39))
-        echo -en "\033[${bg}m\033[$((f+30))m ${bg} $((f+30)) "
+for j in {0..7}; do
+    f=${num[j]}
+    echo -en "$(tput bold)$(tput setaf $f) ███████ "
+done
+echo $(tput sgr0)
+for i in {-1..7}; do
+    if [ $i -ge 0 ] ; then
+        b=${num[i]}
+        echo -en "$(tput setab $b)"
+    fi
+    for j in {0..7}; do
+        f=${num[j]}
+        fg=$(getxresource color$f)
+        echo -en "$(tput setaf $f) $fg "
     done
-    echo -e "\033[0m\033[0m"
-    printf "${fgnames[f]} %3d " $((f+8))
-    for b in {0..8}; do
-        bg=$((b+39))
-        echo -en "\033[${bg}m\033[1;$((f+30))m ${bg} $((f+30)) "
+    echo $(tput sgr0)
+    if [ $i -ge 0 ] ; then
+        echo -en "$(tput setab $b)"
+    fi
+    for j in {0..7}; do
+        f=${num[j]}
+        fg=$(getxresource color$((f+8)))
+        echo -en "$(tput bold)$(tput setaf $f) $fg "
     done
-    echo -e "\033[0m"
+    echo $(tput sgr0)
 done

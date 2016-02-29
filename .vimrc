@@ -14,9 +14,10 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
 "Plug 'kazufukurou/vim-android'
 Plug 'udalov/kotlin-vim'
-Plug 'artur-shaik/vim-javacomplete2'
+"Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'hsanson/vim-android'
 Plug 'tyru/skk.vim'
+Plug g:plug_home.'/eclim'
 call plug#end()
 
 color mycolorscheme
@@ -208,9 +209,9 @@ autocmd FileType java let b:switch_custom_definitions =
     \ ]
 
 "vim-javacomplete2
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
-let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
+" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
+" let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
 
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
