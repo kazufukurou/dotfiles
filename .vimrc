@@ -15,7 +15,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'kazufukurou/vim-android'
 Plug 'udalov/kotlin-vim'
 "Plug 'artur-shaik/vim-javacomplete2'
-"Plug 'hsanson/vim-android'
 Plug 'tyru/skk.vim'
 Plug g:plug_home.'/eclim'
 call plug#end()
@@ -129,7 +128,7 @@ match OverLength /\%81v/
 let g:TypesFileIncludeLocals = 1
 
 "vim-surrond
-let g:surround_45 = "«\r»"
+let g:surround_45 = '«\r»'
 
 "CtrlP
 let g:ctrlp_map = '<leader>p'
@@ -185,11 +184,18 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsEditSplit = 'vertical'
 
 "vim-switch
-let g:switch_mapping = "-"
+let g:switch_mapping = '-'
+let g:switch_common =
+      \ {
+      \   'android_layout': ['LinearLayout', 'RelativeLayout', 'FrameLayout'],
+      \   'android_view': ['View', 'TextView', 'ImageView'],
+      \   'java_equals_not_equals': ['!=', '=='],
+      \   'java_greater_less': ['>', '<'],
+      \ }
 autocmd FileType xml let b:switch_custom_definitions =
     \ [
-    \   ['LinearLayout', 'RelativeLayout'],
-    \   ['TextView', 'ImageView'],
+    \   g:switch_common.android_layout,
+    \   g:switch_common.android_view,
     \   ['match_parent', 'wrap_content'],
     \   ['horizontal', 'vertical'],
     \   ['center_vertical', 'center_horizontal'],
@@ -200,12 +206,23 @@ autocmd FileType xml let b:switch_custom_definitions =
     \ ]
 autocmd FileType java let b:switch_custom_definitions =
     \ [
-    \   ['LinearLayout', 'RelativeLayout'],
-    \   ['TextView', 'ImageView'],
+    \   g:switch_common.android_layout,
+    \   g:switch_common.android_view,
+    \   g:switch_common.java_equals_not_equals,
+    \   g:switch_common.java_greater_less,
     \   ['@Nullable', '@NonNull'],
     \   ['public', 'protected', 'private'],
     \   ['extends', 'implements'],
     \   ['int', 'long', 'float', 'double'],
+    \ ]
+autocmd FileType kotlin let b:switch_custom_definitions =
+    \ [
+    \   g:switch_common.android_layout,
+    \   g:switch_common.android_view,
+    \   g:switch_common.java_equals_not_equals,
+    \   g:switch_common.java_greater_less,
+    \   ['var', 'val'],
+    \   ['Boolean', 'Int', 'Float', 'Long', 'String'],
     \ ]
 
 "vim-javacomplete2
@@ -267,7 +284,7 @@ function! Status(winnum)
         let stat .= '%3*%( %{g:branch} %)%0*' "vcs branch
     endif
     let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
-    if active && mode() ==# "i" | let stat .= '%5*' | endif
+    if active && mode() ==# 'i' | let stat .= '%5*' | endif
     let stat .= ' %<%f' "path to the file relative to current directory
     let stat .= '%=' "separation point between left and right items
     if active
@@ -296,7 +313,7 @@ endfunction
 function! Mode()
     hi User5 ctermbg=4 ctermfg=15
     let l:mode = mode()
-    if l:mode ==# "i"
+    if l:mode ==# 'i'
         hi User2 ctermbg=15 ctermfg=0
         hi User3 ctermbg=12 ctermfg=0
         hi User4 ctermbg=13 ctermfg=0
@@ -305,12 +322,12 @@ function! Mode()
         hi User3 ctermbg=14 ctermfg=0
         hi User4 ctermbg=12 ctermfg=0
     endif
-    if     l:mode ==# "i" | redraw | hi User1 ctermbg=15 ctermfg=0 | return "I"
-    elseif l:mode ==# "n" | redraw | hi User1 ctermbg=10 ctermfg=0 | return "N"
-    elseif l:mode ==# "R" | redraw | hi User1 ctermbg=9  ctermfg=0 | return "R"
-    elseif l:mode ==# "v" | redraw | hi User1 ctermbg=13 ctermfg=0 | return "V"
-    elseif l:mode ==# "V" | redraw | hi User1 ctermbg=13 ctermfg=0 | return "VL"
-    elseif l:mode ==# ""| redraw | hi User1 ctermbg=13 ctermfg=0 | return "VB"
+    if     l:mode ==# 'i' | redraw | hi User1 ctermbg=15 ctermfg=0 | return 'I'
+    elseif l:mode ==# 'n' | redraw | hi User1 ctermbg=10 ctermfg=0 | return 'N'
+    elseif l:mode ==# 'R' | redraw | hi User1 ctermbg=9  ctermfg=0 | return 'R'
+    elseif l:mode ==# 'v' | redraw | hi User1 ctermbg=13 ctermfg=0 | return 'V'
+    elseif l:mode ==# 'V' | redraw | hi User1 ctermbg=13 ctermfg=0 | return 'VL'
+    elseif l:mode ==# ''| redraw | hi User1 ctermbg=13 ctermfg=0 | return 'VB'
     else | return l:mode
     endif
 endfunction
