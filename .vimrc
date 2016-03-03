@@ -15,7 +15,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'kazufukurou/vim-android'
 Plug 'udalov/kotlin-vim'
 "Plug 'artur-shaik/vim-javacomplete2'
-"Plug 'hsanson/vim-android'
 Plug 'tyru/skk.vim'
 Plug g:plug_home.'/eclim'
 call plug#end()
@@ -209,9 +208,9 @@ autocmd FileType java let b:switch_custom_definitions =
     \ ]
 
 "vim-javacomplete2
-" autocmd FileType java setlocal omnifunc=javacomplete#Complete
-" let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
-" let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
+"let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
 
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
@@ -228,13 +227,14 @@ nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
-let g:skk_start_henkan_key = '<C-r>'
 let g:skk_use_face = 1
 let g:skk_ascii_mode_string = 'aA'
 let g:skk_hira_mode_string = 'あ'
 let g:skk_kata_mode_string = 'ア'
 let g:skk_zenei_mode_string = 'Ａ'
 let g:skk_abbrev_mode_string = 'aあ'
+let g:skk_marker_white = '-'
+let g:skk_marker_black = '+'
 
 "keyboard layout
 " augroup xkbmap
