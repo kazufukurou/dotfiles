@@ -5,6 +5,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-operator-user'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/vim-asterisk'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -155,8 +156,8 @@ endfunction
 "vim-easymotion
 "map  / <Plug>(easymotion-sn)
 "omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+"map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 
@@ -168,10 +169,17 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
+
+"vim-asterisk
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
+let g:asterisk#keeppos = 1
 
 "vim-operator-flashy
 map y <Plug>(operator-flashy)
@@ -245,7 +253,6 @@ nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
-let g:skk_use_face = 1
 let g:skk_ascii_mode_string = 'aA'
 let g:skk_hira_mode_string = 'あ'
 let g:skk_kata_mode_string = 'ア'
