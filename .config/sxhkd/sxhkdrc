@@ -47,7 +47,7 @@ super + @button{1-3}
 #
 
 super + {_,ctrl + ,shift + }Return
-    urxvt{_, -e sh -c "bspc node -t floating && $SHELL -i -t", -e sh -c "bspc node -t floating && $SHELL"}
+    urxvt{_, -e tmux, -e zsh -c "tmux -q has-session && exec tmux attach-session && tmux new-window -d || exec tmux new-session -s$USER"}
 
 super + Return
     urxvt
@@ -55,8 +55,8 @@ super + Return
 super + z
     slock & xset dpms force off
 
-super + c
-    ~/bin/toggletray
+# super + c
+#     ~/bin/toggletray
 
 super + x
     firefox
