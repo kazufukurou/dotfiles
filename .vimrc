@@ -26,7 +26,7 @@ set nocompatible
 set noundofile "don't create .un~ files
 set nobackup nowritebackup "don't create ~ files
 set noswapfile "don't create .swp files
-set mouse=a
+set mouse=nv
 set hidden "allow to have unwritten changes to a file and open a new file
 set scrolloff=4 "keep cursor few lines away edge when scrolling
 set nonumber "dont show line numbers
