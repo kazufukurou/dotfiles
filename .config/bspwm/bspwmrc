@@ -26,3 +26,4 @@ bspc rule -a feh state=pseudo_tiled
 xsetroot -cursor_name left_ptr
 xsetroot -solid $color_gray
 urxvt -geometry 212x1 -bw 0 -b 0 -bg $color_gray -e ~/.config/bspwm/panel &
+wmname LG3D &
