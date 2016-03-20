@@ -65,43 +65,39 @@ inoremap <C-c> <nop>
 nnoremap j gj
 nnoremap k gk
 
-"better omnicomplete
-inoremap <C-@> <C-x><C-o>
-
-"easy command line mode
-nnoremap ; :
-
 "don't move cursor then exit insert mode
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap см <esc>`^
 
-"search
-nnoremap <leader>n :cn<cr>
-nnoremap <leader>N :cp<cr>
-
-"easy window navigation
-nnoremap <left> <C-w>h
-nnoremap <down> <C-w>j
-nnoremap <up> <C-w>k
-nnoremap <right> <C-w>l
-
-"wrap lines
-nnoremap <silent><leader>w :set wrap!<cr>
-
-"vimrc editing
-nnoremap <leader>re :vsplit $MYVIMRC<cr>
-nnoremap <leader>rs :source $MYVIMRC<cr>
-
-"quick saving
-nnoremap <leader>s :w<cr>
-
-"vimdiff
+"other easy bindings
+nnoremap ; :
+inoremap <C-@> <C-x><C-o>
 nnoremap <leader>do :diffget 2<cr> :diffup<cr>
 nnoremap <leader>db :diffget 3<cr> :diffup<cr>
 nnoremap <leader>dr :diffget 4<cr> :diffup<cr>
 nnoremap <leader>dn ]c
 nnoremap <leader>dN [c
+nnoremap <leader>ec :JavaCorrect<cr>
+nnoremap <leader>es :JavaSearch<cr>
+nnoremap <leader>ed :JavaDocPreview<cr>
+nnoremap <leader>eo :JavaImpl<cr>
+nnoremap <leader>ei :JavaImport<cr>
+nnoremap <leader>eg :JavaGet<cr>
+nnoremap <leader>egs :JavaGetSet<cr>
+nnoremap <leader>er :ProjectRefresh<cr>
+nnoremap <leader>m :Make<cr>
+nnoremap <leader>n :cn<cr>
+nnoremap <leader>N :cp<cr>
+nnoremap <leader>re :vsplit $MYVIMRC<cr>
+nnoremap <leader>rs :source $MYVIMRC<cr>
+nnoremap <leader>s :w<cr>
+nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
+nnoremap <leader>w :set wrap!<cr>
+nnoremap <left> <C-w>h
+nnoremap <down> <C-w>j
+nnoremap <up> <C-w>k
+nnoremap <right> <C-w>l
 
 "save as root
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -119,11 +115,10 @@ augroup tabHighlight
     autocmd!
     autocmd BufEnter * call TabHighlightModeMatch()
 augroup END
-nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 
 "highlight 80th column
 highlight OverLength ctermbg=1 ctermfg=15
-match OverLength /\%81v/
+2match OverLength /\%81v/
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
@@ -242,14 +237,6 @@ autocmd FileType kotlin let b:switch_custom_definitions =
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimJavaSearchSingleResult = 'edit'
 let g:EclimJavaCompilerAutoDetect = 0
-nnoremap <silent> <leader>ec :JavaCorrect<cr>
-nnoremap <silent> <leader>es :JavaSearch<cr>
-nnoremap <silent> <leader>ed :JavaDocPreview<cr>
-nnoremap <silent> <leader>eo :JavaImpl<cr>
-nnoremap <silent> <leader>ei :JavaImport<cr>
-nnoremap <silent> <leader>eg :JavaGet<cr>
-nnoremap <silent> <leader>egs :JavaGetSet<cr>
-nnoremap <silent> <leader>er :ProjectRefresh<cr>
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
@@ -273,7 +260,7 @@ set laststatus=2 "always show the status line
 augroup statusline
     autocmd!
     autocmd BufEnter,FileChangedShell,CursorHold * call SetBranch()
-    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * call <sid>RefreshStatus()
 augroup END
 
 function! s:RefreshStatus()
@@ -281,8 +268,6 @@ function! s:RefreshStatus()
         call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
     endfor
 endfunction
-
-command! RefreshStatus :call <SID>RefreshStatus()
 
 function! Status(winnum)
     let active = a:winnum == winnr()

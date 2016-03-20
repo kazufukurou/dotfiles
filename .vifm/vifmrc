@@ -175,12 +175,12 @@ fileviewer *.mp3 mp3info
 
 " Video
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv
-        \ {View using ffplay}
-        \ ffplay -fs %c,
-        \ {View using Dragon}
-        \ dragon %f,
+        "\ {View using ffplay}
+        "\ ffplay -fs %c,
+        "\ {View using Dragon}
+        "\ dragon %f,
         \ {View using mplayer}
-        \ mplayer %f,
+        \ mplayer %f 2> /dev/null &,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
          \ ffprobe -show_files -pretty %f 2> /dev/null
 
