@@ -86,7 +86,7 @@ nnoremap <leader>ei :JavaImport<cr>
 nnoremap <leader>eg :JavaGet<cr>
 nnoremap <leader>egs :JavaGetSet<cr>
 nnoremap <leader>er :ProjectRefresh<cr>
-nnoremap <leader>m :Make<cr>
+nnoremap <leader>m :Make!<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
