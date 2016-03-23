@@ -59,7 +59,7 @@ super + z
 #     ~/bin/toggletray
 
 super + x
-    firefox
+    vimb
 
 # make sxhkd reload its configuration files:
 super + shift + z
