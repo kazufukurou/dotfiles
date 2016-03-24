@@ -13,5 +13,4 @@ sxhkd &
 
 xrandr --dpi 160
 xset b off
-#exec bspwm
-exec monsterwm
+exec bspwm
