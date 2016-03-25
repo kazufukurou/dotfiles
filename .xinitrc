@@ -11,5 +11,6 @@ xrdb -merge ~/.Xresources
 sxhkd &
 ~/bin/initxkbmap
 
+xrandr --dpi 160
 xset b off
 exec bspwm
