@@ -13,6 +13,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'kazufukurou/vim-android-sensible'
 Plug 'udalov/kotlin-vim'
 "Plug 'artur-shaik/vim-javacomplete2'
@@ -87,6 +88,7 @@ nnoremap <leader>eg :JavaGet<cr>
 nnoremap <leader>egs :JavaGetSet<cr>
 nnoremap <leader>er :ProjectRefresh<cr>
 nnoremap <leader>m :Make!<cr>
+nnoremap <leader>c :Copen<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
