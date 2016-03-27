@@ -13,7 +13,6 @@ Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'kazufukurou/vim-android-sensible'
 Plug 'udalov/kotlin-vim'
 "Plug 'artur-shaik/vim-javacomplete2'
@@ -56,23 +55,17 @@ set wildignore+=.git,.hg,.gradle
 let mapleader = ' '
 let maplocalleader = ' '
 
-"unwanded keys
-nnoremap : <nop>
+"bindings
 nnoremap <space> <nop>
 nnoremap Q <nop>
 inoremap <C-c> <nop>
-
-"don't skip wrapped lines
+nnoremap ; :
+nnoremap : ;
 nnoremap j gj
 nnoremap k gk
-
-"don't move cursor then exit insert mode
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap см <esc>`^
-
-"other easy bindings
-nnoremap ; :
 inoremap <C-@> <C-x><C-o>
 nnoremap <leader>do :diffget 2<cr> :diffup<cr>
 nnoremap <leader>db :diffget 3<cr> :diffup<cr>
@@ -249,11 +242,6 @@ let g:skk_zenei_mode_string = 'Ａ'
 let g:skk_abbrev_mode_string = 'aあ'
 let g:skk_marker_white = '-'
 let g:skk_marker_black = '+'
-
-"keyboard layout
-" augroup xkbmap
-"     autocmd InsertLeave * call system('initxkbmap')
-" augroup END
 
 "status line
 set noshowmode

@@ -1,31 +1,22 @@
 #!/bin/bash
 
-colors=(0 7 1 3 2 6 4 5)
-colors1=()
-colors2=()
-for i in ${colors[@]} ; do
-    colors1[i]=$(getxresource color$i)
-    echo -en "$(tput setaf $i) ███████ "
+n=(0 7 1 3 2 6 4 5)
+c=$(tput sgr0)
+b=$(tput bold)
+for x in "" $b ; do
+    for i in ${n[@]} ; do printf "$x$(tput setaf $i) ██████████ "; done
+    echo $c
 done
-echo ""
-for i in ${colors[@]} ; do
-    colors2[i]=$(getxresource color$((i+8)))
-    echo -en "$(tput bold)$(tput setaf $i) ███████ "
+for x in "" $b ; do
+    for i in ${n[@]} ; do printf "$x$(tput setaf $i) %2s $(getxresource color$((i+d))) " $((i+d)); done
+    echo $c
+    d=8
 done
-echo $(tput sgr0)
-for i in -1 0 7 1 3 2 6 4 5 ; do
-    if [ $i -ge 0 ] ; then
-        echo -en "$(tput setab $i)"
-    fi
-    for j in ${colors[@]} ; do
-        echo -en "$(tput setaf $j) ${colors1[j]} "
+for x in "" $b ; do
+    for i in ${n[@]} ; do
+        printf "$c $(tput setab $i) "
+        for j in ${n[@]} ; do printf "$x$(tput setaf $j)x"; done
+        printf " $c "
     done
-    echo $(tput sgr0)
-    if [ $i -ge 0 ] ; then
-        echo -en "$(tput setab $i)"
-    fi
-    for j in ${colors[@]} ; do
-        echo -en "$(tput bold)$(tput setaf $j) ${colors2[j]} "
-    done
-    echo $(tput sgr0)
+    echo ""
 done

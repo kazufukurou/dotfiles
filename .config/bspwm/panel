@@ -8,11 +8,13 @@ fi
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 workspaces=('▀ ' '▀▀' ' ▀' '█ ' '██' ' █' '▄ ' '▄▄' ' ▄' '▄▀')
-fw=$(tput bold)$(tput setaf 7)
-fb=$(tput bold)$(tput setaf 4)
-fm=$(tput bold)$(tput setaf 5)
-fr=$(tput bold)$(tput setaf 1)
+f7=$(tput setaf 7)
+f5=$(tput setaf 5)
+f4=$(tput setaf 4)
+f1=$(tput setaf 1)
+f0=$(tput setaf 0)
 blink=$(tput blink)
+cv=$(tput civis)
 c=$(tput sgr0)
 
 cpu() {
@@ -25,7 +27,7 @@ temp() {
 }
 
 temp_color() {
-    [ $1 -gt 80 ] && echo $fr || [ $1 -gt 60 ] && echo $fm || echo $fb
+    [ $1 -gt 80 ] && echo $f1 || [ $1 -gt 60 ] && echo $f5 || echo $f4
 }
 
 volume() {
@@ -33,7 +35,7 @@ volume() {
 }
 
 volume_color() {
-    [ "Mute" = $1 ] && echo $fr || echo $fw
+    [ "Mute" = $1 ] && echo $f1 || echo $f7
 }
 
 battery() {
@@ -46,18 +48,18 @@ battery_status() {
 }
 
 battery_color() {
-    [ $1 -le 10 ] && [ "$2" = "Discharging" ] && echo $fr$blink && return 0
-    [ $1 -le 10 ] && echo $fr && return 0
-    [ $1 -le 50 ] && echo $fm && return 0
-    [ $1 -le 90 ] && echo $fb && return 0
-    echo $fw
+    [ $1 -le 10 ] && [ "$2" = "Discharging" ] && echo $f1$blink && return 0
+    [ $1 -le 10 ] && echo $f1 && return 0
+    [ $1 -le 50 ] && echo $f5 && return 0
+    [ $1 -le 90 ] && echo $f4 && return 0
+    echo $f7
 }
 
 cmus() {
     info=$(cmus-remote -Q | grep tag)
     title=$(echo -e "$info" | grep 'tag title' | cut -d ' ' -f3-)
     artist=$(echo -e "$info" | grep 'tag artist' | cut -d ' ' -f3-)
-    echo "$artist $fw$title$c"
+    echo "$artist $f7$title$c"
 }
 
 system_loop() {
@@ -69,7 +71,7 @@ system_loop() {
 
 panel_bar() {
     while read -r line ; do
-        wm_name=$(bspc query -D -d focused)
+        wm_name=$(bspc query -T -d focused | cut -d\" -f4)
         wm_icon=${workspaces[$wm_name]}
         node_id=$(bspc query -N -n focused)
         title=""
@@ -88,8 +90,7 @@ panel_bar() {
         tc=$(temp_color $t)
         vc=$(volume_color $v)
         bc=$(battery_color $b $bs)
-
-        echo $(tput civis)$fw$wm_icon$c $dm $fw$ddt$c $dw $fw$dt$c T $tc$t$c V $vc$v$c B $bc$b$c $title
+        echo $cv$f7$wm_icon$c $f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b $f0$title
     done
 }
 

@@ -61,31 +61,24 @@ super + z
 super + x
     vimb
 
-# make sxhkd reload its configuration files:
 super + shift + z
     pkill -USR1 -x sxhkd
 
-# Increase volume
 XF86AudioRaiseVolume
     amixer set Master playback 1+
 
-# Decrease volume
 XF86AudioLowerVolume
     amixer set Master playback 1-
 
-# Toggle mute
 XF86AudioMute
-    amixer set Master toggle;
+    amixer set Master toggle
 
-# Music next
 XF86AudioNext
     cmus-remote --next
 
-# Music prev
 XF86AudioPrev
     cmus-remote --prev
 
-# Music play/pause
 XF86AudioPlay
     cmus-remote --pause
 
