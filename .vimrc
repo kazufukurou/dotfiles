@@ -15,7 +15,6 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'kazufukurou/vim-android-sensible'
 Plug 'udalov/kotlin-vim'
-"Plug 'artur-shaik/vim-javacomplete2'
 Plug 'tyru/skk.vim'
 Plug g:plug_home.'/eclim'
 call plug#end()
@@ -154,19 +153,19 @@ nmap t <Plug>(easymotion-t2)
 "incsearch
 let g:incsearch#auto_nohlsearch = 1
 let g:incsearch#magic = '\v'
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-" map *  <Plug>(incsearch-nohl-*)
-" map #  <Plug>(incsearch-nohl-#)
+map n <Plug>(incsearch-nohl-n)
+map N <Plug>(incsearch-nohl-N)
+" map * <Plug>(incsearch-nohl-*)
+" map # <Plug>(incsearch-nohl-#)
 " map g* <Plug>(incsearch-nohl-g*)
 " map g# <Plug>(incsearch-nohl-g#)
 
 "vim-asterisk
-map *  <Plug>(asterisk-z*)
-map #  <Plug>(asterisk-z#)
+map * <Plug>(asterisk-z*)
+map # <Plug>(asterisk-z#)
 map g* <Plug>(asterisk-gz*)
 map g# <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
@@ -222,11 +221,6 @@ autocmd FileType kotlin let b:switch_custom_definitions =
     \   ['var', 'val'],
     \   ['Boolean', 'Int', 'Float', 'Long', 'String'],
     \ ]
-
-"vim-javacomplete2
-"autocmd FileType java setlocal omnifunc=javacomplete#Complete
-"let g:JavaComplete_LibsPath = $ANDROID_HOME . '/platforms/android-23/android.jar'
-"let g:JavaComplete_SourcesPath = $ANDROID_HOME . '/sources/android-23/'
 
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
