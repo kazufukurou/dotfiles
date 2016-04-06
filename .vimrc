@@ -1,6 +1,6 @@
 call plug#begin()
 Plug 'kien/ctrlp.vim'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/neocomplete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-operator-user'
 Plug 'haya14busa/vim-operator-flashy'
@@ -13,10 +13,10 @@ Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'AndrewRadev/switch.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'akhaku/vim-java-unused-imports'
 Plug 'kazufukurou/vim-android-sensible'
 Plug 'udalov/kotlin-vim'
 Plug 'tyru/skk.vim'
-Plug g:plug_home.'/eclim'
 call plug#end()
 
 color mycolorscheme
@@ -65,26 +65,19 @@ nnoremap k gk
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap см <esc>`^
-inoremap <C-@> <C-x><C-o>
+nnoremap <leader>c :Copen<cr>
 nnoremap <leader>do :diffget 2<cr> :diffup<cr>
 nnoremap <leader>db :diffget 3<cr> :diffup<cr>
 nnoremap <leader>dr :diffget 4<cr> :diffup<cr>
 nnoremap <leader>dn ]c
 nnoremap <leader>dN [c
-nnoremap <leader>ec :JavaCorrect<cr>
-nnoremap <leader>es :JavaSearch<cr>
-nnoremap <leader>ed :JavaDocPreview<cr>
-nnoremap <leader>eo :JavaImpl<cr>
-nnoremap <leader>ei :JavaImport<cr>
-nnoremap <leader>eg :JavaGet<cr>
-nnoremap <leader>egs :JavaGetSet<cr>
-nnoremap <leader>er :ProjectRefresh<cr>
+nnoremap <leader>l <c-]>
 nnoremap <leader>m :Make!<cr>
-nnoremap <leader>c :Copen<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
 nnoremap <leader>rs :source $MYVIMRC<cr>
+nnoremap <leader>rt :!ctags -R --langdef=kotlin --langmap=kotlin:.kt --regex-kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/"<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>w :set wrap!<cr>
@@ -116,6 +109,10 @@ highlight OverLength ctermbg=1 ctermfg=15
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
+
+"neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#sources#tags#cache_limit_size=30000000
 
 "vim-surrond
 let g:surround_45 = '«\r»'
@@ -221,11 +218,6 @@ autocmd FileType kotlin let b:switch_custom_definitions =
     \   ['var', 'val'],
     \   ['Boolean', 'Int', 'Float', 'Long', 'String'],
     \ ]
-
-"Eclim
-let g:EclimCompletionMethod = 'omnifunc'
-let g:EclimJavaSearchSingleResult = 'edit'
-let g:EclimJavaCompilerAutoDetect = 0
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
