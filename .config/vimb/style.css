@@ -1,22 +1,22 @@
 ._hintLabel {
     -webkit-transform:translate(-0px,-0px) !important;
     position: absolute !important;
-    font: .8em monospace !important;
+    font:bold 1em monospace !important;
     color: #000 !important;
-    background-color: #f9c !important;
+    background-color: #fc9 !important;
     margin: 0 !important;
     padding: 1px 3px !important;
     border: 0px solid #000 !important;
     opacity: 1 !important
 }
 ._hintLabel._hintFocus {
-    opacity: 1 !important
+    opacity: 1 !important;
 }
 ._hintElem {
-    background-color: #666 !important;
-    color: #000 !important
+    background-color: inherit !important;
+    color: inherit !important
 }
 ._hintElem._hintFocus {
-    background-color: #999 !important;
-    color: #000 !important
+    background-color: inherit !important;
+    color: inherit !important
 }
