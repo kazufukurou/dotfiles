@@ -32,7 +32,7 @@ set scrolloff=4 "keep cursor few lines away edge when scrolling
 set nonumber "dont show line numbers
 set norelativenumber "line numbers are relative to current current line
 set ruler "always show current position
-set cursorline "highlight current line
+set nocursorline "don't highlight current line
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab "insert 4 spaces when hit tab
 set wrap "wrap lines
 set smartindent "automatically inserts one extra level of indentation in some cases
