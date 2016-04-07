@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'kien/ctrlp.vim'
 Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/unite.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-operator-user'
 Plug 'haya14busa/vim-operator-flashy'
@@ -71,6 +72,9 @@ nnoremap <leader>db :diffget 3<cr> :diffup<cr>
 nnoremap <leader>dr :diffget 4<cr> :diffup<cr>
 nnoremap <leader>dn ]c
 nnoremap <leader>dN [c
+nnoremap <leader>ih :UnusedImports<cr>
+nnoremap <leader>ic :UnusedImportsClear<cr>
+nnoremap <leader>id :UnusedImportsRemove<cr>
 nnoremap <leader>l <c-]>
 nnoremap <leader>m :Make!<cr>
 nnoremap <leader>n :cn<cr>
