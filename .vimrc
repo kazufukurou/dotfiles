@@ -83,7 +83,7 @@ nnoremap <leader>rs :source $MYVIMRC<cr>
 nnoremap <leader>rt :!ctags -R --langdef=kotlin --langmap=kotlin:.kt --regex-kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/"<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
-nnoremap <leader>u :Unite file file_rec buffer<cr>
+nnoremap <leader>u :<C-u>Unite -start-insert file file_rec buffer<cr>
 nnoremap <leader>w :set wrap!<cr>
 nnoremap <left> <C-w>h
 nnoremap <down> <C-w>j
@@ -115,7 +115,7 @@ highlight OverLength ctermbg=1 ctermfg=15
 let g:TypesFileIncludeLocals = 1
 
 "Unite
-let g:unite_enable_start_insert = 1
+let g:unite_force_overwrite_statusline = 0
 
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
