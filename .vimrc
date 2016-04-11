@@ -1,5 +1,4 @@
 call plug#begin()
-Plug 'kien/ctrlp.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Raimondi/delimitMate'
@@ -84,6 +83,7 @@ nnoremap <leader>rs :source $MYVIMRC<cr>
 nnoremap <leader>rt :!ctags -R --langdef=kotlin --langmap=kotlin:.kt --regex-kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/"<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
+nnoremap <leader>u :Unite file file_rec buffer<cr>
 nnoremap <leader>w :set wrap!<cr>
 nnoremap <left> <C-w>h
 nnoremap <down> <C-w>j
@@ -114,34 +114,15 @@ highlight OverLength ctermbg=1 ctermfg=15
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
+"Unite
+let g:unite_enable_start_insert = 1
+
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#sources#tags#cache_limit_size=30000000
 
 "vim-surrond
 let g:surround_45 = '«\r»'
-
-"CtrlP
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_status_func = { 'main': 'CtrlP_Statusline_1', 'prog': 'CtrlP_Statusline_2', }
-function! CtrlP_Statusline_1(...)
-    let focus = '%2* '.a:1.' %*'
-    let byfname = '%2* '.a:2.' %*'
-    let regex = a:3 ? '%2* regex %*' : ''
-    let prv = ' '.a:4.' '
-    let item = '%#WildMenu# '.a:5.' %*'
-    let nxt = ' '.a:6.' '
-    let marked = ' '.a:7.' '
-    let dir = ' %=%< '.getcwd().' '
-    return focus.byfname.regex.prv.item.nxt.marked.dir
-endfunction
-function! CtrlP_Statusline_2(...)
-    let len = '%2* '.a:1.' %*'
-    let dir = ' %=%< '.getcwd().' '
-    return len.dir
-endfunction
 
 "vim-easymotion
 "map  / <Plug>(easymotion-sn)
