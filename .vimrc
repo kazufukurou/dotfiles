@@ -1,26 +1,8 @@
-call plug#begin()
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/unite.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'kana/vim-operator-user'
-Plug 'haya14busa/vim-operator-flashy'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/vim-asterisk'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-dispatch'
-Plug 'SirVer/ultisnips'
-Plug 'AndrewRadev/switch.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'akhaku/vim-java-unused-imports'
-Plug 'kazufukurou/vim-android-sensible'
-Plug 'udalov/kotlin-vim'
-Plug 'tyru/skk.vim'
-call plug#end()
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
 
 color mycolorscheme
-syntax on "enable syntax highlighting
 set nocompatible
 set noundofile "don't create .un~ files
 set nobackup nowritebackup "don't create ~ files
