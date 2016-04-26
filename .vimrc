@@ -1,4 +1,5 @@
 execute pathogen#infect()
+Helptags
 syntax on
 filetype plugin indent on
 
@@ -63,7 +64,6 @@ nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
 nnoremap <leader>rs :source $MYVIMRC<cr>
-nnoremap <leader>rt :!ctags -R --langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/"<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>u :<C-u>Unite -start-insert file file_rec buffer<cr>
@@ -102,7 +102,7 @@ let g:unite_force_overwrite_statusline = 0
 
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#sources#tags#cache_limit_size=30000000
+let g:neocomplete#sources#tags#cache_limit_size=2000000
 
 "vim-surrond
 let g:surround_45 = '«\r»'

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --langmap=Java:.java --regex-Kotlin="/^(class|object)\s([a-zA-Z0-9_]+)/\2/d,definition/" --languages=Java,Kotlin --verbose */src/main/kotlin */src/main/java
