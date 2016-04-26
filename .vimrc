@@ -25,6 +25,7 @@ set nolist "don't show whitespaces
 set clipboard=unnamedplus "make yank copy to the global system clipboard
 set shortmess+=I "no startup messages
 set virtualedit+=block "allow block selection where is no actual characters
+set tags+=~/.vim/tags
 set wildmode=longest,full "don't show all completions
 set wildignore+=*.class
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif
@@ -62,7 +63,7 @@ nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
 nnoremap <leader>rs :source $MYVIMRC<cr>
-nnoremap <leader>rt :!ctags -R --langdef=kotlin --langmap=kotlin:.kt --regex-kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/"<cr>
+nnoremap <leader>rt :!ctags -R --langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/"<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>u :<C-u>Unite -start-insert file file_rec buffer<cr>

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+src=$ANDROID_HOME/sources/android-23
+
+ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="/^class\s([a-zA-Z0-9_]+)/\1/d,definition/" --langmap=Java:.java --languages=Java,kotlin --verbose --exclude="*Impl*" --exclude="*Test*" --exclude="*Delegate*" --exclude="*/internal" -f ~/.vim/tags $src/android/{,support/}{,v4/,v7/,v13/,v14/}{app,animation,content,design,graphics,os,text,util,view,widget} $src/java/{io,lang,text,util} ~/repos/kotlin/libraries/stdlib/src
+
+sed -i '/ private /d' ~/.vim/tags
+sed -i '/^m[A-Z]/d' ~/.vim/tags
