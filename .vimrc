@@ -90,18 +90,22 @@ augroup tabHighlight
     autocmd BufEnter * call TabHighlightModeMatch()
 augroup END
 
-"highlight 80th column
+"highlight 100th column
 highlight OverLength ctermbg=1 ctermfg=15
-2match OverLength /\%81v/
+2match OverLength /\%101v/
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
 "Unite
 let g:unite_force_overwrite_statusline = 0
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_selecta'])
 
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#sources#tags#cache_limit_size=2000000
 
 "vim-surrond
