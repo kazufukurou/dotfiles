@@ -49,6 +49,8 @@ nnoremap k gk
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap см <esc>`^
+inoremap <C-@> <C-x><C-]>
+inoremap <C-space> <C-x><C-]>
 nnoremap <leader>c :Copen<cr>
 nnoremap <leader>do :diffget 2<cr> :diffup<cr>
 nnoremap <leader>db :diffget 3<cr> :diffup<cr>
@@ -103,7 +105,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 
 "neocomplete
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#sources#tags#cache_limit_size=2000000
