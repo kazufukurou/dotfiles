@@ -59,7 +59,7 @@ super + z
 #     ~/bin/toggletray
 
 super + x
-    vimb
+    tabbed -c vimb -e
 
 super + shift + z
     pkill -USR1 -x sxhkd
