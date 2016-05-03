@@ -11,7 +11,6 @@ git clone https://github.com/tpope/vim-dispatch
 git clone https://github.com/haya14busa/vim-operator-flashy
 git clone https://github.com/haya14busa/incsearch.vim
 git clone https://github.com/haya14busa/vim-asterisk
-git clone https://github.com/Shougo/neocomplete.vim
 git clone https://github.com/Shougo/unite.vim
 git clone https://github.com/easymotion/vim-easymotion
 git clone https://github.com/Raimondi/delimitMate

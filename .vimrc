@@ -102,16 +102,6 @@ let g:unite_force_overwrite_statusline = 0
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 
-"neocomplete
-call neocomplete#custom#source('buffer', 'disabled', 1)
-let g:neocomplete#enable_debug = 1
-let g:neocomplete#use_vimproc = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#skip_auto_completion_time = 0.3
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#sources#tags#cache_limit_size=2000000
-
 "vim-surrond
 let g:surround_45 = '«\r»'
 
