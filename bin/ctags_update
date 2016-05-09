@@ -112,9 +112,14 @@ $HOME/repos/RxJava/src/main
 $HOME/repos/kotlin/libraries/stdlib/src
 "
 
-ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="/^(class|object)\s([a-zA-Z0-9_]+)/\1/d,definition/" --langmap=Java:.java --languages=Java,Kotlin --exclude="*/internal" --verbose -f ~/.vim/tags $paths
+ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="/(class|object|^\s{4}fun|^\s{4}open fun|^\s{4}val|^\s{4}var)\s([a-zA-Z0-9_]+)/\2/d,definition/" --langmap=Java:.java --languages=Java,Kotlin --exclude="*/internal" --verbose -f ~/.vim/tags $paths
 
 sed -i '/ private /d' ~/.vim/tags
 sed -i '/ volatile /d' ~/.vim/tags
 sed -i '/ native /d' ~/.vim/tags
 sed -i '/^m[A-Z]/d' ~/.vim/tags
+
+if [ -f ./gradlew ]; then
+    ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --langmap=Java:.java --regex-Kotlin="/(class|object|^\s{4}fun|^\s{4}open fun|^\s{4}val|^\s{4}var)\s([a-zA-Z0-9_]+)/\2/d,definition/" --languages=Java,Kotlin --verbose */src/main/kotlin */src/main/java
+fi
+

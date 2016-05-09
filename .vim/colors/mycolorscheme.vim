@@ -30,7 +30,7 @@ hi FoldColumn      ctermfg=7    ctermbg=8
 hi Folded          ctermfg=0    ctermbg=8
 hi Identifier      ctermfg=10
 hi Ignore          ctermfg=7
-hi IncSearch       ctermfg=6    ctermbg=none cterm=reverse
+hi IncSearch       ctermfg=2    ctermbg=none cterm=reverse
 hi Keyword         ctermfg=1                 cterm=bold
 hi LineNr          ctermfg=8
 hi MatchParen      ctermfg=10   ctermbg=0    cterm=bold
