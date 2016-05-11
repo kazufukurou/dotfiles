@@ -1,0 +1,14 @@
+#!/bin/bash
+
+a=$(grep -oE 'android:pathData=".*"' $1)
+
+IFS=',| |"'
+for b in ${a[@]} ; do
+    if [[ $b =~ [0-9]+\.[0-9]{3} ]]; then
+        c=$(printf "%.*f\n" 2 $b)
+        printf "%s %s\n" $b $c
+        sed -i "s/\([^0-9]\)${b/\./\\.}\([^0-9]\)/\1${c/\./\\.}\2/g" $1
+    fi
+done
+sed -i "s/\.00//g" $1
+sed -i "s/\.\([0-9]\)0/\.\1/g" $1
