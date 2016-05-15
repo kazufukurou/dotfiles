@@ -71,11 +71,11 @@ XF86AudioMute
     amixer set Master toggle
 
 XF86AudioNext
-    cmus-remote --next
+    mplayercmd pt_step 1
 
 XF86AudioPrev
-    cmus-remote --prev
+    mplayercmd pt_step -1
 
 XF86AudioPlay
-    cmus-remote --pause
+    mplayercmd pause
 

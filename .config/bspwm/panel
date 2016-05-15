@@ -16,6 +16,9 @@ f0=$(tput setaf 0)
 blink=$(tput blink)
 cv=$(tput civis)
 c=$(tput sgr0)
+mtitle=""
+malbum=""
+martist=""
 
 cpu() {
     cpus=$(grep -c processor /proc/cpuinfo)
@@ -55,11 +58,10 @@ battery_color() {
     echo $f7
 }
 
-cmus() {
-    info=$(cmus-remote -Q | grep tag)
-    title=$(echo -e "$info" | grep 'tag title' | cut -d ' ' -f3-)
-    artist=$(echo -e "$info" | grep 'tag artist' | cut -d ' ' -f3-)
-    echo "$artist $f7$title$c"
+mplayer_parse() {
+    while read -r line ; do
+        mtitle=aaa
+    done
 }
 
 system_loop() {
@@ -90,10 +92,12 @@ panel_bar() {
         tc=$(temp_color $t)
         vc=$(volume_color $v)
         bc=$(battery_color $b $bs)
-        echo $cv$f7$wm_icon$c $f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b $f0$title
+        echo $cv$f7$wm_icon$c $f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b $mtitle $f0$title
     done
 }
 
 system_loop &
 bspc subscribe desktop | panel_bar &
+[ ! -p $pipe ] && mkfifo ~/.mplayer/fifo
+mplayercmd &
 wait
