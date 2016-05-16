@@ -58,12 +58,6 @@ battery_color() {
     echo $f7
 }
 
-mplayer_parse() {
-    while read -r line ; do
-        mtitle=aaa
-    done
-}
-
 system_loop() {
     while true; do
         bspc desktop -f
@@ -98,6 +92,4 @@ panel_bar() {
 
 system_loop &
 bspc subscribe desktop | panel_bar &
-[ ! -p $pipe ] && mkfifo ~/.mplayer/fifo
-mplayercmd &
 wait

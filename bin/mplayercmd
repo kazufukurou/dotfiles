@@ -1,7 +1,20 @@
 #!/bin/sh
+
+fifo=$HOME/.mplayer/fifo
+
+f7=$(tput setaf 7)
+f5=$(tput setaf 5)
+f4=$(tput setaf 4)
+f1=$(tput setaf 1)
+f0=$(tput setaf 0)
+c=$(tput sgr0)
+
+
 if [ $# -eq 0 ] ; then
-    mplayer -slave -quiet -idle -input file=$HOME/.mplayer/fifo | grep -o "Playing .*"
+    [ -e "$fifo" ] && rm "$fifo"
+    mkfifo "$fifo"
+    mplayer -slave -quiet -idle -input file=$fifo 2> /dev/null | grep --line-buffered -o "Playing .*" | sed "s/Playing \/.*\/\([^/]*\)\/\([^/]*\)\/\([^/]*\)\..*\./$f4\1 $f5\2 $f7\3$c/"
 else
-    echo "$@" > ~/.mplayer/fifo
+    echo "$@" > $fifo
 fi
 
