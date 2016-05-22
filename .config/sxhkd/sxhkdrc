@@ -71,10 +71,10 @@ XF86AudioMute
     amixer set Master toggle
 
 XF86AudioNext
-    mplayercmd pt_step 1
+    mplayercmd next
 
 XF86AudioPrev
-    mplayercmd pt_step -1
+    mplayercmd prev
 
 XF86AudioPlay
     mplayercmd pause

@@ -1,7 +1,11 @@
 #!/bin/sh
 
-fifo=$HOME/.mplayer/fifo
+usage() {
+  echo "Usage: `basename $0` [start|pause|next|prev|play <file>]"
+  exit 1
+}
 
+fifo=$HOME/.mplayer/fifo
 f7=$(tput setaf 7)
 f5=$(tput setaf 5)
 f4=$(tput setaf 4)
@@ -9,12 +13,21 @@ f1=$(tput setaf 1)
 f0=$(tput setaf 0)
 c=$(tput sgr0)
 
-
-if [ $# -eq 0 ] ; then
-    [ -e "$fifo" ] && rm "$fifo"
-    mkfifo "$fifo"
-    mplayer -slave -quiet -idle -input file="$fifo" 2> /dev/null | grep --line-buffered -o "Playing .*" | sed "s%Playing /.*/\([^/]*\)/\([^ ]*\) \([^/]*\)/[^ ]\{2\} \([^/]*\)\..*\.%$f4\1 $f0\2 $f5\3 $f7\4$c%"
+if [ $# -eq 2 ]; then
+    if [ "$1" = "play" ]; then echo "loadfile $2" > "$fifo"
+    else usage
+    fi
+elif [ $# -eq 1 ]; then
+    if [ "$1" = "start" ]; then
+        [ -e "$fifo" ] && rm "$fifo"
+        mkfifo "$fifo"
+        mplayer -slave -quiet -idle -input file="$fifo" 2> /dev/null | grep --line-buffered -o "Playing .*" | sed "s%Playing /.*/\([^/]*\)/\([^ ]*\) \([^/]*\)/[^ ]\{2\} \([^/]*\)\..*\.%$f4\1 $f0\2 $f5\3 $f7\4$c%"
+    elif [ "$1" = "pause" ]; then echo "pause" > "$fifo"
+    elif [ "$1" = "next" ]; then echo "pt_step 1" > "$fifo"
+    elif [ "$1" = "prev" ]; then echo "pt_step -1" > "$fifo"
+    else usage
+    fi
 else
-    echo "$@" > "$fifo"
+    usage
 fi
 
