@@ -1,11 +1,14 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: `basename $0` [start|pause|next|prev|play <file>]"
+  echo "Usage: `basename $0` [start|pause|next|prev]"
+  echo "  or:  `basename $0` play FILE"
+  echo "  or:  `basename $0` replace DIRECTORY"
   exit 1
 }
 
 fifo=$HOME/.mplayer/fifo
+playlist=$HOME/.mplayer/playlist
 f7=$(tput setaf 7)
 f5=$(tput setaf 5)
 f4=$(tput setaf 4)
@@ -15,6 +18,9 @@ c=$(tput sgr0)
 
 if [ $# -eq 2 ]; then
     if [ "$1" = "play" ]; then echo "loadfile $2" > "$fifo"
+    elif [ "$1" = "replace" ]; then
+        find "$2" -iname '*.flac' -o -iname '*.mp3' -o -iname '*.ogg' | $3 > "$playlist"
+        echo "loadlist $playlist" > "$fifo"
     else usage
     fi
 elif [ $# -eq 1 ]; then
