@@ -9,8 +9,9 @@ fi
 
 xrdb -merge ~/.Xresources
 sxhkd &
-~/bin/initxkbmap
+~/bin/initxkbmap dvp
 
 xrandr --dpi 160
 xset b off
 exec bspwm
+#exec monsterwm
