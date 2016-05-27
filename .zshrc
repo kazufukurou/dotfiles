@@ -20,11 +20,10 @@ alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
 alias adble='adb logcat "*:E"'
 alias adbld='adb logcat "*:D"'
 alias adblc='adb logcat -c'
-alias eclimd='$HOME/eclipse/eclimd'
 alias lock='slock & xset dpms force off'
 alias reb='sudo /sbin/reboot'
 alias off='sudo /sbin/poweroff'
-alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap'
+alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap dvp'
 
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
