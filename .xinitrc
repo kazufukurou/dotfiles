@@ -13,5 +13,5 @@ sxhkd &
 
 xrandr --dpi 160
 xset b off
-exec bspwm
-#exec monsterwm
+urxvt -name panel -geometry 212x2 -bw 0 -b 0 -bg "#000000" -e ~/bin/panel &
+exec swm

@@ -60,19 +60,6 @@ battery_color() {
 
 system_loop() {
     while true; do
-        bspc desktop -f
-        sleep 1
-    done
-}
-
-panel_bar() {
-    while read -r line ; do
-        wm_name=$(bspc query -T -d focused | cut -d\" -f4)
-        wm_icon=${workspaces[$wm_name]}
-        node_id=$(bspc query -N -n focused)
-        title=""
-        [ -n "$node_id" ] && title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
-        title=${title:0:160}
         t=$(temp)
         v=$(volume)
         b=$(battery)
@@ -82,14 +69,36 @@ panel_bar() {
         ddt=${dd## }
         dw=$(date +%a)
         dt=$(date +%R)
-        case "$status_color" in *$blink*) ;; esac
         tc=$(temp_color $t)
         vc=$(volume_color $v)
         bc=$(battery_color $b $bs)
-        echo $cv$f7$wm_icon$c $f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b $mtitle $f0$title
+        echo "S$f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b"
+        sleep 1
     done
 }
 
-system_loop &
-bspc subscribe desktop | panel_bar &
+panel_bar() {
+    while read -r line ; do
+        case $line in
+            S*)
+                sys="${line#?}"
+                ;;
+        esac
+        wm_name=0
+        wm_icon=${workspaces[$wm_name]}
+        node_id=$(pfw)
+        title=""
+        [ -n "$node_id" ] && title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
+        title=${title:0:160}
+        case "$status_color" in *$blink*) ;; esac
+        echo $cv$f7$wm_icon$c $sys $mtitle $f0$title
+    done
+}
+
+panel_fifo=/tmp/panel-fifo
+[ -e "$panel_fifo" ] && rm "$panel_fifo"
+mkfifo "$panel_fifo"
+
+system_loop > $panel_fifo &
+cat "$panel_fifo" | panel_bar &
 wait

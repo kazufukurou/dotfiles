@@ -1,56 +1,40 @@
-#
-# bspwm hotkeys
-#
-
 super + shift + Escape
-    killall panel; \
-    bspc quit
+     killall panel; \
+     killall swm
 
-super + {_,ctrl + }Escape
-    bspc node {-c,-k}
+# super + {_,ctrl + }Escape
+#     bspc node {-c,-k}
+super + Escape
+    killw $(pfw)
 
-super + space
-    bspc desktop -l next
+super + {_,ctrl + ,shift + }space
+    {fullscreen.sh $(pfw),tile.sh,switch_grid.sh}
 
-super + {shift,ctrl,shift + ctrl} + space
-    bspc node -t {tiled,floating,fullscreen}
+#super + {shift,ctrl,shift + ctrl} + space
+#    bspc node -t {tiled,floating,fullscreen}
 
-super + c
-    bspc node @/ -E
+#super + c
+#    bspc node @/ -E
 
 super + {_,ctrl + }Tab
-    bspc node -f {next,prev}
+    focus.sh {next,prev}
 
-super + {_,shift + }{q,e}
-    bspc node @{parent,/} -R {-90,90}
+#super + {_,shift + }{q,e}
+#    bspc node @{parent,/} -R {-90,90}
 
-super + ctrl + {q,e}
-    bspc node @parent -r {-27,+27}
+#super + ctrl + {q,e}
+#    bspc node @parent -r {-27,+27}
 
-super + {_,ctrl + ,shift + }{a,d,w,s}
-    bspc node {-f ,-p "~",-s }{west,east,north,south}
+#super + {_,ctrl + ,shift + }{a,d,w,s}
+#    bspc node {-f ,-p "~",-s }{west,east,north,south}
+super + {_,ctrl + }{a,d,w,s}
+    {wmv,wrs} {-27 0,27 0,0 -27,0 27} $(pfw)
 
-super + {_,shift + }{u,i,o,j,k,l,m,comma,period}
-    bspc {desktop -f,node -d} {0-8}
+#super + {_,shift + }{u,i,o,j,k,l,m,comma,period}
+#    bspc {desktop -f,node -d} {0-8}
 
-super + {_,shift + }BackSpace
-    bspc {monitor -f next, node -m next}
-
-~button1
-    bspc pointer -g focus
-
-super + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
-
-super + !button{1-3}
-    bspc pointer -t %i %i
-
-super + @button{1-3}
-    bspc pointer -u
-
-#
-# wm independent hotkeys
-#
+#super + {_,shift + }BackSpace
+#    bspc {monitor -f next, node -m next}
 
 super + Return
     urxvt

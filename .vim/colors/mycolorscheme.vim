@@ -46,7 +46,7 @@ hi PmenuSel        ctermfg=15   ctermbg=2
 hi PmenuThumb      ctermfg=15
 hi PreProc         ctermfg=3
 hi Question        ctermfg=4                 cterm=bold
-hi Search          ctermfg=0    ctermbg=6    cterm=none
+hi Search          ctermfg=14   ctermbg=0    cterm=none
 hi SignColumn      ctermfg=15   ctermbg=0    cterm=bold
 hi Special         ctermfg=4
 hi SpecialChar     ctermfg=5
