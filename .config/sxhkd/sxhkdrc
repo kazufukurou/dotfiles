@@ -36,6 +36,9 @@ super + {_,ctrl + }{a,d,w,s}
 #super + {_,shift + }BackSpace
 #    bspc {monitor -f next, node -m next}
 
+#super + !button{1,3}
+#    {wmv, wrs} -a %i %i $(pfw)
+
 super + Return
     urxvt
 
