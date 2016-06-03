@@ -13,8 +13,21 @@ usage() {
     exit 1
 }
 
+getparent() {
+	# loop through top windows to find our WID
+	for PARENT in $(lsw); do
+		# when we get a match, we return the parent ID
+		lsw $PARENT | grep -q $WID && echo $PARENT && return
+	done
+}
+
 # exit if no argument given
 test -z "$1" && usage
+
+WID=$1
+
+# if given window isn't a "top" window, search its parent
+(lsw | grep -q $WID) || WID=$(getparent)
 
 # this will unset the fullscreen state of any fullscreen window if there is one.
 # this way, there will only be one window in fullscreen at a time, and no window
@@ -23,7 +36,7 @@ test -f $FSFILE && wtp $(cat $FSFILE)
 
 # if file exist and contain our window id, it means that out window is in
 # fullscreen mode
-if test -f $FSFILE && grep -q $1 $FSFILE; then
+if test -f $FSFILE && grep -q $WID $FSFILE; then
     # if the window we removed was our window, delete the file, so we can
     # fullscreen it again later 
     rm -f $FSFILE
@@ -31,11 +44,11 @@ if test -f $FSFILE && grep -q $1 $FSFILE; then
 else
     # if not, then put the current window in fullscreen mode, after saving its
     # geometry and id to $FSFILE we also remove any border from this window.
-    wattr xywhi $1 > $FSFILE
-    wtp $(wattr xywh `lsw -r`) $1
-    chwb -s 0 $1
+    wattr xywhi $WID > $FSFILE
+    wtp $(wattr xywh `lsw -r`) $WID
+    chwb -s 0 $WID
 fi
 
 # now focus the window, and put it in front, no matter which state we're in, and
 # put the cursor on its bottom-right corner (for consistency)
-focus.sh $1
+focus.sh $WID

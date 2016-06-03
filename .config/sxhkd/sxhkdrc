@@ -8,7 +8,7 @@ super + Escape
     killw $(pfw)
 
 super + {_,ctrl + ,shift + }space
-    {fullscreen.sh $(pfw),tile.sh,switch_grid.sh}
+    {fullscreen $(pfw),tile,switch_grid}
 
 #super + {shift,ctrl,shift + ctrl} + space
 #    bspc node -t {tiled,floating,fullscreen}
@@ -17,7 +17,7 @@ super + {_,ctrl + ,shift + }space
 #    bspc node @/ -E
 
 super + {_,ctrl + }Tab
-    focus.sh {next,prev}
+    focus {next,prev}
 
 #super + {_,shift + }{q,e}
 #    bspc node @{parent,/} -R {-90,90}
