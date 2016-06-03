@@ -150,7 +150,7 @@ filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a mplayercmd play "%d/%f" &,
 fileviewer *.mp3 mp3info
 
 " Video
-filextype *.avi,*.mp4,*.m4v,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.ogm,*.mov
+filextype *.avi,*.mp4,*.m4v,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.ogm,*.mov,*.webm
         \ {View using mplayer}
         \ mplayer %f 2> /dev/null &,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
