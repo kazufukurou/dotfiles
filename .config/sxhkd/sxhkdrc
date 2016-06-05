@@ -1,40 +1,27 @@
 super + shift + Escape
      killall panel; \
-     killall swm
+     killall wew
 
-# super + {_,ctrl + }Escape
-#     bspc node {-c,-k}
 super + Escape
     killw $(pfw)
 
 super + {_,ctrl + ,shift + }space
-    {fullscreen $(pfw),tile,switch_grid}
-
-#super + {shift,ctrl,shift + ctrl} + space
-#    bspc node -t {tiled,floating,fullscreen}
-
-#super + c
-#    bspc node @/ -E
+    wml {full,tile,grid}
 
 super + {_,ctrl + }Tab
-    focus {next,prev}
+    wfw {next,prev}
 
-#super + {_,shift + }{q,e}
-#    bspc node @{parent,/} -R {-90,90}
-
-#super + ctrl + {q,e}
-#    bspc node @parent -r {-27,+27}
-
-#super + {_,ctrl + ,shift + }{a,d,w,s}
-#    bspc node {-f ,-p "~",-s }{west,east,north,south}
-super + {_,ctrl + }{a,d,w,s}
+super + {shift,ctrl} + {a,d,w,s}
     {wmv,wrs} {-27 0,27 0,0 -27,0 27} $(pfw)
 
-#super + {_,shift + }{u,i,o,j,k,l,m,comma,period}
-#    bspc {desktop -f,node -d} {0-8}
+super + {a,d,w,s}
+    wfw {left,right,up,down}
 
-#super + {_,shift + }BackSpace
-#    bspc {monitor -f next, node -m next}
+super + {j,k}
+    wmg {urxvt,vimb}
+
+super + !button{1,3}
+    {wmv, wrs} -a %i %i $(pfw)
 
 super + Return
     urxvt
@@ -43,7 +30,7 @@ super + z
     slock & xset dpms force off
 
 super + x
-    tabbed -c vimb -e
+    vimb
 
 super + shift + z
     pkill -USR1 -x sxhkd

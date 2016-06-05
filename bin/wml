@@ -1,0 +1,64 @@
+#!/bin/sh
+
+. ~/.config/wmrc/config
+
+usage() {
+    echo "usage: $(basename $0) <full|tile|grid>"
+    exit
+}
+
+WN=$(lsw | wc -l)
+BW=$(wattr b $PFW)
+Y=$((GAP + PANEL))
+X=$((GAP))
+
+fscheck() {
+    if [ $WN -eq 1 ]; then
+        full
+        exit
+    fi
+}
+
+full() {
+    #wtp $X $Y $((SW - 2 * (GAP + BW))) $((SH - 2 * (GAP + BW) - PANEL)) $PFW
+    wtp 0 $PANEL $((SW - 2 * BW)) $((SH - 2 * BW - PANEL)) $PFW
+}
+
+tile() {
+    fscheck
+    MAX=$(lsw | grep -v $PFW | wc -l)
+    W=$(((SW - GAP) / 2 - GAP - 2 * BW))
+    wtp $X $Y $W $((SH - 2 * GAP - 2 * BW - PANEL)) $PFW
+    X=$((W + 2 * BW + 2 * GAP))
+    H=$(((SH - GAP - PANEL) / MAX - GAP - 2 * BW))
+    for wid in $(lsw | grep -v $PFW); do
+        wtp $X $Y $W $H $wid
+        Y=$((Y + H + GAP + 2 * BW))
+    done
+}
+
+grid() {
+    fscheck
+    SQRT=$(echo "sqrt($WN)" | bc)
+    [ $((SQRT * SQRT)) -lt $WN ] && COLS=$((SQRT + 1)) || COLS=$SQRT
+    [ $((COLS * COLS - WN)) -lt $COLS ] && ROWS=$COLS || ROWS=$((COLS - 1))
+    W=$(((SW - GAP) / COLS - GAP - 2 * BW))
+    H=$(((SH - PANEL - GAP) / ROWS - GAP - 2 * BW))
+    wtp $X $Y $W $H $PFW
+    R=0
+    C=1
+    for wid in $(lsw | grep -v $PFW); do
+        X=$(((W + 2 * BW) * C + (C + 1) * GAP))
+        Y=$(((H + 2 * BW) * R + (R + 1) * GAP + PANEL))
+        wtp $X $Y $W $H $wid
+        [ $C -ge $((COLS - 1)) ] && C=0 || C=$((C + 1))
+        [ $C -eq 0 ] && R=$((R + 1))
+    done
+}
+
+case $1 in
+    full) full ;;
+    tile) tile ;;
+    grid) grid ;;
+    *) usage ;;
+esac

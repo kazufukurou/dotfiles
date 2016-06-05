@@ -86,11 +86,10 @@ panel_bar() {
         esac
         wm_name=0
         wm_icon=${workspaces[$wm_name]}
-        node_id=$(pfw)
+        pfw=$(pfw)
         title=""
-        [ -n "$node_id" ] && title=$(xprop -id $node_id WM_NAME | cut -d \" -f2)
+        [ -n "$pfw" ] && title=$(xprop -id $pfw WM_NAME | cut -d \" -f2)
         title=${title:0:160}
-        case "$status_color" in *$blink*) ;; esac
         echo $cv$f7$wm_icon$c $sys $mtitle $f0$title
     done
 }
@@ -98,6 +97,10 @@ panel_bar() {
 panel_fifo=/tmp/panel-fifo
 [ -e "$panel_fifo" ] && rm "$panel_fifo"
 mkfifo "$panel_fifo"
+pfw=$(pfw)
+chwb -s 0 $pfw
+wmv -a 0 0 $pfw
+ignw -s $pfw
 
 system_loop > $panel_fifo &
 cat "$panel_fifo" | panel_bar &

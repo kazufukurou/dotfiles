@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. ~/.config/wmrc/config
+
+if [ $# -eq 1 ]; then
+    for wid in $(lsw -u); do
+        class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+        echo $class
+        [ "$class" = $1 ] && mapw -m $wid
+    done
+    for wid in $(lsw); do
+        class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+        [ "$class" != $1 ] && mapw -u $wid
+    done
+else
+    echo "$(basename $0) <wm_class>"
+fi
