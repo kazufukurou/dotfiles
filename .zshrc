@@ -1,4 +1,3 @@
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
@@ -24,12 +23,6 @@ alias lock='slock & xset dpms force off'
 alias reb='sudo /sbin/reboot'
 alias off='sudo /sbin/poweroff'
 alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap dvp'
-
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
 
 precmd () { vcs_info }
 
