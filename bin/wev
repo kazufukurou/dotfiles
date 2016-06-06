@@ -10,10 +10,17 @@ while IFS=: read ev wid; do
                 ROOT=$(lsw -r)
                 SW=$(wattr w $ROOT)
                 SH=$(wattr h $ROOT)
-                wtp $(((SW - WW)/2)) $(((SH - WH)/2)) $WW $WH $wid
+                CLASS=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+                if [ $CLASS = "panel" ]; then
+                    chwb -s 0 $wid
+                    wmv -a 0 0 $wid
+                    ignw -s $wid
+                else
+                    wtp $(((SW - WW)/2)) $(((SH - WH)/2)) $WW $WH $wid
+                fi
             fi
             ;;
         18) wattr $(pfw) || wfw prev 2>/dev/null ;;
-        4|7|19) [ wattr o $wid ] || wfw $wid ;;
+        4|19) [ wattr o $wid ] || wfw $wid ;;
     esac
 done

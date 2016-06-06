@@ -97,10 +97,6 @@ panel_bar() {
 panel_fifo=/tmp/panel-fifo
 [ -e "$panel_fifo" ] && rm "$panel_fifo"
 mkfifo "$panel_fifo"
-pfw=$(pfw)
-chwb -s 0 $pfw
-wmv -a 0 0 $pfw
-ignw -s $pfw
 
 system_loop > $panel_fifo &
 cat "$panel_fifo" | panel_bar &

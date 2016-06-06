@@ -23,6 +23,9 @@ super + {j,k}
 super + !button{1,3}
     {wmv, wrs} -a %i %i $(pfw)
 
+#super + !button{1,3}
+#    {wmv, wrs} -a %i %i $(pfw)
+
 super + Return
     urxvt
 

@@ -13,5 +13,5 @@ sxhkd &
 
 xrandr --dpi 160
 xset b off
-urxvt -geometry 212x2 -bw 0 -b 0 -bg "#000000" -e panel &
-wew -m 2097152 | wev
+urxvt -name panel -geometry 212x2 -bw 0 -b 0 -bg "#000000" -e panel &
+wew | wev
