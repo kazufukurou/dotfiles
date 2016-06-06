@@ -1,0 +1,19 @@
+#!/bin/sh
+
+WW=$(wattr w $WID)
+WH=$(wattr h $WID)
+CUR=${2:-$(pfw)}
+ROOT=$(lsw -r)
+SW=$(wattr w $ROOT)
+SH=$(wattr h $ROOT)
+DN=$(1)
+SHD=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "$DN!d")
+SHD=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f2 | sed "$DN!d")
+BWIDTH=$(wattr b $CUR)
+PFW=$(pfw)
+
+PANEL=27
+GAP=9
+BW=3
+ACTIVE=${ACTIVE:-0x515151}
+INACTIVE=${INACTIVE:-0xa09f93}
