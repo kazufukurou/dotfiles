@@ -40,8 +40,8 @@ case $1 in
     right) wid=$(closest x y 1 | sort -n | head -n1 | cut -d' ' -f2) ;;
     up)    wid=$(closest y x -1 | sort -n | head -n1 | cut -d' ' -f2) ;;
     down)  wid=$(closest y x 1 | sort -n | head -n1 | cut -d' ' -f2) ;;
-    0x*) wattr $1 && wid=$1 ;;
-    *) usage ;;
+    0x*)   wattr $1 && wid=$1 ;;
+    *)     usage ;;
 esac
 
 [ -z "$wid" ] && { echo "$(basename $0): no window to focus" >&2; exit 1; }
@@ -49,4 +49,4 @@ esac
 chwso -r $wid
 wtf $wid
 setb active $wid
-setb inactive $CUR
+[ $wid != $CUR ] && setb inactive $CUR
