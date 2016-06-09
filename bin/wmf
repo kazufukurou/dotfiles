@@ -17,6 +17,7 @@ setb() {
         active) chwb -s $BW -c $ACTIVE $2 ;;
         inactive) chwb -s $BW -c $INACTIVE $2 ;;
     esac
+    echo "T" > $PANEL_FIFO
 }
 
 closest() {

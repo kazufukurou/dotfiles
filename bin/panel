@@ -7,6 +7,8 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
+. ~/.config/wmrc/config
+
 workspaces=('▀ ' '▀▀' ' ▀' '█ ' '██' ' █' '▄ ' '▄▄' ' ▄' '▄▀')
 f7=$(tput setaf 7)
 f5=$(tput setaf 5)
@@ -94,10 +96,9 @@ panel_bar() {
     done
 }
 
-panel_fifo=/tmp/panel-fifo
-[ -e "$panel_fifo" ] && rm "$panel_fifo"
-mkfifo "$panel_fifo"
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
 
-system_loop > $panel_fifo &
-cat "$panel_fifo" | panel_bar &
+system_loop > $PANEL_FIFO &
+cat "$PANEL_FIFO" | panel_bar &
 wait
