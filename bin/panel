@@ -9,7 +9,6 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 . ~/.config/wmrc/config
 
-workspaces=('▀ ' '▀▀' ' ▀' '█ ' '██' ' █' '▄ ' '▄▄' ' ▄' '▄▀')
 f7=$(tput setaf 7)
 f5=$(tput setaf 5)
 f4=$(tput setaf 4)
@@ -18,9 +17,6 @@ f0=$(tput setaf 0)
 blink=$(tput blink)
 cv=$(tput civis)
 c=$(tput sgr0)
-mtitle=""
-malbum=""
-martist=""
 
 cpu() {
     cpus=$(grep -c processor /proc/cpuinfo)
@@ -82,17 +78,26 @@ system_loop() {
 panel_bar() {
     while read -r line ; do
         case $line in
-            S*)
-                sys="${line#?}"
-                ;;
+            S*) sys="${line#?}" ;;
         esac
-        wm_name=0
-        wm_icon=${workspaces[$wm_name]}
+        hidden_term=0
+        hidden_web=0
+        hidden_other=0
+        for wid in $(lsw -u); do
+            b=$(wattr b $wid)
+            if [ $b -eq $BW ]; then
+                class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+                case $class in
+                    urxvt) hidden_term=$((hidden_term + 1)) ;;
+                    vimb) hidden_web=$((hidden_web + 1)) ;;
+                    *) hidden_other=$((hidden_other + 1)) ;;
+                esac
+            fi
+        done
+
         pfw=$(pfw)
-        title=""
-        [ -n "$pfw" ] && title=$(xprop -id $pfw WM_NAME | cut -d \" -f2)
-        title=${title:0:160}
-        echo $cv$f7$wm_icon$c $sys $mtitle $f0$title
+        [ -n "$pfw" ] && title=$(xprop -id $pfw WM_NAME | cut -d\" -f2) || title=""
+        echo $cv $f7$hidden_term $f4$hidden_web $f5$hidden_other$c $sys $f0${title:0:160}
     done
 }
 

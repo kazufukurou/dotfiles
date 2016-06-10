@@ -3,7 +3,7 @@ super + shift + Escape
      killall wew
 
 super + Escape
-    killw $(pfw)
+    killw -p $(pfw)
 
 super + {_,ctrl + ,shift + }space
     wml {full,tile,grid}
@@ -20,8 +20,8 @@ super + {a,d,w,s}
 super + {q,e}
     wmv {-,_}$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1!d") 0 $(pfw)
 
-super + {j,k}
-    wmg {urxvt,vimb}
+super + {j,k,l}
+    wmg {urxvt,vimb,'[^urxvt|vimb]'}
 
 super + !button{1,3}
     {wmv, wrs} -a %i %i $(pfw)
