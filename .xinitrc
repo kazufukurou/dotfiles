@@ -9,9 +9,7 @@ fi
 
 xrdb -merge ~/.Xresources
 sxhkd &
-~/bin/initxkbmap dvp
-
+initxkbmap dvp
 xrandr --dpi 160
 xset b off
-urxvt -name panel -geometry 212x2 -bw 0 -b 0 -bg "#000000" -e panel &
 wew | wme

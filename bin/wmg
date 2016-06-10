@@ -5,12 +5,17 @@
 if [ $# -eq 1 ]; then
     for wid in $(lsw -a); do
         b=$(wattr b $wid)
-        if [ $b -gt 0 ]; then
+        if [ $b -eq $BW ]; then
             class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
-            echo $class | grep -q -E $1 && mapw -m $wid || mapw -u $wid
+            case $1 in
+                1) [ $class = "urxvt" ] && mapw -m $wid || mapw -u $wid ;;
+                2) [ $class = "vimb" ] && mapw -m $wid || mapw -u $wid ;;
+                3) [ $class = "urxvt" ] || [ $class = "vimb" ] && mapw -u $wid || mapw -m $wid;;
+                a) mapw -m $wid ;;
+            esac
         fi
     done
     echo "T" > $PANEL_FIFO
 else
-    echo "$(basename $0) <expr>"
+    echo "$(basename $0) <1|2|3|a>"
 fi

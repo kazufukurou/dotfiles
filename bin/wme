@@ -1,30 +1,13 @@
 #!/bin/sh
 
-MN=$(xrandr | grep " connected" | wc -l)
-ROOT=$(lsw -r)
-SW=$(wattr w $ROOT)
-SH=$(wattr h $ROOT)
+. ~/.config/wmrc/config
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+urxvt -name panel -geometry 212x2 -bw 0 -b 0 -bg "#000000" -e panel &
 while IFS=: read ev wid; do
     case $ev in
-        16)
-            if ! wattr o $wid; then
-                WW=$(wattr w $wid)
-                WH=$(wattr h $wid)
-                CLASS=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
-                if [ $CLASS = "panel" ]; then
-                    chwb -s 0 $wid
-                    wmv -a 0 0 $wid
-                    ignw -s $wid
-                else
-                    wtp $((DX + (SW / MN - WW) / 2)) $((PANEL + (SH - WH) / 2)) $WW $WH $wid
-                fi
-            fi
-            ;;
         18) wattr $(pfw) || wfw prev 2>/dev/null ;;
-        4|7|19)
-           if ! wattr o $wid; then
-               wmf $wid
-           fi
-           ;;
+        4|7|19) wattr o $wid || wmf $wid 2>/dev/null ;;
     esac
 done

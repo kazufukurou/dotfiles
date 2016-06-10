@@ -7,7 +7,6 @@ WX=$(wattr x $PFW)
 WW=$(wattr w $PFW)
 WH=$(wattr h $PFW)
 WB=$(wattr b $CUR)
-PANEL_FIFO=/tmp/panel-fifo
 SW1=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1q;d")
 [ $WX -ge $SW1 ] && DX=$SW1 || DX=0
 [ $WX -ge $SW1 ] && DN=2 || DN=1
@@ -18,3 +17,5 @@ PANEL=27
 BW=8
 ACTIVE=0x$(getxresource color0 | cut -d# -f2)
 INACTIVE=0x000000
+PANEL_FIFO=/tmp/panel-fifo
+
