@@ -30,7 +30,7 @@ super + Return
     urxvt
 
 super + z
-    slock & xset dpms force off
+    slock & sleep 1 && xset dpms force off
 
 super + x
     vimb
