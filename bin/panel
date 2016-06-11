@@ -87,9 +87,9 @@ panel_bar() {
             if [ $(wattr b $wid) -eq $BW ]; then
                 class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
                 case $class in
-                    urxvt) cht=$f7 ;;
-                    vimb) chw=$f4 ;;
-                    *) cho=$f5 ;;
+                    $TERMINAL) cht=$f7 ;;
+                    $BROWSER) chw=$f7 ;;
+                    *) cho=$f7 ;;
                 esac
             fi
         done

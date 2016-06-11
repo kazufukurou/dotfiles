@@ -17,5 +17,7 @@ PANEL=27
 BW=8
 ACTIVE=0x$(getxresource color0 | cut -d# -f2)
 INACTIVE=0x000000
+TERMINAL=urxvt
+BROWSER=vimb
 PANEL_FIFO=/tmp/panel-fifo
 

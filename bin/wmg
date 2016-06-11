@@ -8,9 +8,9 @@ if [ $# -eq 1 ]; then
         if [ $b -eq $BW ]; then
             class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
             case $1 in
-                1) [ $class = "urxvt" ] && mapw -m $wid || mapw -u $wid ;;
-                2) [ $class = "vimb" ] && mapw -m $wid || mapw -u $wid ;;
-                3) [ $class = "urxvt" ] || [ $class = "vimb" ] && mapw -u $wid || mapw -m $wid;;
+                1) [ $class = $TERMINAL ] && mapw -m $wid || mapw -u $wid ;;
+                2) [ $class = $BROWSER ] && mapw -m $wid || mapw -u $wid ;;
+                3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && mapw -u $wid || mapw -m $wid;;
                 a) mapw -m $wid ;;
             esac
         fi
