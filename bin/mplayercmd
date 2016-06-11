@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: `basename $0` [start|pause|next|prev]"
+  echo "Usage: `basename $0` <start|pause|next|prev>"
   echo "  or:  `basename $0` play FILE"
   echo "  or:  `basename $0` replace DIRECTORY"
   exit 1
