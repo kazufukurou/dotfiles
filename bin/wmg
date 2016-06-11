@@ -3,6 +3,7 @@
 . ~/.config/wmrc/config
 
 if [ $# -eq 1 ]; then
+    wmp -a $DX 0
     for wid in $(lsw -a); do
         b=$(wattr b $wid)
         if [ $b -eq $BW ]; then
