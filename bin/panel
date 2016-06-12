@@ -70,7 +70,7 @@ system_loop() {
         tc=$(temp_color $t)
         vc=$(volume_color $v)
         bc=$(battery_color $b $bs)
-        echo "S$f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b"
+        echo "S$f0$dm $f7$ddt $f0$dw $f7$dt$f0 T $tc$t$f0 V $vc$v$f0 B $bc$b$c"
         sleep 1
     done
 }
