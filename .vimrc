@@ -60,6 +60,9 @@ nnoremap <leader>dN [c
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>ic :UnusedImportsClear<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
+nmap <leader>ii <Plug>JavaInsertImport<cr>
+nmap <leader>is <Plug>JavaSortImport<cr>
+nmap <leader>ip <Plug>JavaInsertPackage<cr>
 nnoremap <leader>l <c-]>
 nnoremap <leader>m :Make!<cr>
 nnoremap <leader>n :cn<cr>
@@ -98,6 +101,10 @@ highlight OverLength ctermbg=1 ctermfg=15
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
+
+"java-imports
+let g:sortedPackage = []
+let g:packageSepDepth = 1
 
 "Unite
 let g:unite_force_overwrite_statusline = 0
