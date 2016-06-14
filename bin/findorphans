@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /
+for pkg in `prt-get listinst`; do pkginfo -l $pkg; done | sort -u > /tmp/db
+find * \( -type d -printf '%p/\n' -o -print \) | \
+egrep -v "^(lost\+found|proc|sys|dev|run|tmp|root|home|boot|lib/firmware|lib/modules|usr/ports|usr/src/linux-4.1.13)" | sort > /tmp/fs
+comm -23 /tmp/fs /tmp/db
