@@ -4,18 +4,22 @@
 
 if [ $# -eq 1 ]; then
     wmp -a $DX 0
+    mwids=""
+    uwids=""
     for wid in $(lsw -a); do
         b=$(wattr b $wid)
         if [ $b -eq $BW ]; then
             class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
             case $1 in
-                1) [ $class = $TERMINAL ] && mapw -m $wid || mapw -u $wid ;;
-                2) [ $class = $BROWSER ] && mapw -m $wid || mapw -u $wid ;;
-                3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && mapw -u $wid || mapw -m $wid;;
-                a) mapw -m $wid ;;
+                1) [ $class = $TERMINAL ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                2) [ $class = $BROWSER ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
+                a) mwids="$mwids $wid" ;;
             esac
         fi
     done
+    mapw -m $mwids
+    mapw -u $uwids
     echo "T" > $PANEL_FIFO
 else
     echo "$(basename $0) <1|2|3|a>"
