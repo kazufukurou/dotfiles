@@ -7,8 +7,6 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-. ~/.config/wmrc/config
-
 f7=$(tput setaf 7)
 f5=$(tput setaf 5)
 f4=$(tput setaf 4)
@@ -107,7 +105,8 @@ ignore() {
     ignw -s $pfw
 }
 
+. ~/.config/wmrc/config
+ignore &
 system_loop > $PANEL_FIFO &
 cat "$PANEL_FIFO" | panel_bar &
-ignore &
 wait

@@ -49,5 +49,5 @@ esac
 
 chwso -r $wid
 wtf $wid
+setb inactive $CUR
 setb active $wid
-[ $wid != $CUR ] && setb inactive $CUR
