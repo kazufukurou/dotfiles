@@ -27,7 +27,7 @@ super + !button{1,3}
     {wmv, wrs} -a %i %i $(pfw)
 
 super + Return
-    urxvt
+    st
 
 super + z
     slock & sleep 1 && xset dpms force off
