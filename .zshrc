@@ -31,18 +31,18 @@ vim_ins_mode="%F{10}I%f"
 vim_cmd_mode="%F{8}N%f"
 vim_mode=$vim_ins_mode
 
-function zle-keymap-select {
+zle-keymap-select() {
   vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
   zle reset-prompt
 }
 zle -N zle-keymap-select
 
-function zle-line-finish {
+zle-line-finish() {
   vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
-function TRAPINT() {
+TRAPINT() {
   vim_mode=$vim_ins_mode
   return $(( 128 + $1 ))
 }
@@ -53,10 +53,12 @@ ${vim_mode} %F{2}%(!.#.$) %f%b'
 
 stty -ixon
 
-h2d() {
-    echo "ibase=16; $@"|bc
-}
+h2d() { echo "ibase=16; $@"|bc }
+d2h() { echo "obase=16; $@"|bc }
 
-d2h() {
-    echo "obase=16; $@"|bc
+compdef r=exec
+r() {
+    $* &>/dev/null &
+    disown %%
+    exit
 }
