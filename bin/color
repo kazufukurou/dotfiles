@@ -1,14 +1,33 @@
 #!/bin/bash
 
+COLOR[0]="666666"
+COLOR[1]="cc6699"
+COLOR[2]="99cc66"
+COLOR[3]="cc9966"
+COLOR[4]="6699cc"
+COLOR[5]="9966cc"
+COLOR[6]="66cc99"
+COLOR[7]="cccccc"
+COLOR[8]="999999"
+COLOR[9]="ff99cc"
+COLOR[10]="ccff99"
+COLOR[11]="ffcc99"
+COLOR[12]="99ccff"
+COLOR[13]="cc99ff"
+COLOR[14]="99ffcc"
+COLOR[15]="ffffff"
+COLOR[16]="333333"
+
 n=(0 7 1 3 2 6 4 5)
 c=$(tput sgr0)
 b=$(tput bold)
+
 for x in "" $b ; do
     for i in ${n[@]} ; do printf "$x$(tput setaf $i) ██████████ "; done
     echo $c
 done
 for x in "" $b ; do
-    for i in ${n[@]} ; do printf "$x$(tput setaf $i) %2s $(getxresource color$((i+d))) " $((i+d)); done
+    for i in ${n[@]} ; do printf "$x$(tput setaf $i) %2s #${COLOR[$((i+d))]} " $((i+d)); done
     echo $c
     d=8
 done

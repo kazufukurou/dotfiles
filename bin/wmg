@@ -22,5 +22,5 @@ if [ $# -eq 1 ]; then
     mapw -u $uwids
     echo "T" > $PANEL_FIFO
 else
-    echo "$(basename $0) <1|2|3|a>"
+    echo "usage: $(basename $0) <1|2|3|a>"
 fi
