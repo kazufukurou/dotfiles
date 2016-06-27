@@ -104,7 +104,7 @@ let g:TypesFileIncludeLocals = 1
 
 "java-imports
 let g:sortedPackage = []
-let g:packageSepDepth = 1
+let g:packageSepDepth = 0
 
 "Unite
 let g:unite_force_overwrite_statusline = 0
