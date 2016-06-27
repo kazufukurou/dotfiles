@@ -7,17 +7,6 @@ usage() {
     exit
 }
 
-samedisplay() {
-    wx=$(wattr x $1)
-    if [ $DX -eq 0 ] && [ $wx -lt $SW1 ]; then
-        return 0
-    elif [ $DX -gt 0 ] && [ $wx -ge $SW1 ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 WN=0
 for wid in $(lsw); do
     if samedisplay $wid; then

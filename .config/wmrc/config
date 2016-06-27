@@ -21,3 +21,9 @@ TERMINAL=st-256color
 BROWSER=vimb
 PANEL_FIFO=/tmp/panel-fifo
 
+samedisplay() {
+    wx=$(wattr x $1)
+    ( [ $DX -eq 0 ] && [ $wx -lt $SW1 ] ) || ( [ $DX -gt 0 ] && [ $wx -ge $SW1 ] ) && return 0 || return 1
+}
+
+

@@ -34,9 +34,15 @@ closest() {
     done
 }
 
+list_wids() {
+    for wid in $(lsw | grep -v $CUR); do
+        samedisplay $wid && echo $wid
+    done
+}
+
 case $1 in
-    next)  wid=$(lsw | grep -v $CUR | sed '1 p;d') ;;
-    prev)  wid=$(lsw | grep -v $CUR | sed '$ p;d') ;;
+    next)  wid=$(list_wids | sed '1 p;d') ;;
+    prev)  wid=$(list_wids | sed '$ p;d') ;;
     left)  wid=$(closest x y -1 | sort -n | head -n1 | cut -d' ' -f2) ;;
     right) wid=$(closest x y 1 | sort -n | head -n1 | cut -d' ' -f2) ;;
     up)    wid=$(closest y x -1 | sort -n | head -n1 | cut -d' ' -f2) ;;
