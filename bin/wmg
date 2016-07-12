@@ -3,19 +3,20 @@
 . ~/.config/wmrc/config
 
 if [ $# -eq 1 ]; then
-    wmp -a $DX 0
     mwids=""
     uwids=""
     for wid in $(lsw -a); do
-        b=$(wattr b $wid)
-        if [ $b -eq $BW ]; then
+        no_hints=$(xprop -id $wid WM_HINTS | grep "not found")
+        if [ "$no_hints" = "" ]; then
             class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
-            case $1 in
-                1) [ $class = $TERMINAL ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                2) [ $class = $BROWSER ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
-                a) mwids="$mwids $wid" ;;
-            esac
+            if [ "$class" != "panel" ]; then
+                case $1 in
+                    1) [ $class = $TERMINAL ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                    2) [ $class = $BROWSER ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                    3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
+                    a) mwids="$mwids $wid" ;;
+                esac
+            fi
         fi
     done
     mapw -m $mwids

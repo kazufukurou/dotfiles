@@ -82,7 +82,8 @@ panel_bar() {
         chw=$f0
         cho=$f0
         for wid in $(lsw -u); do
-            if [ $(wattr b $wid) -eq $BW ]; then
+            no_hints=$(xprop -id $wid WM_HINTS | grep "not found")
+            if [ "$no_hints" = "" ]; then
                 case $(xprop -id $wid WM_CLASS | cut -d\" -f2) in
                     $TERMINAL) cht=$f7 ;;
                     $BROWSER) chw=$f7 ;;
@@ -93,7 +94,7 @@ panel_bar() {
 
         pfw=$(pfw)
         [ "$pfw" == "0x00000001" ] && title="" || title=$(xprop -id $pfw WM_NAME | cut -d\" -f2)
-        echo $cv$cht■$chw■$cho■$c $sys $f0${title:0:160}
+        echo $cv$cht#$chw#$cho#$c $sys $f0${title:0:160}
     done
 }
 
@@ -106,6 +107,8 @@ ignore() {
 }
 
 . ~/.config/wmrc/config
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
 ignore &
 system_loop > $PANEL_FIFO &
 cat "$PANEL_FIFO" | panel_bar &

@@ -11,4 +11,6 @@ sxhkd &
 initxkbmap dvp
 xrandr --dpi 160
 xset b off
-wew | wme
+xsetroot -solid "#333333"
+st -n panel -g 214x2 -e panel &
+exec swm

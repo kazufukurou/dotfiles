@@ -1,6 +1,6 @@
 super + shift + Escape
      killall panel; \
-     killall wew
+     killall swm
 
 super + Escape
     killw -p $(pfw)

@@ -7,19 +7,6 @@ usage() {
     exit 1
 }
 
-setb() {
-    wattr $2 || return
-    wattr o $2 && return
-
-    [ "$(wattr xywh $2)" = "$(wattr xywh $ROOT)" ] && return
-
-    case $1 in
-        active) chwb -s $BW -c $ACTIVE $2 ;;
-        inactive) chwb -s $BW -c $INACTIVE $2 ;;
-    esac
-    echo "T" > $PANEL_FIFO
-}
-
 closest() {
     x1=$(wattr $1 $PFW)
     y1=$(wattr $2 $PFW)
@@ -55,5 +42,9 @@ esac
 
 chwso -r $wid
 wtf $wid
-setb inactive $CUR
-setb active $wid
+x=$(wattr x $wid)
+y=$(wattr y $wid)
+w=$(wattr w $wid)
+h=$(wattr h $wid)
+wmp -a $((w / 2 + x)) $((h / 2 + y))
+echo "T" > $PANEL_FIFO

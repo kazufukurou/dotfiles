@@ -14,7 +14,6 @@ SW=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "${DN}q;d")
 SH=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f2 | sed "${DN}q;d")
 echo $WX-$WW-$WH-$SW1-$DN-$DX-$SW-$SH
 PANEL=28
-BW=8
 ACTIVE=0x666666
 INACTIVE=0x333333
 TERMINAL=st-256color
@@ -25,5 +24,3 @@ samedisplay() {
     wx=$(wattr x $1)
     ( [ $DX -eq 0 ] && [ $wx -lt $SW1 ] ) || ( [ $DX -gt 0 ] && [ $wx -ge $SW1 ] ) && return 0 || return 1
 }
-
-
