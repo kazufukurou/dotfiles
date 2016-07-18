@@ -12,5 +12,5 @@ initxkbmap dvp
 xrandr --dpi 160
 xset b off
 xsetroot -solid "#333333"
-st -n panel -g 214x2 -e panel &
+st -n panel -e panel &
 exec swm

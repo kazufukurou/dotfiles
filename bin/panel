@@ -102,7 +102,7 @@ ignore() {
     pfw=$(pfw)
     chwb -s 0 $pfw
     wmv -a 0 0 $pfw
-    #wtp 0 0 $SW1 $SH $pfw
+    wtp 0 0 $SW1 $((PANEL * 2)) $pfw
     ignw -s $pfw
 }
 
