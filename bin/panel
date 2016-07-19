@@ -82,8 +82,8 @@ panel_bar() {
         chw=$f0
         cho=$f0
         for wid in $(lsw -u); do
-            no_hints=$(xprop -id $wid WM_HINTS | grep "not found")
-            if [ "$no_hints" = "" ]; then
+            wmg=$(xprop -id $wid WMG | grep 1)
+            if [ "$wmg" != "" ]; then
                 case $(xprop -id $wid WM_CLASS | cut -d\" -f2) in
                     $TERMINAL) cht=$f7 ;;
                     $BROWSER) chw=$f7 ;;

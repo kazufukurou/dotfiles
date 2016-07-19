@@ -5,18 +5,19 @@
 if [ $# -eq 1 ]; then
     mwids=""
     uwids=""
+    for wid in $(lsw); do
+        xprop -id $wid -f WMG 8b -set WMG True
+    done
     for wid in $(lsw -a); do
-        no_hints=$(xprop -id $wid WM_HINTS | grep "not found")
-        if [ "$no_hints" = "" ]; then
+        wmg=$(xprop -id $wid WMG | grep 1)
+        if [ "$wmg" != "" ]; then
             class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
-            if [ "$class" != "panel" ]; then
-                case $1 in
-                    1) [ $class = $TERMINAL ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                    2) [ $class = $BROWSER ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                    3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
-                    a) mwids="$mwids $wid" ;;
-                esac
-            fi
+            case $1 in
+                1) [ $class = $TERMINAL ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                2) [ $class = $BROWSER ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
+                a) mwids="$mwids $wid" ;;
+            esac
         fi
     done
     mapw -m $mwids
