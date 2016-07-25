@@ -8,6 +8,7 @@ git clone https://github.com/tpope/vim-surround
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/tpope/vim-repeat
 git clone https://github.com/tpope/vim-dispatch
+git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/haya14busa/vim-operator-flashy
 git clone https://github.com/haya14busa/incsearch.vim
 git clone https://github.com/haya14busa/vim-asterisk
