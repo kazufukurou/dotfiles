@@ -20,7 +20,7 @@ super + {a,d,w,s}
 super + {q,e}
     wmv {-,_}$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1!d") 0 $(pfw)
 
-super + {j,k,l,semicolon}
+super + {j,k,l,i}
     wmg {1,2,3,a}
 
 super + !button{1,3}
