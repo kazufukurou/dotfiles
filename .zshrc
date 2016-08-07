@@ -15,6 +15,7 @@ zstyle ':vcs_info:*' unstagedstr '%F{1}-%f'
 zstyle ':vcs_info:*' enable hg git
 
 alias v='$EDITOR'
+alias m='mplayercmd start'
 alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
 alias adble='adb logcat "*:E"'
 alias adbld='adb logcat "*:D"'
