@@ -210,7 +210,6 @@ set laststatus=2 "always show the status line
 
 augroup statusline
     autocmd!
-    autocmd BufEnter,FileChangedShell,CursorHold * call SetBranch()
     autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * call <sid>RefreshStatus()
 augroup END
 
@@ -225,7 +224,7 @@ function! Status(winnum)
     let stat = ''
     if active
         let stat .= '%1* %{Mode()} %0*' "mode
-        let stat .= '%3*%( %{g:branch} %)%0*' "vcs branch
+        let stat .= '%3*%( %{fugitive#statusline()} %)%0*' "vcs branch
     endif
     let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
     if active && mode() ==# 'i' | let stat .= '%5*' | endif
@@ -239,19 +238,6 @@ function! Status(winnum)
         let stat .= '%2* %-6.(%l:%c%) %P %0*' "line, column, scroll position
     endif
     return stat
-endfunction
-
-let g:branch = ''
-function! SetBranch()
-    silent let l:branch = substitute(system('hg branch'), '\n', '', '')
-    if l:branch !~ 'abort'
-        let g:branch = l:branch
-    else
-        silent let l:branch = substitute(system('git name-rev --name-only HEAD'), '\n', '', '')
-        if l:branch !~ 'fatal'
-            let g:branch = l:branch
-        endif
-    endif
 endfunction
 
 function! Mode()
