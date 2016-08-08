@@ -275,3 +275,4 @@ nmap ,w :set wrap!<cr>
 nmap ; :
 nmap gp :!mplayercmd dir %d/%f<cr>
 nmap ge :!extract %f<cr>
+nmap gv :!vim %f<cr>
