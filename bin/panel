@@ -94,7 +94,7 @@ panel_bar() {
 
         pfw=$(pfw)
         [ "$pfw" == "0x00000001" ] && title="" || title=$(xprop -id $pfw WM_NAME | cut -d\" -f2)
-        echo $cv$cht#$chw#$cho#$c $sys $f0${title:0:160}
+        echo $cv$cht● $chw● $cho● $c $sys $f0${title:0:160}
     done
 }
 

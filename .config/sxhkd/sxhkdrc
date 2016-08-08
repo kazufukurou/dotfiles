@@ -18,7 +18,9 @@ super + {a,d,w,s}
     wmf {left,right,up,down}
 
 super + {q,e}
-    wmv {-,_}$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1!d") 0 $(pfw)
+    pfw=$(pfw); \
+    wmv {-,_}$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1!d") 0 $pfw; \
+    wmf $pfw
 
 super + {j,k,l,i}
     wmg {1,2,3,a}

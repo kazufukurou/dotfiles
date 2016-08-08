@@ -146,7 +146,7 @@ filextype *.ps,*.ps.gz gv %c %i &
 filextype *.djvu apvlv %f
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a mplayercmd play "%d/%f" &,
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a mplayercmd file "%d/%f" &,
 fileviewer *.mp3 mp3info
 
 " Video
@@ -261,7 +261,7 @@ nmap cc cw<c-u>
 nmap A cw<c-w>
 
 " Opening console in current directory
-nmap ,t :!urxvt &<cr>
+nmap ,t :!st &<cr>
 
 " Opening vim to edit .vifmrc
 nmap ,c :execute ':!vim $MYVIFMRC' | restart<cr>
@@ -273,3 +273,5 @@ nmap ,w :set wrap!<cr>
 
 " My mappings
 nmap ; :
+nmap gp :!mplayercmd dir %d/%f<cr>
+nmap ge :!extract %f<cr>

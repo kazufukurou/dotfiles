@@ -17,8 +17,8 @@ f0=$(tput setaf 0)
 c=$(tput sgr0)
 
 if [ $# -eq 2 ]; then
-    if [ "$1" = "play" ]; then echo "loadfile $2" > "$fifo"
-    elif [ "$1" = "replace" ]; then
+    if [ "$1" = "file" ]; then echo "loadfile $2" > "$fifo"
+    elif [ "$1" = "dir" ]; then
         find "$2" -iname '*.flac' -o -iname '*.mp3' -o -iname '*.ogg' | shuf > "$playlist"
         echo "loadlist $playlist" > "$fifo"
     else usage
