@@ -224,7 +224,7 @@ function! Status(winnum)
     let stat = ''
     if active
         let stat .= '%1* %{Mode()} %0*' "mode
-        let stat .= '%3*%( %{fugitive#statusline()} %)%0*' "vcs branch
+        let stat .= '%3*%( %{fugitive#head()} %)%0*' "vcs branch
     endif
     let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
     if active && mode() ==# 'i' | let stat .= '%5*' | endif
