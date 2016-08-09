@@ -1,3 +1,1 @@
-if [[ $(tty) == /dev/tty1 ]]; then
-    exec startx
-fi
+[[ $(tty) = "/dev/tty1" ]] && exec startx
