@@ -106,7 +106,7 @@ ignore() {
     ignw -s $pfw
 }
 
-. ~/.config/wmrc/config
+. ~/bin/wmrc
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 ignore &

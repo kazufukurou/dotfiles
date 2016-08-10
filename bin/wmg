@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ~/.config/wmrc/config
+. ~/bin/wmrc
 
 if [ $# -eq 1 ]; then
     mwids=""

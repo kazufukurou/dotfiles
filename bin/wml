@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ~/.config/wmrc/config
+. ~/bin/wmrc
 
 usage() {
     echo "usage: $(basename $0) <full|tile|grid>"
