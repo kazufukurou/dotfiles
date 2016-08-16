@@ -37,6 +37,6 @@ function uploadImage {
 scrot -s "shot.png"
 if [ -f shot.png ]; then
     mtpaint "shot.png"
-    uploadImage "shot.png" | xclip -selection c
-    rm "shot.png"
+    #uploadImage "shot.png" | xclip -selection c
+    #rm "shot.png"
 fi
