@@ -191,7 +191,7 @@ autocmd FileType kotlin let b:switch_custom_definitions =
     \   g:switch_common.java_equals_not_equals,
     \   g:switch_common.java_greater_less,
     \   ['var', 'val'],
-    \   ['Boolean', 'Int', 'Float', 'Long', 'String'],
+    \   ['Boolean', 'Int', 'Float', 'Double', 'Long', 'String'],
     \ ]
 
 "skk
