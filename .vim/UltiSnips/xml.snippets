@@ -104,6 +104,15 @@ snippet ta "Android XML text appearance" b
 android:textAppearance="@style/$1"
 endsnippet
 
+snippet fl "Android FrameLayout" b
+<FrameLayout
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:wrap_content}">
+    $0
+</FrameLayout>
+endsnippet
+
 snippet rl "Android RelativeLayout" b
 <RelativeLayout
     android:id="@+id/$1"
