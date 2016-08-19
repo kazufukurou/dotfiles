@@ -5,11 +5,14 @@ super + shift + Escape
 super + Escape
     killw -p $(pfw)
 
-super + {_,ctrl + ,shift + }space
-    wml {full,tile,grid}
+super + grave
+    dmenurun
 
-super + {_,ctrl + }Tab
-    wmf {next,prev}
+super + space
+    wml
+
+super + Tab
+    dmenuwin
 
 super + {shift,ctrl} + {a,d,w,s}
     {wmv,wrs} {-27 0,27 0,0 -27,0 27} $(pfw)

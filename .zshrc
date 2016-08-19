@@ -57,10 +57,3 @@ stty -ixon
 
 h2d() { echo "ibase=16; $@"|bc }
 d2h() { echo "obase=16; $@"|bc }
-
-compdef r=exec
-r() {
-    $* &>/dev/null &
-    disown %%
-    exit
-}

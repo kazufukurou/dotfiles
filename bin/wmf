@@ -2,49 +2,17 @@
 
 . ~/bin/wmrc
 
-usage() {
-    echo "usage: $(basename $0) <next|prev|left|right|up|down|wid>" >&2
-    exit 1
-}
+if [ $# -eq 1 ]; then
+    wid=$1
+    chwso -r $wid
+    wtf $wid
+    x=$(wattr x $wid)
+    y=$(wattr y $wid)
+    w=$(wattr w $wid)
+    h=$(wattr h $wid)
+    wmp -a $((w / 2 + x)) $((h / 2 + y))
+    echo "T" > $PANEL_FIFO
+else
+    echo "usage: $(basename $0) <wid>" >&2
+fi
 
-closest() {
-    x1=$(wattr $1 $PFW)
-    y1=$(wattr $2 $PFW)
-    d=$3
-    for wid in $(lsw | grep -v $PFW); do
-        x2=$(wattr $1 $wid)
-        y2=$(wattr $2 $wid)
-        if [ $(((x2 - x1) * d)) -gt 0 ]; then
-            dist=$(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)))
-            echo $dist $wid
-        fi
-    done
-}
-
-list_wids() {
-    for wid in $(lsw | grep -v $CUR); do
-        samedisplay $wid && echo $wid
-    done
-}
-
-case $1 in
-    next)  wid=$(list_wids | sed '1 p;d') ;;
-    prev)  wid=$(list_wids | sed '$ p;d') ;;
-    left)  wid=$(closest x y -1 | sort -n | head -n1 | cut -d' ' -f2) ;;
-    right) wid=$(closest x y 1 | sort -n | head -n1 | cut -d' ' -f2) ;;
-    up)    wid=$(closest y x -1 | sort -n | head -n1 | cut -d' ' -f2) ;;
-    down)  wid=$(closest y x 1 | sort -n | head -n1 | cut -d' ' -f2) ;;
-    0x*)   wattr $1 && wid=$1 ;;
-    *)     usage ;;
-esac
-
-[ -z "$wid" ] && { echo "$(basename $0): no window to focus" >&2; exit 1; }
-
-chwso -r $wid
-wtf $wid
-x=$(wattr x $wid)
-y=$(wattr y $wid)
-w=$(wattr w $wid)
-h=$(wattr h $wid)
-wmp -a $((w / 2 + x)) $((h / 2 + y))
-echo "T" > $PANEL_FIFO
