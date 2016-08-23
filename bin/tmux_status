@@ -57,4 +57,4 @@ dt=$(date +%R)
 tc=$(temp_color $t)
 vc=$(volume_color $v)
 bc=$(battery_color $b $bs)
-echo "$f7 T $tc$t$f7 V $vc$v$f7 B $bc$b $f7$dm $f15$ddt $f7$dw $f15$dt"
+echo "$f7 V $vc$v$f7 T $tc$t$f7 B $bc$b $f7$dm $f15$ddt $f7$dw $f15$dt"
