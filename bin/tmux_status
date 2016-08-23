@@ -1,0 +1,60 @@
+#! /bin/bash
+
+f7=#[fg=colour7,nobold]
+f15=#[fg=colour15,bold]
+f13=#[fg=colour13,bold]
+f12=#[fg=colour12,bold]
+f9=#[fg=colour9]
+f9blink=#[fg=colour9,bold,blink]
+
+cpu() {
+    cpus=$(grep -c processor /proc/cpuinfo)
+    echo $(ps -eo pcpu | awk -v "cpus=$cpus" '/\s*[1-9]/ NR==1 {sum=0} {sum+=$1} END {printf "%d\n", sum/cpus}')
+}
+
+temp() {
+    echo $((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
+}
+
+temp_color() {
+    [ $1 -gt 80 ] && echo $f9 || [ $1 -gt 60 ] && echo $f13 || echo $f12
+}
+
+volume() {
+    [ -n "$(amixer get Master | grep off)" ] && echo Mute || echo $(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')
+}
+
+volume_color() {
+    [ "Mute" = $1 ] && echo $f9 || echo $f15
+}
+
+battery() {
+    battery=$(cat /sys/class/power_supply/BAT0/capacity)
+    [ -z $battery ] && echo 0 || echo $battery
+}
+
+battery_status() {
+    echo $(cat /sys/class/power_supply/BAT0/status)
+}
+
+battery_color() {
+    [ $1 -le 10 ] && [ "$2" = "Discharging" ] && echo $f9blink && return 0
+    [ $1 -le 10 ] && echo $f9 && return 0
+    [ $1 -le 50 ] && echo $f13 && return 0
+    [ $1 -le 90 ] && echo $f12 && return 0
+    echo $f15
+}
+
+t=$(temp)
+v=$(volume)
+b=$(battery)
+bs=$(battery_status)
+dm=$(date +%b)
+dd=$(date +%e)
+ddt=${dd## }
+dw=$(date +%a)
+dt=$(date +%R)
+tc=$(temp_color $t)
+vc=$(volume_color $v)
+bc=$(battery_color $b $bs)
+echo "$f7 T $tc$t$f7 V $vc$v$f7 B $bc$b $f7$dm $f15$ddt $f7$dw $f15$dt"

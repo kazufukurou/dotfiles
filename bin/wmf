@@ -11,7 +11,6 @@ if [ $# -eq 1 ]; then
     w=$(wattr w $wid)
     h=$(wattr h $wid)
     wmp -a $((w / 2 + x)) $((h / 2 + y))
-    echo "T" > $PANEL_FIFO
 else
     echo "usage: $(basename $0) <wid>" >&2
 fi

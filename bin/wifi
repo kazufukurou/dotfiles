@@ -1,4 +1,4 @@
 #!/bin/sh
-sudo ip link set wlp3s0 up
-sudo wpa_supplicant -B -i wlp3s0 -c /etc/wpa_supplicant.conf
-sudo dhcpcd
+sudo /sbin/ip link set wlp1s0 up
+sudo /usr/sbin/wpa_supplicant -B -i wlp1s0 -c /etc/wpa_supplicant.conf
+sudo /sbin/dhcpcd

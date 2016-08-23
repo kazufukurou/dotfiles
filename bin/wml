@@ -9,6 +9,6 @@ samedisplay() {
 
 for wid in $(lsw); do
     if samedisplay $wid; then
-        wtp $DX $PANEL $((SW - 2 * WB)) $((SH - 2 * WB - PANEL)) $wid
+        wtp $DX 0 $((SW - 2 * WB)) $((SH - 2 * WB)) $wid
     fi
 done

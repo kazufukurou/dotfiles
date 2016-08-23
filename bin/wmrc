@@ -12,7 +12,5 @@ SW1=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1q;d")
 [ $WX -ge $SW1 ] && DN=2 || DN=1
 SW=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "${DN}q;d")
 SH=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f2 | sed "${DN}q;d")
-PANEL=28
 TERMINAL=st-256color
 BROWSER=vimb
-PANEL_FIFO=/tmp/panel-fifo
