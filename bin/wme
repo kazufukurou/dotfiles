@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while IFS=: read ev wid; do
+    case $ev in
+        18) wattr $(pfw) || wmf prev 2>/dev/null ;;
+        4|7|19) wattr o $wid || wmf $wid 2>/dev/null ;;
+    esac
+done
