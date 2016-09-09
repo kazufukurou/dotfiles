@@ -1,8 +1,18 @@
 #!/bin/sh
 
+PFW=$(pfw)
+WX=$(wattr x $PFW)
+WW=$(wattr w $PFW)
+WH=$(wattr h $PFW)
+SW1=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1q;d")
+[ $WX -ge $SW1 ] && DX=$SW1 || DX=0
+[ $WX -ge $SW1 ] && DN=2 || DN=1
+SW=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "${DN}q;d")
+SH=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f2 | sed "${DN}q;d")
+
 while IFS=: read ev wid; do
     case $ev in
         18) wattr $(pfw) || wmf $(lsw | sed '$ p;d') ;;
-        4|7|19) wattr o $wid || wmf $wid && wml ;;
+        4|7|19) wattr o $wid || wmf $wid && wtp $DX 0 $SW $SH $wid ;;
     esac
 done

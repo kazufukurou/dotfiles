@@ -1,6 +1,7 @@
 #!/bin/sh
 
-. ~/bin/wmrc
+terminal=st-256color
+browser=vimb
 
 if [ $# -eq 1 ]; then
     mwids=""
@@ -13,9 +14,9 @@ if [ $# -eq 1 ]; then
         if [ "$wmg" != "" ]; then
             class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
             case $1 in
-                1) [ $class = $TERMINAL ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                2) [ $class = $BROWSER ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                3) [ $class = $TERMINAL ] || [ $class = $BROWSER ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
+                1) [ $class = $terminal ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                2) [ $class = $browser ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
+                3) [ $class = $terminal ] || [ $class = $browser ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
                 a) mwids="$mwids $wid" ;;
             esac
         fi

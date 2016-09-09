@@ -1,7 +1,5 @@
 #!/bin/sh
 
-. ~/bin/wmrc
-
 if [ $# -eq 1 ]; then
     wid=$1
     chwso -r $wid
