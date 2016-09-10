@@ -15,13 +15,13 @@ for w in $(lsw | grep -v $(pfw)); do
     n=$((n+1))
     [ -n "$output" ] && output="$output\n"
     l=$(chr $((n+96)))
-    output="$output$w:$l $(xprop -id $w WM_NAME | cut -d\" -f2)"
+    output="$output$w^$l $(xprop -id $w WM_NAME | cut -d\" -f2)"
 done
 if [ $n -eq 1 ]; then
-    wmf $(echo $output | cut -d: -f1)
+    wmf $(echo $output | cut -d^ -f1)
 elif [ $n -gt 1 ]; then
-    win=$(echo $output | cut -d: -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
+    win=$(echo $output | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
     win=$(ord $win)
     win=$((win-96))
-    wmf $(echo $output | sed -n "$win p" | cut -d: -f1)
+    wmf $(echo $output | sed -n "$win p" | cut -d^ -f1)
 fi
