@@ -8,6 +8,13 @@ if [ $# -eq 1 ]; then
     y=$(wattr y $wid)
     w=$(wattr w $wid)
     h=$(wattr h $wid)
+    w1=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1q;d")
+    [ $x -ge $w1 ] && dx=$w1 || dx=0
+    [ $x -ge $w1 ] && dn=2 || dn=1
+    sw=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "${dn}q;d")
+    sh=$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f2 | sed "${dn}q;d")
+    echo $dx $sw $sh $wid
+    wtp $dx 0 $sw $sh $wid
     wmp -a $((w / 2 + x)) $((h / 2 + y))
 else
     echo "usage: $(basename $0) <wid>" >&2
