@@ -7,22 +7,22 @@ if [ $# -eq 1 ]; then
     mwids=""
     uwids=""
     for wid in $(lsw); do
-        xprop -id $wid -f WMG 8b -set WMG True
+        class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+        type=o
+        [ "$class" = "$terminal" ] && type=t
+        [ "$class" = "$browser" ] && type=b
+        xprop -id $wid -f WMG 8s -set WMG $type
     done
     for wid in $(lsw -a); do
-        wmg=$(xprop -id $wid WMG | grep 1)
-        if [ "$wmg" != "" ]; then
-            class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
-            case $1 in
-                1) [ $class = $terminal ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                2) [ $class = $browser ] && mwids="$mwids $wid" || uwids="$uwids $wid" ;;
-                3) [ $class = $terminal ] || [ $class = $browser ] && uwids="$uwids $wid" || mwids="$mwids $wid" ;;
-                a) mwids="$mwids $wid" ;;
-            esac
+        g=$(xprop -id $wid WMG | grep WMG | cut -d\" -f2)
+        if [ "$1" = "a" ]; then
+            [ "$g" != "" ] && mwids="$mwids $wid"
+        else
+            [ "$g" = "$1" ] && mwids="$mwids $wid" || uwids="$uwids $wid"
         fi
     done
     mapw -m $mwids
     mapw -u $uwids
 else
-    echo "usage: $(basename $0) <1|2|3|a>"
+    echo "usage: $(basename $0) <t|b|o|a>"
 fi

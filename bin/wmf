@@ -9,12 +9,11 @@ if [ $# -eq 1 ]; then
     w=$(wattr w $wid)
     h=$(wattr h $wid)
     r=$(xrandr | grep "*" | cut -d' ' -f4)
-    w1=$(echo $r | cut -dx -f1 | sed "1q;d")
+    w1=$(echo "$r" | cut -dx -f1 | sed "1q;d")
     [ $x -ge $w1 ] && dx=$w1 || dx=0
     [ $x -ge $w1 ] && dn=2 || dn=1
-    sw=$(echo $r | cut -dx -f1 | sed "${dn}q;d")
-    sh=$(echo $r | cut -dx -f2 | sed "${dn}q;d")
-    echo $dx $sw $sh $wid
+    sw=$(echo "$r" | cut -dx -f1 | sed "${dn}q;d")
+    sh=$(echo "$r" | cut -dx -f2 | sed "${dn}q;d")
     wtp $dx 0 $sw $sh $wid
     wmp -a $((w / 2 + x)) $((h / 2 + y))
 else

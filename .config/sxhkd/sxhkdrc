@@ -22,7 +22,7 @@ super + {q,e}
     wmf $pfw
 
 super + {j,k,l,i}
-    wmg {1,2,3,a}
+    wmg {t,b,o,a}
 
 super + !button{1,3}
     {wmv, wrs} -a %i %i $(pfw)
