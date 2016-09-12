@@ -23,11 +23,11 @@ c=$(tput sgr0)
 b=$(tput bold)
 
 for x in "" $b ; do
-    for i in ${n[@]} ; do printf "$x$(tput setaf $i) ██████████ "; done
+    for i in ${n[@]} ; do printf "$x$(tput setaf $i) ██████████"; done
     echo $c
 done
 for x in "" $b ; do
-    for i in ${n[@]} ; do printf "$x$(tput setaf $i) %2s #${COLOR[$((i+d))]} " $((i+d)); done
+    for i in ${n[@]} ; do printf "$x$(tput setaf $i) %2s #${COLOR[$((i+d))]}" $((i+d)); done
     echo $c
     d=8
 done
@@ -35,7 +35,7 @@ for x in "" $b ; do
     for i in ${n[@]} ; do
         printf "$c $(tput setab $i) "
         for j in ${n[@]} ; do printf "$x$(tput setaf $j)x"; done
-        printf " $c "
+        printf " $c"
     done
     echo ""
 done

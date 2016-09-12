@@ -4,11 +4,8 @@ super + shift + Escape
 super + Escape
     killw -p $(pfw)
 
-super + grave
-    dmenurun
-
 super + space
-    wml
+    dmenurun
 
 super + Tab
     dmenuwin
