@@ -4,8 +4,7 @@ terminal=st-256color
 browser=vimb
 
 if [ $# -eq 1 ]; then
-    mwids=""
-    uwids=""
+    xprop -root -f WMG 8s -set WMG $1
     for wid in $(lsw); do
         class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
         type=o
@@ -13,16 +12,25 @@ if [ $# -eq 1 ]; then
         [ "$class" = "$browser" ] && type=b
         xprop -id $wid -f WMG 8s -set WMG $type
     done
+    uwids=""
     for wid in $(lsw -a); do
-        g=$(xprop -id $wid WMG | grep WMG | cut -d\" -f2)
-        if [ "$1" = "a" ]; then
-            [ "$g" != "" ] && mwids="$mwids $wid"
+        uwids="$uwids $wid"
+    done
+    mapw -u $uwids
+    mwid1=""
+    mwid2=""
+    for wid in $(lsw -a); do
+        g=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
+        x=$(wattr x $wid)
+        if [ $x -eq 0 ]; then
+            [ "$1" = "a" ] && [ "$g" != "" ] && [ "$mwid1" = "" ] && mwid1="$wid"
+            [ "$1" != "a" ] && [ "$g" = "$1" ] && [ "$mwid1" = "" ] && mwid1="$wid"
         else
-            [ "$g" = "$1" ] && mwids="$mwids $wid" || uwids="$uwids $wid"
+            [ "$1" = "a" ] && [ "$g" != "" ] && [ "$mwid2" = "" ] && mwid2="$wid"
+            [ "$1" != "a" ] && [ "$g" = "$1" ] && [ "$mwid2" = "" ] && mwid2="$wid"
         fi
     done
-    mapw -m $mwids
-    mapw -u $uwids
+    mapw -m $mwid1 $mwid2
 else
     echo "usage: $(basename $0) <t|b|o|a>"
 fi
