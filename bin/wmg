@@ -3,8 +3,7 @@
 terminal=st-256color
 browser=vimb
 
-if [ $# -eq 1 ]; then
-    xprop -root -f WMG 8s -set WMG $1
+if [ $# -eq 2 ]; then
     for wid in $(lsw); do
         class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
         type=o
@@ -13,24 +12,18 @@ if [ $# -eq 1 ]; then
         xprop -id $wid -f WMG 8s -set WMG $type
     done
     uwids=""
-    for wid in $(lsw -a); do
-        uwids="$uwids $wid"
-    done
-    mapw -u $uwids
-    mwid1=""
-    mwid2=""
+    mwid=""
     for wid in $(lsw -a); do
         g=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
         x=$(wattr x $wid)
-        if [ $x -eq 0 ]; then
-            [ "$1" = "a" ] && [ "$g" != "" ] && [ "$mwid1" = "" ] && mwid1="$wid"
-            [ "$1" != "a" ] && [ "$g" = "$1" ] && [ "$mwid1" = "" ] && mwid1="$wid"
-        else
-            [ "$1" = "a" ] && [ "$g" != "" ] && [ "$mwid2" = "" ] && mwid2="$wid"
-            [ "$1" != "a" ] && [ "$g" = "$1" ] && [ "$mwid2" = "" ] && mwid2="$wid"
+        [ $x -eq 0 ] && dn=0 || dn=1
+        if [ $dn -eq $1 ]; then
+            uwids="$uwids $wid"
+            [ "$g" = "$2" ] && mwid="$wid"
         fi
     done
-    mapw -m $mwid1 $mwid2
+    mapw -u $uwids
+    mapw -m $mwid
 else
-    echo "usage: $(basename $0) <t|b|o|a>"
+    echo "usage: $(basename $0) <NUM> <t|b|o>"
 fi

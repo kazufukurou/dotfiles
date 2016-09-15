@@ -11,10 +11,9 @@ ord() {
 dmenu_opts="-l 26 -fn monospace:pixelsize=18 -nf #999999 -nb #666666 -sf #ffffff -sb #666666"
 n=0
 output=""
-root_group=$(xprop -root WMG | cut -d\" -f2)
 for wid in $(lsw -a | grep -v $(pfw)); do
-    group=$(xprop -id $wid WMG | cut -d\" -f2)
-    if [ "$group" = "$root_group" ]; then
+    group=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
+    if [ -n "$group" ]; then
         n=$((n+1))
         [ -n "$output" ] && output="$output\n"
         l=$(chr $((n+96)))
@@ -23,11 +22,9 @@ for wid in $(lsw -a | grep -v $(pfw)); do
 done
 if [ $n -eq 1 ]; then
     wmf $(echo $output | cut -d^ -f1)
-    echo ololo-$output
 elif [ $n -gt 1 ]; then
     win=$(echo $output | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
     win=$(ord $win)
     win=$((win-96))
-    echo ololo-$output-$win-
     wmf $(echo $output | sed -n "$win p" | cut -d^ -f1)
 fi

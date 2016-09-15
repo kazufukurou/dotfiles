@@ -1,9 +1,7 @@
-execute pathogen#infect()
-Helptags
 syntax on
 filetype plugin indent on
 
-color mycolorscheme
+color mycolors
 set nocompatible
 set noundofile "don't create .un~ files
 set nobackup nowritebackup "don't create ~ files
@@ -71,7 +69,7 @@ nnoremap <leader>re :vsplit $MYVIMRC<cr>
 nnoremap <leader>rs :source $MYVIMRC<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
-nnoremap <leader>u :<C-u>Unite -start-insert file file_rec buffer<cr>
+nnoremap <leader>f :FZF<cr>
 nnoremap <leader>w :set wrap!<cr>
 nnoremap <left> <C-w>h
 nnoremap <down> <C-w>j
@@ -105,11 +103,6 @@ let g:TypesFileIncludeLocals = 1
 "java-imports
 let g:sortedPackage = []
 let g:packageSepDepth = 0
-
-"Unite
-let g:unite_force_overwrite_statusline = 0
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
 
 "vim-surrond
 let g:surround_45 = '«\r»'
@@ -158,6 +151,8 @@ let g:switch_common =
       \ {
       \   'android_layout': ['LinearLayout', 'RelativeLayout', 'FrameLayout'],
       \   'android_view': ['View', 'TextView', 'ImageView'],
+      \   'android_layoutparams': ['WRAP_CONTENT', 'MATCH_PARENT'],
+      \   'android_orientation': ['HORIZONTAL', 'VERTICAL'],
       \   'java_equals_not_equals': ['!=', '=='],
       \   'java_greater_less': ['>', '<'],
       \ }
@@ -177,6 +172,8 @@ autocmd FileType java let b:switch_custom_definitions =
     \ [
     \   g:switch_common.android_layout,
     \   g:switch_common.android_view,
+    \   g:switch_common.android_layoutparams,
+    \   g:switch_common.android_orientation,
     \   g:switch_common.java_equals_not_equals,
     \   g:switch_common.java_greater_less,
     \   ['@Nullable', '@NonNull'],
@@ -188,6 +185,8 @@ autocmd FileType kotlin let b:switch_custom_definitions =
     \ [
     \   g:switch_common.android_layout,
     \   g:switch_common.android_view,
+    \   g:switch_common.android_layoutparams,
+    \   g:switch_common.android_orientation,
     \   g:switch_common.java_equals_not_equals,
     \   g:switch_common.java_greater_less,
     \   ['var', 'val'],

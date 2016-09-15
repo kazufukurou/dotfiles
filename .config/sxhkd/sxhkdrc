@@ -1,42 +1,30 @@
 super + shift + Escape
-     killall wew
+    killall wew
 
 super + Escape
     killw -p $(pfw)
 
-super + space
-    dmenurun
+super + {space,Tab}
+    {dmenurun,dmenuwin}
 
-super + Tab
-    dmenuwin
+super + BackSpace
+    wid=$(pfw); \
+    [ $(wattr x $wid) -eq 0 ] && wmv 9999 0 $wid || wmv -9999 0 $wid; \
+    wmf $wid
 
-super + {shift,ctrl} + {a,d,w,s}
-    {wmv,wrs} {-27 0,27 0,0 -27,0 27} $(pfw)
-
-super + {a,d,w,s}
-    wmf {left,right,up,down}
-
-super + {q,e}
-    pfw=$(pfw); \
-    wmv {-,_}$(xrandr | grep "*" | cut -d' ' -f4 | cut -dx -f1 | sed "1!d") 0 $pfw; \
-    wmf $pfw
-
-super + {j,k,l,i}
-    wmg {t,b,o,a}
+super + {_,shift + }{j,k,l}
+    wmg {0,1} {t,b,o}
 
 super + !button{1,3}
     {wmv, wrs} -a %i %i $(pfw)
 
-super + Return
-    st
+super + {_,shift + }Return
+    {st,vimb}
 
 super + z
     slock & sleep 1 && xset dpms force off
 
-super + x
-    vimb
-
-super + shift + z
+super + o
     pkill -USR1 -x sxhkd
 
 XF86AudioRaiseVolume
