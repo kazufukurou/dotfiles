@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -d ~/.vim/pack/bundle/start ] || mkdir ~/.vim/pack/bundle/start
+[ -d ~/.vim/pack/bundle/start ] || mkdir -p ~/.vim/pack/bundle/start
 rm -rf ~/.vim/pack/bundle/start/*
 cd ~/.vim/pack/bundle/start
 git clone https://github.com/tpope/vim-surround
