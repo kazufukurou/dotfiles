@@ -147,50 +147,30 @@ let g:UltiSnipsEditSplit = 'vertical'
 
 "vim-switch
 let g:switch_mapping = '-'
-let g:switch_common =
-      \ {
-      \   'android_layout': ['LinearLayout', 'RelativeLayout', 'FrameLayout'],
-      \   'android_view': ['View', 'TextView', 'ImageView'],
-      \   'android_layoutparams': ['WRAP_CONTENT', 'MATCH_PARENT'],
-      \   'android_orientation': ['HORIZONTAL', 'VERTICAL'],
-      \   'java_equals_not_equals': ['!=', '=='],
-      \   'java_greater_less': ['>', '<'],
-      \ }
-autocmd FileType xml let b:switch_custom_definitions =
+let g:switch_custom_definitions =
     \ [
-    \   g:switch_common.android_layout,
-    \   g:switch_common.android_view,
-    \   ['match_parent', 'wrap_content'],
+    \   ['LinearLayout', 'RelativeLayout', 'FrameLayout'],
+    \   ['View', 'TextView', 'ImageView'],
+    \   ['WRAP_CONTENT', 'MATCH_PARENT'],
+    \   ['wrap_content', 'match_parent'],
+    \   ['HORIZONTAL', 'VERTICAL'],
     \   ['horizontal', 'vertical'],
+    \   ['CENTER_VERTICAL', 'CENTER_HORIZONTAL'],
     \   ['center_vertical', 'center_horizontal'],
+    \   ['!=', '=='],
+    \   ['>', '<'],
+    \   ['>=', '<='],
+    \   ['var', 'val'],
+    \   ['if', 'when'],
+    \   ['boolean', 'int', 'float', 'double', 'long'],
+    \   ['Boolean', 'Int', 'Float', 'Double', 'Long', 'String'],
+    \   ['@Nullable', '@NonNull'],
+    \   ['public', 'protected', 'private'],
+    \   ['extends', 'implements'],
     \   ['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'],
     \   ['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'],
     \   ['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom'],
     \   ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
-    \ ]
-autocmd FileType java let b:switch_custom_definitions =
-    \ [
-    \   g:switch_common.android_layout,
-    \   g:switch_common.android_view,
-    \   g:switch_common.android_layoutparams,
-    \   g:switch_common.android_orientation,
-    \   g:switch_common.java_equals_not_equals,
-    \   g:switch_common.java_greater_less,
-    \   ['@Nullable', '@NonNull'],
-    \   ['public', 'protected', 'private'],
-    \   ['extends', 'implements'],
-    \   ['int', 'long', 'float', 'double'],
-    \ ]
-autocmd FileType kotlin let b:switch_custom_definitions =
-    \ [
-    \   g:switch_common.android_layout,
-    \   g:switch_common.android_view,
-    \   g:switch_common.android_layoutparams,
-    \   g:switch_common.android_orientation,
-    \   g:switch_common.java_equals_not_equals,
-    \   g:switch_common.java_greater_less,
-    \   ['var', 'val'],
-    \   ['Boolean', 'Int', 'Float', 'Double', 'Long', 'String'],
     \ ]
 
 "skk
