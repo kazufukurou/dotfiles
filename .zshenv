@@ -9,3 +9,4 @@ export VISUAL="$EDITOR"
 export CLASSPATH=/usr/share/java/bsh.jar
 export JavaScriptCoreUseJIT=0
 export FZF_DEFAULT_OPTS='--color 16'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
