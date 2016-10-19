@@ -24,8 +24,12 @@ super + {_,shift + }Return
 super + z
     slock & sleep 1 && xset dpms force off
 
-super + o
+super + x
     pkill -USR1 -x sxhkd
+
+super + c
+    wid=$(pfw); \
+    wtp 0 0 $(($(wattr w $wid) / 2)) $(wattr h $wid) $wid
 
 XF86AudioRaiseVolume
     amixer set Master playback 1+

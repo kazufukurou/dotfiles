@@ -17,14 +17,16 @@ for wid in $(lsw -a | grep -v $(pfw)); do
         n=$((n+1))
         [ -n "$output" ] && output="$output\n"
         l=$(chr $((n+96)))
-        output="$output$wid^$l $(xprop -id $wid WM_NAME | cut -d\" -f2)"
+        output="$output$wid^$l $(xprop -id $wid _NET_WM_NAME | cut -d\" -f2)"
     fi
 done
 if [ $n -eq 1 ]; then
-    wmf $(echo -e $output | cut -d^ -f1)
+    wmf $(echo "$output" | cut -d^ -f1)
 elif [ $n -gt 1 ]; then
-    win=$(echo -e $output | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
+    win=$(echo "$output" | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
     win=$(ord $win)
     win=$((win-96))
-    wmf $(echo -e $output | sed -n "$win p" | cut -d^ -f1)
+    echo $win
+    echo $(echo "$output" | sed -n "$win p" | cut -d^ -f1)
+    wmf $(echo "$output" | sed -n "$win p" | cut -d^ -f1)
 fi

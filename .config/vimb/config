@@ -24,3 +24,4 @@ set status-sslinvalid-font=monospace normal 8
 set status-sslinvalid-font=monospace normal 8
 nnoremap ; :
 nnoremap : ;
+autocmd LoadFinished * sh! xprop -id $VIMB_XID -f _NET_WM_NAME 8u -set _NET_WM_NAME "% $VIMB_TITLE"

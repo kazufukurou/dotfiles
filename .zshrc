@@ -17,6 +17,7 @@ zstyle ':vcs_info:*' enable hg git
 alias v='$EDITOR'
 alias t='tmux'
 alias m='mplayercmd start'
+alias g='grep -E --color=auto'
 alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
 alias adble='adb logcat "*:E"'
 alias adbld='adb logcat "*:D"'
@@ -25,6 +26,7 @@ alias lock='slock & sleep 1 && xset dpms force off'
 alias reb='sudo /sbin/reboot'
 alias off='sudo /sbin/poweroff'
 alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap dvp'
+
 
 precmd () { vcs_info }
 
@@ -55,5 +57,5 @@ ${vim_mode} %F{2}%(!.#.$) %f%b'
 
 stty -ixon
 
-h2d() { echo "ibase=16; $@"|bc }
-d2h() { echo "obase=16; $@"|bc }
+h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
+d2h() { echo "obase=16; $@" | bc }

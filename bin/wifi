@@ -1,4 +1,6 @@
 #!/bin/sh
-sudo /sbin/ip link set wlp1s0 up
-sudo /usr/sbin/wpa_supplicant -B -i wlp1s0 -c /etc/wpa_supplicant.conf
-sudo /sbin/dhcpcd
+
+wlan=$(sudo /sbin/ip link | grep wlp | cut -d: -f2)
+sudo /sbin/ip link set $wlan up
+sudo /usr/sbin/wpa_supplicant -B -i $wlan -c /etc/wpa_supplicant.conf
+sudo /sbin/dhcpcd $wlan
