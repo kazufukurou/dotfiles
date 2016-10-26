@@ -8,25 +8,25 @@ ord() {
   printf '%d' "'$1"
 }
 
-dmenu_opts="-l 26 -fn monospace:pixelsize=18 -nf #999999 -nb #666666 -sf #ffffff -sb #666666"
-n=0
-output=""
-for wid in $(lsw -a | grep -v $(pfw)); do
-    group=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
-    if [ -n "$group" ]; then
-        n=$((n+1))
-        [ -n "$output" ] && output="$output\n"
-        l=$(chr $((n+96)))
-        output="$output$wid^$l $(xprop -id $wid _NET_WM_NAME | cut -d\" -f2)"
-    fi
-done
+titles() {
+    n=0
+    for wid in $(lsw -a | grep -v $(pfw)); do
+        group=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
+        if [ -n "$group" ]; then
+            n=$((n+1))
+            l=$(chr $((n+96)))
+            echo "$wid^$l $(xprop -id $wid _NET_WM_NAME | cut -d\" -f2)"
+        fi
+    done
+}
+
+n=$(titles | wc -l)
 if [ $n -eq 1 ]; then
-    wmf $(echo "$output" | cut -d^ -f1)
+    wmf $(titles | cut -d^ -f1)
 elif [ $n -gt 1 ]; then
-    win=$(echo "$output" | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
+    dmenu_opts="-l 26 -fn monospace:pixelsize=18 -nf #999999 -nb #666666 -sf #ffffff -sb #666666"
+    win=$(titles | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
     win=$(ord $win)
     win=$((win-96))
-    echo $win
-    echo $(echo "$output" | sed -n "$win p" | cut -d^ -f1)
-    wmf $(echo "$output" | sed -n "$win p" | cut -d^ -f1)
+    wmf $(titles | sed -n "$win p" | cut -d^ -f1)
 fi

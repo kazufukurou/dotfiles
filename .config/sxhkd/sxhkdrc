@@ -4,8 +4,8 @@ super + shift + Escape
 super + Escape
     killw -p $(pfw)
 
-super + {space,Tab}
-    {dmenurun,dmenuwin}
+super + {Tab, space}
+    {dmenuwin, dmenurun}
 
 super + BackSpace
     wid=$(pfw); \
@@ -18,6 +18,9 @@ super + {_,shift + }{j,k,l}
 super + !button{1,3}
     {wmv, wrs} -a %i %i $(pfw)
 
+super + s
+    wmf $(pfw)
+
 super + {_,shift + }Return
     {st,vimb}
 
@@ -29,6 +32,8 @@ super + x
 
 super + c
     wid=$(pfw); \
+
+    [ $(wattr x $wid) -eq 0 ] && wmv 9999 0 $wid || wmv -9999 0 $wid; \
     wtp 0 0 $(($(wattr w $wid) / 2)) $(wattr h $wid) $wid
 
 XF86AudioRaiseVolume

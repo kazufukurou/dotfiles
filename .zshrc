@@ -26,6 +26,7 @@ alias lock='slock & sleep 1 && xset dpms force off'
 alias reb='sudo /sbin/reboot'
 alias off='sudo /sbin/poweroff'
 alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap dvp'
+alias java='java -Dawt.useSystemAAFontSettings=on'
 
 
 precmd () { vcs_info }
