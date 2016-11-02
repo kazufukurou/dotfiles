@@ -1,0 +1,67 @@
+#!/bin/sh
+
+if [ $# -eq 1 ]; then
+    if [ "$1" = "loop" ]; then
+        while IFS=: read ev wid; do
+            case $ev in
+                18) wattr $(pfw) || wmc focus $(lsw | sed '$ p;d') ;;
+                4|7|19) wattr o $wid || wmc focus $wid ;;
+            esac
+        done
+    elif [ "$1" = "max" ]; then
+        wid=$(pfw)
+        x=$(wattr x $wid)
+        r=$(xrandr | grep "*" | cut -d' ' -f4)
+        w1=$(echo "$r" | cut -dx -f1 | sed "1q;d")
+        [ $x -ge $w1 ] && dx=$w1 || dx=0
+        [ $x -ge $w1 ] && dn=2 || dn=1
+        sw=$(echo "$r" | cut -dx -f1 | sed "${dn}q;d")
+        sh=$(echo "$r" | cut -dx -f2 | sed "${dn}q;d")
+        wtp $dx 0 $sw $sh $wid
+    fi
+elif [ $# -eq 2 ]; then
+    if [ "$1" = "focus" ]; then
+        wid=$2
+        x=$(wattr x $wid)
+        y=$(wattr y $wid)
+        w=$(wattr w $wid)
+        h=$(wattr h $wid)
+        chwso -r $wid
+        wtf $wid
+        mapw -m $wid
+        wmp -a $((w / 2 + x)) $((h / 2 + y))
+    fi
+elif [ $# -eq 3 ]; then
+    if [ "$1" = "group" ]; then
+        terminal=st-256color
+        browser=vimb
+        dnum=$2
+        group=$3
+        for wid in $(lsw); do
+            class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+            type=o
+            [ "$class" = "$terminal" ] && type=t
+            [ "$class" = "$browser" ] && type=b
+            xprop -id $wid -f WMG 8s -set WMG $type
+        done
+        uwids=""
+        mwid=""
+        for wid in $(lsw -a); do
+            g=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
+            x=$(wattr x $wid)
+            [ $x -eq 0 ] && dn=0 || dn=1
+            if [ $dn -eq $dnum ]; then
+                uwids="$uwids $wid"
+                [ "$g" = "$group" ] && mwid="$wid"
+            fi
+        done
+        mapw -u $uwids
+        mapw -m $mwid
+    fi
+else
+    name=$(basename $0)
+    echo "usage: $name loop"
+    echo "       $name max"
+    echo "       $name focus <wid>"
+    echo "       $name group <NUM> <t|b|o>"
+fi

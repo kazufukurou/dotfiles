@@ -28,5 +28,5 @@ elif [ $n -gt 1 ]; then
     win=$(titles | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)
     win=$(ord $win)
     win=$((win-96))
-    wmf $(titles | sed -n "$win p" | cut -d^ -f1)
+    wmc focus $(titles | sed -n "$win p" | cut -d^ -f1)
 fi

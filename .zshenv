@@ -10,4 +10,3 @@ export CLASSPATH=/usr/share/java/bsh.jar
 export FZF_DEFAULT_OPTS='--color 16'
 export FZF_DEFAULT_COMMAND='pt --nocolor -l -g=""'
 export JavaScriptCoreUseJIT=0
-# export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
