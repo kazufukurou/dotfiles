@@ -8,16 +8,25 @@ if [ $# -eq 1 ]; then
                 4|7|19) wattr o $wid || wmc focus $wid ;;
             esac
         done
-    elif [ "$1" = "max" ]; then
+    elif [ "$1" = "resize" ]; then
         wid=$(pfw)
         x=$(wattr x $wid)
+        w=$(wattr w $wid)
+        h=$(wattr h $wid)
         r=$(xrandr | grep "*" | cut -d' ' -f4)
         w1=$(echo "$r" | cut -dx -f1 | sed "1q;d")
         [ $x -ge $w1 ] && dx=$w1 || dx=0
         [ $x -ge $w1 ] && dn=2 || dn=1
         sw=$(echo "$r" | cut -dx -f1 | sed "${dn}q;d")
         sh=$(echo "$r" | cut -dx -f2 | sed "${dn}q;d")
-        wtp $dx 0 $sw $sh $wid
+        [ $w -eq $sw ] && ww=$((sw / 2)) || ww=$sw
+        [ $w -eq $sw ] && ww=$((sw / 2)) || ww=$sw
+        wtp $dx 0 $ww $sh $wid
+        wmp -a $((ww / 2 + x)) $((h / 2))
+    elif [ "$1" = "switch" ]; then
+        wid=$(pfw)
+        [ $(wattr x $wid) -eq 0 ] && wmv 9999 0 $wid || wmv -9999 0 $wid
+        wmc focus $wid
     fi
 elif [ $# -eq 2 ]; then
     if [ "$1" = "focus" ]; then
@@ -61,7 +70,8 @@ elif [ $# -eq 3 ]; then
 else
     name=$(basename $0)
     echo "usage: $name loop"
-    echo "       $name max"
+    echo "       $name resize"
+    echo "       $name switch"
     echo "       $name focus <wid>"
     echo "       $name group <NUM> <t|b|o>"
 fi

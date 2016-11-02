@@ -7,22 +7,14 @@ super + Escape
 super + {_,ctrl + }{Tab}
     {dmenuwin, dmenurun}
 
-super + space
-    wmc max
-
-super + BackSpace
-    wid=$(pfw); \
-    [ $(wattr x $wid) -eq 0 ] && wmv 9999 0 $wid || wmv -9999 0 $wid; \
-    wmc focus $wid
+super + {space,BackSpace}
+    wmc {resize,switch}
 
 super + {_,shift + }{j,k,l}
     wmc group {0,1} {t,b,o}
 
 super + !button{1,3}
-    {wmv, wrs} -a %i %i $(pfw)
-
-super + s
-    wmf $(pfw)
+    {wmv,wrs} -a %i %i $(pfw)
 
 super + {_,shift + }Return
     {st,vimb}
@@ -32,11 +24,6 @@ super + z
 
 super + x
     pkill -USR1 -x sxhkd
-
-super + c
-    wid=$(pfw); \
-    [ $(wattr x $wid) -eq 0 ] && wmv 9999 0 $wid || wmv -9999 0 $wid; \
-    wtp 0 0 $(($(wattr w $wid) / 2)) $(wattr h $wid) $wid
 
 XF86AudioRaiseVolume
     amixer set Master playback 1+
