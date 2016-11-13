@@ -49,7 +49,7 @@ inoremap jk <esc>`^
 inoremap см <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
-nnoremap <leader>c :Copen<cr>
+nnoremap <leader>c :call asyncrun#quickfix_toggle(8)<cr>
 nnoremap <leader>dl :diffget 2<cr> :diffup<cr>
 nnoremap <leader>db :diffget 3<cr> :diffup<cr>
 nnoremap <leader>dr :diffget 4<cr> :diffup<cr>
@@ -62,7 +62,7 @@ nmap <leader>ii <Plug>JavaInsertImport<cr>
 nmap <leader>is <Plug>JavaSortImport<cr>
 nmap <leader>ip <Plug>JavaInsertPackage<cr>
 nnoremap <leader>l <c-]>
-nnoremap <leader>m :Make!<cr>
+nnoremap <leader>m :call MakeAndroid()<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
@@ -79,13 +79,19 @@ nnoremap <right> <C-w>l
 "save as root
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
+"build and install android project
+function! MakeAndroid()
+    let l:buildGradle = gradle#findGradleFile()
+    let l:line = system('sed -n "/productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
+    let l:flavor = substitute(l:line, '\n', '', '')
+    execute 'AsyncRun -program=make '.l:flavor
+endfunction
+
 "toggle tab vs space highlight mode
 highlight ExtraWhitespace ctermbg=0
 function! TabHighlightModeMatch()
-    if &expandtab
-        match ExtraWhitespace /\t\|\s\+$/
-    else
-        match ExtraWhitespace /^\t*\zs \+\|\s\+$/
+    if &expandtab | match ExtraWhitespace /\t\|\s\+$/
+    else | match ExtraWhitespace /^\t*\zs \+\|\s\+$/
     endif
 endfunction
 augroup tabHighlight
@@ -99,6 +105,11 @@ highlight OverLength ctermbg=1 ctermfg=15
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
+
+"vim-transliterate
+let g:transliterateMode = 'ruscyr'
+nmap <F8> <Plug>TransliterateApply
+vmap <F8> <Plug>TransliterateApply
 
 "java-imports
 let g:sortedPackage = []
@@ -177,13 +188,6 @@ let g:switch_custom_definitions =
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
-let g:skk_ascii_mode_string = 'aA'
-let g:skk_hira_mode_string = 'あ'
-let g:skk_kata_mode_string = 'ア'
-let g:skk_zenei_mode_string = 'Ａ'
-let g:skk_abbrev_mode_string = 'aあ'
-let g:skk_marker_white = '-'
-let g:skk_marker_black = '+'
 
 "status line
 set noshowmode
@@ -196,49 +200,49 @@ augroup END
 
 function! s:RefreshStatus()
     for nr in range(1, winnr('$'))
-        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+        call setwinvar(nr, '&statusline', '%!Status('.nr.')')
     endfor
 endfunction
 
 function! Status(winnum)
-    let active = a:winnum == winnr()
-    let stat = ''
-    if active
-        let stat .= '%1* %{Mode()} %0*' "mode
-        let stat .= '%3*%( %{fugitive#head()} %)%0*' "vcs branch
-    endif
-    let stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
-    if active && mode() ==# 'i' | let stat .= '%5*' | endif
-    let stat .= ' %<%f' "path to the file relative to current directory
-    let stat .= '%=' "separation point between left and right items
-    if active
-        let stat .= '%{SkkGetModeStr()} '
-        let stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
-        let stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
-        let stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
-        let stat .= '%2* %-6.(%l:%c%) %P %0*' "line, column, scroll position
-    endif
-    return stat
-endfunction
-
-function! Mode()
-    hi User5 ctermbg=4 ctermfg=15
-    let l:mode = mode()
-    if l:mode ==# 'i'
-        hi User2 ctermbg=15 ctermfg=0
-        hi User3 ctermbg=12 ctermfg=0
-        hi User4 ctermbg=13 ctermfg=0
-    else
-        hi User2 ctermbg=10 ctermfg=0
-        hi User3 ctermbg=14 ctermfg=0
-        hi User4 ctermbg=12 ctermfg=0
-    endif
-    if     l:mode ==# 'i' | redraw | hi User1 ctermbg=15 ctermfg=0 | return 'I'
-    elseif l:mode ==# 'n' | redraw | hi User1 ctermbg=10 ctermfg=0 | return 'N'
-    elseif l:mode ==# 'R' | redraw | hi User1 ctermbg=9  ctermfg=0 | return 'R'
-    elseif l:mode ==# 'v' | redraw | hi User1 ctermbg=13 ctermfg=0 | return 'V'
-    elseif l:mode ==# 'V' | redraw | hi User1 ctermbg=13 ctermfg=0 | return 'VL'
-    elseif l:mode ==# ''| redraw | hi User1 ctermbg=13 ctermfg=0 | return 'VB'
-    else | return l:mode
-    endif
+    if a:winnum == winnr()
+        redraw
+        let l:mode = mode()
+        let l:stat = '%1* ' "mode start
+        if l:mode ==# 'i'
+            hi User1 ctermbg=15 ctermfg=0
+            hi User2 ctermbg=15 ctermfg=0
+            hi User3 ctermbg=12 ctermfg=0
+            hi User4 ctermbg=13 ctermfg=0
+            let l:skk = substitute(SkkGetModeStr(),'\[SKK:\(.*\)\]','\1','')
+            if l:skk == ' ' | let l:stat .= 'I' | else | let l:stat .= l:skk | endif
+        else
+            if     l:mode ==# 'n'  | hi User1 ctermbg=10 ctermfg=0 | let l:stat .= 'N'
+            elseif l:mode ==# 'R'  | hi User1 ctermbg=9  ctermfg=0 | let l:stat .= 'R'
+            elseif l:mode ==# 'v'  | hi User1 ctermbg=13 ctermfg=0 | let l:stat .= 'V'
+            elseif l:mode ==# 'V'  | hi User1 ctermbg=13 ctermfg=0 | let l:stat .= 'VL'
+            elseif l:mode ==# '' | hi User1 ctermbg=13 ctermfg=0 | let l:stat .= 'VB'
+            endif
+            hi User2 ctermbg=10 ctermfg=0
+            hi User3 ctermbg=14 ctermfg=0
+            hi User4 ctermbg=12 ctermfg=0
+        endif
+        hi User5 ctermbg=4 ctermfg=15
+        hi User6 ctermbg=8 ctermfg=10
+        hi User7 ctermbg=8 ctermfg=9
+        let l:stat .= ' %0*' "mode end
+        let l:stat .= '%3*%( %{fugitive#head()} %)%0*' "vcs branch
+        let l:stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
+        if l:mode ==# 'i' | let l:stat .= '%5*' | endif "change bg in insert mode
+        let l:stat .= ' %<%f %=' "path to the file relative to current directory, end of left part
+        if     g:asyncrun_status == 'running' | let l:stat .= '%6*▶ %0*'
+        elseif g:asyncrun_status == 'success' | let l:stat .= '%6*● %0*'
+        elseif g:asyncrun_status == 'failure' | let l:stat .= '%7*■ %0*'
+        endif
+        let l:stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
+        let l:stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
+        let l:stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
+        let l:stat .= '%2* %-6.(%l:%c%) %P %0*' "line, column, scroll position
+        return l:stat
+    else | return ' %<%f' | endif
 endfunction
