@@ -15,4 +15,5 @@ xrandr --dpi 160
 xset b off
 xsetroot -cursor_name left_ptr
 wew | wmc loop
+# fbpanel &
 # exec openbox

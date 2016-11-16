@@ -1,5 +1,5 @@
 super + shift + Escape
-    killall wmc
+    killall wew
 
 super + Escape
     killw -p $(pfw)
