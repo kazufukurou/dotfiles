@@ -22,6 +22,7 @@ set status-sslinvalid-color-bg=#c96
 set status-sslinvalid-color-fg=#fff
 set status-sslinvalid-font=monospace normal 8
 set status-sslinvalid-font=monospace normal 8
+set editor-command=st -e vim %s
 nnoremap ; :
 nnoremap : ;
 autocmd LoadFinished * sh! xprop -id $VIMB_XID -f _NET_WM_NAME 8u -set _NET_WM_NAME "% $VIMB_TITLE"
