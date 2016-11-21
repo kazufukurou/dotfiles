@@ -57,6 +57,7 @@ nmap <leader>ii <Plug>JavaInsertImport<cr>
 nmap <leader>is <Plug>JavaSortImport<cr>
 nmap <leader>ip <Plug>JavaInsertPackage<cr>
 nnoremap <leader>l <c-]>
+nnoremap <leader>L :tnext<cr>
 nnoremap <leader>m :call MakeAndroid()<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>

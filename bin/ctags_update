@@ -112,14 +112,21 @@ $HOME/repos/RxJava/src/main
 $HOME/repos/kotlin/libraries/stdlib/src
 "
 
-ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="/(class|object|^\s{4}fun|^\s{4}open fun|^\s{4}val|^\s{4}var)\s([a-zA-Z0-9_]+)/\2/d,definition/" --langmap=Java:.java --languages=Java,Kotlin --exclude="*/internal" --verbose -f ~/.vim/tags $paths
+fileTags=$HOME/.vim/tags
+ktRegexCommon='/(fun\s[^()]*\.)([a-zA-Z0-9_]+)/\2/d,definition/'
+ktArgs="--langdef=Kotlin --langmap=Kotlin:.kt --regex-Kotlin="
+javaArgs="--langmap=Java:.java"
+commonArgs="--recurse --verbose --languages=Java,Kotlin"
 
-sed -i '/ private /d' ~/.vim/tags
-sed -i '/ volatile /d' ~/.vim/tags
-sed -i '/ native /d' ~/.vim/tags
-sed -i '/^m[A-Z]/d' ~/.vim/tags
+ctags $javaArgs $ktArgs$ktRegexCommon $commonArgs --exclude="*/internal" -f $fileTags $paths
+
+sed -i '/ private /d' $fileTags
+sed -i '/ volatile /d' $fileTags
+sed -i '/ native /d' $fileTags
+sed -i '/^m[A-Z]/d' $fileTags
 
 if [ -f ./gradlew ]; then
-    ctags --recurse --langdef=Kotlin --langmap=Kotlin:.kt --langmap=Java:.java --regex-Kotlin="/(class|object|^\s{4}fun|^\s{4}open fun|^\s{4}val|^\s{4}var)\s([a-zA-Z0-9_]+)/\2/d,definition/" --languages=Java,Kotlin --verbose */src/main/kotlin */src/main/java
+    ktRegex='/(class\s|object\s|^\s{4}fun\s|^\s{4}open\sfun\s|^\s{4}val\s|^\s{4}var\s)([a-zA-Z0-9_]+)/\2/d,definition/'
+    ctags $javaArgs $ktArgs$ktRegex $commonArgs */src/main/kotlin */src/main/java
 fi
 
