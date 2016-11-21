@@ -50,11 +50,6 @@ inoremap см <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>c :call asyncrun#quickfix_toggle(8)<cr>
-nnoremap <leader>dl :diffget 2<cr> :diffup<cr>
-nnoremap <leader>db :diffget 3<cr> :diffup<cr>
-nnoremap <leader>dr :diffget 4<cr> :diffup<cr>
-nnoremap <leader>dn ]c
-nnoremap <leader>dN [c
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>ic :UnusedImportsClear<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>

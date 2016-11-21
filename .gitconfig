@@ -24,9 +24,9 @@
 [difftool]
     prompt = false
 [merge]
-    tool = vimdiff
-[mergetool "vimdiff"]
-    cmd = vimdiff -f -d $MERGED -M $LOCAL $BASE $REMOTE -c \"wincmd J\" -c \"set modifiable\" -c \"set write\" -c \"syntax off\"
+    tool = fugitive
+[mergetool "fugitive"]
+    cmd = vim -f -c Gvdiff $MERGED
     trustExitCode = true
     keepBackup = false
     prompt = false
