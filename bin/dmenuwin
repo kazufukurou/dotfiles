@@ -22,7 +22,7 @@ titles() {
 
 n=$(titles | wc -l)
 if [ $n -eq 1 ]; then
-    wmf $(titles | cut -d^ -f1)
+    wmc focus $(titles | cut -d^ -f1)
 elif [ $n -gt 1 ]; then
     dmenu_opts="-l 26 -fn monospace:pixelsize=18 -nf #999999 -nb #666666 -sf #ffffff -sb #666666"
     win=$(titles | cut -d^ -f2 | dmenu $dmenu_opts | cut -d' ' -f1)

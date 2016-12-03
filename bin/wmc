@@ -46,26 +46,29 @@ elif [ $# -eq 3 ]; then
         browser=vimb
         dnum=$2
         group=$3
-        for wid in $(lsw); do
-            class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
-            type=o
-            [ "$class" = "$terminal" ] && type=t
-            [ "$class" = "$browser" ] && type=b
-            xprop -id $wid -f WMG 8s -set WMG $type
-        done
+        if [ "$group" != "a" ]; then
+            for wid in $(lsw); do
+                class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
+                type=o
+                [ "$class" = "$terminal" ] && type=t
+                [ "$class" = "$browser" ] && type=b
+                xprop -id $wid -f WMG 8s -set WMG $type
+            done
+        fi
         uwids=""
-        mwid=""
+        mwids=""
         for wid in $(lsw -a); do
             g=$(xprop -id $wid WMG | grep 'WMG(STRING) =' | cut -d\" -f2)
             x=$(wattr x $wid)
             [ $x -eq 0 ] && dn=0 || dn=1
             if [ $dn -eq $dnum ]; then
                 uwids="$uwids $wid"
-                [ "$g" = "$group" ] && mwid="$wid"
+                [ "$g" = "$group" ] && mwids="$wid"
+                [ "a" = "$group" ] && mwids="$mwids $wid"
             fi
         done
         mapw -u $uwids
-        mapw -m $mwid
+        mapw -m $mwids
     fi
 else
     name=$(basename $0)
