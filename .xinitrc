@@ -14,6 +14,12 @@ sxhkd &
 xrandr --dpi 160
 xset b off
 xsetroot -cursor_name left_ptr
-wew | wmc loop
-# fbpanel &
-# exec openbox
+
+if [ "$(hostname)" == "lenovo-arch" ]; then
+    [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
+    compton &
+    lxpanel &
+    exec pekwm
+else
+    wew | wmc loop
+fi
