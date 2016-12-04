@@ -19,7 +19,7 @@ if [ "$(hostname)" == "lenovo-arch" ]; then
     [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
     compton &
     lxpanel &
-    exec pekwm
+    exec echinus
 else
     wew | wmc loop
 fi
