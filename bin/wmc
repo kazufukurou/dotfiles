@@ -1,5 +1,9 @@
 #!/bin/sh
 
+pfw=$(pfw)
+xp=$(wattr x $pfw)
+wp=$(wattr w $pfw)
+hp=$(wattr h $pfw)
 if [ $# -eq 1 ]; then
     if [ "$1" = "loop" ]; then
         while IFS=: read ev wid; do
@@ -9,24 +13,20 @@ if [ $# -eq 1 ]; then
             esac
         done
     elif [ "$1" = "resize" ]; then
-        wid=$(pfw)
-        x=$(wattr x $wid)
-        w=$(wattr w $wid)
-        h=$(wattr h $wid)
         r=$(xrandr | grep "*" | cut -d' ' -f4)
-        w1=$(echo "$r" | cut -dx -f1 | sed "1q;d")
-        [ $x -ge $w1 ] && dx=$w1 || dx=0
-        [ $x -ge $w1 ] && dn=2 || dn=1
-        sw=$(echo "$r" | cut -dx -f1 | sed "${dn}q;d")
-        sh=$(echo "$r" | cut -dx -f2 | sed "${dn}q;d")
-        [ $w -eq $sw ] && ww=$((sw / 2)) || ww=$sw
-        [ $w -eq $sw ] && ww=$((sw / 2)) || ww=$sw
-        wtp $dx 0 $ww $sh $wid
-        wmp -a $((ww / 2 + x)) $((h / 2))
+        r1=$(echo $r | sed "1q;d")
+        r2=$(echo $r | sed "2q;d")
+        sw1=${r1%x*}
+        sw2=${r2%x*}
+        sh1=${r1#*x}
+        sh2=${r2#*x}
+        [ $xp -ge $sw1 ] && dn=2 dx=$w1 sw=$sw2 sh=$sh2 || dn=1 dx=0 sw=$sw1 sh=$sh1
+        [ $wp -eq $sw ] && ww=$((sw / 2)) || ww=$sw
+        wtp $dx 0 $ww $sh $pfw
+        wmp -a $((ww / 2 + xp)) $((hp / 2))
     elif [ "$1" = "switch" ]; then
-        wid=$(pfw)
-        [ $(wattr x $wid) -eq 0 ] && wmv 9999 0 $wid || wmv -9999 0 $wid
-        wmc focus $wid
+        [ $xp -eq 0 ] && wmv 9999 0 $pfw || wmv -9999 0 $pfw
+        wmc focus $pfw
     fi
 elif [ $# -eq 2 ]; then
     if [ "$1" = "focus" ]; then
