@@ -1,0 +1,11 @@
+#!/bin/sh
+
+r="wwwxhhh"
+echo ${r%x*} ${r#*x}
+
+x="b"
+[ "$x" = "a" ] && a="a" b="b" c="c" || a="A" b="B" c="C"
+echo $a $b $c
+[ "$x" = "a" ] && a="a" b="b" c="c" || a="A" b="B" c="C"
+x=1
+[ "$x" -ge 1 -a "$x" -le 10 ] && echo "A" || echo "B"

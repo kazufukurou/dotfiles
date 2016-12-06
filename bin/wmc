@@ -38,20 +38,20 @@ elif [ $# -eq 2 ]; then
         chwso -r $wid
         wtf $wid
         mapw -m $wid
-        wmp -a $((w / 2 + x)) $((h / 2 + y))
+        mp=$(wmp)
+        mx=${mp% *}
+        [ "$mx" -lt "$x" -o "$mx" -gt "$((x + w))" ] && wmp -a $((w / 2 + x)) $((h / 2 + y))
     fi
 elif [ $# -eq 3 ]; then
     if [ "$1" = "group" ]; then
-        terminal=st-256color
-        browser=vimb
         dnum=$2
         group=$3
         if [ "$group" != "a" ]; then
             for wid in $(lsw); do
                 class=$(xprop -id $wid WM_CLASS | cut -d\" -f2)
                 type=o
-                [ "$class" = "$terminal" ] && type=t
-                [ "$class" = "$browser" ] && type=b
+                [ "$class" = "st-256color" ] && type=t
+                [ "$class" = "vimb" ] && type=b
                 xprop -id $wid -f WMG 8s -set WMG $type
             done
         fi

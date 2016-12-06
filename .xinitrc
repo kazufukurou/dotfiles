@@ -21,5 +21,6 @@ if [ "$(hostname)" == "lenovo-arch" ]; then
     lxpanel &
     exec echinus
 else
+    xcompmgr -cCfF -r6 -l-8 -t-6 -o.5 -D5 &
     wew | wmc loop
 fi
