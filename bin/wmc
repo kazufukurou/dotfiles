@@ -13,15 +13,15 @@ if [ $# -eq 1 ]; then
             esac
         done
     elif [ "$1" = "resize" ]; then
-        r=$(xrandr | grep "*" | cut -d' ' -f4)
-        r1=$(echo $r | sed "1q;d")
-        r2=$(echo $r | sed "2q;d")
+        r1=$(xrandr | grep "*" | cut -d' ' -f4 | sed "1q;d")
+        r2=$(xrandr | grep "*" | cut -d' ' -f4 | sed "2q;d")
         sw1=${r1%x*}
-        sw2=${r2%x*}
         sh1=${r1#*x}
+        sw2=${r2%x*}
         sh2=${r2#*x}
-        [ $xp -ge $sw1 ] && dn=2 dx=$w1 sw=$sw2 sh=$sh2 || dn=1 dx=0 sw=$sw1 sh=$sh1
+        [ $xp -ge $sw1 ] && dn=2 dx=$sw1 sw=$sw2 sh=$sh2 || dn=1 dx=0 sw=$sw1 sh=$sh1
         [ $wp -eq $sw ] && ww=$((sw / 2)) || ww=$sw
+        echo -$dx-$ww-$sh-$pfw
         wtp $dx 0 $ww $sh $pfw
         wmp -a $((ww / 2 + xp)) $((hp / 2))
     elif [ "$1" = "switch" ]; then
