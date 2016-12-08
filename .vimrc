@@ -164,6 +164,7 @@ let g:switch_custom_definitions =
     \   ['horizontal', 'vertical'],
     \   ['CENTER_VERTICAL', 'CENTER_HORIZONTAL'],
     \   ['center_vertical', 'center_horizontal'],
+    \   ['+', '-', '*', '/'],
     \   ['!=', '=='],
     \   ['>', '<'],
     \   ['>=', '<='],
