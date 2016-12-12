@@ -102,10 +102,9 @@ highlight OverLength ctermbg=1 ctermfg=15
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
-"vim-transliterate
-let g:transliterateMode = 'ruscyr'
-nmap <F8> <Plug>TransliterateApply
-vmap <F8> <Plug>TransliterateApply
+"translit
+inoremap <C-u> <C-o>:ToggleTranslit<cr><C-o>:DelimitMateSwitch<cr>
+nnoremap <C-u> :ToggleTranslit<cr>:DelimitMateSwitch<cr>
 
 "java-imports
 let g:sortedPackage = []

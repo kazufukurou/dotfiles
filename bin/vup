@@ -21,5 +21,5 @@ git clone https://github.com/jvenant/vim-java-imports
 git clone https://github.com/tyru/skk.vim
 git clone https://github.com/junegunn/fzf.git
 git clone https://github.com/skywind3000/asyncrun.vim
-git clone https://github.com/vim-scripts/transliterate
+git clone https://github.com/einars/translit.vim
 git clone https://github.com/kazufukurou/vim-android-sensible
