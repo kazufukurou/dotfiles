@@ -103,6 +103,7 @@ highlight OverLength ctermbg=1 ctermfg=15
 let g:TypesFileIncludeLocals = 1
 
 "translit
+let g:translit_toggle_keymap = ''
 inoremap <C-t> <C-o>:ToggleTranslit<cr><C-o>:DelimitMateSwitch<cr>
 nnoremap <C-t> :ToggleTranslit<cr>:DelimitMateSwitch<cr>
 
