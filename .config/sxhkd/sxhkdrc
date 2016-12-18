@@ -7,6 +7,9 @@ super + shift + Escape
 super + Escape
     killw -p $(pfw)
 
+super + ctrl + Tab
+    dmenurun
+
 super + {_,ctrl + }{Tab}
     {dmenuwin, dmenurun}
 

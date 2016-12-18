@@ -1,0 +1,82 @@
+#! /usr/bin/python2
+
+from Xlib.display import Display
+from Xlib import X, XK, protocol, Xatom
+
+WM_NAME = 'tinywm'
+dpy = Display()
+
+screen_width = dpy.screen().width_in_pixels
+screen_height = dpy.screen().height_in_pixels
+
+root = dpy.screen().root
+support_window = None
+windows = []
+window_stack = []
+
+root.change_attributes(event_mask=X.SubstructureNotifyMask)
+root.grab_key(dpy.keysym_to_keycode(XK.string_to_keysym("F1")), X.Mod1Mask, 1, X.GrabModeAsync, X.GrabModeAsync)
+
+ATOM_ACTIVE_WINDOW = dpy.get_atom('_NET_ACTIVE_WINDOW')
+
+def activate(window):
+    global window_stack
+    window.raise_window()
+    window.set_input_focus(revert_to=X.RevertToNone, time=X.CurrentTime)
+    root.change_property(dpy.get_atom('_NET_ACTIVE_WINDOW'), Xatom.WINDOW, 32, [window.id] if window else [X.NONE],)
+    try:
+        index = window_stack.index(window)
+    except ValueError:
+        pass
+    else:
+        window_stack = (window_stack[index + 1:] + window_stack[:index + 1])
+
+def _update_clients():
+    root.change_property(dpy.get_atom('_NET_CLIENT_LIST'), Xatom.WINDOW, 32, [window.id for window in windows],)
+    root.change_property(dpy.get_atom('_NET_ACTIVE_WINDOW'), Xatom.WINDOW, 32, [window_stack[-1].id] if window_stack else [X.NONE],)
+
+def on_map_notify(ev):
+    ev.window.configure(x=0, y=0, width=screen_width, height=screen_height)
+    windows.append(ev.window)
+    window_stack.append(ev.window)
+    activate(ev.window)
+
+def on_unmap_notify(ev):
+    try:
+        windows.remove(ev.window)
+        window_stack.remove(ev.window)
+    except ValueError:
+        pass
+    if window_stack:
+        activate(window_stack[-1])
+
+def on_key_press(ev):
+    if ev.child == X.NONE:
+        return
+    if window_stack:
+        activate(window_stack[0])
+
+def on_client_message(ev):
+    if ev.client_type == ATOM_ACTIVE_WINDOW:
+        activate(ev.window)
+
+attributes = ['_NET_SUPPORTED', '_NET_ACTIVE_WINDOW', '_NET_CLIENT_LIST',]
+root.change_property(dpy.get_atom('_NET_SUPPORTED'), Xatom.ATOM, 32, [dpy.get_atom(x) for x in attributes],)
+support_window = root.create_window(0, 0, 10, 10, 0, dpy.screen().root_depth)
+
+for window in [root, support_window]:
+    window.change_property(dpy.get_atom('_NET_SUPPORTING_WM_CHECK'), Xatom.WINDOW, 32, [support_window.id],)
+support_window.change_property(dpy.get_atom('_NET_WM_NAME'), Xatom.STRING, 8, WM_NAME,)
+
+while 1:
+    ev = root.display.next_event()
+    if ev.type == X.MapNotify:
+        on_map_notify(ev)
+    elif ev.type == X.UnmapNotify:
+        on_unmap_notify(ev)
+    elif ev.type == X.KeyPress:
+        on_key_press(ev)
+    elif ev.type == X.ClientMessage:
+        on_client_message(ev)
+
+    _update_clients()
