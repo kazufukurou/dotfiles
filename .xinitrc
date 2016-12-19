@@ -16,5 +16,4 @@ if [ "$(hostname)" = "lenovo-arch" ]; then
 else
     xcompmgr -cCfF -r6 -l-8 -t-6 -o.5 -D5 &
     exec python ~/bin/wm
-    # exec swm
 fi
