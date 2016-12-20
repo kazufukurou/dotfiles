@@ -1,3 +1,0 @@
-#!/bin/sh
-
-setxkbmap -model pc104 -layout us,ru -variant $1, -option grp:alt_space_toggle,ctrl:nocaps

@@ -2,25 +2,13 @@ super + q
     pkill -USR1 -x sxhkd
 
 super + shift + Escape
-    killall wew
+    pkill -x xinit
 
 super + Escape
     killw -p $(pfw)
 
-super + ctrl + Tab
-    dmenurun
-
 super + {_,ctrl + }{Tab}
     {dmenuwin, dmenurun}
-
-super + {space,BackSpace}
-    wmc {resize,switch}
-
-super + {_,shift + }{h,t,n,c}
-    wmc group {0,1} {t,b,o,a}
-
-super + !button{1,3}
-    {wmv,wrs} -a %i %i $(pfw)
 
 super + {_,shift + }Return
     {st,vimb}
