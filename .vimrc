@@ -95,9 +95,9 @@ augroup tabHighlight
     autocmd BufEnter * call TabHighlightModeMatch()
 augroup END
 
-"highlight 100th column
+"highlight 120th column
 highlight OverLength ctermbg=1 ctermfg=15
-2match OverLength /\%101v/
+2match OverLength /\%121v/
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1

@@ -1,14 +1,8 @@
 super + q
     pkill -USR1 -x sxhkd
 
-super + shift + Escape
-    pkill -x xinit
-
-super + Escape
-    killw -p $(pfw)
-
-super + {_,ctrl + }{Tab}
-    {dmenuwin, dmenurun}
+super + semicolon
+    dmenurun
 
 super + {_,shift + }Return
     {st,vimb}
