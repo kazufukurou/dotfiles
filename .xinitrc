@@ -13,5 +13,5 @@ if [ "$(hostname)" = "lenovo-arch" ]; then
     lxpanel &
     exec echinus
 else
-    exec python ~/repos/0wm/0wm
+    exec ~/repos/0wm/0wm
 fi
