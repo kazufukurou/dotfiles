@@ -8,7 +8,7 @@ xrandr --dpi 160
 xset b off
 xsetroot -cursor_name left_ptr
 sxhkd &
-compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 &
+compton -cCGfG -r6 -l-8 -t-6 -o.5 -i.7 -D5 &
 if [ "$(hostname)" = "lenovo-arch" ]; then
     lxpanel &
     exec echinus
