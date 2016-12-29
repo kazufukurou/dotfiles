@@ -8,10 +8,10 @@ xrandr --dpi 160
 xset b off
 xsetroot -cursor_name left_ptr
 sxhkd &
-compton -cCGfG -r6 -l-8 -t-6 -o.5 -i.7 -D5 &
+compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 --inactive-dim .3 &
 if [ "$(hostname)" = "lenovo-arch" ]; then
     lxpanel &
     exec echinus
 else
-    exec ~/repos/0wm/0wm
+    exec ~/repos/tawm/tawm h t m w
 fi
