@@ -13,5 +13,5 @@ if [ "$(hostname)" = "lenovo-arch" ]; then
     lxpanel &
     exec echinus
 else
-    exec ~/repos/tawm/tawm h t m w
+    exec ~/repos/tawm/tawm 4 h t m w
 fi
