@@ -225,16 +225,17 @@ function! Status(winnum)
             hi User4 ctermbg=12 ctermfg=0
         endif
         hi User5 ctermbg=4 ctermfg=15
-        hi User6 ctermbg=8 ctermfg=10
-        hi User7 ctermbg=8 ctermfg=9
+        hi User6 ctermbg=8 ctermfg=14
+        hi User7 ctermbg=8 ctermfg=10
+        hi User8 ctermbg=8 ctermfg=9
         let l:stat .= ' %0*' "mode end
         let l:stat .= '%3*%( %{fugitive#head()} %)%0*' "vcs branch
         let l:stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
         if l:mode ==# 'i' | let l:stat .= '%5*' | endif "change bg in insert mode
         let l:stat .= ' %<%f %=' "path to the file relative to current directory, end of left part
-        if     g:asyncrun_status == 'running' | let l:stat .= '%6*▶ %0*'
-        elseif g:asyncrun_status == 'success' | let l:stat .= '%6*● %0*'
-        elseif g:asyncrun_status == 'failure' | let l:stat .= '%7*■ %0*'
+        if     g:asyncrun_status == 'running' | let l:stat .= '%6* ▶ %0*'
+        elseif g:asyncrun_status == 'success' | let l:stat .= '%7* ● %0*'
+        elseif g:asyncrun_status == 'failure' | let l:stat .= '%8* ■ %0*'
         endif
         let l:stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
         let l:stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
