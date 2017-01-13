@@ -25,8 +25,9 @@
     prompt = false
 [merge]
     tool = fugitive
+[mergetool]
+    keepBackup = false
 [mergetool "fugitive"]
     cmd = vim -f -c Gvdiff $MERGED
     trustExitCode = true
-    keepBackup = false
     prompt = false
