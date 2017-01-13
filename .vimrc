@@ -63,7 +63,7 @@ nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
 nnoremap <leader>re :vsplit $MYVIMRC<cr>
 nnoremap <leader>rs :source $MYVIMRC<cr>
-nnoremap <leader>s :w<cr>
+nnoremap <leader>s :wa<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>f :FZF<cr>
 nnoremap <leader>w :set wrap!<cr>
