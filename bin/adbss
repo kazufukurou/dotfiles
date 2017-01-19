@@ -1,3 +1,8 @@
 #!/bin/sh
 
-adb shell screencap -p | sed 's/\r$//' > $(date +%s).png
+file=/sdcard/temp.png
+adb root
+adb shell screencap -p $file
+sleep 2
+adb pull $file $(date +%s).png
+adb shell rm $file
