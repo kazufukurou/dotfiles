@@ -30,6 +30,7 @@ set wildmode=longest,full "don't show all completions
 set wildignore+=*.class
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif
 set wildignore+=*.apk,*.zip
+set wildignore+=mapping*.txt
 set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
 
