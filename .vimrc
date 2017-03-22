@@ -80,7 +80,7 @@ command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 "build and install android project
 function! MakeAndroid()
     let l:buildGradle = gradle#findGradleFile()
-    let l:line = system('sed -n "/productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
+    let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
     let l:flavor = substitute(l:line, '\n', '', '')
     execute 'AsyncRun -program=make '.l:flavor
 endfunction

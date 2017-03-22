@@ -28,6 +28,6 @@
 [mergetool]
     keepBackup = false
 [mergetool "fugitive"]
-    cmd = vim -f -c Gvdiff $MERGED
+    cmd = vim -f -c Gdiff $MERGED
     trustExitCode = true
     prompt = false
