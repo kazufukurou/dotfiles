@@ -187,6 +187,7 @@ let g:switch_custom_definitions =
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
+let g:skk_auto_save_jisyo = -1
 
 "status line
 set noshowmode
