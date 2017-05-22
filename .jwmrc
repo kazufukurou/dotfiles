@@ -38,36 +38,26 @@
     </RootMenu>
 
     <!-- Options for program groups. -->
-    <Group>
-        <Option>tiled</Option>
-        <Option>aerosnap</Option>
-    </Group>
-    <Group>
-        <Class>Pidgin</Class>
-        <Option>sticky</Option>
-    </Group>
-    <Group>
-        <Name>xterm</Name>
-        <Option>vmax</Option>
-    </Group>
+    <!-- <Group> -->
+    <!--     <Name>urxvt</Name> -->
+    <!--     <Name>st</Name> -->
+    <!--     <Option>fullscreen</Option> -->
+    <!-- </Group> -->
     <Group>
         <Name>xclock</Name>
         <Option>drag</Option>
         <Option>notitle</Option>
     </Group>
 
-    <!-- Tray at the bottom. -->
-    <Tray x="0" y="-1" autohide="off">
-        <Spacer width="2"/>
+    <Tray x="0" y="0" layout="vertical">
         <TrayButton icon="computer">root:1</TrayButton>
-        <Spacer width="2"/>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
-        <Spacer width="2"/>
+        <Spacer height="32"/>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256"/>
+        <TaskList maxwidth="256" labeled="false"/>
+        <Spacer/>
         <Dock/>
-        <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock>
-        <Spacer width="2"/>
+        <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
     </Tray>
 
     <!-- Visual Styles -->
@@ -87,7 +77,7 @@
             <Opacity>1.0</Opacity>
         </Active>
     </WindowStyle>
-    <TrayStyle group="true" list="all">
+    <TrayStyle group="false" list="all" labeled="false">
         <Font>Sans-8</Font>
         <Background>#333333</Background>
         <Foreground>#FFFFFF</Foreground>
@@ -162,25 +152,10 @@
     <ResizeMode>opaque</ResizeMode>
 
     <!-- Key bindings -->
-    <Key key="Up">up</Key>
-    <Key key="Down">down</Key>
-    <Key key="Right">right</Key>
-    <Key key="Left">left</Key>
-    <Key key="h">left</Key>
-    <Key key="j">down</Key>
-    <Key key="k">up</Key>
-    <Key key="l">right</Key>
-    <Key key="Return">select</Key>
-    <Key key="Escape">escape</Key>
-
-    <Key mask="A" key="Tab">nextstacked</Key>
-    <Key mask="A" key="F4">close</Key>
-    <Key mask="A" key="#">desktop#</Key>
-    <Key mask="A" key="F1">root:1</Key>
-    <Key mask="A" key="F2">window</Key>
-    <Key mask="A" key="F10">maximize</Key>
-    <Key mask="A" key="Right">rdesktop</Key>
-    <Key mask="A" key="Left">ldesktop</Key>
-    <Key mask="A" key="Up">udesktop</Key>
-    <Key mask="A" key="Down">ddesktop</Key>
+    <Key mask="4" key="Escape">close</Key>
+    <Key mask="4" key="h">prev</Key>
+    <Key mask="4" key="t">next</Key>
+    <Key mask="4" key="m">maximize</Key>
+    <Key mask="4" key="w">fullscreen</Key>
+    <!-- <Key mask="4" key="m">maximize</Key> -->
 </JWM>

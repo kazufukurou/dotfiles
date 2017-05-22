@@ -7,10 +7,10 @@ xrandr --output $m1 --auto --output $m2 --auto --right-of $m1
 xrandr --dpi 160
 xset b off
 xsetroot -cursor_name left_ptr
+setxkbmap -model pc104 -layout us,ru, -option grp:alt_space_toggle
 sxhkd &
 compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 --inactive-dim .3 &
 if [ "$(hostname)" = "lenovo-thinkpad-void" ]; then
-    setxkbmap -model pc104 -layout us,ru, -option grp:alt_space_toggle
     exec jwm
 else
     exec ~/repos/tawm/tawm 4 h t m w
