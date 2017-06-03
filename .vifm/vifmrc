@@ -136,7 +136,7 @@ command vgrep nvim "+grep %a"
 " program.
 
 " Pdf
-filetype *.pdf zathura %f,apvlv %f,xpdf %f,mupdf %f
+filetype *.pdf mupdf %f,zathura %f,apvlv %f,xpdf %f
 fileview *.pdf pdftotext -nopgbrk %c -
 
 " PostScript
