@@ -172,6 +172,7 @@ let g:switch_custom_definitions =
     \   ['>=', '<='],
     \   ['var', 'val'],
     \   ['if', 'when'],
+    \   ['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'],
     \   ['boolean', 'int', 'long', 'float', 'double'],
     \   ['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'],
     \   ['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'],
