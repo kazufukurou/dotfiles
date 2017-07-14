@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <JWM>
     <!-- The root menu. -->
-    <RootMenu onroot="12">
+    <RootMenu onroot="12" height="32">
         <Program icon="terminal.png" label="Terminal">urxvt</Program>
         <Program icon="folder-blue.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
@@ -54,18 +54,22 @@
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
         <Spacer height="32"/>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256" labeled="false"/>
+        <TaskList maxwidth="256" labeled="false" height="48"/>
         <Spacer/>
         <Dock/>
+        <Clock format="%b"/>
+        <Clock format="%e"/>
+        <Clock format="%a"/>
+        <Clock format="%R"/>
         <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
     </Tray>
 
     <!-- Visual Styles -->
     <WindowStyle>
         <Font>Sans-8</Font>
-        <Width>4</Width>
+        <Width>1</Width>
         <Height>32</Height>
-        <Corner>3</Corner>
+        <Corner>0</Corner>
         <Foreground>#FFFFFF</Foreground>
         <Background>#555555</Background>
         <Outline>#555555</Outline>
@@ -115,11 +119,11 @@
          IconPath can be listed multiple times to allow searching
          for icons in multiple paths.
       -->
-    <IconPath>/usr/share/icons/Paper/32x32/apps</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/actions</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/categories</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/places</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/devices</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/apps</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/actions</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/categories</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/places</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/devices</IconPath>
     <IconPath>/usr/local/share/jwm</IconPath>
 
     <!-- Virtual Desktops -->
