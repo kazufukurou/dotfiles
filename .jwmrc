@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <JWM>
     <!-- The root menu. -->
-    <RootMenu onroot="12" height="32">
+    <RootMenu onroot="12" height="48">
         <Program icon="terminal.png" label="Terminal">urxvt</Program>
         <Program icon="folder-blue.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
@@ -25,6 +25,7 @@
         </Menu>
         <Menu icon="applications-utilities.png" label="Utilities">
             <Program icon="lxappearance.png" label="Appearance">lxappearance</Program>
+            <Program icon="pavucontrol.png" label="Volume">pavucontrol</Program>
         </Menu>
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
@@ -49,16 +50,14 @@
         <Option>notitle</Option>
     </Group>
 
-    <Tray x="0" y="0" layout="vertical">
+    <Tray x="0" y="0" layout="vertical" width="64">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
-        <Spacer height="32"/>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256" labeled="false" height="48"/>
+        <TaskList maxwidth="256" labeled="false" height="64"/>
         <Spacer/>
         <Dock/>
-        <Clock format="%b"/>
-        <Clock format="%e"/>
+        <Clock format="%b %e"/>
         <Clock format="%a"/>
         <Clock format="%R"/>
         <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
@@ -88,6 +87,9 @@
         <Outline>#000000</Outline>
         <Opacity>1.0</Opacity>
     </TrayStyle>
+    <ClockStyle>
+        <Font>Sans-8</Font>
+    </ClockStyle>
     <PagerStyle>
         <Outline>#000000</Outline>
         <Foreground>#555555</Foreground>
