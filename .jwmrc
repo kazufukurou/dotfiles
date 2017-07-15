@@ -8,6 +8,7 @@
             <Program icon="audacity.png" label="Audacity">audacity</Program>
             <Program icon="music.png" label="Audacious">audacious</Program>
             <Program icon="calc.png" label="Calculator">mate-calc</Program>
+            <Program icon="chromium.png" label="Chromium">chromium</Program>
             <Program icon="firefox.png" label="Firefox">firefox</Program>
             <Program icon="libreoffice.png" label="LibreOffice">libreoffice</Program>
             <Program icon="text-editor.png" label="Scite">scite</Program>
