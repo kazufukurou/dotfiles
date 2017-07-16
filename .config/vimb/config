@@ -1,4 +1,4 @@
-set download-path=~/downloads/
+set download-path=~/Downloads/
 set strict-ssl=on
 set hintkeys=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 set completion-font=monospace normal 8
