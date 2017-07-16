@@ -2,8 +2,8 @@
 <JWM>
     <!-- The root menu. -->
     <RootMenu onroot="12" height="48">
-        <Program icon="terminal.png" label="Terminal">urxvt</Program>
-        <Program icon="folder-blue.png" label="Files">pcmanfm</Program>
+        <Program icon="terminal.png" label="Terminal">urxvt -name terminal</Program>
+        <Program icon="folder.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
             <Program icon="audacity.png" label="Audacity">audacity</Program>
             <Program icon="music.png" label="Audacious">audacious</Program>
@@ -25,8 +25,8 @@
             <Program icon="xonotic.png" label="Xonotic">xonotic-glx</Program>
         </Menu>
         <Menu icon="applications-utilities.png" label="Utilities">
-            <Program icon="lxappearance.png" label="Appearance">lxappearance</Program>
-            <Program icon="pavucontrol.png" label="Volume">pavucontrol</Program>
+            <Program icon="preferences-theme.png" label="Appearance">lxappearance</Program>
+            <Program icon="sound.png" label="Volume">pavucontrol</Program>
         </Menu>
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
@@ -58,6 +58,7 @@
         <TaskList maxwidth="256" labeled="false" height="64"/>
         <Spacer/>
         <Dock/>
+        <Swallow name="batt">/home/void/bin/batt</Swallow>
         <Clock format="%b %e"/>
         <Clock format="%a"/>
         <Clock format="%R"/>
@@ -118,6 +119,8 @@
         <Background>#999999</Background>
     </PopupStyle>
 
+    <StartupCommand>pcmanfm --desktop</StartupCommand>
+
     <!-- Path where icons can be found.
          IconPath can be listed multiple times to allow searching
          for icons in multiple paths.
@@ -136,7 +139,7 @@
               contained within a Desktop tag to give a specific background
               for that desktop.
          -->
-        <Background type="tile">/home/void/wallpaper.png</Background>
+        <!-- <Background type="tile">/home/void/wallpaper.png</Background> -->
         <!-- <Background type="solid">#111111</Background> -->
     </Desktops>
 

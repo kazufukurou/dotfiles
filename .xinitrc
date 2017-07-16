@@ -10,7 +10,9 @@ xsetroot -cursor_name left_ptr
 setxkbmap -model pc104 -layout us,ru, -option grp:alt_space_toggle
 sxhkd &
 # if [ "$(hostname)" = "lenovo-thinkpad" ]; then
+    udiskie &
     compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 &
+    # exec dbus-launch ck-launch-session jwm
     exec dbus-launch jwm
 # else
 #     compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 --inactive-dim .3 &
