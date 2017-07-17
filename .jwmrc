@@ -10,6 +10,7 @@
             <Program icon="calc.png" label="Calculator">mate-calc</Program>
             <Program icon="chromium.png" label="Chromium">chromium</Program>
             <Program icon="firefox.png" label="Firefox">firefox</Program>
+            <Program icon="idea.png" label="IntelliJ IDEA">idea</Program>
             <Program icon="libreoffice.png" label="LibreOffice">libreoffice</Program>
             <Program icon="text-editor.png" label="Scite">scite</Program>
         </Menu>
