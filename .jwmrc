@@ -12,6 +12,7 @@
             <Program icon="idea.png" label="IntelliJ IDEA">idea</Program>
             <Program icon="libreoffice.png" label="LibreOffice">libreoffice</Program>
             <Program icon="text-editor.png" label="Scite">scite</Program>
+            <Program icon="transmission.png" label="Transmission">transmission-gtk</Program>
         </Menu>
         <Menu icon="applications-graphics.png" label="Graphics">
             <Program icon="darktable.png" label="Darktable">darktable</Program>
