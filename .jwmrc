@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <JWM>
-    <!-- The root menu. -->
-    <RootMenu onroot="12" height="48">
+    <RootMenu onroot="12" height="52">
         <Program icon="terminal.png" label="Terminal">urxvt -name terminal</Program>
         <Program icon="folder.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
@@ -51,15 +50,14 @@
         <Option>notitle</Option>
     </Group>
 
-    <Tray x="0" y="0" layout="vertical" width="64">
+    <Tray x="0" y="0" layout="vertical" width="60">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256" labeled="false" height="64"/>
+        <TaskList maxwidth="256" labeled="false" height="60"/>
         <Spacer/>
         <Dock/>
-        <Swallow name="batt">/home/void/bin/batt</Swallow>
-        <Clock format="%b %e"/>
+        <Clock format="%b%e"/>
         <Clock format="%a"/>
         <Clock format="%R"/>
         <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
@@ -68,8 +66,8 @@
     <!-- Visual Styles -->
     <WindowStyle>
         <Font>Sans-8</Font>
-        <Width>1</Width>
-        <Height>32</Height>
+        <Width>4</Width>
+        <Height>30</Height>
         <Corner>0</Corner>
         <Foreground>#FFFFFF</Foreground>
         <Background>#555555</Background>
