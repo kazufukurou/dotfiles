@@ -56,7 +56,7 @@
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256" labeled="false" height="60"/>
+        <TaskList maxwidth="256" labeled="false" height="58"/>
         <Spacer/>
         <Dock/>
         <Clock format="%b%e"/>
