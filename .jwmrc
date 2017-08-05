@@ -1,16 +1,18 @@
 <?xml version="1.0"?>
 <JWM>
-    <!-- The root menu. -->
-    <RootMenu onroot="12">
-        <Program icon="terminal.png" label="Terminal">urxvt</Program>
-        <Program icon="folder-blue.png" label="Files">pcmanfm</Program>
+    <RootMenu onroot="12" height="52">
+        <Program icon="terminal.png" label="Terminal">urxvt -name terminal</Program>
+        <Program icon="folder.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
             <Program icon="audacity.png" label="Audacity">audacity</Program>
             <Program icon="music.png" label="Audacious">audacious</Program>
             <Program icon="calc.png" label="Calculator">mate-calc</Program>
+            <Program icon="chromium.png" label="Chromium">chromium</Program>
             <Program icon="firefox.png" label="Firefox">firefox</Program>
+            <Program icon="idea.png" label="IntelliJ IDEA">idea</Program>
             <Program icon="libreoffice.png" label="LibreOffice">libreoffice</Program>
             <Program icon="text-editor.png" label="Scite">scite</Program>
+            <Program icon="transmission.png" label="Transmission">transmission-gtk</Program>
         </Menu>
         <Menu icon="applications-graphics.png" label="Graphics">
             <Program icon="darktable.png" label="Darktable">darktable</Program>
@@ -24,7 +26,8 @@
             <Program icon="xonotic.png" label="Xonotic">xonotic-glx</Program>
         </Menu>
         <Menu icon="applications-utilities.png" label="Utilities">
-            <Program icon="lxappearance.png" label="Appearance">lxappearance</Program>
+            <Program icon="preferences-theme.png" label="Appearance">lxappearance</Program>
+            <Program icon="sound.png" label="Volume">pavucontrol</Program>
         </Menu>
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
@@ -49,14 +52,16 @@
         <Option>notitle</Option>
     </Group>
 
-    <Tray x="0" y="0" layout="vertical">
+    <Tray x="0" y="0" layout="vertical" width="60">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
-        <Spacer height="32"/>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256" labeled="false"/>
+        <TaskList maxwidth="256" labeled="false" height="60"/>
         <Spacer/>
         <Dock/>
+        <Clock format="%b%e"/>
+        <Clock format="%a"/>
+        <Clock format="%R"/>
         <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
     </Tray>
 
@@ -64,8 +69,8 @@
     <WindowStyle>
         <Font>Sans-8</Font>
         <Width>4</Width>
-        <Height>32</Height>
-        <Corner>3</Corner>
+        <Height>30</Height>
+        <Corner>0</Corner>
         <Foreground>#FFFFFF</Foreground>
         <Background>#555555</Background>
         <Outline>#555555</Outline>
@@ -84,6 +89,9 @@
         <Outline>#000000</Outline>
         <Opacity>1.0</Opacity>
     </TrayStyle>
+    <ClockStyle>
+        <Font>Sans-8</Font>
+    </ClockStyle>
     <PagerStyle>
         <Outline>#000000</Outline>
         <Foreground>#555555</Foreground>
@@ -111,15 +119,17 @@
         <Background>#999999</Background>
     </PopupStyle>
 
+    <StartupCommand>pcmanfm --desktop</StartupCommand>
+
     <!-- Path where icons can be found.
          IconPath can be listed multiple times to allow searching
          for icons in multiple paths.
       -->
-    <IconPath>/usr/share/icons/Paper/32x32/apps</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/actions</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/categories</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/places</IconPath>
-    <IconPath>/usr/share/icons/Paper/32x32/devices</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/apps</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/actions</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/categories</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/places</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/devices</IconPath>
     <IconPath>/usr/local/share/jwm</IconPath>
 
     <!-- Virtual Desktops -->
@@ -129,7 +139,7 @@
               contained within a Desktop tag to give a specific background
               for that desktop.
          -->
-        <Background type="tile">/home/void/wallpaper.png</Background>
+        <!-- <Background type="tile">/home/void/wallpaper.png</Background> -->
         <!-- <Background type="solid">#111111</Background> -->
     </Desktops>
 

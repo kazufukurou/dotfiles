@@ -68,9 +68,9 @@ elif args.rename:
             ext = os.path.splitext(fn)[1]
             title = f['title'][0]
             tracknumber = f['tracknumber'][0].zfill(2)
-            sys.stdout.write(tracknumber + ' ' + title + ext + '\n')
+            sys.stdout.write(tracknumber + ' ' + title.replace("/", "_") + ext + '\n')
             if args.force:
-                os.rename(fn,  tracknumber + ' ' + title + ext)
+                os.rename(fn,  tracknumber + ' ' + title.replace("/", "_") + ext)
     sys.stdout.write('Done!\n')
 elif args.guess:
     sys.stdout.write('\nGuessing tags...\n\n')

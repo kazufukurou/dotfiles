@@ -52,6 +52,9 @@ inoremap см <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>c :call asyncrun#quickfix_toggle(8)<cr>
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>ic :UnusedImportsClear<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
@@ -172,6 +175,7 @@ let g:switch_custom_definitions =
     \   ['>=', '<='],
     \   ['var', 'val'],
     \   ['if', 'when'],
+    \   ['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'],
     \   ['boolean', 'int', 'long', 'float', 'double'],
     \   ['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'],
     \   ['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'],
