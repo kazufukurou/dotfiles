@@ -1,1 +1,0 @@
-ssh -C2qTnN -D 8080 guest@kazufukurou.com

@@ -27,7 +27,7 @@ alias reb='sudo /sbin/reboot'
 alias off='sudo /sbin/poweroff'
 alias sus='sudo echo && slock & sudo /usr/sbin/pm-suspend & wait $! && initxkbmap dvp'
 alias java='java -Dawt.useSystemAAFontSettings=on'
-
+alias tunnel='ssh -C2qTnN -D 8080'
 
 precmd () { vcs_info }
 
