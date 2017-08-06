@@ -5,7 +5,7 @@ super + Tab
     dmenurun
 
 super + {_,shift + }Return
-    {st,vimb}
+    {urxvt -name terminal,vimb}
 
 super + apostrophe
     slock & sleep 1 && xset dpms force off
