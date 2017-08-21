@@ -1,14 +1,17 @@
-super + q
+alt + s
     pkill -USR1 -x sxhkd
 
-super + Tab
+alt + Tab
     dmenurun
 
-super + {_,shift + }Return
+alt + {_,shift + }Return
     {urxvt -name terminal,vimb}
 
-super + apostrophe
+alt + l
     slock & sleep 1 && xset dpms force off
+
+alt + Escape
+    xdotool getwindowfocus windowkill
 
 XF86AudioRaiseVolume
     amixer set Master playback 1+

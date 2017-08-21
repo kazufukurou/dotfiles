@@ -59,7 +59,8 @@
         <TaskList maxwidth="256" labeled="false" height="58"/>
         <Spacer/>
         <Dock/>
-        <Clock format="%b%e"/>
+        <Clock format="%b"/>
+        <Clock format="%e"/>
         <Clock format="%a"/>
         <Clock format="%R"/>
         <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
@@ -162,10 +163,9 @@
     <ResizeMode>opaque</ResizeMode>
 
     <!-- Key bindings -->
-    <Key mask="4" key="Escape">close</Key>
-    <Key mask="4" key="h">prev</Key>
-    <Key mask="4" key="t">next</Key>
-    <Key mask="4" key="m">maximize</Key>
-    <Key mask="4" key="w">fullscreen</Key>
+    <Key mask="1" key="h">prev</Key>
+    <Key mask="1" key="t">next</Key>
+    <Key mask="1" key="m">maximize</Key>
+    <Key mask="1" key="w">fullscreen</Key>
     <!-- <Key mask="4" key="m">maximize</Key> -->
 </JWM>
