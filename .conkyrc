@@ -1,4 +1,5 @@
 conky.config = {
+    color1 = '999',
     alignment = 'bottom_left',
     background = false,
     border_width = 0,
@@ -11,9 +12,9 @@ conky.config = {
     draw_outline = false,
     draw_shades = false,
     use_xft = true,
-    font = 'DejaVu Sans Mono:size=12',
-    gap_x = 5,
-    gap_y = 60,
+    font = 'Sans:size=8',
+    gap_x = 8,
+    gap_y = 4,
     minimum_height = 5,
     minimum_width = 5,
     net_avg_samples = 2,
@@ -21,9 +22,11 @@ conky.config = {
     out_to_console = false,
     out_to_stderr = false,
     extra_newline = false,
+    double_buffer = true,
     own_window = true,
     own_window_class = 'Conky',
     own_window_type = 'panel',
+    own_window_colour = '333333',
     stippled_borders = 0,
     update_interval = 1.0,
     uppercase = false,
@@ -33,10 +36,12 @@ conky.config = {
 }
 
 conky.text = [[
-$battery_percent
-${color grey}Frequency (in MHz):$color $freq
-${color grey}Frequency (in GHz):$color $freq_g
-${color grey}RAM Usage:$color $mem/$memmax - $memperc% ${membar 4}
-${color grey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar 4}
-${color grey}CPU Usage:$color $cpu% ${cpubar 4}
+${color1}Vol
+$color${exec vol}
+${color1}Bat
+$color$battery_percent
+${color1}${time %b}
+$color${time %e}
+${color1}${time %a}
+$color${time %R}
 ]]

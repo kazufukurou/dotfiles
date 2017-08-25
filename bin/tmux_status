@@ -20,10 +20,6 @@ temp_color() {
     [ $1 -gt 80 ] && echo $f9 || [ $1 -gt 60 ] && echo $f13 || echo $f12
 }
 
-volume() {
-    [ -n "$(amixer get Master | grep off)" ] && echo Mute || echo $(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')
-}
-
 volume_color() {
     [ "Mute" = $1 ] && echo $f9 || echo $f15
 }
@@ -46,7 +42,7 @@ battery_color() {
 }
 
 t=$(temp)
-v=$(volume)
+v=$(vol)
 b=$(battery)
 bs=$(battery_status)
 dm=$(date +%b)

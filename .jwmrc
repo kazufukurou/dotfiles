@@ -32,7 +32,7 @@
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
             <Restart label="Restart" icon="system-restart.png"/>
-            <Exit label="Exit" confirm="true" icon="exit.png"/>
+            <Exit label="Exit" confirm="false" icon="exit.png"/>
             <Program label="Hibernate" icon="system-hibernate.png">sudo /sbin/zzz</Program>
             <Program label="Reboot" icon="system-reboot.png">sudo /sbin/reboot</Program>
             <Program label="Shutdown" icon="system-shutdown.png">sudo /sbin/poweroff</Program>
@@ -47,9 +47,9 @@
     <!--     <Option>fullscreen</Option> -->
     <!-- </Group> -->
     <Group>
-        <Name>xclock</Name>
-        <Option>drag</Option>
-        <Option>notitle</Option>
+        <Name>Conky</Name>
+        <Option>nolist</Option>
+        <Option>nofocus</Option>
     </Group>
 
     <Tray x="0" y="0" layout="vertical" width="60">
@@ -59,11 +59,6 @@
         <TaskList maxwidth="256" labeled="false" height="58"/>
         <Spacer/>
         <Dock/>
-        <Clock format="%b"/>
-        <Clock format="%e"/>
-        <Clock format="%a"/>
-        <Clock format="%R"/>
-        <!-- <Clock format="%b %e %a %R"><Button mask="123">exec:xclock</Button></Clock> -->
     </Tray>
 
     <!-- Visual Styles -->

@@ -1,0 +1,3 @@
+#! /bin/bash
+
+[ -n "$(amixer get Master | grep off)" ] && echo Mute || echo $(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')
