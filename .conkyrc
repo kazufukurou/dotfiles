@@ -41,7 +41,7 @@ $color${exec vol}
 ${color1}Bat
 $color$battery_percent
 ${color1}${time %b}
-$color${time %e}
+$color${time %-d}
 ${color1}${time %a}
 $color${time %R}
 ]]
