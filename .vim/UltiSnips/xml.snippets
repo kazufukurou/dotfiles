@@ -10,83 +10,189 @@ snippet xmlnsa "Android XML custom namespace" b
 xmlns:app="http://schemas.android.com/apk/res-auto"
 endsnippet
 
-snippet lapr "Android XML layout align parent right" b
+snippet lapr "Android XML layout_alignParentRight" b
 android:layout_alignParentRight="true"
 endsnippet
 
-snippet lapb "Android XML layout align parent bottom" b
+snippet lapb "Android XML layout_alignParentBottom" b
 android:layout_alignParentBottom="true"
 endsnippet
 
-snippet lawp "Android XML layout align with parent if missing" b
+snippet lawp "Android XML layout_alignWithParentIfMissing" b
 android:layout_alignWithParentIfMissing="true"
 endsnippet
 
-snippet lch "Android XML layout center horizontal" b
+snippet lch "Android XML layout_centerHorizontal" b
 android:layout_centerHorizontal="true"
 endsnippet
 
-snippet lcv "Android XML layout center vertical" b
+snippet lcv "Android XML layout_centerVertical" b
 android:layout_centerVertical="true"
 endsnippet
 
-snippet lcp "Android XML layout center in parent" b
+snippet lcp "Android XML layout_centerInParent" b
 android:layout_centerInParent="true"
 endsnippet
 
-snippet ltl "Android XML layout to left of" b
+snippet ltl "Android XML layout_toLeftOf" b
 android:layout_toLeftOf="@id/$1"
 endsnippet
 
-snippet ltr "Android XML layout to right of" b
+snippet ltr "Android XML layout_toRightOf" b
 android:layout_toRightOf="@id/$1"
 endsnippet
 
-snippet la "Android XML layout above" b
+snippet la "Android XML layout_above" b
 android:layout_above="@id/$1"
 endsnippet
 
-snippet lb "Android XML layout below" b
+snippet lb "Android XML layout_below" b
 android:layout_below="@id/$1"
 endsnippet
 
-snippet lal "Android XML layout align left" b
+snippet lal "Android XML layout_alignLeft" b
 android:layout_alignLeft="@id/$1"
 endsnippet
 
-snippet lar "Android XML layout align right" b
+snippet lar "Android XML layout_alignRight" b
 android:layout_alignRight="@id/$1"
 endsnippet
 
-snippet lat "Android XML layout align top" b
+snippet lat "Android XML layout_alignTop" b
 android:layout_alignTop="@id/$1"
 endsnippet
 
-snippet lab "Android XML layout align bottom" b
+snippet lab "Android XML layout_alignBottom" b
 android:layout_alignBottom="@id/$1"
 endsnippet
 
-snippet lm "Android XML layout margin" b
+snippet lm "Android XML layout_margin" b
+android:layout_margin="${1:8}dp"
+endsnippet
+
+snippet lmm "Android XML layout_margin" b
 android:layout_marginLeft="${1:8}dp"
 android:layout_marginRight="${2:8}dp"
 android:layout_marginTop="${3:8}dp"
 android:layout_marginBottom="${4:8}dp"
 endsnippet
 
-snippet lml "Android XML layout margin left" b
+snippet lml "Android XML layout_marginLeft" b
 android:layout_marginLeft="${1:8}dp"
 endsnippet
 
-snippet lmr "Android XML layout margin right" b
+snippet lmr "Android XML layout_marginRight" b
 android:layout_marginRight="${1:8}dp"
 endsnippet
 
-snippet lmt "Android XML layout margin top" b
+snippet lmt "Android XML layout_marginTop" b
 android:layout_marginTop="${1:8}dp"
 endsnippet
 
-snippet lmb "Android XML layout margin bottom" b
+snippet lmb "Android XML layout_marginBottom" b
 android:layout_marginBottom="${1:8}dp"
+endsnippet
+
+snippet lms "Android XML layout_marginStart" b
+android:layout_marginStart="${1:8}dp"
+endsnippet
+
+snippet lme "Android XML layout_marginEnd" b
+android:layout_marginEnd="${1:8}dp"
+endsnippet
+
+snippet lgml "Android XML layout_goneMarginLeft" b
+app:layout_goneMarginLeft="${1:8}dp"
+endsnippet
+
+snippet lgmr "Android XML layout_goneMarginRight" b
+app:layout_goneMarginRight="${1:8}dp"
+endsnippet
+
+snippet lgmt "Android XML layout_goneMarginTop" b
+app:layout_goneMarginTop="${1:8}dp"
+endsnippet
+
+snippet lgmb "Android XML layout_goneMarginBottom" b
+app:layout_goneMarginBottom="${1:8}dp"
+endsnippet
+
+snippet lgms "Android XML layout_goneMarginStart" b
+app:layout_goneMarginStart="${1:8}dp"
+endsnippet
+
+snippet lgme "Android XML layout_goneMarginEnd" b
+app:layout_goneMarginEnd="${1:8}dp"
+endsnippet
+
+snippet lcw "Android XML layout_constraintWidth_default" b
+app:layout_constraintWidth_default="${1:spread}"
+endsnippet
+
+snippet lch "Android XML layout_constraintHeight_default" b
+app:layout_constraintHeight_default="${1:spread}"
+endsnippet
+
+snippet lcwm "Android XML layout_constraintWidth_min layout_constraintWidth_max" b
+app:layout_constraintWidth_min="$1dp"
+app:layout_constraintWidth_max="$2dp"
+endsnippet
+
+snippet lchm "Android XML layout_constraintHeiht_min layout_constraintHeight_max" b
+app:layout_constraintHeight_min="$1dp"
+app:layout_constraintHeight_max="$2dp"
+endsnippet
+
+snippet lcll "Android XML layout_constraintLeft_toLeftOf" b
+app:layout_constraintLeft_toLeftOf="${1:parent}"
+endsnippet
+
+snippet lclr "Android XML layout_constraintLeft_toRightOf" b
+app:layout_constraintLeft_toRightOf="${1:parent}"
+endsnippet
+
+snippet lcrl "Android XML layout_constraintRight_toLeftOf" b
+app:layout_constraintRight_toLeftOf="${1:parent}"
+endsnippet
+
+snippet lcrr "Android XML layout_constraintRight_toRightOf" b
+app:layout_constraintRight_toRightOf="${1:parent}"
+endsnippet
+
+snippet lctt "Android XML layout_constraintTop_toTopOf" b
+app:layout_constraintTop_toTopOf="${1:parent}"
+endsnippet
+
+snippet lctb "Android XML layout_constraintTop_toBottomOf" b
+app:layout_constraintTop_toBottomOf="${1:parent}"
+endsnippet
+
+snippet lcbt "Android XML layout_constraintBottom_toTopOf" b
+app:layout_constraintBottom_toTopOf="${1:parent}"
+endsnippet
+
+snippet lcbb "Android XML layout_constraintBottom_toBottomOf" b
+app:layout_constraintBottom_toBottomOf="${1:parent}"
+endsnippet
+
+snippet lcbl "Android XML layout_constraintBaseline_toBaselineOf" b
+app:layout_constraintBaseline_toBaselineOf="id/$1"
+endsnippet
+
+snippet lcse "Android XML layout_constraintStart_toEndOf" b
+app:layout_constraintStart_toEndOf="id/$1"
+endsnippet
+
+snippet lcss "Android XML layout_constraintStart_toStartOf" b
+app:layout_constraintStart_toStartOf="id/$1"
+endsnippet
+
+snippet lces "Android XML layout_constraintEnd_toStartOf" b
+app:layout_constraintEnd_toStartOf="id/$1"
+endsnippet
+
+snippet lcee "Android XML layout_constraintEnd_toEndOf" b
+app:layout_constraintEnd_toEndOf="id/$1"
 endsnippet
 
 snippet g "Android XML gravity" b
@@ -94,13 +200,17 @@ android:gravity="${1:center_vertical}"
 endsnippet
 
 snippet p "Android XML padding" b
+android:padding="${1:8}dp"
+endsnippet
+
+snippet pp "Android XML padding all" b
 android:paddingLeft="${1:8}dp"
 android:paddingRight="${2:8}dp"
 android:paddingTop="${3:8}dp"
 android:paddingBottom="${4:8}dp"
 endsnippet
 
-snippet ta "Android XML text appearance" b
+snippet ta "Android XML textAppearance" b
 android:textAppearance="@style/$1"
 endsnippet
 
@@ -148,7 +258,7 @@ snippet tv "Android TextView" b
     android:textAppearance="@style/$5"/>
 endsnippet
 
-snippet bt "Android button" b
+snippet bt "Android Button" b
 <Button
     android:id="@+id/$1"
     android:layout_width="${2:match_parent}"
@@ -184,4 +294,13 @@ snippet cv "Android CardView" b
     app:cardBackgroundColor="@color/$5">
     $0
 </android.support.v7.widget.CardView>
+endsnippet
+
+snippet cl "Android ConstraintLayout" b
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/$1"
+    android:layout_width="${2:match_parent}"
+    android:layout_height="${3:match_parent}">
+    $0
+</android.support.constraint.ConstraintLayout>
 endsnippet

@@ -167,6 +167,7 @@ let g:switch_custom_definitions =
     \   ['wrap_content', 'match_parent'],
     \   ['HORIZONTAL', 'VERTICAL'],
     \   ['horizontal', 'vertical'],
+    \   ['width', 'height'],
     \   ['CENTER_VERTICAL', 'CENTER_HORIZONTAL'],
     \   ['center_vertical', 'center_horizontal'],
     \   ['+', '-', '*', '/'],
