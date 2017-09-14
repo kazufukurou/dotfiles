@@ -128,8 +128,8 @@ $src/java/util/Locale.java
 $src/java/util/Random.java
 $src/java/util/TimeZone.java
 $src/java/util/concurrent/TimeUnit.java
-$HOME/repos/RxJava/src/main
-$HOME/repos/kotlin/libraries/stdlib/src
+$HOME/Repos/RxJava/src/main
+$HOME/Repos/kotlin/libraries/stdlib/src
 "
 
 fileTags=$HOME/.vim/tags
