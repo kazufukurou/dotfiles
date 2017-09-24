@@ -5,7 +5,7 @@ alt + Tab
     dmenurun
 
 alt + {_,shift + }Return
-    {urxvt -name terminal,vimb}
+    {alacritty -t terminal,vimb}
 
 alt + l
     slock & sleep 1 && xset dpms force off
