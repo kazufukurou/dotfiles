@@ -12,7 +12,7 @@ conky.config = {
     draw_outline = false,
     draw_shades = false,
     use_xft = true,
-    font = 'Sans:size=8',
+    font = 'Sans:size=7',
     gap_x = 8,
     gap_y = 4,
     minimum_height = 5,
