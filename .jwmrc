@@ -60,13 +60,16 @@
         <TaskList maxwidth="256" labeled="false" height="58"/>
         <Spacer/>
         <Dock/>
+        <Clock format="%b %e"/>
+        <Clock format="%a"/>
+        <Clock format="%R"/>
     </Tray>
 
     <!-- Visual Styles -->
     <WindowStyle>
         <Font>Sans-8</Font>
         <Width>4</Width>
-        <Height>22</Height>
+        <Height>32</Height>
         <Corner>0</Corner>
         <Foreground>#FFFFFF</Foreground>
         <Background>#555555</Background>
@@ -87,7 +90,7 @@
         <Opacity>1.0</Opacity>
     </TrayStyle>
     <ClockStyle>
-        <Font>Sans-8</Font>
+        <Font>Sans-7</Font>
     </ClockStyle>
     <PagerStyle>
         <Outline>#000000</Outline>
