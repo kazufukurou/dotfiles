@@ -39,7 +39,7 @@ conky.text = [[
 ${color1}Vol
 $color${exec vol}
 ${color1}Bat
-$color$battery_percent${if_match $battery_percent < 10}${if_match "$battery_short" == "D"}${exec notify-send -u critical "Low Battery"}${endif}${endif}
+$color$battery_percent${if_match "$battery_percent" < "10"}${if_match "$acpiacadapter" == "off-line"}${exec notify-send -u critical "Low Battery"}$endif$endif
 ${color1}${time %b}
 $color${time %-d}
 ${color1}${time %a}

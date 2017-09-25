@@ -1,5 +1,5 @@
 typeset -U path
-path=(~/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
+path=(~/.local/bin ~/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 
 export LANG=en_US.utf8
 export ANDROID_HOME=${HOME}/android-sdk
