@@ -1,6 +1,6 @@
 #!/bin/bash
 
-src=$ANDROID_HOME/sources/android-25
+src=$ANDROID_HOME/sources/android-26
 paths="
 $src/android/app/ActionBar.java
 $src/android/app/Activity.java

@@ -1,7 +1,7 @@
 alt + s
     pkill -USR1 -x sxhkd
 
-alt + Tab
+alt + semicolon
     dmenurun
 
 alt + {_,shift + }Return
@@ -10,7 +10,7 @@ alt + {_,shift + }Return
 alt + l
     slock & sleep 1 && xset dpms force off
 
-alt + Escape
+alt + z
     xdotool getwindowfocus windowkill
 
 XF86AudioRaiseVolume
