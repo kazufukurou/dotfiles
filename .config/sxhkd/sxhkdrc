@@ -13,6 +13,9 @@ alt + l
 alt + z
     xdotool getwindowfocus windowkill
 
+XF86MonBrightness{Down,Up}
+    xbacklight {-5,+5}
+
 XF86AudioRaiseVolume
     amixer set Master playback 1+
 
