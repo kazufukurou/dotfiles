@@ -16,20 +16,11 @@ alt + z
 XF86MonBrightness{Down,Up}
     xbacklight {-5,+5}
 
-XF86AudioRaiseVolume
-    amixer set Master playback 1+
-
-XF86AudioLowerVolume
-    amixer set Master playback 1-
+XF86Audio{Raise,Lower}Volume
+    amixer set Master playback {1+,1-}
 
 XF86AudioMute
     amixer set Master toggle
 
-XF86AudioNext
-    mplayercmd next
-
-XF86AudioPrev
-    mplayercmd prev
-
-XF86AudioPlay
-    mplayercmd pause
+XF86Audio{Next,Prev,Play}
+    mplayercmd {next,prev,pause}
