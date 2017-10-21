@@ -15,6 +15,7 @@
             <Program icon="transmission.png" label="Transmission">transmission-gtk</Program>
         </Menu>
         <Menu icon="applications-graphics.png" label="Graphics">
+            <Program icon="azpainter.png" label="AzPainter">azpainter</Program>
             <Program icon="darktable.png" label="Darktable">darktable</Program>
             <Program icon="gimp.png" label="Gimp">gimp</Program>
             <Program icon="inkscape.png" label="Inkscape">inkscape</Program>
