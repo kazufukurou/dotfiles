@@ -1,0 +1,11 @@
+#!/bin/sh
+l="y/abvgdeziklmnoprstufcqy'/абвгдезиклмнопрстуфцъыь/"
+u="y/ABVGDEZIKLMNOPRSTUFCQY\"/АБВГДЕЗИКЛМНОПРСТУФЦЪЫЬ/"
+ll="s/jo/ё/g;s/zh/ж/g;s/jj/й/g;s/kh/х/g;s/ch/ч/g;s/sh/ш/g;s/je/э/g;s/ju/ю/g;s/ja/я/g"
+uu="s/JO/Ё/g;s/ZH/Ж/g;s/JJ/Й/g;s/KH/Х/g;s/CH/Ч/g;s/SH/Ш/g;s/JE/Э/g;s/JU/Ю/g;s/JA/Я/g"
+lll="s/shh/щ/g;"
+uuu="s/SHH/Щ/g"
+
+xdotool getactivewindow key --delay 100 ctrl+a ctrl+x
+xclip -selection clipboard -o | sed "$lll;$uuu;$ll;$uu;$l;$u" | xclip -selection clipboard
+xdotool getactivewindow key --delay 100 ctrl+v
