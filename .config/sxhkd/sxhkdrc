@@ -13,8 +13,8 @@ alt + l
 alt + z
     xdotool getwindowfocus windowkill
 
-alt + n
-    transliterate
+alt + v
+    vedit
 
 XF86MonBrightness{Down,Up}
     xbacklight {-5,+5}

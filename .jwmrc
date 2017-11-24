@@ -8,6 +8,7 @@
             <Program icon="music.png" label="Audacious">audacious</Program>
             <Program icon="calc.png" label="Calculator">mate-calc</Program>
             <Program icon="chromium.png" label="Chromium">chromium</Program>
+            <Program icon="chromium.png" label="Chromium Proxy">chromium --proxy-server="socks5://localhost:8080"</Program>
             <Program icon="firefox.png" label="Firefox">firefox</Program>
             <Program icon="idea.png" label="IntelliJ IDEA">idea</Program>
             <Program icon="libreoffice.png" label="LibreOffice">libreoffice</Program>
