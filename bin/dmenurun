@@ -1,3 +1,0 @@
-#!/bin/sh
-
-dmenu_run -fn monospace:pixelsize=18 -nf "#999999" -nb "#666666" -sf "#ffffff" -sb "#666666"

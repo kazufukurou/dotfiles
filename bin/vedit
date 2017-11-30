@@ -1,8 +1,0 @@
-#!/bin/sh
-
-alacritty -d 212 8 -e vim /tmp/vedit
-xclip -selection clipboard < /tmp/vedit
-rm /tmp/vedit
-xdotool getactivewindow key --delay 100 ctrl+v
-echo '' | xclip -selection clipboard
-

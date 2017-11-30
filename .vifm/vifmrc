@@ -146,7 +146,7 @@ filextype *.ps,*.ps.gz gv %c %i &
 filextype *.djvu apvlv %f
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a mplayercmd file "%d/%f" &,
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a mplayercmd play %d/%f &,
 fileviewer *.mp3 file
 
 " Video
@@ -273,6 +273,7 @@ nmap ,w :set wrap!<cr>
 
 " My mappings
 nmap ; :
-nmap gp :!mplayercmd dir %d/%f<cr>
-nmap ge :!extract %f<cr>
-nmap gv :!vim %f<cr>
+nmap <space>p :!mplayercmd play %d/%f<cr>
+nmap <space>a :!mplayercmd add %d/%f<cr>
+nmap <space>e :!extract %f<cr>
+nmap <space>v :!vim %f<cr>

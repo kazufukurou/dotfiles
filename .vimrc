@@ -48,7 +48,6 @@ nnoremap j gj
 nnoremap k gk
 inoremap <esc> <esc>`^
 inoremap jk <esc>`^
-inoremap см <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>c :call asyncrun#quickfix_toggle(8)<cr>
@@ -119,13 +118,11 @@ let g:packageSepDepth = 0
 "vim-surrond
 let g:surround_45 = '«\r»'
 
-"vim-easymotion
-"map  / <Plug>(easymotion-sn)
-"omap / <Plug>(easymotion-tn)
-"map  n <Plug>(easymotion-next)
-"map  N <Plug>(easymotion-prev)
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+"vim-sneak
+let g:sneak#label = 1
+" let g:sneak#s_next = 1
+hi Sneak ctermfg=15 ctermbg=5
+hi SneakScope ctermfg=14 ctermbg=5
 
 "incsearch
 let g:incsearch#auto_nohlsearch = 1

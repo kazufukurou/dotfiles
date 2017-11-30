@@ -2,7 +2,8 @@ alt + s
     pkill -USR1 -x sxhkd
 
 alt + semicolon
-    dmenurun
+    dmenu_run -fn monospace:pixelsize=18 -nf "#999999" -nb "#666666" -sf "#ffffff" -sb "#666666"
+
 
 alt + {_,shift + }Return
     {alacritty -t terminal,vimb}
@@ -12,9 +13,6 @@ alt + l
 
 alt + z
     xdotool getwindowfocus windowkill
-
-alt + v
-    vedit
 
 XF86MonBrightness{Down,Up}
     xbacklight {-5,+5}
