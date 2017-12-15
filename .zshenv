@@ -11,3 +11,4 @@ export FZF_DEFAULT_OPTS='--color 16'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export JavaScriptCoreUseJIT=0
 export GDK_DPI_SCALE=1.5
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
