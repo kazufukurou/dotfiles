@@ -35,8 +35,8 @@ set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
 
 "leader
-let mapleader = ' '
-let maplocalleader = ' '
+let mapleader = ','
+let maplocalleader = ','
 
 "bindings
 nnoremap <space> <nop>
@@ -50,7 +50,8 @@ inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
-nnoremap <leader>c :call asyncrun#quickfix_toggle(8)<cr>
+nnoremap <leader>c :call ToggleQf()<cr>
+nnoremap <Plug>ToggleQf :call <SID>ToggleQf()<cr>
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 vnoremap <leader>p "_dP
@@ -60,7 +61,7 @@ nnoremap <leader>id :UnusedImportsRemove<cr>
 nmap <leader>ii <Plug>JavaInsertImport<cr>
 nmap <leader>is <Plug>JavaSortImport<cr>
 nmap <leader>ip <Plug>JavaInsertPackage<cr>
-nnoremap <leader>l <c-]>
+nnoremap <leader>l <C-]>
 nnoremap <leader>L :tnext<cr>
 nnoremap <leader>m :call MakeAndroid()<cr>
 nnoremap <leader>n :cn<cr>
@@ -79,12 +80,24 @@ nnoremap <right> <C-w>l
 "save as root
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
+function! ToggleQf()
+    for buffer in tabpagebuflist()
+        if bufname(buffer) == ''
+            cclose
+            return
+        endif
+    endfor
+    copen
+endfunction
+
 "build and install android project
+command! -bang -nargs=* Make call asyncdo#run(<bang>0, &makeprg, <f-args>)
 function! MakeAndroid()
     let l:buildGradle = gradle#findGradleFile()
     let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
     let l:flavor = substitute(l:line, '\n', '', '')
-    execute 'AsyncRun -program=make '.l:flavor
+    " execute 'make '.l:flavor
+    call asyncdo#run(0, &makeprg, l:flavor)
 endfunction
 
 "toggle tab vs space highlight mode
@@ -148,44 +161,44 @@ let g:asterisk#keeppos = 1
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
 
-"Ultisnips
-let g:UltiSnipsExpandTrigger = '<c-s>'
-let g:UltiSnipsJumpForwardTrigger = '<c-s>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsEditSplit = 'vertical'
+"vim-minisnip
+let g:minisnip_trigger = '<C-s>'
 
-"vim-switch
-let g:switch_mapping = '-'
-let g:switch_custom_definitions =
-    \ [
-    \   ['LinearLayout', 'RelativeLayout', 'FrameLayout'],
-    \   ['View', 'TextView', 'ImageView'],
-    \   ['WRAP_CONTENT', 'MATCH_PARENT'],
-    \   ['wrap_content', 'match_parent'],
-    \   ['HORIZONTAL', 'VERTICAL'],
-    \   ['horizontal', 'vertical'],
-    \   ['width', 'height'],
-    \   ['CENTER_VERTICAL', 'CENTER_HORIZONTAL'],
-    \   ['center_vertical', 'center_horizontal'],
-    \   ['+', '-', '*', '/'],
-    \   ['!=', '=='],
-    \   ['>', '<'],
-    \   ['>=', '<='],
-    \   ['var', 'val'],
-    \   ['if', 'when'],
-    \   ['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'],
-    \   ['boolean', 'int', 'long', 'float', 'double'],
-    \   ['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'],
-    \   ['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'],
-    \   ['BooleanArray', 'IntArray', 'LongArry', 'FloatArry', 'DoubleArray', 'ShortArray'],
-    \   ['@Nullable', '@NonNull'],
-    \   ['public', 'protected', 'private'],
-    \   ['extends', 'implements'],
-    \   ['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'],
-    \   ['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'],
-    \   ['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom'],
-    \   ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
-    \ ]
+"vim-cycle
+nmap <silent> <C-a> <Plug>CycleNext
+nmap <silent> <C-x> <Plug>CyclePrev
+noremap <silent> <Plug>CycleFallbackNext <C-a>
+noremap <silent> <Plug>CycleFallbackPrev <C-x>
+let g:cycle_default_groups = [
+    \ [['+', '-', '*', '/']],
+    \ [['<', '>']],
+    \ [['<=', '>=']],
+    \ [['on', 'off']],
+    \ [['yes', 'no']],
+    \ [['var', 'val']],
+    \ [['if', 'when']],
+    \ [['true', 'false']],
+    \ [['width', 'height']],
+    \ [['horizontal', 'vertical']],
+    \ [['extends', 'implements']],
+    \ [['public', 'protected', 'private']],
+    \ [['left', 'right', 'top', 'bottom']],
+    \ [['@Nullable', '@NonNull'], 'hard_case'],
+    \ [['LinearLayout', 'RelativeLayout', 'FrameLayout'], 'hard_case'],
+    \ [['View', 'TextView', 'ImageView'], 'hard_case'],
+    \ [['wrap_content', 'match_parent'], 'hard_case', 'match_case'],
+    \ [['WRAP_CONTENT', 'MATCH_PARENT'], 'hard_case', 'match_case'],
+    \ [['center_vertical', 'center_horizontal'], 'hard_case', 'match_case'],
+    \ [['CENTER_VERTICAL', 'CENTER_HORIZONTAL'], 'hard_case', 'match_case'],
+    \ [['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'], 'hard_case'],
+    \ [['boolean', 'int', 'long', 'float', 'double']],
+    \ [['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'], 'hard_case', 'match_case'],
+    \ [['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'], 'hard_case', 'match_case'],
+    \ [['BooleanArray', 'IntArray', 'LongArry', 'FloatArry', 'DoubleArray', 'ShortArray'], 'hard_case', 'match_case'],
+    \ [['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'], 'hard_case'],
+    \ [['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'], 'hard_case'],
+    \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
+    \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
 
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
@@ -238,10 +251,7 @@ function! Status(winnum)
         let l:stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
         if l:mode ==# 'i' | let l:stat .= '%5*' | endif "change bg in insert mode
         let l:stat .= ' %<%f %=' "path to the file relative to current directory, end of left part
-        if     g:asyncrun_status == 'running' | let l:stat .= '%6* ▶ %0*'
-        elseif g:asyncrun_status == 'success' | let l:stat .= '%7* ● %0*'
-        elseif g:asyncrun_status == 'failure' | let l:stat .= '%8* ■ %0*'
-        endif
+        let l:stat .= '%6*%{exists("g:asyncdo")?" ▶ ":""}%0*'
         let l:stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
         let l:stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
         let l:stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode

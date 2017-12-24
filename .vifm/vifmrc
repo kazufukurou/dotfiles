@@ -273,7 +273,7 @@ nmap ,w :set wrap!<cr>
 
 " My mappings
 nmap ; :
-nmap <space>p :!mplayercmd play %d/%f<cr>
-nmap <space>a :!mplayercmd add %d/%f<cr>
-nmap <space>e :!extract %f<cr>
-nmap <space>v :!vim %f<cr>
+nmap ,p :!mplayercmd play %d/%f<cr>
+nmap ,a :!mplayercmd add %d/%f<cr>
+nmap ,e :!extract %f<cr>
+nmap ,v :!vim %f<cr>

@@ -1,0 +1,9 @@
+<android.support.v7.widget.CardView
+    android:id="@+id/{{++}}"
+    android:layout_width="{{+match_parent+}}"
+    android:layout_height="{{+wrap_content+}}"
+    app:cardCornerRadius="{{+4dp+}}"
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@color/{{++}}">
+    {{++}}
+</android.support.v7.widget.CardView>
