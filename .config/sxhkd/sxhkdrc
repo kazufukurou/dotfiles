@@ -4,9 +4,11 @@ alt + s
 alt + semicolon
     dmenu_run -fn monospace:pixelsize=18 -nf "#999999" -nb "#666666" -sf "#ffffff" -sb "#666666"
 
+alt + Return
+    alacritty -t terminal
 
-alt + {_,shift + }Return
-    {alacritty -t terminal,vimb}
+alt + b
+    vimb
 
 alt + l
     slock & sleep 1 && xset dpms force off

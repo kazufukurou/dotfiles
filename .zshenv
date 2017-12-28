@@ -3,7 +3,7 @@ path=(~/.local/bin ~/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 
 export LANG=en_US.utf8
 export ANDROID_HOME=${HOME}/android-sdk
-export JAVA_HOME=/usr/lib/jvm/openjdk
+[ -e /usr/lib/jvm/oracle-jdk ] && export JAVA_HOME=/usr/lib/jvm/oracle-jdk || export JAVA_HOME=/usr/lib/jvm/openjdk
 export EDITOR=vim
 export VISUAL=$EDITOR
 export CLASSPATH=/usr/share/java/bsh.jar

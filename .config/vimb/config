@@ -1,28 +1,8 @@
+set user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/999+ (KHTML, like Gecko) Safari/999.9"
 set download-path=~/Downloads/
 set strict-ssl=on
 set hintkeys=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-set completion-font=monospace normal 8
-set completion-bg-active=#ccc
-set completion-fg-active=#666
-set completion-bg-normal=#fff
-set completion-fg-normal=#666
-set input-bg-error=#c69
-set input-bg-normal=#333
-set input-fg-error=#fff
-set input-fg-normal=#fff
-set input-font-error=monospace normal 8
-set input-font-normal=monospace normal 8
-set status-color-bg=#999
-set status-color-fg=#fff
-set status-font=monospace normal 8
-set status-ssl-color-bg=#6c9
-set status-ssl-color-fg=#fff
-set status-ssl-font=monospace normal 8
-set status-sslinvalid-color-bg=#c96
-set status-sslinvalid-color-fg=#fff
-set status-sslinvalid-font=monospace normal 8
-set status-sslinvalid-font=monospace normal 8
-set editor-command=st -g 192x3 -e vim -c '$' -c 'startinsert!' %s
+set editor-command=alacritty -d 192 16 -e vim -c '$' -c 'startinsert!' %s
 nnoremap ; :
 nnoremap : ;
 autocmd LoadFinished * sh! xprop -id $VIMB_XID -f _NET_WM_NAME 8u -set _NET_WM_NAME "% $VIMB_TITLE"

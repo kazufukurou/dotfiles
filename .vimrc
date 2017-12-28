@@ -34,6 +34,13 @@ set wildignore+=mapping*.txt
 set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
 
+"netrw
+let g:netrw_banner = 0 "hide help
+let g:netrw_preview = 1 "open previews vertically
+let g:netrw_winsize = 20
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+
 "leader
 let mapleader = ','
 let maplocalleader = ','
@@ -52,6 +59,7 @@ inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>c :call ToggleQf()<cr>
 nnoremap <Plug>ToggleQf :call <SID>ToggleQf()<cr>
+nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 vnoremap <leader>p "_dP
@@ -63,6 +71,8 @@ nmap <leader>is <Plug>JavaSortImport<cr>
 nmap <leader>ip <Plug>JavaInsertPackage<cr>
 nnoremap <leader>l <C-]>
 nnoremap <leader>L :tnext<cr>
+nnoremap <leader>cn ]c
+nnoremap <leader>cN [c
 nnoremap <leader>m :call MakeAndroid()<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
