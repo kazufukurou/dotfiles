@@ -1,8 +1,20 @@
 set user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/999+ (KHTML, like Gecko) Safari/999.9"
 set download-path=~/Downloads/
-set strict-ssl=on
-set hintkeys=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-set editor-command=alacritty -d 192 16 -e vim -c '$' -c 'startinsert!' %s
-nnoremap ; :
-nnoremap : ;
-autocmd LoadFinished * sh! xprop -id $VIMB_XID -f _NET_WM_NAME 8u -set _NET_WM_NAME "% $VIMB_TITLE"
+set incsearch=true
+set default-font=Iosevka
+set monospace-font=Iosevka Term
+set sans-serif-font=Iosevka
+set serif-font=Iosevka
+set font-size=16
+set monospace-font-size=13
+set default-zoom=100
+set completion-css=color:#d3d0c8;background-color:#393939;font:12pt DejaVu Sans Mono;
+set completion-hover-css=color:#d3d0c8;background-color:#393939;font:12pt DejaVu Sans Mono;
+set completion-selected-css=color:#d3d0c8;background-color:#515151;font:12pt DejaVu Sans Mono;
+set input-css=color:#d3d0c8;background-color:#393939;font:12pt DejaVu Sans Mono;
+set input-error-css=color:#f2777a;background-color:#393939;font:12pt DejaVu Sans Mono;
+set status-css=color:#ffcc66;background-color:#393939;font:12pt DejaVu Sans Mono;
+set status-ssl-css=color:#99cc99;background-color:#393939;font:12pt DejaVu Sans Mono;
+set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:12pt DejaVu Sans Mono;
+
+set editor-command=alacritty

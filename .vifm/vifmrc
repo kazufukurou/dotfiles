@@ -275,5 +275,5 @@ nmap ,w :set wrap!<cr>
 nmap ; :
 nmap ,p :!mplayercmd play %d/%f<cr>
 nmap ,a :!mplayercmd add %d/%f<cr>
-nmap ,e :!extract %f<cr>
+nmap ,e :!dtrx %f<cr>
 nmap ,v :!vim %f<cr>

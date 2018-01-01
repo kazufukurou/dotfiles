@@ -16,11 +16,11 @@ git clone https://github.com/Raimondi/delimitMate
 git clone https://github.com/kana/vim-operator-user
 git clone https://github.com/bootleq/vim-cycle
 git clone https://github.com/KeyboardFire/vim-minisnip
-git clone https://github.com/udalov/kotlin-vim
 git clone https://github.com/akhaku/vim-java-unused-imports
 git clone https://github.com/jvenant/vim-java-imports
 git clone https://github.com/tyru/skk.vim
 git clone https://github.com/junegunn/fzf.git
 git clone https://github.com/hauleth/asyncdo.vim
 git clone https://github.com/einars/translit.vim
+git clone https://github.com/udalov/kotlin-vim
 git clone https://github.com/kazufukurou/vim-android-sensible
