@@ -1,9 +1,6 @@
 alt + s
     pkill -USR1 -x sxhkd
 
-alt + semicolon
-    alacritty -e zsh -i -t 
-
 alt + Return
     alacritty -t terminal
 
@@ -12,9 +9,6 @@ alt + b
 
 alt + l
     slock & sleep 1 && xset dpms force off
-
-alt + z
-    xdotool getwindowfocus windowkill
 
 XF86MonBrightness{Down,Up}
     xbacklight {-5,+5}

@@ -83,7 +83,7 @@
          <Font>Sans-8</Font>
          <Foreground>#FFFFFF</Foreground>
          <Active>
-             <Background>#333333</Background>
+             <Background>#444444</Background>
          </Active>
     </TaskListStyle>
     <TrayStyle group="false" list="all" labeled="false">
@@ -112,7 +112,7 @@
         <Outline>#000000</Outline>
         <Active>
             <Foreground>#FFFFFF</Foreground>
-            <Background>#333333</Background>
+            <Background>#444444</Background>
         </Active>
         <Opacity>1.0</Opacity>
     </MenuStyle>
@@ -168,4 +168,5 @@
     <Key mask="1" key="t">next</Key>
     <Key mask="1" key="w">maximize</Key>
     <Key mask="1" key="m">fullscreen</Key>
+    <Key mask="1" key="z">close</Key>
 </JWM>
