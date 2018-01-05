@@ -1,41 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-COLOR[0]="666"
-COLOR[1]="c69"
-COLOR[2]="9c6"
-COLOR[3]="c96"
-COLOR[4]="69c"
-COLOR[5]="96c"
-COLOR[6]="6c9"
-COLOR[7]="ccc"
-COLOR[8]="999"
-COLOR[9]="f9c"
-COLOR[10]="cf9"
-COLOR[11]="fc9"
-COLOR[12]="9cf"
-COLOR[13]="c9f"
-COLOR[14]="9fc"
-COLOR[15]="fff"
-COLOR[16]="333"
-
-n=(0 7 1 3 2 6 4 5)
-c=$(tput sgr0)
-b=$(tput bold)
-
-for x in "" $b ; do
-    for i in ${n[@]} ; do printf "$x$(tput setaf $i)████████"; done
-    echo $c
+for i in $(seq 0 15) ; do
+    printf "%2s "  $i
 done
-for x in "" $b ; do
-    for i in ${n[@]} ; do
-        printf "$c$(tput setab $i)"
-        for j in ${n[@]} ; do printf "$x$(tput setaf $j)0"; done
-        printf "$c"
-    done
-    echo ""
-done
-for x in "" $b ; do
-    for i in ${n[@]} ; do printf "$x$(tput setaf $i)%2s #${COLOR[$((i+d))]} " $((i+d)); done
-    echo $c
-    d=8
+echo ""
+for i in $(seq 0 255) ; do
+    printf "$(tput setab $i)   $(tput sgr0)"
+    [ $(((i+1) % 16)) -eq 0 ] && echo ""
 done

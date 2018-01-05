@@ -1,7 +1,10 @@
 syntax on
 filetype plugin indent on
 
-color mycolors
+if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+endif
 set nocompatible
 set noundofile "don't create .un~ files
 set nobackup nowritebackup "don't create ~ files
@@ -13,7 +16,7 @@ set scrolloff=4 "keep cursor few lines away edge when scrolling
 set nonumber "dont show line numbers
 set norelativenumber "line numbers are relative to current current line
 set ruler "always show current position
-set nocursorline "don't highlight current line
+set cursorline "highlight current line
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab "insert 4 spaces when hit tab
 set wrap "wrap lines
 set smartindent "automatically inserts one extra level of indentation in some cases
@@ -111,7 +114,7 @@ function! MakeAndroid()
 endfunction
 
 "toggle tab vs space highlight mode
-highlight ExtraWhitespace ctermbg=0
+highlight ExtraWhitespace ctermbg=19
 function! TabHighlightModeMatch()
     if &expandtab | match ExtraWhitespace /\t\|\s\+$/
     else | match ExtraWhitespace /^\t*\zs \+\|\s\+$/
@@ -170,6 +173,8 @@ let g:asterisk#keeppos = 1
 "vim-operator-flashy
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
+let g:operator#flashy#group = 'Visual'
+let g:operator#flashy#flash_time = 200
 
 "vim-minisnip
 let g:minisnip_trigger = '<C-s>'
@@ -194,8 +199,8 @@ let g:cycle_default_groups = [
     \ [['public', 'protected', 'private']],
     \ [['left', 'right', 'top', 'bottom']],
     \ [['@Nullable', '@NonNull'], 'hard_case'],
-    \ [['LinearLayout', 'RelativeLayout', 'FrameLayout'], 'hard_case'],
     \ [['View', 'TextView', 'ImageView'], 'hard_case'],
+    \ [['LinearLayout', 'RelativeLayout', 'FrameLayout'], 'hard_case'],
     \ [['wrap_content', 'match_parent'], 'hard_case', 'match_case'],
     \ [['WRAP_CONTENT', 'MATCH_PARENT'], 'hard_case', 'match_case'],
     \ [['center_vertical', 'center_horizontal'], 'hard_case', 'match_case'],
@@ -233,39 +238,32 @@ function! Status(winnum)
     if a:winnum == winnr()
         redraw
         let l:mode = mode()
-        let l:stat = '%1* ' "mode start
-        if l:mode ==# 'i'
-            hi User1 ctermbg=15 ctermfg=0
-            hi User2 ctermbg=15 ctermfg=0
-            hi User3 ctermbg=12 ctermfg=0
-            hi User4 ctermbg=13 ctermfg=0
-            let l:skk = substitute(SkkGetModeStr(),'\[SKK:\(.*\)\]','\1','')
-            if l:skk == ' ' | let l:stat .= 'I' | else | let l:stat .= l:skk | endif
-        else
-            if     l:mode ==# 'n'  | hi User1 ctermbg=10 ctermfg=0 | let l:stat .= 'N'
-            elseif l:mode ==# 'R'  | hi User1 ctermbg=9  ctermfg=0 | let l:stat .= 'R'
-            elseif l:mode ==# 'v'  | hi User1 ctermbg=13 ctermfg=0 | let l:stat .= 'V'
-            elseif l:mode ==# 'V'  | hi User1 ctermbg=13 ctermfg=0 | let l:stat .= 'VL'
-            elseif l:mode ==# '' | hi User1 ctermbg=13 ctermfg=0 | let l:stat .= 'VB'
-            endif
-            hi User2 ctermbg=10 ctermfg=0
-            hi User3 ctermbg=14 ctermfg=0
-            hi User4 ctermbg=12 ctermfg=0
+        let l:skk = substitute(SkkGetModeStr(),'\[SKK:\(.*\)\]','\1','')
+        let l:stat = '' "mode start
+        if l:mode ==# 'i' | let l:stat .= '%1* '.(l:skk == ' ' ? 'I' : l:skk)
+        elseif l:mode ==# 'n' | let l:stat .= '%2* N'
+        elseif l:mode ==# 'R' | let l:stat .= '%3* R'
+        elseif l:mode ==# 'v' | let l:stat .= '%4* V'
+        elseif l:mode ==# 'V' | let l:stat .= '%4* VL'
+        elseif l:mode ==# '' | let l:stat .= '%4* VB'
         endif
-        hi User5 ctermbg=4 ctermfg=15
-        hi User6 ctermbg=8 ctermfg=14
-        hi User7 ctermbg=8 ctermfg=10
-        hi User8 ctermbg=8 ctermfg=9
         let l:stat .= ' %0*' "mode end
-        let l:stat .= '%3*%( %{fugitive#head()} %)%0*' "vcs branch
-        let l:stat .= '%4*%( %H%M%R %)%0*' "help, modified, read only flags
-        if l:mode ==# 'i' | let l:stat .= '%5*' | endif "change bg in insert mode
+        let l:stat .= '%5*%( %{fugitive#head()} %)%0*' "vcs branch
+        let l:stat .= '%6*%( %H%M%R %)%0*' "help, modified, read only flags
         let l:stat .= ' %<%f %=' "path to the file relative to current directory, end of left part
-        let l:stat .= '%6*%{exists("g:asyncdo")?" ▶ ":""}%0*'
-        let l:stat .= '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",BOM":"")} ' "encoding
-        let l:stat .= '%4*%{(&wrap?" W ":"")}%0*' "wrap line mode
-        let l:stat .= '%3* %{(&expandtab?"S":"T")} %0*' "expand tab mode
+        if exists("g:asyncdo") | let l:stat .= '%7* ▶ %0*' | endif "async job indicator
+        let l:stat .= (&fenc == "" ? &enc : &fenc).((exists("+bomb") && &bomb) ? '+BOM' : '').' ' "encoding
+        if &wrap | let l:stat .=  '%6* W %0*' | endif "wrap line mode
+        if !&expandtab | let l:stat .= '%5* T %0*' | endif "expand tab mode
         let l:stat .= '%2* %-6.(%l:%c%) %P %0*' "line, column, scroll position
         return l:stat
     else | return ' %<%f' | endif
 endfunction
+
+highlight User1 ctermbg=15 ctermfg=0
+highlight User2 ctermbg=10 ctermfg=0
+highlight User3 ctermbg=9  ctermfg=0
+highlight User4 ctermbg=13 ctermfg=0
+highlight User5 ctermbg=14 ctermfg=0
+highlight User6 ctermbg=12 ctermfg=0
+highlight User7 ctermbg=19 ctermfg=14

@@ -2,7 +2,7 @@ alt + s
     pkill -USR1 -x sxhkd
 
 alt + semicolon
-    dmenu_run -fn monospace:pixelsize=18 -nf "#999999" -nb "#666666" -sf "#ffffff" -sb "#666666"
+    alacritty -e zsh -i -t 
 
 alt + Return
     alacritty -t terminal

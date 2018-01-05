@@ -21,7 +21,7 @@ args=parser.parse_args()
 
 def isMusic(str):
     ext = os.path.splitext(str)[1]
-    return ext == '.mp3' or ext == '.flac' or ext == '.m4a'
+    return ext == '.mp3' or ext == '.flac' or ext == '.m4a' or ext == '.ogg'
 
 if args.query:
     sys.stdout.write('\nQuery tag info...\n\n')

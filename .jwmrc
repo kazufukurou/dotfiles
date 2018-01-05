@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <JWM>
-    <RootMenu onroot="12" height="52">
+    <RootMenu onroot="12" height="47">
         <Program icon="terminal.png" label="Terminal">alacritty -t terminal</Program>
         <Program icon="folder.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
@@ -49,22 +49,17 @@
     <!--     <Name>st</Name> -->
     <!--     <Option>fullscreen</Option> -->
     <!-- </Group> -->
-    <Group>
-        <Name>Conky</Name>
-        <Option>nolist</Option>
-        <Option>nofocus</Option>
-    </Group>
 
-    <Tray x="0" y="0" layout="vertical" width="60">
+    <Tray x="0" y="0" layout="vertical" width="55">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
         <!-- <Pager labeled="true"/> -->
-        <TaskList maxwidth="256" labeled="false" height="58"/>
+        <TaskList maxwidth="256" labeled="false" height="53"/>
         <Spacer/>
         <Dock/>
-        <Clock format="%b %e"/>
-        <Clock format="%a"/>
-        <Clock format="%R"/>
+        <Clock format="%b %-d">exec:alacritty -e bash -c 'cal -3; read -s -n 1'</Clock>
+        <Clock format="%a">exec:alacritty -e bash -c 'cal -3; read -s -n 1'</Clock>
+        <Clock format="%R">exec:alacritty -e bash -c 'cal -3; read -s -n 1'</Clock>
     </Tray>
 
     <!-- Visual Styles -->
@@ -73,22 +68,28 @@
         <Width>4</Width>
         <Height>22</Height>
         <Corner>0</Corner>
-        <Foreground>#FFFFFF</Foreground>
-        <Background>#555555</Background>
-        <Outline>#555555</Outline>
+        <Foreground>#666666</Foreground>
+        <Background>#111111</Background>
+        <Outline>#111111</Outline>
         <Opacity>1.0</Opacity>
         <Active>
-            <Foreground>#FFFFFF</Foreground>
-            <Background>#546e7a</Background>
-            <Outline>#546e7a</Outline>
+            <Foreground>#999999</Foreground>
+            <Background>#222222</Background>
+            <Outline>#222222</Outline>
             <Opacity>1.0</Opacity>
         </Active>
     </WindowStyle>
+    <TaskListStyle>
+         <Font>Sans-8</Font>
+         <Foreground>#FFFFFF</Foreground>
+         <Active>
+             <Background>#333333</Background>
+         </Active>
+    </TaskListStyle>
     <TrayStyle group="false" list="all" labeled="false">
-        <Font>Sans-8</Font>
-        <Background>#333333</Background>
-        <Foreground>#FFFFFF</Foreground>
-        <Outline>#000000</Outline>
+        <Background>#222222</Background>
+        <Foreground>#999999</Foreground>
+        <Outline>#222222</Outline>
         <Opacity>1.0</Opacity>
     </TrayStyle>
     <ClockStyle>
@@ -106,12 +107,12 @@
     </PagerStyle>
     <MenuStyle>
         <Font>Sans-8</Font>
-        <Foreground>#FFFFFF</Foreground>
-        <Background>#333333</Background>
+        <Foreground>#999999</Foreground>
+        <Background>#222222</Background>
         <Outline>#000000</Outline>
         <Active>
             <Foreground>#FFFFFF</Foreground>
-            <Background>#0077CC</Background>
+            <Background>#333333</Background>
         </Active>
         <Opacity>1.0</Opacity>
     </MenuStyle>
@@ -159,14 +160,12 @@
 
     <!-- The move mode (outline or opaque) -->
     <MoveMode>opaque</MoveMode>
-
     <!-- The resize mode (outline or opaque) -->
     <ResizeMode>opaque</ResizeMode>
 
     <!-- Key bindings -->
     <Key mask="1" key="h">prev</Key>
     <Key mask="1" key="t">next</Key>
-    <Key mask="1" key="m">maximize</Key>
-    <Key mask="1" key="w">fullscreen</Key>
-    <!-- <Key mask="4" key="m">maximize</Key> -->
+    <Key mask="1" key="w">maximize</Key>
+    <Key mask="1" key="m">fullscreen</Key>
 </JWM>

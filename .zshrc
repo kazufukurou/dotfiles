@@ -1,6 +1,9 @@
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 setopt prompt_subst
 autoload -U colors && colors
 autoload -U compinit && compinit
@@ -52,7 +55,7 @@ TRAPINT() {
 }
 
 PROMPT='
-%F{5}%n%f%F{13}@%f%F{5}%m%f %B%F{4}%~ %f%(1j.%F{10}%j %f.)${vcs_info_msg_0_}
+%F{5}%n@%m%f %B%F{4}%~ %f%(1j.%F{2}%j %f.)${vcs_info_msg_0_}
 ${vim_mode} %F{2}%(!.#.$) %f%b'
 
 stty -ixon
