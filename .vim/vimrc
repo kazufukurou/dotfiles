@@ -1,10 +1,8 @@
 syntax on
 filetype plugin indent on
 
-if filereadable(expand("~/.vimrc_background"))
-    let base16colorspace=256
-    source ~/.vimrc_background
-endif
+let base16colorspace=256
+colorscheme base16-terminal
 set nocompatible
 set noundofile "don't create .un~ files
 set nobackup nowritebackup "don't create ~ files

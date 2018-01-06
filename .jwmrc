@@ -2,7 +2,7 @@
 <JWM>
     <RootMenu onroot="12" height="47">
         <Program icon="terminal.png" label="Terminal">alacritty -t terminal</Program>
-        <Program icon="folder.png" label="Files">pcmanfm</Program>
+        <Program icon="file-manager.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
             <Program icon="audacity.png" label="Audacity">audacity</Program>
             <Program icon="music.png" label="Audacious">audacious</Program>
@@ -49,6 +49,12 @@
     <!--     <Name>st</Name> -->
     <!--     <Option>fullscreen</Option> -->
     <!-- </Group> -->
+    <Group>
+        <Name>Alacritty</Name>
+        <Name>urxvt</Name>
+        <Name>st</Name>
+        <Option>icon:terminal</Option>
+    </Group>
 
     <Tray x="0" y="0" layout="vertical" width="55">
         <TrayButton icon="computer">root:1</TrayButton>
@@ -133,6 +139,7 @@
     <IconPath>/usr/share/icons/Paper/32x32@2x/categories</IconPath>
     <IconPath>/usr/share/icons/Paper/32x32@2x/places</IconPath>
     <IconPath>/usr/share/icons/Paper/32x32@2x/devices</IconPath>
+    <IconPath>/usr/share/icons/Paper/32x32@2x/mimetypes</IconPath>
     <IconPath>/usr/local/share/jwm</IconPath>
 
     <!-- Virtual Desktops -->
@@ -145,6 +152,8 @@
         <!-- <Background type="tile">/home/void/wallpaper.png</Background> -->
         <!-- <Background type="solid">#111111</Background> -->
     </Desktops>
+
+    <DefaultIcon>exec</DefaultIcon>
 
     <!-- Double click speed (in milliseconds) -->
     <DoubleClickSpeed>400</DoubleClickSpeed>

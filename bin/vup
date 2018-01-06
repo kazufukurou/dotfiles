@@ -1,8 +1,5 @@
 #!/bin/bash
 
-rm -rf ~/.config/base16-shell
-cd ~/.config
-git clone https://github.com/chriskempson/base16-shell.git
 [ -d ~/.vim/pack/bundle/start ] || mkdir -p ~/.vim/pack/bundle/start
 rm -rf ~/.vim/pack/bundle/start/*
 cd ~/.vim/pack/bundle/start
@@ -14,7 +11,6 @@ git clone https://github.com/tpope/vim-abolish
 git clone https://github.com/haya14busa/vim-operator-flashy
 git clone https://github.com/haya14busa/incsearch.vim
 git clone https://github.com/haya14busa/vim-asterisk
-git clone https://github.com/chriskempson/base16-vim.git
 git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/Raimondi/delimitMate
 git clone https://github.com/kana/vim-operator-user

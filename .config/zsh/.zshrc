@@ -1,8 +1,7 @@
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+[ -f $ZDOTDIR/.base16_theme ] && . $ZDOTDIR/.base16_theme
 
 setopt prompt_subst
 autoload -U colors && colors

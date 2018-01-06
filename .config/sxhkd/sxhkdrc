@@ -2,7 +2,7 @@ alt + s
     pkill -USR1 -x sxhkd
 
 alt + Return
-    alacritty -t terminal
+    alacritty
 
 alt + b
     vimb

@@ -2,7 +2,9 @@ typeset -U path
 path=(~/.local/bin ~/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 
 export LANG=en_US.utf8
+export ZDOTDIR=$HOME/.config/zsh
 export ANDROID_HOME=${HOME}/android-sdk
+# [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config/"
 [ -e /usr/lib/jvm/oracle-jdk ] && export JAVA_HOME=/usr/lib/jvm/oracle-jdk || export JAVA_HOME=/usr/lib/jvm/openjdk
 export EDITOR=vim
 export VISUAL=$EDITOR
