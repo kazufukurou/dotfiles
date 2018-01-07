@@ -44,16 +44,15 @@
     </RootMenu>
 
     <!-- Options for program groups. -->
-    <!-- <Group> -->
-    <!--     <Name>urxvt</Name> -->
-    <!--     <Name>st</Name> -->
-    <!--     <Option>fullscreen</Option> -->
-    <!-- </Group> -->
     <Group>
         <Name>Alacritty</Name>
         <Name>urxvt</Name>
         <Name>st</Name>
         <Option>icon:terminal</Option>
+    </Group>
+    <Group>
+        <Class>Vimb</Class>
+        <Option>maximized</Option>
     </Group>
 
     <Tray x="0" y="0" layout="vertical" width="55">

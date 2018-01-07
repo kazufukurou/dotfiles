@@ -9,7 +9,7 @@ for script in "${scripts[@]}"; do
     printf "%-8s\n" "${theme}"
 done | column
 echo ""
-read -p "Theme file: " name
+read -p "Enter theme: " name
 script=$dir/base16-$name.sh
 
 if [ -f $script ] ; then

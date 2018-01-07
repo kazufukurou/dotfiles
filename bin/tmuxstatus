@@ -1,0 +1,18 @@
+#! /bin/bash
+
+[ -n "$(amixer get Master | grep off)" ] && v=Mute || v=$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')
+t=$((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
+bt=$(cat /sys/class/power_supply/BAT0/capacity)
+b=${bt:-0}
+bs=$(cat /sys/class/power_supply/BAT0/status)
+dm=$(date +%b)
+dd=$(date +%-d)
+dw=$(date +%a)
+dt=$(date +%R)
+ba=#[bg=colour5]
+bg=""
+[ $t -gt 80 ] && bg=$ba
+[ $b -le 10 ] && [ "$bs" = "Discharging" ] && bg=$ba
+ft=#[fg=colour7,nobold]
+fv=#[fg=colour15,bold]
+echo "$bg$ft V $fv$v$ft T $fv$t$ft B $fv$b$ft $dm $fv$dd$ft $dw $fv$dt"
