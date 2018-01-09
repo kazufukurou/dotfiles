@@ -17,6 +17,7 @@
         </Menu>
         <Menu icon="applications-graphics.png" label="Graphics">
             <Program icon="azpainter.png" label="AzPainter">azpainter</Program>
+            <Program icon="blender.png" label="Blender">blender</Program>
             <Program icon="darktable.png" label="Darktable">darktable</Program>
             <Program icon="gimp.png" label="Gimp">gimp</Program>
             <Program icon="inkscape.png" label="Inkscape">inkscape</Program>
@@ -24,6 +25,7 @@
             <Program icon="scanner.png" label="VueScan">~/Downloads/vuex6495/VueScan/vuescan</Program>
         </Menu>
         <Menu icon="applications-games.png" label="Games">
+            <Program icon="hegdewars.png" label="Hedgewars">hedgewars</Program>
             <Program icon="ppsspp.png" label="PPSSPP">ppsspp-sdl</Program>
             <Program icon="tesseract.png" label="Tesseract">tesseract</Program>
             <Program icon="xonotic.png" label="Xonotic">xonotic-glx</Program>
@@ -38,7 +40,7 @@
             <Exit label="Exit" confirm="false" icon="exit.png"/>
             <Program label="Hibernate" icon="system-hibernate.png">sudo /sbin/zzz</Program>
             <Program label="Reboot" icon="system-reboot.png">sudo /sbin/reboot</Program>
-            <Program label="Shutdown" icon="system-shutdown.png">sudo /sbin/poweroff</Program>
+            <Program label="Shutdown" icon="system-shutdown.png">sudo /sbin/shutdown</Program>
         </Menu>
         <!-- <Separator/> -->
     </RootMenu>
