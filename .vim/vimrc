@@ -38,6 +38,7 @@ set wildignore+=.git,.hg,.gradle
 "netrw
 let g:netrw_banner = 0 "hide help
 let g:netrw_preview = 1 "open previews vertically
+let g:netrw_liststyle = 0
 let g:netrw_winsize = 20
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
@@ -58,7 +59,7 @@ inoremap <esc> <esc>`^
 inoremap jk <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
-nnoremap <leader>c :call ToggleQf()<cr>
+nnoremap <leader>. :call ToggleQf()<cr>
 nnoremap <Plug>ToggleQf :call <SID>ToggleQf()<cr>
 nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>d "_d
@@ -72,7 +73,7 @@ nmap <leader>is <Plug>JavaSortImport<cr>
 nmap <leader>ip <Plug>JavaInsertPackage<cr>
 nnoremap <leader>l <C-]>
 nnoremap <leader>L :tnext<cr>
-nnoremap <leader>cn ]c
+nnoremap <leader>tn ]c
 nnoremap <leader>cN [c
 nnoremap <leader>m :call MakeAndroid()<cr>
 nnoremap <leader>n :cn<cr>
@@ -92,13 +93,10 @@ nnoremap <right> <C-w>l
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 function! ToggleQf()
-    for buffer in tabpagebuflist()
-        if bufname(buffer) == ''
-            cclose
-            return
-        endif
-    endfor
-    copen
+    let nr = winnr("$")
+    cwindow
+    let nr2 = winnr("$")
+    if nr == nr2 | cclose | endif
 endfunction
 
 "build and install android project

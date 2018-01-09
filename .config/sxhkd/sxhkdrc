@@ -1,6 +1,9 @@
 alt + s
     pkill -USR1 -x sxhkd
 
+alt + v
+    vedit
+
 alt + Return
     alacritty
 
