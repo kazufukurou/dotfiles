@@ -15,7 +15,7 @@ volumeicon &
 compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 &
 nm-applet &
 if [ -x "$(command -v ck-launch-session)" ]; then
-    exec dbus-launch ck-launch-session jwm
+    exec dbus-launch --exit-with-session ck-launch-session jwm
 else
     exec jwm
 fi
