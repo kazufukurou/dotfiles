@@ -14,4 +14,8 @@ cbatticon &
 volumeicon &
 compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 &
 nm-applet &
-exec jwm
+if [ -x "$(command -v ck-launch-session)" ]; then
+    exec dbus-launch ck-launch-session jwm
+else
+    exec jwm
+fi
