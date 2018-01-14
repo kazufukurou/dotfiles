@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <JWM>
     <RootMenu onroot="12" height="47">
-        <Program icon="terminal.png" label="Terminal">alacritty -t terminal</Program>
+        <Program icon="terminal.png" label="Terminal">term</Program>
         <Program icon="file-manager.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
             <Program icon="audacity.png" label="Audacity">audacity</Program>
@@ -57,23 +57,23 @@
         <Option>maximized</Option>
     </Group>
 
-    <Tray x="0" y="0" layout="vertical" width="55">
+    <Tray x="0" y="0" layout="vertical" width="56">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
         <!-- <Pager labeled="true"/> -->
         <TaskList maxwidth="256" labeled="false" height="53"/>
         <Spacer/>
         <Dock/>
-        <Clock format="%b %-d">exec:alacritty -e bash -c 'cal -3; read -s -n 1'</Clock>
-        <Clock format="%a">exec:alacritty -e bash -c 'cal -3; read -s -n 1'</Clock>
-        <Clock format="%R">exec:alacritty -e bash -c 'cal -3; read -s -n 1'</Clock>
+        <Clock format="%b %-d">exec:term cal</Clock>
+        <Clock format="%a">exec:term cal</Clock>
+        <Clock format="%R">exec:term cal</Clock>
     </Tray>
 
     <!-- Visual Styles -->
     <WindowStyle>
         <Font>Sans-8</Font>
         <Width>4</Width>
-        <Height>22</Height>
+        <Height>25</Height>
         <Corner>0</Corner>
         <Foreground>#666666</Foreground>
         <Background>#111111</Background>

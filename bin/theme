@@ -1,8 +1,8 @@
 #!/bin/bash
 
 dir=~/.config/base16-shell
-[ ! -d "$dir" ] && git clone https://github.com/chriskempson/base16-shell.git $dir
-[ -d "$dir" ] && cd $dir && git pull
+[ ! -d "$dir" ] && git clone https://github.com/chriskempson/base16-shell "$dir"
+cd "$dir" && git pull
 
 scripts=(`ls $dir/scripts/base16*.sh`)
 for script in "${scripts[@]}"; do
@@ -13,9 +13,9 @@ for script in "${scripts[@]}"; do
 done | column
 echo ""
 read -p "Enter theme: " name
-script=$dir/scripts/base16-$name.sh
+script="$dir/scripts/base16-$name.sh"
 
-if [ -f $script ]; then
-    . $script
-    ln -fs $script $ZDOTDIR/.base16_theme
+if [ -f "$script" ]; then
+    . "$script"
+    ln -fs "$script" "$ZDOTDIR/.base16_theme"
 fi

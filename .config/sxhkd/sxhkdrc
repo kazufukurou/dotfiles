@@ -2,10 +2,10 @@ alt + s
     pkill -USR1 -x sxhkd
 
 alt + v
-    vedit
+    term vedit
 
 alt + Return
-    alacritty
+    term
 
 alt + b
     vimb

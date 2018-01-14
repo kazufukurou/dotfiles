@@ -1,26 +1,34 @@
 #!/bin/bash
 
-[ -d ~/.vim/pack/bundle/start ] || mkdir -p ~/.vim/pack/bundle/start
-rm -rf ~/.vim/pack/bundle/start/*
-cd ~/.vim/pack/bundle/start
-git clone https://github.com/tpope/vim-surround
-git clone https://github.com/tpope/vim-commentary
-git clone https://github.com/tpope/vim-repeat
-git clone https://github.com/tpope/vim-fugitive
-git clone https://github.com/tpope/vim-abolish
-git clone https://github.com/haya14busa/vim-operator-flashy
-git clone https://github.com/haya14busa/incsearch.vim
-git clone https://github.com/haya14busa/vim-asterisk
-git clone https://github.com/justinmk/vim-sneak.git
-git clone https://github.com/Raimondi/delimitMate
-git clone https://github.com/kana/vim-operator-user
-git clone https://github.com/bootleq/vim-cycle
-git clone https://github.com/KeyboardFire/vim-minisnip
-git clone https://github.com/akhaku/vim-java-unused-imports
-git clone https://github.com/jvenant/vim-java-imports
-git clone https://github.com/tyru/skk.vim
-git clone https://github.com/junegunn/fzf.git
-git clone https://github.com/hauleth/asyncdo.vim
-git clone https://github.com/einars/translit.vim
-git clone https://github.com/udalov/kotlin-vim
-git clone https://github.com/kazufukurou/vim-android-sensible
+repos=(
+    https://github.com/tpope/vim-surround
+    https://github.com/tpope/vim-commentary
+    https://github.com/tpope/vim-repeat
+    https://github.com/tpope/vim-fugitive
+    https://github.com/tpope/vim-abolish
+    https://github.com/haya14busa/vim-operator-flashy
+    https://github.com/haya14busa/incsearch.vim
+    https://github.com/haya14busa/vim-asterisk
+    https://github.com/justinmk/vim-sneak
+    https://github.com/Raimondi/delimitMate
+    https://github.com/kana/vim-operator-user
+    https://github.com/bootleq/vim-cycle
+    https://github.com/KeyboardFire/vim-minisnip
+    https://github.com/akhaku/vim-java-unused-imports
+    https://github.com/jvenant/vim-java-imports
+    https://github.com/tyru/skk.vim
+    https://github.com/junegunn/fzf
+    https://github.com/hauleth/asyncdo.vim
+    https://github.com/einars/translit.vim
+    https://github.com/udalov/kotlin-vim
+    https://github.com/kazufukurou/vim-android-sensible
+)
+
+dir=~/.vim/pack/bundle/start
+mkdir -p "$dir"
+for repo in "${repos[@]}"; do
+    cd "$dir"
+    name=${repo##*/}
+    [ ! -d "./$name" ] && git clone $repo
+    cd "./$name" && git pull
+done
