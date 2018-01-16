@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd /usr/src/linux-4.1.13
-sudo make clean
-sudo make all
-sudo make modules_install
-sudo cp arch/x86_64/boot/bzImage /boot/vmlinuz
-sudo cp System.map /boot
-sudo /sbin/lilo

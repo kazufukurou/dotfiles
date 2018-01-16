@@ -21,8 +21,8 @@ alias t='tmux'
 alias m='mplayercmd start'
 alias g='grep -E --color=auto'
 alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
-alias adble='adb logcat "*:E"'
-alias adbld='adb logcat "*:D"'
+alias adble='adb logcat "*:E" | g '
+alias adbld='adb logcat "*:D" | g '
 alias adblc='adb logcat -c'
 alias reb='/usr/bin/reboot'
 alias off='/usr/bin/poweroff'
@@ -38,19 +38,19 @@ vim_cmd_mode="%F{8}N%f"
 vim_mode=$vim_ins_mode
 
 zle-keymap-select() {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
+    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+    zle reset-prompt
 }
 zle -N zle-keymap-select
 
 zle-line-finish() {
-  vim_mode=$vim_ins_mode
+    vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
 TRAPINT() {
-  vim_mode=$vim_ins_mode
-  return $(( 128 + $1 ))
+    vim_mode=$vim_ins_mode
+    return $(( 128 + $1 ))
 }
 
 PROMPT='
