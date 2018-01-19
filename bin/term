@@ -15,7 +15,7 @@ elif [ "$1" = "vedit" ]; then
     text=$(cat $file)
     echo -n "$text" | xclip -selection clipboard
     rm $file
-    xdotool getactivewindow key --delay 100 ctrl+v
+    xdotool getactivewindow key --clearmodifiers --delay 100 ctrl+v
     echo '' | xclip -selection clipboard
 else
     st -f $font
