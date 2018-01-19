@@ -1,6 +1,8 @@
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
+[ -z "$SSH_AUTH_SOCK" ] && eval $(ssh-agent)
+
 [ -f $ZDOTDIR/.base16_theme ] && . $ZDOTDIR/.base16_theme
 
 setopt prompt_subst
