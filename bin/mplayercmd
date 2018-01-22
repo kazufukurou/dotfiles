@@ -39,4 +39,3 @@ elif [ $# -eq 1 ]; then
 else
     usage
 fi
-

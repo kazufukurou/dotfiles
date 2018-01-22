@@ -21,6 +21,7 @@
             <Program icon="darktable.png" label="Darktable">darktable</Program>
             <Program icon="gimp.png" label="Gimp">gimp</Program>
             <Program icon="inkscape.png" label="Inkscape">inkscape</Program>
+            <Program icon="mtpaint.png" label="mtPaint">mtpaint</Program>
             <Program icon="openscad.png" label="OpenSCAD">openscad</Program>
             <Program icon="scanner.png" label="VueScan">~/Downloads/vuex6495/VueScan/vuescan</Program>
         </Menu>
