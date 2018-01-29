@@ -34,7 +34,6 @@ alias tunnel='ssh -C2qTnN -D 8080'
 
 precmd () { vcs_info }
 
-bindkey -M viins 'jk' vi-cmd-mode
 vim_ins_mode="%F{10}I%f"
 vim_cmd_mode="%F{8}N%f"
 vim_mode=$vim_ins_mode

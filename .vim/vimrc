@@ -56,7 +56,6 @@ nnoremap : ;
 nnoremap j gj
 nnoremap k gk
 inoremap <esc> <esc>`^
-inoremap jk <esc>`^
 inoremap <C-@> <C-x><C-]>
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
@@ -73,7 +72,7 @@ nmap <leader>is <Plug>JavaSortImport<cr>
 nmap <leader>ip <Plug>JavaInsertPackage<cr>
 nnoremap <leader>l <C-]>
 nnoremap <leader>L :tnext<cr>
-nnoremap <leader>tn ]c
+nnoremap <leader>cn ]c
 nnoremap <leader>cN [c
 nnoremap <leader>m :call MakeAndroid()<cr>
 nnoremap <leader>n :cn<cr>
