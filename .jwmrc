@@ -74,7 +74,7 @@
     <WindowStyle>
         <Font>Sans-8</Font>
         <Width>4</Width>
-        <Height>25</Height>
+        <Height>26</Height>
         <Corner>0</Corner>
         <Foreground>#666666</Foreground>
         <Background>#111111</Background>
