@@ -1,7 +1,12 @@
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
-[ -z "$SSH_AUTH_SOCK" ] && eval $(ssh-agent)
+ssh_auth_sock=~/.ssh/ssh_auth_sock
+if [ ! -S $ssh_auth_sock ]; then
+    eval $(ssh-agent)
+    ln -sf "$SSH_AUTH_SOCK" $ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=$ssh_auth_sock
 
 [ -f $ZDOTDIR/.base16_theme ] && . $ZDOTDIR/.base16_theme
 
