@@ -1,0 +1,24 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: `basename $0` <push|pull> <all|music> PATH user@host [-f]"
+    exit 1
+}
+
+cmd=$1
+cfg=$2
+src=$3
+dest=$4
+[ "$5" = "-f" ] && dry="" || dry="--dry-run"
+if [ "$cfg" = "music" ]; then
+    args=(-avz --delete --include='*/' --include='*.txt' --include='cover.*' --exclude='*')
+elif [ "$cfg" = "all" ]; then
+    args=(-avz --delete)
+else usage
+fi
+if [ "$cmd" = "push" ]; then
+    rsync $dry ${args[@]} $src/ $dest:backups/Music
+elif [ "$cmd" = "pull" ]; then
+    rsync $dry ${args[@]} $dest:backups/Music/ $src
+else usage
+fi

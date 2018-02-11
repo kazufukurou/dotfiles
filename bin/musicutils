@@ -7,7 +7,7 @@ import os.path
 import sys
 import argparse
 
-parser = argparse.ArgumentParser(description='Various music tagging tools')
+parser = argparse.ArgumentParser(description='Music tagging tools')
 parser.add_argument('-q', '--query', action='store_true', dest='query', help='query tags')
 parser.add_argument('-c', '--clear', action='store_true', dest='clear', help='delete all tags except artist, album, title, date, tracknumber')
 parser.add_argument('-d', '--delete', action='store_true', dest='delete', help='delete all tags')
