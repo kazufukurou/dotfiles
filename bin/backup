@@ -1,32 +1,24 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: `basename $0` <push|pull> <all|music> PATH user@host [-f]"
-    exit 1
+    echo "Usage: `basename $0` <push|pull> <all|music> PATH DEST" && exit 1
 }
 
-cmd=$1
-cfg=$2
-src=$3
-dest=$4
-[ "$5" = "-f" ] && dry="" || dry="--dry-run"
-if [ "$cfg" = "music" ]; then
-    args=(-rvlc --delete --include='*/' --include='*.txt' --include='cover.*' --exclude='*')
-    destdir=$dest:backups/Music
-elif [ "$cfg" = "all" ]; then
-    args=(-rvlc --delete)
-    destdir=$dest:backups/$src
-else
-    usage
+args=(-rvlc --delete)
+if [ "$2" = "music" ]; then
+    args+=(--include='*/' --include='*.txt' --include='cover.*' --exclude='*')
+    dest=$4:backups/Music
+elif [ "$2" = "all" ]; then
+    dest=$4:backups/$3
 fi
-if [ ! -z "$src" ] && [ ! -z "$dest" ]; then
-    if [ "$cmd" = "push" ]; then
-        rsync $dry ${args[@]} $src/ $destdir
-    elif [ "$cmd" = "pull" ]; then
-        rsync $dry ${args[@]} $destdir/ $src
-    else
-        usage
-    fi
-else
-    usage
-fi
+
+[ -z "$3" ] || [ -z "$4" ] || [ -z "$dest" ] && usage
+srcdst=()
+[ "$1" = "push" ] && srcdst=($3/ $dest)
+[ "$1" = "pull" ] && srcdst=($dest/ $3)
+[ ${#srcdst[@]} -eq 0 ] && usage
+
+rsync --dry-run ${args[@]} ${srcdst[@]}
+echo
+read -r -p "Does this look right? [y/N] " response
+[ "$response" = "y" ] && rsync ${args[@]} ${srcdst[@]}

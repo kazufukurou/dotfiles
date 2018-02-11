@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # r="wwwxhhh"
 # echo ${r%x*} ${r#*x}
@@ -10,3 +10,6 @@
 # x=1
 # [ "$x" -ge 1 -a "$x" -le 10 ] && echo "A" || echo "B"
 [ ! -z "$1" ] && [ ! -z "$2" ] && echo "AB" || echo "CC"
+arr=()
+[ ${#arr[@]} -eq 0 ] && echo empty || echo notempty
+
