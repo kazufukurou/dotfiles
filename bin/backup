@@ -11,10 +11,10 @@ src=$3
 dest=$4
 [ "$5" = "-f" ] && dry="" || dry="--dry-run"
 if [ "$cfg" = "music" ]; then
-    args=(-avzO --delete --include='*/' --include='*.txt' --include='cover.*' --exclude='*')
+    args=(-rvlc --delete --include='*/' --include='*.txt' --include='cover.*' --exclude='*')
     destdir=$dest:backups/Music
 elif [ "$cfg" = "all" ]; then
-    args=(-avzO --delete)
+    args=(-rvlc --delete)
     destdir=$dest:backups/$src
 else
     usage
