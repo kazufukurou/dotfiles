@@ -74,11 +74,11 @@ nnoremap <leader>l <C-]>
 nnoremap <leader>L :tnext<cr>
 nnoremap <leader>cn ]c
 nnoremap <leader>cN [c
-nnoremap <leader>m :call MakeAndroid()<cr>
+nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
+nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
+nnoremap <leader>rl :call MakeAndroid('ktlint', '')<cr>
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>N :cp<cr>
-nnoremap <leader>re :vsplit $MYVIMRC<cr>
-nnoremap <leader>rs :source $MYVIMRC<cr>
 nnoremap <leader>s :wa<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>f :FZF<cr>
@@ -99,13 +99,11 @@ function! ToggleQf()
 endfunction
 
 "build and install android project
-command! -bang -nargs=* Make call asyncdo#run(<bang>0, &makeprg, <f-args>)
-function! MakeAndroid()
+function! MakeAndroid(task, buildType)
     let l:buildGradle = gradle#findGradleFile()
     let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
     let l:flavor = substitute(l:line, '\n', '', '')
-    " execute 'make '.l:flavor
-    call asyncdo#run(0, &makeprg, l:flavor)
+    call asyncdo#run(0, &makeprg, a:task.l:flavor.a:buildType)
 endfunction
 
 "toggle tab vs space highlight mode
