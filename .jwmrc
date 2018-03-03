@@ -43,7 +43,7 @@
             <Exit icon="exit.png" label="Exit" confirm="false"/>
             <Program icon="system-hibernate.png" label="Sleep">sudo /sbin/zzz</Program>
             <Program icon="system-reboot.png" label="Reboot">sudo /sbin/reboot</Program>
-            <Program icon="system-shutdown.png" label="Shutdown">sudo /sbin/shutdown</Program>
+            <Program icon="system-shutdown.png" label="Shutdown">sudo /sbin/halt</Program>
         </Menu>
         <!-- <Separator/> -->
     </RootMenu>
