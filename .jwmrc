@@ -67,8 +67,6 @@
         <TaskList maxwidth="256" labeled="false" height="53"/>
         <Spacer/>
         <Dock/>
-        <Clock format="%b %-d">exec:term cal</Clock>
-        <Clock format="%a">exec:term cal</Clock>
         <Clock format="%R">exec:term cal</Clock>
     </Tray>
 
