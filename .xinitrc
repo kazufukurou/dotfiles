@@ -9,15 +9,13 @@ xsetroot -cursor_name left_ptr
 setxkbmap -model pc104 -layout us,ru, -option grp:alt_space_toggle
 sxhkd &
 dunst &
-udiskie &
+udiskie -t &
 cbatticon &
 volumeicon &
 compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 &
 nm-applet &
 if [ -x "$(command -v startxfce4)" ]; then
-    exec startxfce4
-elif [ -x "$(command -v ck-launch-session)" ]; then
-    exec dbus-launch --exit-with-session ck-launch-session jwm
+    exec startxfce4 --with-ck-launch
 else
-    exec jwm
+    exec dbus-launch --exit-with-session ck-launch-session jwm
 fi

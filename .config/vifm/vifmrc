@@ -157,13 +157,13 @@ fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
          \ ffprobe -show_files -pretty %f 2> /dev/null
 
 " Web
-filetype *.html,*.htm vimb %f %i &
+filetype *.html,*.htm,*.gif vimb %f %i &
 
 " Object
 filetype *.o nm %f | less
 
 " Image
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm
         \ feh --start-at %d/%c --action ';feh -t -b trans' --title 'feh [%%u of %%l][%%wx%%h] %%n' %d &> /dev/null &
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
 
