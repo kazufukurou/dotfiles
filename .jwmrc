@@ -33,16 +33,17 @@
             <Program icon="xonotic.png" label="Xonotic">xonotic-glx</Program>
         </Menu>
         <Menu icon="applications-utilities.png" label="Utilities">
+            <Program icon="keyboard.png" label="Onboard">onboard</Program>
             <Program icon="preferences-theme.png" label="Appearance">lxappearance</Program>
             <Program icon="sound.png" label="Volume">pavucontrol</Program>
         </Menu>
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
-            <Restart label="Restart" icon="system-restart.png"/>
-            <Exit label="Exit" confirm="false" icon="exit.png"/>
-            <Program label="Hibernate" icon="system-hibernate.png">sudo /sbin/zzz</Program>
-            <Program label="Reboot" icon="system-reboot.png">sudo /sbin/reboot</Program>
-            <Program label="Shutdown" icon="system-shutdown.png">sudo /sbin/shutdown</Program>
+            <Restart icon="system-restart.png" label="Restart"/>
+            <Exit icon="exit.png" label="Exit" confirm="false"/>
+            <Program icon="system-hibernate.png" label="Sleep">sudo /sbin/zzz</Program>
+            <Program icon="system-reboot.png" label="Reboot">sudo /sbin/reboot</Program>
+            <Program icon="system-shutdown.png" label="Shutdown">sudo /sbin/shutdown</Program>
         </Menu>
         <!-- <Separator/> -->
     </RootMenu>
