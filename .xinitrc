@@ -5,6 +5,7 @@ m2=$(xrandr | grep " connected" | tail -1 | cut -d ' ' -f 1)
 xrandr --output $m1 --auto --output $m2 --auto --right-of $m1
 xrandr --dpi 160
 xset b off
+xset s 200
 xsetroot -cursor_name left_ptr
 setxkbmap -model pc104 -layout us,ru, -option grp:alt_space_toggle
 sxhkd &
