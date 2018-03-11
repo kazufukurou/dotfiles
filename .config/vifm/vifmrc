@@ -152,7 +152,7 @@ fileviewer *.mp3 file
 " Video
 filextype *.avi,*.mp4,*.m4v,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.ogm,*.mov,*.webm
         \ {View using mplayer}
-        \ mplayer %f 2> /dev/null &,
+        \ mplayer -zoom %f 2> /dev/null &,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
          \ ffprobe -show_files -pretty %f 2> /dev/null
 
