@@ -10,14 +10,14 @@ elif [ "$1" = "vimbedit" ]; then
 elif [ "$1" = "vedit" ]; then
     file=/tmp/vedit
     echo '' | xclip -selection clipboard
-    xdotool getactivewindow key ctrl+a ctrl+c
+    xdotool getactivewindow key --clearmodifiers --delay 100 ctrl+a ctrl+c
     xclip -selection clipboard -o > $file
     st -g 80x8 -f $font -e zsh -i -c "vim -c '$' $file"
     text=$(cat $file)
     echo -n "$text" | xclip -selection clipboard
     rm $file
     if [ "$(xdotool getactivewindow getwindowname)" != "st" ]; then
-        xdotool getactivewindow key --clearmodifiers ctrl+v
+        xdotool getactivewindow key --clearmodifiers --delay 100 ctrl+v
     fi
 else
     st -f $font
