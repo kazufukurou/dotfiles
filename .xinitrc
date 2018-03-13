@@ -7,7 +7,6 @@ xrandr --dpi 160
 xset b off
 xset s 200
 xsetroot -cursor_name left_ptr
-setxkbmap -model pc104 -layout us,ru, -option grp:alt_space_toggle
 sxhkd &
 dunst &
 udiskie -t &
