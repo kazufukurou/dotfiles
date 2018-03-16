@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <JWM>
-    <RootMenu onroot="12" height="47">
+    <RootMenu onroot="12" height="48">
         <Program icon="terminal.png" label="Terminal">term</Program>
         <Program icon="file-manager.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
@@ -66,7 +66,6 @@
     <Tray x="0" y="0" layout="vertical" width="56">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
-        <!-- <Pager labeled="true"/> -->
         <TaskList maxwidth="256" labeled="false" height="53"/>
         <Spacer/>
         <Dock/>
@@ -120,7 +119,7 @@
         <Font>Sans-8</Font>
         <Foreground>#999999</Foreground>
         <Background>#222222</Background>
-        <Outline>#000000</Outline>
+        <Outline>#222222</Outline>
         <Active>
             <Foreground>#FFFFFF</Foreground>
             <Background>#444444</Background>
@@ -129,6 +128,7 @@
     </MenuStyle>
     <PopupStyle>
         <Font>Sans-8</Font>
+        <Outline>#999999</Outline>
         <Foreground>#000000</Foreground>
         <Background>#999999</Background>
     </PopupStyle>
