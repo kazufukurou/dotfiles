@@ -164,7 +164,8 @@ filetype *.o nm %f | less
 
 " Image
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm
-        \ feh --start-at %d/%c --action ';feh -t -b trans' --title 'feh [%%u of %%l][%%wx%%h] %%n' %d &> /dev/null &
+        \ feh --start-at %d/%c --action ';feh -t -b trans' --title 'feh [%%u of %%l][%%wx%%h] %%n' %d &> /dev/null &,
+        \ viewnior %f &> /dev/null &
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
 
 " SVG
