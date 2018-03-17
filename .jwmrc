@@ -38,7 +38,6 @@
         <Menu icon="applications-utilities.png" label="Utilities">
             <Program icon="keyboard.png" label="Onboard">onboard</Program>
             <Program icon="preferences-theme.png" label="Appearance">lxappearance</Program>
-            <Program icon="sound.png" label="Volume">pavucontrol</Program>
         </Menu>
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
@@ -66,7 +65,7 @@
     <Tray x="0" y="0" layout="vertical" width="56">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
-        <TaskList maxwidth="256" labeled="false" height="53"/>
+        <TaskList maxwidth="256" labeled="false" height="54"/>
         <Spacer/>
         <Dock/>
         <Clock format="%R">exec:term cal</Clock>
