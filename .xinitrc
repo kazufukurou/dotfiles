@@ -17,5 +17,5 @@ nm-applet &
 if [ -x "$(command -v startxfce4)" ]; then
     exec startxfce4 --with-ck-launch
 else
-    exec dbus-launch --exit-with-session ck-launch-session jwm
+    exec ck-launch-session jwm
 fi
