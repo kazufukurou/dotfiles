@@ -43,9 +43,9 @@
             <Program icon="lock.png" label="Lock">slock</Program>
             <Restart icon="system-restart.png" label="Restart"/>
             <Exit icon="exit.png" label="Exit" confirm="false"/>
-            <Program icon="system-hibernate.png" label="Sleep">sudo /sbin/zzz</Program>
-            <Program icon="system-reboot.png" label="Reboot">sudo /sbin/reboot</Program>
-            <Program icon="system-shutdown.png" label="Shutdown">sudo /sbin/halt</Program>
+            <Program icon="system-hibernate.png" label="Sleep">power sus</Program>
+            <Program icon="system-reboot.png" label="Reboot">power reb</Program>
+            <Program icon="system-shutdown.png" label="Shutdown">power off</Program>
         </Menu>
         <!-- <Separator/> -->
     </RootMenu>
