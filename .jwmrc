@@ -34,6 +34,7 @@
             <Program icon="ppsspp.png" label="PPSSPP">ppsspp-sdl</Program>
             <Program icon="tesseract.png" label="Tesseract">tesseract</Program>
             <Program icon="steam.png" label="Steam">steam</Program>
+            <Program icon="supertuxkart.png" label="SuperTuxKart">supertuxkart</Program>
             <Program icon="xonotic.png" label="Xonotic">xonotic-glx</Program>
         </Menu>
         <Menu icon="applications-utilities.png" label="Utilities">
