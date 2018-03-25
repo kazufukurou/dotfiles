@@ -39,15 +39,14 @@
         <Menu icon="applications-utilities.png" label="Utilities">
             <Program icon="keyboard.png" label="Onboard">onboard</Program>
             <Program icon="preferences-theme.png" label="Appearance">lxappearance</Program>
-            <Program icon="sound.png" label="Volume">pavucontrol</Program>
         </Menu>
         <Menu icon="applications-system.png" label="System">
             <Program icon="lock.png" label="Lock">slock</Program>
             <Restart icon="system-restart.png" label="Restart"/>
             <Exit icon="exit.png" label="Exit" confirm="false"/>
-            <Program icon="system-hibernate.png" label="Sleep">sudo /sbin/zzz</Program>
-            <Program icon="system-reboot.png" label="Reboot">sudo /sbin/reboot</Program>
-            <Program icon="system-shutdown.png" label="Shutdown">sudo /sbin/halt</Program>
+            <Program icon="system-hibernate.png" label="Sleep">power sus</Program>
+            <Program icon="system-reboot.png" label="Reboot">power reb</Program>
+            <Program icon="system-shutdown.png" label="Shutdown">power off</Program>
         </Menu>
         <!-- <Separator/> -->
     </RootMenu>
@@ -67,7 +66,7 @@
     <Tray x="0" y="0" layout="vertical" width="56">
         <TrayButton icon="computer">root:1</TrayButton>
         <TrayButton icon="desktop.png">showdesktop</TrayButton>
-        <TaskList maxwidth="256" labeled="false" height="53"/>
+        <TaskList maxwidth="256" labeled="false" height="54"/>
         <Spacer/>
         <Dock/>
         <Clock format="%R">exec:term cal</Clock>
