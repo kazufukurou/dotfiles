@@ -4,7 +4,7 @@ alt + s
 alt + v
     term vedit
 
-alt + Return
+alt + n
     term
 
 alt + b
@@ -12,9 +12,6 @@ alt + b
 
 alt + l
     slock & sleep 1 && xset dpms force off
-
-XF86MonBrightness{Down,Up}
-    xbacklight {-5,+5}
 
 XF86Audio{Raise,Lower}Volume
     amixer set Master playback {1+,1-}
