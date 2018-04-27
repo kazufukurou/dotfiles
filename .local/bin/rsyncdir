@@ -1,0 +1,14 @@
+#!/bin/bash
+
+[ -z "$1" ] || [ -z "$2" ] && echo "Usage: `basename $0` PATH DEST" && exit 1
+
+args=(-rvlc --delete)
+if [ "$1" = "Music" ] || [ "$2" = "Music" ]; then
+    args+=(--include='*/' --include='*.txt' --include='cover.*' --exclude='*')
+fi
+args+=("$1" "$2")
+
+rsync --dry-run ${args[@]}
+echo
+read -r -p "Does this look right? (y/n) " response
+[ "$response" = "y" ] && rsync ${args[@]}
