@@ -136,7 +136,7 @@ command vgrep nvim "+grep %a"
 " program.
 
 " Pdf
-filetype *.pdf mupdf %f,zathura %f,apvlv %f,xpdf %f
+filextype *.pdf mupdf %f 2> /dev/null &,zathura %f 2> /dev/null &,apvlv %f 2> /dev/null &,xpdf %f 2> /dev/null &
 fileview *.pdf pdftotext -nopgbrk %c -
 
 " PostScript
@@ -146,7 +146,7 @@ filextype *.ps,*.ps.gz gv %c %i &
 filextype *.djvu apvlv %f
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mplayercmd play %d/%f &,
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mplayercmd play %d/%f &
 fileviewer *.mp3 file
 
 " Video
