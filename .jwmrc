@@ -4,6 +4,7 @@
         <Program icon="terminal.png" label="Terminal">term</Program>
         <Program icon="file-manager.png" label="Files">pcmanfm</Program>
         <Menu icon="applications-other.png" label="Applications">
+            <Program icon="android-studio.png" label="Android Studio">android-studio</Program>
             <Program icon="audacity.png" label="Audacity">audacity</Program>
             <Program icon="audacious.png" label="Audacious">audacious</Program>
             <Program icon="calc.png" label="Calculator">mate-calc</Program>
@@ -17,6 +18,7 @@
             <Program icon="text-editor.png" label="Scite">scite</Program>
             <Program icon="skype.png" label="Skype">skypeforlinux</Program>
             <Program icon="transmission.png" label="Transmission">transmission-gtk</Program>
+            <Program icon="virtualbox.png" label="VirtualBox">VirtualBox</Program>
         </Menu>
         <Menu icon="applications-graphics.png" label="Graphics">
             <Program icon="azpainter.png" label="AzPainter">azpainter</Program>
