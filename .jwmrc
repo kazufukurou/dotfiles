@@ -32,12 +32,16 @@
             <Program icon="scanner.png" label="VueScan">~/Downloads/vuex6495/VueScan/vuescan</Program>
         </Menu>
         <Menu icon="applications-games.png" label="Games">
+            <Program icon="flare.png" label="Flare">flare</Program>
             <Program icon="hegdewars.png" label="Hedgewars">hedgewars</Program>
+            <Program icon="hotlinemiami.png" label="Hotline Miami 2">~/GOG\ Games/Hotline\ Miami\ 2\ Wrong\ Number/start.sh</Program>
             <Program icon="ppsspp.png" label="PPSSPP">ppsspp-sdl</Program>
             <Program icon="tesseract.png" label="Tesseract">tesseract</Program>
             <Program icon="steam.png" label="Steam">steam</Program>
             <Program icon="supertuxkart.png" label="SuperTuxKart">supertuxkart</Program>
             <Program icon="teeworlds.png" label="Teeworlds">teeworlds</Program>
+            <Program icon="tesseract.png" label="Tesseract">tesseract</Program>
+            <Program icon="urbanterror.png" label="Urban Terror">urbanterror</Program>
             <Program icon="xonotic.png" label="Xonotic">xonotic-glx</Program>
         </Menu>
         <Menu icon="applications-utilities.png" label="Utilities">
