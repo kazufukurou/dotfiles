@@ -1,0 +1,12 @@
+unbind-key all
+unbind-mouse all
+bind-key M-h window-rcycle
+bind-key M-t window-cycle
+bind-key M-m window-fullscreen
+bind-key M-w window-maximize
+bind-key M-r restart
+bind-key M-z window-delete
+bind-mouse M-1 window-move
+bind-mouse M-3 window-resize
+borderwidth 0
+gap 0 0 56 0

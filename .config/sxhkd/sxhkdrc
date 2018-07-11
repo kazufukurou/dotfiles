@@ -13,6 +13,9 @@ alt + b
 alt + l
     slock & sleep 1 && xset dpms force off
 
+alt + semicolon
+    dmenu_run -fn monospace:pixelsize=18 -nf "#999999" -nb "#555555" -sf "#ffffff" -sb "#555555"
+
 XF86Audio{Raise,Lower}Volume
     amixer set Master playback {1+,1-}
 

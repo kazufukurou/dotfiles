@@ -10,10 +10,11 @@ dunst &
 udiskie -t &
 cbatticon &
 volumeicon &
-compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 &
+compton -cCGfG -r6 -l-8 -t-6 -o.5 -D5 --inactive-dim .3 &
 nm-applet &
+tint2 &
 if [ -x "$(command -v startxfce4)" ]; then
     exec startxfce4 --with-ck-launch
 else
-    exec dbus-launch --exit-with-session ck-launch-session jwm
+    exec dbus-launch --exit-with-session ck-launch-session cwm
 fi
