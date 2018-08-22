@@ -59,8 +59,6 @@ nnoremap k gk
 inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
-nnoremap <leader>cn ]c
-nnoremap <leader>cN [c
 nnoremap <leader>d "_d
 nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>f :FZF<cr>
