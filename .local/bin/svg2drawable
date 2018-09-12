@@ -1,4 +1,10 @@
 #!/bin/sh
+
+if [ $# -eq 0 ] ; then
+    echo "usage: $(basename $0) <svg>"
+    exit 0
+fi
+
 fullpath=$(readlink -f $1)
 newpath=${fullpath%/*}
 newpath=${newpath%/*}/res
