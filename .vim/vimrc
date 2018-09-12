@@ -116,6 +116,9 @@ augroup END
 highlight OverLength ctermbg=1 ctermfg=15
 2match OverLength /\%121v/
 
+"editorconfig-vim
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 "skk
 let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
 let g:skk_auto_save_jisyo = -1
