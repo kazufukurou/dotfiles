@@ -1,19 +1,10 @@
 #! /bin/bash
 
 [ -n "$(amixer get Master | grep off)" ] && v=Mute || v=$(amixer get Master | tail -1 | cut -d ' ' -f6 | tr -d '[%]')
-cpu=$(mpstat -P ALL 2 1 | grep "Average.*all" | awk '{printf("%d", 100 - $12)}')
-t=$((`cat /sys/class/thermal/thermal_zone0/temp`/1000))
-bt=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null)
-b=${bt:-0}
-bs=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null)
 dm=$(date +%b)
 dd=$(date +%-d)
 dw=$(date +%a)
 dt=$(date +%R)
-ba=#[bg=colour5]
-bg=""
-[ $t -gt 80 ] && bg=$ba
-[ $b -le 10 ] && [ "$bs" = "Discharging" ] && bg=$ba
 ft=#[fg=colour7,nobold]
 fv=#[fg=colour15,bold]
-echo "$bg$ft V $fv$v$ft T $fv$t$ft B $fv$b$ft C $fv$cpu$ft $dm $fv$dd$ft $dw $fv$dt"
+echo "$ft V $fv$v$ft $dm $fv$dd$ft $dw $fv$dt"
