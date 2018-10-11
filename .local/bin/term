@@ -12,7 +12,7 @@ elif [ "$1" = "vedit" ]; then
     echo '' | xclip -selection clipboard
     xdotool getactivewindow key --clearmodifiers --delay 100 ctrl+a ctrl+c
     xclip -selection clipboard -o > $file
-    st -g 80x8 -f $font -e zsh -i -c "vim -c '$' $file"
+    st -t vedit -g 80x8 -f $font -e zsh -i -c "vim -c '$' $file"
     text=$(cat $file)
     echo -n "$text" | xclip -selection clipboard
     rm $file
