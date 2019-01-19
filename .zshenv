@@ -15,5 +15,4 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 export JavaScriptCoreUseJIT=0
 export GDK_DPI_SCALE=1.5
 export _JAVA_AWT_WM_NONREPARENTING=1
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Xmx3G'
-
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'

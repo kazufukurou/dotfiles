@@ -22,6 +22,7 @@ repos=(
     https://github.com/hauleth/asyncdo.vim
     https://github.com/einars/translit.vim
     https://github.com/udalov/kotlin-vim
+    https://github.com/sudar/vim-arduino-syntax
     https://github.com/editorconfig/editorconfig-vim
     https://github.com/kazufukurou/vim-android-sensible
 )

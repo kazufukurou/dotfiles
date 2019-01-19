@@ -32,12 +32,17 @@ elif [ $# -eq 1 ]; then
             -v f6=$(tput setaf 6) \
             -v f7=$(tput setaf 7) \
             'match($0, /Playing ((.*\/(.*)\/)([0-9\-]* )?(.*)\/([0-9.]* )?(.*)\..*)\./, arr) {
-                if (arr[3] == "!other") {
-                    print f6 arr[5] " " f1 arr[7] fc
-                    system("cat \"" arr[2] "/" arr[5] "/lyrics/" arr[7] ".txt" "\" 2>/dev/null")
+                parentDirFull=arr[2]
+                parentDir=arr[3]
+                dirDate=arr[4]
+                dirName=arr[5]
+                fileName=arr[7]
+                if (parentDir == "Music") {
+                    print f6 dirName " " f1 fileName fc
+                    system("cat \"" parentDirFull "/" dirName "/lyrics/" fileName ".txt" "\" 2>/dev/null")
                 } else {
-                    print f6 arr[3] " " f4 arr[4] f5 arr[5] " " f1 arr[7] fc
-                    system("cat \"" arr[2] "lyrics/" arr[7] ".txt" "\" 2>/dev/null")
+                    print f6 parentDir " " f4 dirDate f5 dirName " " f1 fileName fc
+                    system("cat \"" parentDirFull "lyrics/" fileName ".txt" "\" 2>/dev/null")
                 }
             }'
     elif [ "$1" = "pause" ]; then echo "pause" > "$fifo"

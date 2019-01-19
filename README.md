@@ -12,8 +12,3 @@ Auto-mount external storage
 $ sudo cp .config/udiskie/50-udiskie.rules /etc/polkit-1/rules.d
 $ usermod -aG storage username
 ```
-
-Keyboard layout
-```
-$ sudo cp -r .config/xorg.conf.d /etc/X11
-```
