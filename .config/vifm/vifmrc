@@ -163,7 +163,7 @@ filextype *.html,*.htm vimb %f %i &
 filetype *.o nm %f | less
 
 " Image
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.gif viewnior %f &> /dev/null &
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.gif imv -s shrink -n %f * &> /dev/null &
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
 
 " SVG
