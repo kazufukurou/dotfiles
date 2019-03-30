@@ -20,5 +20,5 @@ elif [ "$1" = "vedit" ]; then
         xdotool getactivewindow key --clearmodifiers --delay 100 ctrl+v
     fi
 else
-    st -f $font
+    st -f $font -e screen
 fi

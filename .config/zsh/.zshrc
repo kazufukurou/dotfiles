@@ -1,6 +1,9 @@
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
+mkdir -p "${XDG_RUNTIME_DIR}"
+chmod 0700 "${XDG_RUNTIME_DIR}"
+
 ssh_auth_sock=~/.ssh/ssh_auth_sock
 if [ ! -S $ssh_auth_sock ]; then
     eval $(ssh-agent)
@@ -24,7 +27,6 @@ zstyle ':vcs_info:*' unstagedstr '%F{1}-%f'
 zstyle ':vcs_info:*' enable hg git
 
 alias v='$EDITOR'
-alias t='tmux'
 alias m='mplayercmd start'
 alias g='grep -E --color=auto'
 alias hgit='git --git-dir=$HOME/.hgit --work-tree=$HOME'
@@ -72,3 +74,7 @@ stty -ixon
 
 h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
 d2h() { echo "obase=16; $@" | bc }
+
+if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
+    echo -n "Starting WM.." && sleep 1 && exec sway
+fi

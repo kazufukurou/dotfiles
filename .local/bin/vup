@@ -27,7 +27,7 @@ repos=(
     https://github.com/kazufukurou/vim-android-sensible
 )
 
-dir=~/.vim/pack/bundle/start
+dir="$XDG_CONFIG_HOME/vim/pack/bundle/start"
 mkdir -p "$dir"
 for repo in "${repos[@]}"; do
     cd "$dir"

@@ -1,13 +1,16 @@
-syntax on
-filetype plugin indent on
+set undodir=$XDG_CACHE_HOME/vim
+set directory=$XDG_CACHE_HOME/vim
+set backupdir=$XDG_CACHE_HOME/vim
+set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set packpath^=$XDG_CONFIG_HOME/vim
+if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
 
-let base16colorspace=256
-colorscheme base16-terminal
 set nocompatible
-set noundofile "don't create .un~ files
-set nobackup nowritebackup "don't create ~ files
-set noswapfile "don't create .swp files
+"set nobackup nowritebackup "don't create ~ files
+"set noswapfile "don't create .swp files
 set mouse=nv
+set ttymouse=sgr
 set hidden "allow to have unwritten changes to a file and open a new file
 set hlsearch "highlight search
 set scrolloff=4 "keep cursor few lines away edge when scrolling
@@ -35,6 +38,11 @@ set wildignore+=*.apk,*.zip,*.so,*.jar
 set wildignore+=mapping*.txt
 set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
+
+syntax on
+filetype plugin indent on
+let base16colorspace=256
+colorscheme base16-terminal
 
 "netrw
 let g:netrw_banner = 0 "hide help
