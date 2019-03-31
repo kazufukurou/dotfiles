@@ -7,8 +7,8 @@ set packpath^=$XDG_CONFIG_HOME/vim
 if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
 
 set nocompatible
-"set nobackup nowritebackup "don't create ~ files
-"set noswapfile "don't create .swp files
+set nobackup nowritebackup "don't create ~ files
+set noswapfile "don't create .swp files
 set mouse=nv
 set ttymouse=sgr
 set hidden "allow to have unwritten changes to a file and open a new file
@@ -33,7 +33,7 @@ set laststatus=2 "always show the status line
 set virtualedit+=block "allow block selection where is no actual characters
 set wildmode=longest,full "don't show all completions
 set wildignore+=*.class
-set wildignore+=*.png,*.jpg,*.jpeg,*.gif
+set wildignore+=*.mkv,*.avi,*mp3,*.flac,*.png,*.jpg,*.jpeg,*.gif
 set wildignore+=*.apk,*.zip,*.so,*.jar
 set wildignore+=mapping*.txt
 set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
@@ -128,7 +128,7 @@ highlight OverLength ctermbg=1 ctermfg=15
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 "skk
-let g:skk_large_jisyo = '~/.vim/SKK-JISYO.L'
+let g:skk_large_jisyo = $XDG_CONFIG_HOME."/vim/SKK-JISYO.L"
 let g:skk_auto_save_jisyo = -1
 
 "local variable highlighting
@@ -176,6 +176,7 @@ let g:operator#flashy#flash_time = 200
 
 "vim-minisnip
 let g:minisnip_trigger = '<C-s>'
+let g:minisnip_dir = $XDG_CONFIG_HOME."/vim/minisnip"
 
 "vim-cycle
 nmap <silent> <C-a> <Plug>CycleNext

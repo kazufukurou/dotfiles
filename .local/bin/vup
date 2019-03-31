@@ -17,6 +17,7 @@ repos=(
     https://github.com/KeyboardFire/vim-minisnip
     https://github.com/akhaku/vim-java-unused-imports
     https://github.com/Jacoby6000/vimport-sort
+    https://github.com/ervandew/supertab
     https://github.com/tyru/skk.vim
     https://github.com/junegunn/fzf
     https://github.com/hauleth/asyncdo.vim

@@ -1,8 +1,8 @@
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 
-mkdir -p "${XDG_RUNTIME_DIR}"
-chmod 0700 "${XDG_RUNTIME_DIR}"
+mkdir -p "$XDG_RUNTIME_DIR"
+chmod 0700 "$XDG_RUNTIME_DIR"
 
 ssh_auth_sock=~/.ssh/ssh_auth_sock
 if [ ! -S $ssh_auth_sock ]; then
@@ -11,7 +11,7 @@ if [ ! -S $ssh_auth_sock ]; then
 fi
 export SSH_AUTH_SOCK=$ssh_auth_sock
 
-[ -f $ZDOTDIR/.base16_theme ] && . $ZDOTDIR/.base16_theme
+[ -f "$ZDOTDIR/.base16_theme" ] && . "$ZDOTDIR/.base16_theme"
 
 setopt prompt_subst
 autoload -U colors && colors
@@ -75,6 +75,5 @@ stty -ixon
 h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
 d2h() { echo "obase=16; $@" | bc }
 
-if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
-    echo -n "Starting WM.." && sleep 1 && exec sway
-fi
+[ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ] && echo -n "Starting WM.." && sleep 1 && exec sway
+[ -z "$STY" ] && screen -RR

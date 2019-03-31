@@ -5,46 +5,47 @@ set $gray1 888888
 set $gray2 666666
 set $gray3 333333
 set $red ff6633
-set $wcTty 1:tty
-set $wcWeb 2:web
-set $wcIde 3:ide
-set $wcEtc 4:etc
+set $blue 6688aa
+set $wsTty 1:tty
+set $wsWeb 2:web
+set $wsIde 3:ide
+set $wsEtc 4:etc
 set $mod Mod1
-set $menu dmenu_run -fn monospace:pixelsize=19 -nf "#$gray1" -nb "#$gray3" -sf "#$white" -sb "#$gray2"
-set $lock swaylock -c $black -s --separatorcolor $gray3 --ringcolor $gray3 --keyhlcolor $gray2 --indicator-thickness 16 --indicator-radius 96
+set $menu dmenu_run -fn monospace:pixelsize=18 -nf "#$gray1" -nb "#$gray3" -sf "#$white" -sb "#$gray2"
+set $lock swaylock -c $black --separator-color $gray3 --ring-color $gray3 --key-hl-color $gray2 --indicator-thickness 16 --indicator-radius 96
 
 default_border none
 default_floating_border none
-#workspace_layout tabbed
 hide_edge_borders both
 titlebar_border_thickness 0
 titlebar_padding 6 1
 font pango:Monospace 14
 floating_modifier $mod normal
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 gaps inner 16
 smart_gaps on
 
 bindsym $mod+m exec term
 bindsym $mod+z exec term vedit
-bindsym $mod+w kill
-bindsym $mod+b reload
 bindsym $mod+l exec $lock
-bindsym $mod+Shift+w exit
 bindsym $mod+semicolon exec $menu
+bindsym $mod+w kill
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+w exit
 
-bindsym $mod+g focus left
-bindsym $mod+c focus right
+bindsym $mod+h focus left
+bindsym $mod+t focus right
 bindsym $mod+n focus down
 bindsym $mod+r focus up
-bindsym $mod+h workspace prev
-bindsym $mod+t workspace next
-bindsym $mod+s workspace $wcEtc
+bindsym $mod+s split toggle
+bindsym $mod+Shift+g layout toggle tabbed split
+bindsym $mod+Shift+c layout toggle split
+bindsym $mod+g workspace prev
+bindsym $mod+c workspace next
 bindsym $mod+v fullscreen
-bindsym $mod+Shift+h move container to workspace $wcTty
-bindsym $mod+Shift+t move container to workspace $wcWeb
-bindsym $mod+Shift+n move container to workspace $wcIde
-bindsym $mod+Shift+s move container to workspace $wcEtc
+bindsym $mod+Shift+h move container to workspace $wsTty
+bindsym $mod+Shift+t move container to workspace $wsWeb
+bindsym $mod+Shift+n move container to workspace $wsIde
+bindsym $mod+Shift+s move container to workspace $wsEtc
 
 bindsym XF86AudioRaiseVolume exec amixer set Master playback 1+
 bindsym XF86AudioLowerVolume exec amixer set Master playback 1-
@@ -53,11 +54,18 @@ bindsym XF86AudioNext exec mplayercmd next
 bindsym XF86AudioPrev exec mplayercmd prev
 bindsym XF86AudioPlay exec mplayercmd pause
 
-#assign [class=".*"] $wcEtc
-assign [title="st"] $wcTty
-assign [class="Firefox"] $wcWeb
-assign [class="jetbrains-studio"] $wcIde
-for_window [title="vedit"] layout splitv
+assign [title="^(st|screen)$"] $wsTty
+assign [app_id="^vimb$"] $wsWeb
+assign [class="^Firefox$"] $wsWeb
+assign [class="^jetbrains-studio$"] $wsIde
+assign [title="^(?!vedit|vimbedit|imv).*"] $wsEtc
+for_window [title="^(vedit|vimbedit)$"] floating enable
+for_window [class="^imv$"] floating enable
+for_window [app_id="vimb"] layout tabbed
+
+output * {
+    bg #$blue solid_color
+}
 
 input * {
     xkb_layout us

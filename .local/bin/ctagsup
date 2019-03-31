@@ -23,6 +23,6 @@ sed -i '/ native /d' $fileTags
 sed -i '/^m[A-Z]/d' $fileTags
 
 if [ -f ./gradlew ]; then
-    ktRegex='/(class\s|object\s|^\s{4}fun\s|^\s{4}open\sfun\s|^\s{4}val\s|^\s{4}var\s)([a-zA-Z0-9_]+)/\2/d,definition/'
+    ktRegex='/(class\s|object\s|interface\s|^\s{4}fun\s|^\s{4}open\sfun\s|^\s{4}val\s|^\s{4}var\s)([a-zA-Z0-9_]+)/\2/d,definition/'
     ctags -a $javaArgs $ktArgs$ktRegex $commonArgs */src/main/kotlin */src/main/java
 fi
