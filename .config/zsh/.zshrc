@@ -40,6 +40,7 @@ alias java='java -Dawt.useSystemAAFontSettings=on'
 alias tunnel='ssh -C2qTnN -D 8080'
 alias pkgc="sudo xbps-remove -Oo"
 alias pkgi='sudo xbps-install -S'
+alias pkgl='xbps-query -l'
 alias pkgr="sudo xbps-remove -R"
 alias pkgs='xbps-query -Rs'
 alias pkgu='sudo xbps-install -Su'

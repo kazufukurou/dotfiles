@@ -14,6 +14,7 @@ set $mod Mod1
 set $menu dmenu_run -fn monospace:pixelsize=18 -nf "#$gray1" -nb "#$gray3" -sf "#$white" -sb "#$gray2"
 set $lock swaylock -c $black --separator-color $gray3 --ring-color $gray3 --key-hl-color $gray2 --indicator-thickness 16 --indicator-radius 96
 
+workspace $wsTty
 default_border none
 default_floating_border none
 hide_edge_borders both
@@ -25,6 +26,7 @@ gaps inner 16
 smart_gaps on
 
 bindsym $mod+m exec term
+bindsym $mod+Shift+m exec vimb
 bindsym $mod+z exec term vedit
 bindsym $mod+l exec $lock
 bindsym $mod+semicolon exec $menu
