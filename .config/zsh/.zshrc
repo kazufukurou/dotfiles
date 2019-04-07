@@ -1,18 +1,3 @@
-export HISTFILESIZE=100000
-export HISTSIZE=100000
-
-mkdir -p "$XDG_RUNTIME_DIR"
-chmod 0700 "$XDG_RUNTIME_DIR"
-
-ssh_auth_sock=~/.ssh/ssh_auth_sock
-if [ ! -S $ssh_auth_sock ]; then
-    eval $(ssh-agent)
-    ln -sf "$SSH_AUTH_SOCK" $ssh_auth_sock
-fi
-export SSH_AUTH_SOCK=$ssh_auth_sock
-
-[ -f "$ZDOTDIR/.base16_theme" ] && . "$ZDOTDIR/.base16_theme"
-
 setopt prompt_subst
 autoload -U colors && colors
 autoload -U compinit && compinit
@@ -28,13 +13,32 @@ zstyle ':vcs_info:*' enable hg git
 
 alias v='$EDITOR'
 alias m='mplayercmd start'
-alias g='grep -E --color=auto'
+alias grep='grep -E --color=auto'
 alias hgit='git --git-dir=$HOME/.hgit --work-tree=$HOME'
+alias g='git'
+alias gc='git commit -v -a'
+alias gc!='git commit -v -a --amend'
+alias gcn!='git commit -v -a --no-edit --amend'
+alias gcb='git checkout -b'
+alias gcd='git checkout develop'
+alias gcm='git checkout master'
+alias gco='git checkout'
+alias gl='git pull'
+alias glog="git log --pretty='%C(blue)%h%C(reset) %C(green)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso"
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gpu='git push --set-upstream origin HEAD'
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbd='git rebase develop'
+alias gst='git status -s'
+alias gsu='git submodule update'
 alias adble='adb logcat "*:E" | g '
 alias adbld='adb logcat "*:D" | g '
 alias adblc='adb logcat -c'
-alias reb='/usr/bin/reboot'
-alias off='/usr/bin/poweroff'
+alias reb='sudo reboot'
+alias off='sudo poweroff'
 alias lock='slock & sleep 1 && xset dpms force off'
 alias java='java -Dawt.useSystemAAFontSettings=on'
 alias tunnel='ssh -C2qTnN -D 8080'
@@ -55,13 +59,15 @@ zle-keymap-select() {
     vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
     zle reset-prompt
 }
-zle -N zle-keymap-select
 
 zle-line-finish() {
     vim_mode=$vim_ins_mode
 }
+
+zle -N zle-keymap-select
 zle -N zle-line-finish
 
+# set INSERT mode on ^C
 TRAPINT() {
     vim_mode=$vim_ins_mode
     return $(( 128 + $1 ))
@@ -76,5 +82,18 @@ stty -ixon
 h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
 d2h() { echo "obase=16; $@" | bc }
 
+export HISTFILESIZE=100000
+export HISTSIZE=100000
+export KEYTIMEOUT=1
+
+ssh_auth_sock=~/.ssh/ssh_auth_sock
+if [ ! -S $ssh_auth_sock ]; then
+    eval $(ssh-agent)
+    ln -sf "$SSH_AUTH_SOCK" $ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=$ssh_auth_sock
+
+mkdir -p "$XDG_RUNTIME_DIR"
+chmod 0700 "$XDG_RUNTIME_DIR"
+[ -n "$DISPLAY" ] && [ -f "$ZDOTDIR/.base16_theme" ] && . "$ZDOTDIR/.base16_theme"
 [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ] && echo -n "Starting WM.." && sleep 1 && exec sway
-[ -z "$STY" ] && screen -RR
