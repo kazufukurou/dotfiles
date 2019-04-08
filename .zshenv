@@ -4,6 +4,7 @@ path=(~/.local/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 export LANG=en_US.utf8
 export EDITOR=vim
 export VISUAL=$EDITOR
+export BROWSER=vimb
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"

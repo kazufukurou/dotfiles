@@ -22,8 +22,9 @@ titlebar_border_thickness 0
 titlebar_padding 6 1
 font pango:Monospace 14
 floating_modifier $mod normal
-gaps inner 16
+gaps inner 18
 smart_gaps on
+smart_borders on
 
 # no Shift
 # | ws-prev    | ws-next     | focus-up   | lock  |

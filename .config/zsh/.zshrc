@@ -1,4 +1,6 @@
 setopt prompt_subst
+setopt inc_append_history
+setopt share_history
 autoload -U colors && colors
 autoload -U compinit && compinit
 autoload -Uz vcs_info

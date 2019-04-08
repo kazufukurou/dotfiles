@@ -14,5 +14,5 @@ elif [ "$1" = "vedit" ]; then
     wl-copy "$(cat $file)$"
     rm $file
 else
-    st -t st -f $font -e zsh -i -c dvtm
+    st -t st -f $font -e zsh -i -c 'dvtm -h 10000'
 fi

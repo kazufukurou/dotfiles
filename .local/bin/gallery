@@ -1,0 +1,38 @@
+#!/bin/bash
+
+dir="$XDG_CACHE_HOME/gallery"
+index="$dir/index.html"
+thumbs="$dir/thumbs"
+rm -f "$index"
+rm -rf "$thumbs"
+mkdir -p "$thumbs"
+
+echo '<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>gallery</title>
+<style>
+body { background-color: #808080; }
+img { width: 160px; }
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+}
+</style>
+</head>
+<body>
+<div class="grid-container">' >> "$index"
+
+shopt -s nullglob
+for file in *.{jpg,png,svg}; do
+    echo "<img src="$(pwd)/$file"/>" >> "$index"
+done
+
+echo '
+</div>
+</body>
+</html>' >> "$index"
+
+$BROWSER "$index"
