@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
+import time
 import i3ipc
 import threading
-import time
 import subprocess
 
 ipc = i3ipc.Connection()
-transparency_val = '0.8'
+color1 = '#ffffff'
+color2 = '#888888'
+transparency_val = '0.75'
 prev_focused = None
-color1 = "#ffffff"
-color2 = "#888888"
 
 for window in ipc.get_tree():
     if window.focused:
@@ -24,29 +24,29 @@ def on_window_focus(ipc, focused):
         prev_focused.command('opacity ' + transparency_val)
         prev_focused = focused.container
 
-ipc.on("window::focus", on_window_focus)
+def print_status(text, highlight):
+    color = color1 if highlight else color2
+    print('{"full_text":"%s","color":"%s"},' %(text,color), flush=True)
 
+ipc.on("window::focus", on_window_focus)
 t = threading.Thread(target=ipc.main)
 t.start()
 
 print('{"version":1}')
 print('[[],')
 while True:
-    title = prev_focused.name
-    month = time.strftime("%b")
-    day = time.strftime("%d")
-    weekday = time.strftime("%a")
-    hour_minute = time.strftime("%R")
     amixer = subprocess.check_output(['amixer', 'get', 'Master'])
     volume_level = amixer.decode('utf-8').split()[-3].strip('[]%')
     volume_state = amixer.decode('utf-8').split()[-1].strip('[]')
-    volume_color = color1 if volume_state == "on" else color2
     print('[')
-    print('{"full_text":"%s","color":"%s"},' %(title,color2), flush=True)
-    print('{"full_text":"%s","color":"%s"},' %(volume_level,volume_color), flush=True)
-    print('{"full_text":"%s","color":"%s"},' %(month,color2), flush=True)
-    print('{"full_text":"%s","color":"%s"},' %(day,color1), flush=True)
-    print('{"full_text":"%s","color":"%s"},' %(weekday,color2), flush=True)
-    print('{"full_text":"%s","color":"%s"},' %(hour_minute, color1), flush=True)
+    print_status(prev_focused.name, False)
+    print_status('|', False)
+    print_status('V', False)
+    print_status(volume_level, volume_state == 'on')
+    print_status('|', False)
+    print_status(time.strftime('%b'), False)
+    print_status(time.strftime('%d'), True)
+    print_status(time.strftime('%a'), False)
+    print_status(time.strftime('%R'), True)
     print('],')
     time.sleep(1)
