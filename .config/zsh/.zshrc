@@ -98,4 +98,8 @@ export SSH_AUTH_SOCK=$ssh_auth_sock
 mkdir -p "$XDG_RUNTIME_DIR"
 chmod 0700 "$XDG_RUNTIME_DIR"
 [ -n "$DISPLAY" ] && [ -f "$ZDOTDIR/.base16_theme" ] && . "$ZDOTDIR/.base16_theme"
-[ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ] && echo -n "Starting WM.." && sleep 1 && exec sway
+if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
+    echo -n "Starting WM.." && sleep 1 && exec sway
+fi
+
+

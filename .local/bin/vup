@@ -23,6 +23,7 @@ repos=(
     https://github.com/hauleth/asyncdo.vim
     https://github.com/einars/translit.vim
     https://github.com/udalov/kotlin-vim
+    https://github.com/davidhalter/jedi-vim
     https://github.com/sudar/vim-arduino-syntax
     https://github.com/editorconfig/editorconfig-vim
     https://github.com/kazufukurou/vim-android-sensible
@@ -33,6 +34,6 @@ mkdir -p "$dir"
 for repo in "${repos[@]}"; do
     cd "$dir"
     name=${repo##*/}
-    [ ! -d "./$name" ] && git clone $repo
+    [ ! -d "./$name" ] && git clone --recursive $repo
     cd "./$name" && git pull
 done

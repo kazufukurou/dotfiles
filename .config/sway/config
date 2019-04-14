@@ -86,7 +86,7 @@ bar {
     position top
     strip_workspace_numbers yes
     font pango:Monospace 14
-    status_command ~/.local/bin/swaystatus
+    status_command python3 .local/bin/swaystatus.py
     tray_padding 0
     colors {
         statusline #$white
