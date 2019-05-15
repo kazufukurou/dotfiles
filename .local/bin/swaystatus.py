@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
+import sys
 import time
 import i3ipc
 import threading
 import subprocess
 
 ipc = i3ipc.Connection()
-color1 = '#ffffff'
-color2 = '#888888'
+color1 = sys.argv[1]
+color2 = sys.argv[2]
 transparency_val = '0.75'
 prev_focused = None
 
@@ -26,7 +27,7 @@ def on_window_focus(ipc, focused):
 
 def print_status(text, highlight):
     color = color1 if highlight else color2
-    print('{"full_text":"%s","color":"%s"},' %(text,color), flush=True)
+    print('{"full_text":"%s","color":"#%s"},' %(text, color), flush = True)
 
 ipc.on("window::focus", on_window_focus)
 t = threading.Thread(target=ipc.main)
@@ -40,11 +41,9 @@ while True:
     volume_state = amixer.decode('utf-8').split()[-1].strip('[]')
     print('[')
     print_status(prev_focused.name, False)
-    print_status('|', False)
-    print_status('V', False)
+    print_status('  V', False)
     print_status(volume_level, volume_state == 'on')
-    print_status('|', False)
-    print_status(time.strftime('%b'), False)
+    print_status(time.strftime('  %b'), False)
     print_status(time.strftime('%d'), True)
     print_status(time.strftime('%a'), False)
     print_status(time.strftime('%R'), True)

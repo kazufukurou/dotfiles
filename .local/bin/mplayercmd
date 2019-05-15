@@ -10,10 +10,12 @@ fifo=$HOME/.mplayer/fifo
 playlist=$HOME/.mplayer/playlist
 
 if [ $# -eq 2 ]; then
-    append=""
+    append="0"
     [ "$1" = "add" ] && append="1"
-    if [ -d "$2" ]; then
-        find "$2" -iname '*.flac' -o -iname '*.mp3' -o -iname '*.ogg' | shuf > "$playlist"
+    [ "$1" = "play" ] && append=""
+    if [ "$append" = "0" ]; then usage
+    elif [ -d "$2" ]; then
+        find -L "$2" -iname '*.flac' -o -iname '*.mp3' -o -iname '*.ogg' | shuf > "$playlist"
         echo "loadlist $playlist $append" > "$fifo"
     elif [ -f "$2" ]; then
         echo "loadfile \"$2\" $append" > "$fifo"
@@ -25,25 +27,13 @@ elif [ $# -eq 1 ]; then
         mkfifo "$fifo"
         mplayer -slave -quiet -idle -input file="$fifo" 2> /dev/null | \
         grep --line-buffered -o "Playing .*" | \
-        gawk -v fc=$(tput sgr0) \
-            -v f1=$(tput setaf 1) \
-            -v f4=$(tput setaf 4) \
-            -v f5=$(tput setaf 5) \
-            -v f6=$(tput setaf 6) \
-            -v f7=$(tput setaf 7) \
-            'match($0, /Playing ((.*\/(.*)\/)([0-9\-]* )?(.*)\/([0-9.]* )?(.*)\..*)\./, arr) {
-                parentDirFull=arr[2]
-                parentDir=arr[3]
-                dirDate=arr[4]
-                dirName=arr[5]
-                fileName=arr[7]
-                if (parentDir == "Music") {
-                    print f6 dirName " " f1 fileName fc
-                    system("cat \"" parentDirFull "/" dirName "/lyrics/" fileName ".txt" "\" 2>/dev/null")
-                } else {
-                    print f6 parentDir " " f4 dirDate f5 dirName " " f1 fileName fc
-                    system("cat \"" parentDirFull "lyrics/" fileName ".txt" "\" 2>/dev/null")
-                }
+        gawk -v fc=$(tput sgr0) -v f4=$(tput setaf 4) -v f6=$(tput setaf 6) \
+            'match($0, /Playing (.*\/(.*)\/)(.*)\..*\./, arr) {
+                parentDirFull=arr[1]
+                parentDir=arr[2]
+                fileName=arr[3]
+                print f4 parentDir " " f6 fileName fc
+                system("cat \"" parentDirFull "/lyrics/" fileName ".txt" "\" 2>/dev/null")
             }'
     elif [ "$1" = "pause" ]; then echo "pause" > "$fifo"
     elif [ "$1" = "next" ]; then echo "pt_step 1" > "$fifo"

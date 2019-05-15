@@ -1,30 +1,17 @@
 ### Variables
 set $black 000000
 set $white ffffff
-set $gray1 888888
-set $gray2 666666
-set $gray3 333333
+set $gray1 666666
+set $gray2 333333
+set $gray3 222222
 set $red ff6633
-set $blue 6688aa
 set $wsTty 1:tty
 set $wsWeb 2:web
 set $wsIde 3:ide
 set $wsEtc 4:etc
 set $mod Mod1
-set $menu dmenu_run -fn monospace:pixelsize=18 -nf "#$gray1" -nb "#$gray3" -sf "#$white" -sb "#$gray2"
-set $lock swaylock -c $black --separator-color $gray3 --ring-color $gray3 --key-hl-color $gray2 --indicator-thickness 16 --indicator-radius 96
-
-workspace $wsTty
-default_border none
-default_floating_border none
-hide_edge_borders both
-titlebar_border_thickness 0
-titlebar_padding 6 1
-font pango:Monospace 14
-floating_modifier $mod normal
-gaps inner 18
-smart_gaps on
-smart_borders on
+set $menu dmenu_run -fn monospace:pixelsize=18 -nf "#$gray1" -nb "#$black" -sf "#$white" -sb "#$black"
+set $lock swaylock -c $black --separator-color $gray2 --ring-color $gray2 --key-hl-color $gray1 --indicator-thickness 16 --indicator-radius 96
 
 # no Shift
 # | ws-prev    | ws-next     | focus-up   | lock  |
@@ -73,6 +60,20 @@ for_window [title="^vedit$"] floating enable
 for_window [class="^imv$"] floating enable
 for_window [app_id="vimb"] layout tabbed
 
+workspace $wsTty
+default_border none
+default_floating_border none
+hide_edge_borders both
+titlebar_border_thickness 0
+titlebar_padding 6 1
+font pango:Monospace 14
+floating_modifier $mod normal
+client.focused #$gray3 #$gray3 #$white #$white #$white
+client.unfocused #$gray3 #$gray3 #$white #$white #$white
+gaps inner 18
+smart_gaps on
+smart_borders on
+
 output * {
     bg #$black solid_color
 }
@@ -86,16 +87,16 @@ bar {
     position top
     strip_workspace_numbers yes
     font pango:Monospace 14
-    status_command python3 .local/bin/swaystatus.py
+    status_command python3 .local/bin/swaystatus.py "$white" "$gray1"
     tray_padding 0
     colors {
         statusline #$white
-        background #$gray3
-        separator #$gray3
+        background #$black
+        separator #$black
 
-        focused_workspace #$gray3 #$gray3 #$white
-        active_workspace #$gray3 #$gray3 #$white
-        inactive_workspace #$gray3 #$gray3 #$gray1
+        focused_workspace #$black #$black #$white
+        active_workspace #$black #$black #$white
+        inactive_workspace #$black #$black #$gray1
         urgent_workspace #$red #$red #$white
     }
 }

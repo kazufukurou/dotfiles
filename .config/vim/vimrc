@@ -65,7 +65,7 @@ nnoremap : ;
 nnoremap j gj
 nnoremap k gk
 inoremap <esc> <esc>`^
-"inoremap <C-space> <C-x><C-]>
+inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
 nnoremap <leader>d "_d
 nnoremap <leader>e :Lexplore<cr>
