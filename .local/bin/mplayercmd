@@ -15,7 +15,7 @@ if [ $# -eq 2 ]; then
     [ "$1" = "play" ] && append=""
     if [ "$append" = "0" ]; then usage
     elif [ -d "$2" ]; then
-        find -L "$2" -iname '*.flac' -o -iname '*.mp3' -o -iname '*.ogg' | shuf > "$playlist"
+        find -L "$2" -iname '*.flac' -o -iname '*.mp3' -o -iname '*.ogg' -o -iname '*.wav' | shuf > "$playlist"
         echo "loadlist $playlist $append" > "$fifo"
     elif [ -f "$2" ]; then
         echo "loadfile \"$2\" $append" > "$fifo"
