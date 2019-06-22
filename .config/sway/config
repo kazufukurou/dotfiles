@@ -55,6 +55,7 @@ assign [title="^(st|screen)$"] $wsTty
 assign [app_id="^vimb$"] $wsWeb
 assign [class="^Firefox$"] $wsWeb
 assign [class="^jetbrains-studio$"] $wsIde
+assign [class="^jetbrains-idea-ce$"] $wsIde
 assign [title="^(?!vedit|imv).*"] $wsEtc
 for_window [title="^vedit$"] floating enable
 for_window [class="^imv$"] floating enable
@@ -79,7 +80,9 @@ output * {
 }
 
 input * {
-    xkb_layout us
+    xkb_layout us,ru
+    xkb_variant ,phonetic_yazherty
+    xkb_options grp:alt_space_toggle
 }
 
 bar {

@@ -21,7 +21,6 @@ repos=(
     https://github.com/tyru/skk.vim
     https://github.com/junegunn/fzf
     https://github.com/hauleth/asyncdo.vim
-    https://github.com/einars/translit.vim
     https://github.com/udalov/kotlin-vim
     https://github.com/davidhalter/jedi-vim
     https://github.com/sudar/vim-arduino-syntax

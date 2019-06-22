@@ -7,11 +7,13 @@ elif [ "$1" = "alsa" ]; then
     st -t st -f $font -e zsh -i -c alsamixer
 elif [ "$1" = "vimbedit" ]; then
     st -t vedit -g 80x8 -f $font -e zsh -i -c "vim -c '$' $2"
+elif [ "$1" = "vimbdownload" ]; then
+    st -t st -f $font -e zsh -i -c "cd '$VIMB_DOWNLOAD_PATH' && curl -sLJOC - -e '$VIMB_URI' $2"
 elif [ "$1" = "vedit" ]; then
     file="$XDG_CACHE_HOME/vim/vedit"
     #wl-paste -n $file
     st -t vedit -g 80x8 -f $font -e zsh -i -c "vim -c '$' $file"
-    wl-copy "$(cat $file)$"
+    wl-copy "$(cat $file)"
     rm $file
 else
     st -t st -f $font -e zsh -i -c 'dvtm -h 10000'
