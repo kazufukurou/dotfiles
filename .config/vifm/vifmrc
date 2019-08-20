@@ -147,7 +147,7 @@ filextype *.djvu apvlv %f
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mplayercmd play %d/%f &
-fileviewer *.mp3 file
+fileviewer *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape ffmpeg -i
 
 " Video
 filextype *.avi,*.mp4,*.m4v,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.ogm,*.mov,*.webm

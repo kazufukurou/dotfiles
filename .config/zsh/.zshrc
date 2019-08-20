@@ -55,7 +55,7 @@ alias off='sudo poweroff'
 alias lock='slock & sleep 1 && xset dpms force off'
 alias java='java -Dawt.useSystemAAFontSettings=on'
 alias tunnel='ssh -C2qTnN -D 8080'
-alias pkgc="sudo xbps-remove -Oo"
+alias pkgc="sudo xbps-remove -Oo ; sudo vkpurge rm all"
 alias pkgi='sudo xbps-install -S'
 alias pkgl='xbps-query -l'
 alias pkgr="sudo xbps-remove -R"

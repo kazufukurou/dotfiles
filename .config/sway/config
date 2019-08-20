@@ -10,7 +10,7 @@ set $wsWeb 2:web
 set $wsIde 3:ide
 set $wsEtc 4:etc
 set $mod Mod1
-set $menu dmenu_run -fn monospace:pixelsize=18 -nf "#$gray1" -nb "#$black" -sf "#$white" -sb "#$black"
+set $menu dmenu-wl_run -h 24 -nf "#$gray1" -nb "#$black" -sf "#$white" -sb "#$black"
 set $lock swaylock -c $black --separator-color $gray2 --ring-color $gray2 --key-hl-color $gray1 --indicator-thickness 16 --indicator-radius 96
 
 # no Shift

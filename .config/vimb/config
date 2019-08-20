@@ -1,7 +1,7 @@
 #set user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/999+ (KHTML, like Gecko) Safari/999.9"
 set download-path=~/Downloads/
 set download-use-external=true
-set download-command="term vimbdownload %s"
+set download-command=term vimbdl %s
 set incsearch=true
 set completion-css=color:#d3d0c8;background-color:#393939;font:11pt Monospace;
 set completion-hover-css=color:#d3d0c8;background-color:#393939;font:11pt Monospace;
