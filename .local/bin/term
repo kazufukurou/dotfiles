@@ -1,10 +1,10 @@
 #!/bin/sh
 
 font="monospace:pixelsize=20"
-if [ "$1" = "cal" ]; then
-    st -t st -f $font -e zsh -i -c 'cal -3; read -s -n 1'
-elif [ "$1" = "alsa" ]; then
+if [ "$1" = "alsa" ]; then
     st -t st -f $font -e zsh -i -c alsamixer
+elif [ "$1" = "cal" ]; then
+    st -t st -f $font -e zsh -i -c 'cal -3; read -s -n 1'
 elif [ "$1" = "vimbedit" ]; then
     st -t vedit -g 80x8 -f $font -e zsh -i -c "vim -c '$' $2"
 elif [ "$1" = "vimbdl" ]; then

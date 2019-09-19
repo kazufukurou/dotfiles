@@ -146,13 +146,13 @@ filextype *.ps,*.ps.gz gv %c %i &
 filextype *.djvu apvlv %f
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mplayercmd play %d/%f &
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mpvcmd play %d/%f
 fileviewer *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape ffmpeg -i
 
 " Video
 filextype *.avi,*.mp4,*.m4v,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.ogm,*.mov,*.webm
-        \ {View using mplayer}
-        \ mplayer -font 'M+ 1mn' -utf8 -zoom %f 2> /dev/null &,
+        \ {View using mpv}
+        \ mpv %f 2> /dev/null &,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
          \ ffprobe -show_files -pretty %f 2> /dev/null
 
@@ -272,7 +272,7 @@ nmap ,w :set wrap!<cr>
 
 " My mappings
 nmap ; :
-nmap ,p :!mplayercmd play %d/%f<cr>
-nmap ,a :!mplayercmd add %d/%f<cr>
+nmap ,p :!mpvcmd play %d/%f<cr>
+nmap ,a :!mpvcmd add %d/%f<cr>
 nmap ,e :!dtrx %f<cr>
 nmap ,v :!vim %f<cr>

@@ -46,10 +46,10 @@ bindsym $mod+Shift+w exit
 bindsym $mod+Shift+v reload
 bindsym XF86AudioRaiseVolume exec amixer set Master playback 1+
 bindsym XF86AudioLowerVolume exec amixer set Master playback 1-
-bindsym XF86AudioMute exec amixer set Master toggle
-bindsym XF86AudioNext exec mplayercmd next
-bindsym XF86AudioPrev exec mplayercmd prev
-bindsym XF86AudioPlay exec mplayercmd pause
+bindsym XF86AudioMute exec amixer set PCM toggle
+bindsym XF86AudioNext exec mpvcmd next
+bindsym XF86AudioPrev exec mpvcmd prev
+bindsym XF86AudioPlay exec mpvcmd pause
 
 assign [title="^(st|screen)$"] $wsTty
 assign [app_id="^vimb$"] $wsWeb
@@ -90,7 +90,7 @@ bar {
     position top
     strip_workspace_numbers yes
     font pango:Monospace 14
-    status_command python3 .local/bin/swaystatus.py "$white" "$gray1"
+    status_command python3 .local/bin/swaystatus "$white" "$gray1"
     tray_padding 0
     colors {
         statusline #$white

@@ -14,7 +14,7 @@ zstyle ':vcs_info:*' unstagedstr '%F{1}-%f'
 zstyle ':vcs_info:*' enable hg git
 
 alias v='$EDITOR'
-alias m='mplayercmd start'
+alias m='mpvcmd start'
 alias grep='grep -E --color=auto'
 alias hgit='git --git-dir=$HOME/.hgit --work-tree=$HOME'
 alias g='git'
@@ -110,6 +110,8 @@ mkdir -p "$XDG_RUNTIME_DIR"
 chmod 0700 "$XDG_RUNTIME_DIR"
 [ -n "$DISPLAY" ] && [ -f "$ZDOTDIR/.base16_theme" ] && . "$ZDOTDIR/.base16_theme"
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
+    aplay nothing 2> /dev/null # activate alsa softvol
+    amixer set Master 50%
     echo -n "Starting WM.." && sleep 1 && exec sway
 fi
 
