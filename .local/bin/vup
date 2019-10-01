@@ -31,6 +31,7 @@ repos=(
 dir="$XDG_CONFIG_HOME/vim/pack/bundle/start"
 mkdir -p "$dir"
 for repo in "${repos[@]}"; do
+    echo "Checking $repo"
     cd "$dir"
     name=${repo##*/}
     [ ! -d "./$name" ] && git clone --recursive $repo

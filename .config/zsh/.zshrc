@@ -15,6 +15,7 @@ zstyle ':vcs_info:*' enable hg git
 
 alias v='$EDITOR'
 alias m='mpvcmd start'
+alias lyrics='python3 ~/Repos/lyric-get/main_cli.py'
 alias grep='grep -E --color=auto'
 alias hgit='git --git-dir=$HOME/.hgit --work-tree=$HOME'
 alias g='git'

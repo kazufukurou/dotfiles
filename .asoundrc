@@ -6,16 +6,16 @@ pcm.!default {
             type multi
             slaves {
                 a {
-                    pcm "hw:0"
+                    pcm "hw:PCH"
                     channels 2
                 }
                 b {
                     pcm {
                         type softvol
-                        slave.pcm "hw:1"
+                        slave.pcm "hw:MicroII"
                         control {
                             name Master
-                            card 1
+                            card MicroII
                         }
                     }
                     channels 2
@@ -34,5 +34,5 @@ pcm.!default {
 
 ctl.!default {
     type hw
-    card 1
+    card MicroII
 }
