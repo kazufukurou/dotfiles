@@ -127,15 +127,11 @@ highlight OverLength ctermbg=1 ctermfg=15
 "editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-"skk
-let g:skk_large_jisyo = $XDG_CONFIG_HOME."/vim/SKK-JISYO.L"
-let g:skk_auto_save_jisyo = -1
+"eskk
+let g:eskk#large_dictionary = { 'path': "~/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp' }
 
 "local variable highlighting
 let g:TypesFileIncludeLocals = 1
-
-"vim-surrond
-let g:surround_45 = '«\r»'
 
 "vim-sneak
 let g:sneak#label = 1
@@ -230,7 +226,7 @@ function! Status(winnum)
     if a:winnum == winnr()
         redraw
         let l:mode = mode()
-        let l:skk = substitute(SkkGetModeStr(),'\[SKK:\(.*\)\]','\1','')
+        let l:skk = eskk#is_enabled() ? get(g:eskk#statusline_mode_strings, eskk#get_current_instance().mode, ' ') : ' '
         let l:stat = '' "mode start
         if l:mode ==# 'i' | let l:stat .= '%1* '.(l:skk == ' ' ? 'I' : l:skk)
         elseif l:mode ==# 'n' | let l:stat .= '%2* N'
