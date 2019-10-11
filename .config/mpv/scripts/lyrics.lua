@@ -23,7 +23,6 @@ function main()
     realFilePath = run("realpath \"" .. filePath .. "\"")
     lrcFileName = fileName:gsub("%.[^.]+$", ".txt")
     lrcPath = realFilePath:gsub("%/[^/]+$", "/lyrics/" .. lrcFileName)
-    mp.commandv("print-text", "aaa " .. lrcPath)
     if file_exists(lrcPath) then
         mp.commandv("print-text", "")
         mp.commandv("print-text", read_all(lrcPath))

@@ -1,0 +1,100 @@
+[submodule ".config/vim/pack/bundle/start/vim-surround"]
+	path = .config/vim/pack/bundle/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-commentary"]
+	path = .config/vim/pack/bundle/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-repeat"]
+	path = .config/vim/pack/bundle/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-fugitive"]
+	path = .config/vim/pack/bundle/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-abolish"]
+	path = .config/vim/pack/bundle/start/vim-abolish
+	url = https://github.com/tpope/vim-abolish
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-unimpaired"]
+	path = .config/vim/pack/bundle/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-operator-flashy"]
+	path = .config/vim/pack/bundle/start/vim-operator-flashy
+	url = https://github.com/haya14busa/vim-operator-flashy
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-asterisk"]
+	path = .config/vim/pack/bundle/start/vim-asterisk
+	url = https://github.com/haya14busa/vim-asterisk
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/incsearch.vim"]
+	path = .config/vim/pack/bundle/start/incsearch.vim
+	url = https://github.com/haya14busa/incsearch.vim
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-sneak"]
+	path = .config/vim/pack/bundle/start/vim-sneak
+	url = https://github.com/justinmk/vim-sneak
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/delimitMate"]
+	path = .config/vim/pack/bundle/start/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-operator-user"]
+	path = .config/vim/pack/bundle/start/vim-operator-user
+	url = https://github.com/kana/vim-operator-user
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-cycle"]
+	path = .config/vim/pack/bundle/start/vim-cycle
+	url = https://github.com/bootleq/vim-cycle
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-minisnip"]
+	path = .config/vim/pack/bundle/start/vim-minisnip
+	url = https://github.com/KeyboardFire/vim-minisnip
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-java-unused-imports"]
+	path = .config/vim/pack/bundle/start/vim-java-unused-imports
+	url = https://github.com/akhaku/vim-java-unused-imports
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vimport-sort"]
+	path = .config/vim/pack/bundle/start/vimport-sort
+	url = https://github.com/Jacoby6000/vimport-sort
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/supertab"]
+	path = .config/vim/pack/bundle/start/supertab
+	url = https://github.com/ervandew/supertab
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/fzf"]
+	path = .config/vim/pack/bundle/start/fzf
+	url = https://github.com/junegunn/fzf
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/asyncdo.vim"]
+	path = .config/vim/pack/bundle/start/asyncdo.vim
+	url = https://github.com/hauleth/asyncdo.vim
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/kotlin-vim"]
+	path = .config/vim/pack/bundle/start/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/jedi-vim"]
+	path = .config/vim/pack/bundle/start/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-arduino-syntax"]
+	path = .config/vim/pack/bundle/start/vim-arduino-syntax
+	url = https://github.com/sudar/vim-arduino-syntax
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/editorconfig-vim"]
+	path = .config/vim/pack/bundle/start/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/vim-android-sensible"]
+	path = .config/vim/pack/bundle/start/vim-android-sensible
+	url = https://github.com/kazufukurou/vim-android-sensible
+	ignore = untracked
+[submodule ".config/vim/pack/bundle/start/eskk.vim"]
+	path = .config/vim/pack/bundle/start/eskk.vim
+	url = https://github.com/tyru/eskk.vim.git
+	ignore = untracked
