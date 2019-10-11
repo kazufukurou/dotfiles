@@ -2,6 +2,7 @@ typeset -U path
 path=(~/.local/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 
 export LANG=en_US.utf8
+export LESSCHARSET=utf-8
 export EDITOR=vim
 export VISUAL=$EDITOR
 export BROWSER=vimb

@@ -13,6 +13,8 @@
     branch = auto
 [credential]
     helper = cache --timeout=3600
+[alias]
+    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev' | xargs -n 1 git branch -d"
 [diff]
     tool = vimdiff
 [difftool]
