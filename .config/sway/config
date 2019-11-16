@@ -86,7 +86,7 @@ input * {
 }
 
 bar {
-    height 25
+    height 24
     position top
     strip_workspace_numbers yes
     font pango:Monospace 14
