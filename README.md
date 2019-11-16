@@ -2,7 +2,7 @@
 
 ```
 $ cd
-$ git clone --bare git@github.com:kazufukurou/dotfiles.git .hgit
-$ git --git-dir=.hgit --work-tree=$HOME checkout -f
-$ echo '*' >> .hgit/info/exclude
+$ git clone --bare git@github.com:kazufukurou/dotfiles.git .homegit
+$ git --git-dir=.homegit --work-tree=$HOME checkout -f
+$ echo '*' >> .homegit/info/exclude
 ```
