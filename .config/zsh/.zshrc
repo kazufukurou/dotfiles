@@ -33,6 +33,8 @@ alias pkgl='xbps-query -l'
 alias pkgr="sudo xbps-remove -R"
 alias pkgs='xbps-query -Rs'
 alias pkgu='sudo xbps-install -Su'
+alias mnt='sudo mount -o gid=users,fmask=113,dmask=002'
+alias umnt='sudo umount'
 
 precmd () { vcs_info }
 

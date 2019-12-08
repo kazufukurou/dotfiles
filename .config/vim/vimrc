@@ -213,7 +213,7 @@ let g:import_sort_settings = {
 
 augroup statusline
     autocmd!
-    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * call <sid>RefreshStatus()
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,QuickFixCmdPost * call <sid>RefreshStatus()
 augroup END
 
 function! s:RefreshStatus()

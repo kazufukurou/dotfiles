@@ -49,7 +49,7 @@
     s = status -s
     sh = stash
     su = submodule
-    suu = submodule update --recursive --init
+    suu = submodule update --init
     cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev' | xargs -n 1 git branch -d"
 [diff]
     tool = vimdiff

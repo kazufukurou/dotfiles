@@ -18,10 +18,7 @@ export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 export ANDROID_HOME="$HOME/android-sdk"
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
-[ -e /usr/lib/jvm/oracle-jdk ] && export JAVA_HOME=/usr/lib/jvm/oracle-jdk
-[ -e /usr/lib/jvm/openjdk ] && export JAVA_HOME=/usr/lib/jvm/openjdk
-[ -e /usr/libexec/java_home ] && export JAVA_HOME=$(/usr/libexec/java_home)
-export CLASSPATH=/usr/share/java/bsh.jar
+export JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 export JavaScriptCoreUseJIT=0
 export GDK_DPI_SCALE=1.5
 export _JAVA_AWT_WM_NONREPARENTING=1
