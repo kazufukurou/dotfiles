@@ -21,6 +21,9 @@
     ca = commit -v -a
     cam = commit -v -a --amend
     camn = commit -v -a --amend --no-edit
+    ch = cherry-pick
+    cha = cherry-pick --abort
+    chc = cherry-pick --continue
     cm = commit -v --amend
     cod = checkout develop
     com = checkout master
