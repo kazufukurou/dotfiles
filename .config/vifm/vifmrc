@@ -1,25 +1,26 @@
+colorscheme base16
 set syscalls " don't use standard utilites for file operations
-set vicmd=vim " vim command
+set slowfs=curlftpfs " don't do too much requests to slow file systems
+set vicmd=vim
 set trash " use trash
+set trashdir=~/.local/share/Trash
+set fusehome=/tmp/vifm_FUSE " if no FUSE_HOME set
 set history=100 " directory history
 set followlinks " follow links on l or Enter.
-set fastrun " allow partial commands (e.g. :!Te instead of :!Terminal or :!Te<tab>).
 set sortnumbers " natural sort of (version) numbers within text.
 set undolevels=100 " maximum number of changes that can be undone.
 set novimhelp " don't use vim.txt help file
 set norunexec " don't run executables on Enter
-set noiec " use KiB, MiB, ... instead of KB, MB, ...
-colorscheme base16 " selected color scheme
-set fusehome=/tmp/vifm_FUSE " if no FUSE_HOME set
-set timefmt=%Y-%m-%d\ %H:%M " format for time in file list
+set fastrun " allow partial commands (e.g. :!Te instead of :!Terminal or :!Te<tab>).
 set wildmenu " show list of matches on tab complition in command-line mode
 set ignorecase " ignore case in search patterns...
 set smartcase " unless it contains at least one uppercase
 set nohlsearch " don't highlight search results automatically
 set incsearch " use increment searching (search while typing)
 set scrolloff=4 " try to leave some space from cursor to upper/lower border in lists
-set slowfs=curlftpfs " don't do too much requests to slow file systems
-set statusline="  %t%= %A %10u:%-7g %15s %20d  " " set custom status line look
+set statusline="  %t%= %A %10u:%-7g %15s %20d  "
+set timefmt=%Y-%m-%d\ %H:%M
+set noiec " use KiB, MiB, ... instead of KB, MB, ...
 set tuioptions-=s " remove borders
 
 " :mark mark /full/directory/path [filename]
