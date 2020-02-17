@@ -17,5 +17,5 @@ script="$dir/scripts/base16-$name.sh"
 
 if [ -f "$script" ]; then
     . "$script"
-    ln -fs "$script" "$ZDOTDIR/.base16_theme"
+    ln -fs "$script" "$HOME/.base16_theme"
 fi

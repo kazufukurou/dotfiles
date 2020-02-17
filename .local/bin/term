@@ -1,20 +1,18 @@
 #!/bin/sh
 
 font="monospace:pixelsize=20"
-if [ "$1" = "alsa" ]; then
-    st -t st -f $font -e zsh -i -c alsamixer
-elif [ "$1" = "cal" ]; then
-    st -t st -f $font -e zsh -i -c 'cal -3; read -s -n 1'
+cmdexec="st -t st -f $font -e bash -i -c"
+cmdvim="st -t vedit -g 80x8 -f $font -e bash -i -c"
+if [ "$1" = "vimbdl" ]; then
+    $cmdexec "cd $VIMB_DOWNLOAD_PATH && curl -LJOC - -e '$VIMB_URI' $2; read -s -n 1"
 elif [ "$1" = "vimbedit" ]; then
-    st -t vedit -g 80x8 -f $font -e zsh -i -c "vim -c '$' $2"
-elif [ "$1" = "vimbdl" ]; then
-    st -t st -f $font -e zsh -i -c "cd $VIMB_DOWNLOAD_PATH && curl -LJOC - -e '$VIMB_URI' $2; read -s -n 1"
+    $cmdvim "vim -c '$' $2"
 elif [ "$1" = "vedit" ]; then
     file="$XDG_CACHE_HOME/vim/vedit"
-    #wl-paste -n $file
-    st -t vedit -g 80x8 -f $font -e zsh -i -c "vim -c '$' $file"
+    wl-paste -n > $file
+    $cmdvim "vim -c '$' $file"
     wl-copy "$(cat $file)"
     rm $file
 else
-    st -t st -f $font -e zsh -i -c 'dvtm -h 10000'
+    $cmdexec 'dvtm -M -h 10000'
 fi
