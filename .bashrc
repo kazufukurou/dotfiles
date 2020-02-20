@@ -57,7 +57,7 @@ f2=$(tput setaf 2)
 f4=$(tput setaf 4)
 f5=$(tput setaf 5)
 f11=$(tput setaf 11)
-PS1='${f5}\u@\h ${f4}\w ${f11}$(git_branch) $f\n${f2}$ $f'
+PS1='\n${f5}\u@\h ${f4}\w ${f11}$(git_branch) $f\n$ '
 
 ssh_auth_sock=~/.ssh/ssh_auth_sock
 if [ ! -S "$ssh_auth_sock" ]; then
