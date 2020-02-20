@@ -51,15 +51,13 @@ bindsym XF86AudioNext exec mpvcmd next
 bindsym XF86AudioPrev exec mpvcmd prev
 bindsym XF86AudioPlay exec mpvcmd pause
 
-assign [title="^(st|screen)$"] $wsTty
-assign [app_id="^vimb$"] $wsWeb
-assign [class="^Firefox$"] $wsWeb
-assign [class="^jetbrains-studio$"] $wsIde
-assign [class="^jetbrains-idea-ce$"] $wsIde
+assign [title="^(st)$"] $wsTty
+assign [app_id="^(vimb|firefox)$"] $wsWeb
+assign [class="^(jetbrains-studio|jetbrains-idea-ce)$"] $wsIde
 assign [title="^(?!vedit|imv).*"] $wsEtc
-for_window [title="^vedit$"] floating enable
-for_window [class="^imv$"] floating enable
-for_window [app_id="vimb"] layout tabbed
+for_window [title="^(vedit)$"] floating enable
+for_window [class="^(imv)$"] floating enable
+for_window [app_id="^(vimb)$"] layout tabbed
 
 workspace $wsTty
 default_border none
@@ -71,7 +69,7 @@ font pango:Monospace 14
 floating_modifier $mod normal
 client.focused #$gray3 #$gray3 #$white #$white #$white
 client.unfocused #$gray3 #$gray3 #$white #$white #$white
-gaps inner 18
+gaps inner 12
 smart_gaps on
 smart_borders on
 
