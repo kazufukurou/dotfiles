@@ -14,7 +14,7 @@ if [ $# -eq 2 ]; then
     else usage
     fi
 elif [ $# -eq 1 ]; then
-    if [ "$1" = "start" ]; then mpv --shuffle --quiet --idle=yes --input-ipc-server=$socket
+    if [ "$1" = "start" ]; then mpv --shuffle --idle=yes --input-ipc-server=$socket
     elif [ "$1" = "pause" ]; then echo 'cycle pause' | socat - "$socket"
     elif [ "$1" = "next" ]; then echo 'playlist-next' | socat - "$socket"
     elif [ "$1" = "prev" ]; then echo 'playlist-prev' | socat - "$socket"
