@@ -80,7 +80,7 @@ nnoremap <leader>N :cp<cr>
 vnoremap <leader>p "_dP
 nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
 nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
-nnoremap <leader>rl :call MakeAndroid('ktlint', '')<cr>
+nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
 nnoremap <leader>s :wa<cr>
 nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>w :set wrap!<cr>
