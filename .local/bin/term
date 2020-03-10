@@ -3,6 +3,7 @@
 font="monospace:pixelsize=20"
 cmdexec="st -t st -f $font -e bash -i -c"
 cmdvim="st -t vedit -g 80x8 -f $font -e bash -i -c"
+
 if [ "$1" = "vimbdl" ]; then
     $cmdexec "cd $VIMB_DOWNLOAD_PATH && curl -LJOC - -e '$VIMB_URI' $2; read -s -n 1"
 elif [ "$1" = "vimbedit" ]; then

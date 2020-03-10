@@ -48,6 +48,12 @@ alias getgitcompletion='curl https://raw.githubusercontent.com/git/git/master/co
 yaku() { grep "^$@.*" ~/Downloads/edict2u ; }
 h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc ; }
 d2h() { echo "obase=16; $@" | bc ; }
+md5dir() { find "$@" -type f -exec md5sum {} \; > "$@.md5" ; }
+
+unoflash() {
+    arduino-cli compile -b arduino:avr:uno
+    arduino-cli upload -b arduino:avr:uno -p /dev/ttyACM0
+}
 
 git_branch() {
     #git symbolic-ref HEAD --short 2>/dev/null
