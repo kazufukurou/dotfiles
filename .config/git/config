@@ -17,6 +17,7 @@
     a = add
     aa = add --all
     b = branch
+    bdg = "!git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs git branch -D"
     c = commit -v
     ca = commit -v -a
     cam = commit -v -a --amend
@@ -53,7 +54,6 @@
     sh = stash
     su = submodule
     suu = submodule update --init
-    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev' | xargs -n 1 git branch -d"
 [diff]
     tool = vimdiff
 [difftool]
