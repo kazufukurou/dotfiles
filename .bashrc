@@ -1,5 +1,8 @@
 PATH=~/.local/bin:~/android-sdk/tools:~/android-sdk/platform-tools:$PATH
 
+# disable terminal <C-s>
+stty -ixon
+
 export LANG=en_US.utf8
 export LESSCHARSET=utf-8
 export EDITOR=vim
