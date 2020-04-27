@@ -57,18 +57,16 @@ if __name__ == "__main__":
     print("[[],")
     while True:
         try:
-            amixer_master = subprocess.check_output(["amixer", "get", "Master"])
-            amixer_pcm = subprocess.check_output(["amixer", "get", "PCM"])
-            volume_level = amixer_master.decode("utf-8").split()[-1].strip("[]%")
-            volume_state = amixer_pcm.decode("utf-8").split()[-1].strip("[]")
+            volume_level = subprocess.check_output(["pulsemixer", "--get-volume"]).decode("utf-8").split()[-1]
+            volume_muted = subprocess.check_output(["pulsemixer", "--get-mute"]).decode("utf-8").split()[-1]
         except:
             volume_level = "0"
-            volume_state = "off"
+            volume_muted = "0"
         print("[")
         print_status(prev_focused.name, False)
         print_status(" ", False)
         print_status("V", False)
-        print_status(volume_level, volume_state == "on")
+        print_status(volume_level, volume_muted == "0")
         print_status(" ", False)
         print_status(time.strftime("%b"), False)
         print_status(time.strftime("%d"), True)

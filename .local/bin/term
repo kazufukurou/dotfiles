@@ -1,8 +1,12 @@
 #!/bin/sh
 
-font="monospace:pixelsize=20"
-cmdexec="st -t st -f $font -e bash -i -c"
-cmdvim="st -t vedit -g 80x8 -f $font -e bash -i -c"
+#font="monospace:pixelsize=20"
+#cmdexec="st -t st -f $font -e bash -i -c"
+#cmdvim="st -t vedit -g 80x8 -f $font -e bash -i -c"
+#cmdterm="$cmdexec 'dvtm -M -h 10000'"
+cdmexec="alacritty -e bash -i -c"
+cmdvim="alacritty -t vedit -g 80x8 -e bash -i -c"
+cmdterm=alacritty
 
 if [ "$1" = "vimbdl" ]; then
     $cmdexec "cd $VIMB_DOWNLOAD_PATH && curl -LJOC - -e '$VIMB_URI' $2; read -s -n 1"
@@ -15,5 +19,5 @@ elif [ "$1" = "vedit" ]; then
     wl-copy "$(cat $file)"
     rm $file
 else
-    $cmdexec 'dvtm -M -h 10000'
+    $cmdterm
 fi

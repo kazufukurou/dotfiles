@@ -44,14 +44,15 @@ bindsym $mod+Shift+n fullscreen
 bindsym $mod+Shift+m exec vimb
 bindsym $mod+Shift+w exit
 bindsym $mod+Shift+v reload
-bindsym XF86AudioRaiseVolume exec amixer set Master playback 1+
-bindsym XF86AudioLowerVolume exec amixer set Master playback 1-
-bindsym XF86AudioMute exec amixer set PCM toggle
+bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +1
+bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -1
+bindsym XF86AudioMute exec pulsemixer --toggle-mute
 bindsym XF86AudioNext exec mpvcmd next
 bindsym XF86AudioPrev exec mpvcmd prev
 bindsym XF86AudioPlay exec mpvcmd pause
 
 assign [title="^(st)$"] $wsTty
+assign [app_id="^(Alacritty)$"] $wsTty
 assign [app_id="^(vimb|firefox)$"] $wsWeb
 assign [class="^(jetbrains-studio|jetbrains-idea-ce)$"] $wsIde
 assign [title="^(?!vedit|imv).*"] $wsEtc
