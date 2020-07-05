@@ -9,6 +9,7 @@ if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
 set nobackup nowritebackup " don't create ~ files
 set noswapfile " don't create .swp files
 set nomodeline " modeline is not secure
+set nofixeol " don't change EOL of file
 set mouse=nv
 set ttymouse=sgr
 set hidden " allow to have unwritten changes to a file and open a new file
