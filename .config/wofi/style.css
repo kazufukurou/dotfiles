@@ -1,0 +1,36 @@
+window {
+    margin: 0px;
+    border: none;
+    background-color: #000;
+}
+
+*:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+#input {
+    color: #fff;
+    margin: 0px;
+    border: none;
+    background-color: #000;
+}
+
+#input image {
+    color: #888;
+}
+
+#text {
+    color: #888;
+    margin: 0px;
+    border: none;
+}
+
+#entry:selected {
+    background-color: #222;
+}
+
+#text:selected {
+    color: #fff;
+}
