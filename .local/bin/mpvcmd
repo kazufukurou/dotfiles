@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-    echo "Usage: `basename $0` <start|pause|next|prev>"
+    echo "Usage: `basename $0` <start|play|next|prev>"
     echo "  or   `basename $0` <play|add> PATH"
     exit 1
 }
@@ -15,7 +15,7 @@ if [ $# -eq 2 ]; then
     fi
 elif [ $# -eq 1 ]; then
     if [ "$1" = "start" ]; then mpv --shuffle --idle=yes --input-ipc-server=$socket
-    elif [ "$1" = "pause" ]; then echo 'cycle pause' | socat - "$socket"
+    elif [ "$1" = "play" ]; then echo 'cycle pause' | socat - "$socket"
     elif [ "$1" = "next" ]; then echo 'playlist-next' | socat - "$socket"
     elif [ "$1" = "prev" ]; then echo 'playlist-prev' | socat - "$socket"
     else usage

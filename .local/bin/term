@@ -5,7 +5,7 @@
 #cmdvim="st -t vedit -g 80x8 -f $font -e bash -i -c"
 #cmdterm="$cmdexec 'dvtm -M -h 10000'"
 cdmexec="alacritty -e bash -i -c"
-cmdvim="alacritty -t vedit -g 80x8 -e bash -i -c"
+cmdvim="alacritty -d 80 8 -e bash -i -c"
 cmdterm=alacritty
 
 if [ "$1" = "vimbdl" ]; then
