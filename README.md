@@ -9,5 +9,5 @@ $ echo '*' >> .homegit/info/exclude
 
 # Update submodules
 ```
-git submodule foreach git pull origin master
+gh submodule foreach git pull origin master
 ```
