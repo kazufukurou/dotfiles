@@ -8,6 +8,7 @@ androidPaths=$(grep -rh --include='*.kt' --include='*.java' "$imports" . | sort 
 paths="
 $androidPaths
 $HOME/Repos/RxJava/src/main
+$HOME/Repos/kotlin/libraries/stdlib/common/src
 $HOME/Repos/kotlin/libraries/stdlib/src
 "
 ktRegexCommon='/(fun\s[^()]*\.)([a-zA-Z0-9_]+)/\2/d,definition/'

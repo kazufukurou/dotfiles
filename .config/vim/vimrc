@@ -20,7 +20,7 @@ set norelativenumber " line numbers are relative to current current line
 set ruler " always show current position
 set cursorline " highlight current line
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab " insert 4 spaces when hit tab
-set wrap " wrap lines
+set nowrap " don't wrap lines
 set autoindent " automatically inserts one extra level of indentation in some cases
 set ignorecase " ignore case when searching
 set smartcase " a pattern is case sensitive only if it contains an uppercase letter
@@ -68,17 +68,16 @@ nnoremap k gk
 inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
-nnoremap <leader>d "_d
 nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>f :FZF<cr>
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
 nnoremap <leader>is :SortImports<cr>
-nnoremap <leader>l <C-]>
-nnoremap <leader>L :tnext<cr>
-nnoremap <leader>n :cn<cr>
-nnoremap <leader>N :cp<cr>
-vnoremap <leader>p "_dP
+nnoremap <leader>d <C-]>
+nnoremap <leader>tn :tnext<cr>
+nnoremap <leader>tp :tnext<cr>
+nnoremap <leader>n :cnext<cr>
+nnoremap <leader>p :cprev<cr>
 nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
 nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
 nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
@@ -124,6 +123,9 @@ augroup END
 " highlight 120th column
 highlight OverLength ctermbg=1 ctermfg=15
 2match OverLength /\%121v/
+
+" vim-java-unused-imports
+highlight link unusedimport Comment
 
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -236,24 +238,25 @@ function! Status(winnum)
         elseif l:mode ==# 'V' | let l:stat .= '%4* VL'
         elseif l:mode ==# '' | let l:stat .= '%4* VB'
         endif
-        let l:stat .= ' %0*' " mode end
-        let l:stat .= '%5*%( %{fugitive#head()} %)%0*' " vcs branch
-        let l:stat .= '%6*%( %H%M%R %)%0*' " help, modified, read only flags
+        let l:stat .= '%0*' " mode end
+        let l:stat .= '%6*%( %H%M%R%)%0*' " help, modified, read only flags
+        let l:stat .= '%5*%( %{fugitive#head()}%)%0*' " VCS branch
         let l:stat .= ' %<%f %=' " path to the file relative to current directory, end of left part
-        if exists("g:asyncdo") | let l:stat .= '%7* ▶ %0*' | endif " async job indicator
+        if exists("g:asyncdo") | let l:stat .= '%7* ~ %0*' | endif " async job indicator
+        if !&expandtab | let l:stat .= 'T ' | endif " expand tab mode
+        if &wrap | let l:stat .=  'W ' | endif " wrap line mode
+        let l:stat .= '%l:%c %P ' " line, column, scroll position
         let l:stat .= (&fenc == "" ? &enc : &fenc).((exists("+bomb") && &bomb) ? '+BOM' : '').' ' " encoding
-        let l:stat .= &ff.' '
-        if &wrap | let l:stat .=  '%6* W %0*' | endif " wrap line mode
-        if !&expandtab | let l:stat .= '%5* T %0*' | endif " expand tab mode
-        let l:stat .= '%2* %-6.(%l:%c%) %P %0*' " line, column, scroll position
+        let l:stat .= &ff.' ' " file format
         return l:stat
     else | return ' %<%f' | endif
 endfunction
 
-highlight User1 ctermbg=15 ctermfg=0
-highlight User2 ctermbg=10 ctermfg=0
-highlight User3 ctermbg=9  ctermfg=0
-highlight User4 ctermbg=13 ctermfg=0
-highlight User5 ctermbg=14 ctermfg=0
-highlight User6 ctermbg=12 ctermfg=0
+highlight User1 ctermbg=19 ctermfg=15
+highlight User2 ctermbg=19 ctermfg=10
+highlight User3 ctermbg=19 ctermfg=9
+highlight User4 ctermbg=19 ctermfg=13
+highlight User5 ctermbg=19 ctermfg=12
+highlight User6 ctermbg=19 ctermfg=11
 highlight User7 ctermbg=19 ctermfg=14
+
