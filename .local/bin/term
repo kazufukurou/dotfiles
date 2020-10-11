@@ -1,8 +1,9 @@
 #!/bin/sh
 
-cmdexec="foot bash -i -c"
-cmdvim="foot -g 800x208 bash -i -c"
-cmdterm=foot
+# fix broken base16-shell theme after opening vim from vifm
+cmdterm="foot -t screen-256color"
+cmdexec="$cmdterm zsh -i -c"
+cmdvim="$cmdterm -g 800x208 zsh -i -c"
 
 if [ "$1" = "vimbdl" ]; then
     $cmdexec "cd $VIMB_DOWNLOAD_PATH && curl -LJOC - -e '$VIMB_URI' $2; read -s -n 1"

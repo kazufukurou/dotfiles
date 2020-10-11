@@ -37,6 +37,7 @@
     l = log --pretty='%C(blue)%h%C(reset) %C(green)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso
     m = merge
     ma = merge --abort
+    mc = merge --continue
     mt = mergetool --no-prompt
     pl = pull
     plr = pull --rebase
