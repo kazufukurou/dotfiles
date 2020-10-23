@@ -12,7 +12,6 @@ export HISTFILESIZE=100000
 export HISTSIZE=100000
 export KEYTIMEOUT=1
 export JavaScriptCoreUseJIT=0
-export JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 export LANG=en_US.utf8
 export LESSCHARSET=utf-8
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
@@ -24,3 +23,6 @@ export XDG_RUNTIME_DIR="$HOME/.runtime"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+[ -e /usr/lib/jvm/oracle-jdk ] && export JAVA_HOME=/usr/lib/jvm/oracle-jdk
+[ -e /usr/lib/jvm/openjdk ] && export JAVA_HOME=/usr/lib/jvm/openjdk
+[ -e /usr/libexec/java_home ] && export JAVA_HOME=$(/usr/libexec/java_home)
