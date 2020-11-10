@@ -1,7 +1,7 @@
 window {
     margin: 0px;
     border: none;
-    background-color: #000;
+    background-color: #000000;
 }
 
 *:focus {
@@ -10,27 +10,33 @@ window {
   box-shadow: none;
 }
 
+#outer-box {
+  margin: 0px;
+  border: 3px solid #606060;
+  background-color: #000000;
+}
+
 #input {
-    color: #fff;
+    color: #ffffff;
     margin: 0px;
     border: none;
-    background-color: #000;
+    background-color: #000000;
 }
 
 #input image {
-    color: #888;
+    color: #808080;
 }
 
 #text {
-    color: #888;
+    color: #808080;
     margin: 0px;
     border: none;
 }
 
 #entry:selected {
-    background-color: #222;
+    background-color: #202020;
 }
 
 #text:selected {
-    color: #fff;
+    color: #ffffff;
 }
