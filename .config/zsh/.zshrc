@@ -16,7 +16,7 @@ zstyle ':vcs_info:*' enable git
 alias adble='adb logcat "*:E" | grep '
 alias adbld='adb logcat "*:D" | grep '
 alias adblc='adb logcat -c'
-alias flu='fluidsynth -a alsa -m alsa_seq -l -i -s /usr/share/soundfonts/FluidR3_GM.sf2'
+alias flu='fluidsynth -a pulseaudio -m alsa_seq -l -i -s /usr/share/soundfonts/FluidR3_GM.sf2'
 alias g='git'
 alias gethosts='sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -o "/etc/hosts"'
 alias gh='git --git-dir=$HOME/.homegit --work-tree=$HOME'
