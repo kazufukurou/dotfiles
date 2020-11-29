@@ -13,7 +13,8 @@ set nofixeol " don't change EOL of file
 set mouse=nv
 set ttymouse=sgr
 set hidden " allow to have unwritten changes to a file and open a new file
-set hlsearch " highlight search
+set hlsearch " highlight last search
+set incsearch " highlight search while typing
 set scrolloff=4 " keep cursor few lines away edge when scrolling
 set nonumber " dont show line numbers
 set norelativenumber " line numbers are relative to current current line
@@ -59,12 +60,12 @@ let maplocalleader = ','
 
 " bindings
 nnoremap <space> <nop>
-nnoremap Q <nop>
 inoremap <C-c> <nop>
+nnoremap Q @q
 nnoremap ; :
-nnoremap : ;
 nnoremap j gj
 nnoremap k gk
+nnoremap Y y$
 inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
@@ -81,43 +82,43 @@ nnoremap <leader>p :cprev<cr>
 nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
 nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
 nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
-nnoremap <leader>s :wa<cr>
-nnoremap <leader>t :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
-nnoremap <leader>w :set wrap!<cr>
-nnoremap <left> <C-w>h
-nnoremap <down> <C-w>j
+nnoremap <leader>st :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
+nnoremap <leader>sw :set wrap!<cr>
+nnoremap <leader>w :wa<cr>
 nnoremap <up> <C-w>k
+nnoremap <down> <C-w>j
+nnoremap <left> <C-w>h
 nnoremap <right> <C-w>l
 
 " save as root
 command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
-function! ToggleQf()
-    let nr = winnr("$")
-    cwindow
-    let nr2 = winnr("$")
-    if nr == nr2 | cclose | endif
-endfunction
+fun! ToggleQf()
+  let nr = winnr("$")
+  cwindow
+  let nr2 = winnr("$")
+  if nr == nr2 | cclose | endif
+endfun
 
 " build and install android project
-function! MakeAndroid(task, buildType)
-    if filereadable("tags") && a:task == 'install' | call system('ctagsup') | endif
-    let l:buildGradle = gradle#findGradleFile()
-    let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
-    let l:flavor = substitute(l:line, '\n', '', '')
-    call asyncdo#run(0, &makeprg, a:task.l:flavor.a:buildType)
-endfunction
+fun! MakeAndroid(task, buildType)
+  if filereadable("tags") && a:task == 'install' | call system('ctagsup') | endif
+  let l:buildGradle = gradle#findGradleFile()
+  let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
+  let l:flavor = substitute(l:line, '\n', '', '')
+  call asyncdo#run(0, &makeprg, a:task.l:flavor.a:buildType)
+endfun
 
 " toggle tab vs space highlight mode
 highlight ExtraWhitespace ctermbg=19
-function! TabHighlightModeMatch()
-    if &expandtab | match ExtraWhitespace /\t\|\s\+$/
-    else | match ExtraWhitespace /^\t*\zs \+\|\s\+$/
-    endif
-endfunction
+fun! TabHighlightModeMatch()
+  if &expandtab | match ExtraWhitespace /\t\|\s\+$/
+  else | match ExtraWhitespace /^\t*\zs \+\|\s\+$/
+  endif
+endfun
 augroup tabHighlight
-    autocmd!
-    autocmd BufEnter * call TabHighlightModeMatch()
+  autocmd!
+  autocmd BufEnter * call TabHighlightModeMatch()
 augroup END
 
 " highlight 120th column
@@ -135,25 +136,6 @@ let g:eskk#large_dictionary = { 'path': "~/SKK-JISYO.L", 'sorted': 1, 'encoding'
 
 " local variable highlighting
 let g:TypesFileIncludeLocals = 1
-
-" vim-sneak
-let g:sneak#label = 1
-" let g:sneak#s_next = 1
-hi Sneak ctermfg=15 ctermbg=5
-hi SneakScope ctermfg=14 ctermbg=5
-
-" incsearch
-let g:incsearch#auto_nohlsearch = 1
-let g:incsearch#magic = '\v'
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map n <Plug>(incsearch-nohl-n)
-map N <Plug>(incsearch-nohl-N)
-" map * <Plug>(incsearch-nohl-*)
-" map # <Plug>(incsearch-nohl-#)
-" map g* <Plug>(incsearch-nohl-g*)
-" map g# <Plug>(incsearch-nohl-g#)
 
 " vim-asterisk
 map * <Plug>(asterisk-z*)
@@ -178,79 +160,83 @@ nmap <silent> <C-x> <Plug>CyclePrev
 noremap <silent> <Plug>CycleFallbackNext <C-a>
 noremap <silent> <Plug>CycleFallbackPrev <C-x>
 let g:cycle_default_groups = [
-    \ [['+', '-', '*', '/']],
-    \ [['<', '>']],
-    \ [['<=', '>=']],
-    \ [['on', 'off']],
-    \ [['yes', 'no']],
-    \ [['var', 'val']],
-    \ [['if', 'when']],
-    \ [['true', 'false']],
-    \ [['width', 'height']],
-    \ [['horizontal', 'vertical']],
-    \ [['extends', 'implements']],
-    \ [['public', 'protected', 'private']],
-    \ [['left', 'right', 'top', 'bottom']],
-    \ [['@Nullable', '@NonNull'], 'hard_case'],
-    \ [['View', 'TextView', 'ImageView'], 'hard_case'],
-    \ [['LinearLayout', 'RelativeLayout', 'FrameLayout'], 'hard_case'],
-    \ [['wrap_content', 'match_parent'], 'hard_case', 'match_case'],
-    \ [['WRAP_CONTENT', 'MATCH_PARENT'], 'hard_case', 'match_case'],
-    \ [['center_vertical', 'center_horizontal'], 'hard_case', 'match_case'],
-    \ [['CENTER_VERTICAL', 'CENTER_HORIZONTAL'], 'hard_case', 'match_case'],
-    \ [['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'], 'hard_case'],
-    \ [['boolean', 'int', 'long', 'float', 'double']],
-    \ [['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'], 'hard_case', 'match_case'],
-    \ [['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'], 'hard_case', 'match_case'],
-    \ [['BooleanArray', 'IntArray', 'LongArry', 'FloatArry', 'DoubleArray', 'ShortArray'], 'hard_case', 'match_case'],
-    \ [['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'], 'hard_case'],
-    \ [['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'], 'hard_case'],
-    \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
-    \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
+  \ [['+', '-', '*', '/']],
+  \ [['<', '>']],
+  \ [['<=', '>=']],
+  \ [['on', 'off']],
+  \ [['yes', 'no']],
+  \ [['var', 'val']],
+  \ [['if', 'when']],
+  \ [['true', 'false']],
+  \ [['width', 'height']],
+  \ [['horizontal', 'vertical']],
+  \ [['extends', 'implements']],
+  \ [['public', 'protected', 'private']],
+  \ [['left', 'right', 'top', 'bottom']],
+  \ [['@Nullable', '@NonNull'], 'hard_case'],
+  \ [['View', 'TextView', 'ImageView'], 'hard_case'],
+  \ [['LinearLayout', 'RelativeLayout', 'FrameLayout'], 'hard_case'],
+  \ [['wrap_content', 'match_parent'], 'hard_case', 'match_case'],
+  \ [['WRAP_CONTENT', 'MATCH_PARENT'], 'hard_case', 'match_case'],
+  \ [['center_vertical', 'center_horizontal'], 'hard_case', 'match_case'],
+  \ [['CENTER_VERTICAL', 'CENTER_HORIZONTAL'], 'hard_case', 'match_case'],
+  \ [['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'], 'hard_case'],
+  \ [['boolean', 'int', 'long', 'float', 'double']],
+  \ [['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'], 'hard_case', 'match_case'],
+  \ [['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'], 'hard_case', 'match_case'],
+  \ [['BooleanArray', 'IntArray', 'LongArry', 'FloatArry', 'DoubleArray', 'ShortArray'], 'hard_case', 'match_case'],
+  \ [['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'], 'hard_case'],
+  \ [['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'], 'hard_case'],
+  \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
+  \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
 
 " vimport-sort
 let g:import_sort_settings = {
-    \ 'kotlin': { 'import_prefix': 'import ', 'import_groups': [] },
-    \ 'java': { 'import_prefix': 'import ' , 'import_groups': [] }
-    \ }
+  \ 'kotlin': { 'import_prefix': 'import ', 'import_groups': [] },
+  \ 'java': { 'import_prefix': 'import ' , 'import_groups': [] }
+  \ }
 
 augroup statusline
-    autocmd!
-    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,QuickFixCmdPost * call <sid>RefreshStatus()
+  autocmd!
+  autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,QuickFixCmdPost * call <sid>RefreshStatus()
 augroup END
 
-function! s:RefreshStatus()
-    for nr in range(1, winnr('$'))
-        call setwinvar(nr, '&statusline', '%!Status('.nr.')')
-    endfor
-endfunction
+fun! s:RefreshStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  endfor
+endfun
 
-function! Status(winnum)
-    if a:winnum == winnr()
-        redraw
-        let l:mode = mode()
-        let l:skk = eskk#is_enabled() ? get(g:eskk#statusline_mode_strings, eskk#get_current_instance().mode, ' ') : ' '
-        let l:stat = '' " mode start
-        if l:mode ==# 'i' | let l:stat .= '%1* '.(l:skk == ' ' ? 'I' : l:skk)
-        elseif l:mode ==# 'n' | let l:stat .= '%2* N'
-        elseif l:mode ==# 'R' | let l:stat .= '%3* R'
-        elseif l:mode ==# 'v' | let l:stat .= '%4* V'
-        elseif l:mode ==# 'V' | let l:stat .= '%4* VL'
-        elseif l:mode ==# '' | let l:stat .= '%4* VB'
-        endif
-        let l:stat .= '%0*' " mode end
-        let l:stat .= '%6*%( %H%M%R%)%0*' " help, modified, read only flags
-        let l:stat .= '%5*%( %{fugitive#head()}%)%0*' " VCS branch
-        let l:stat .= ' %<%f %=' " path to the file relative to current directory, end of left part
-        if exists("g:asyncdo") | let l:stat .= '%7* ~ %0*' | endif " async job indicator
-        if !&expandtab | let l:stat .= 'T ' | endif " expand tab mode
-        if &wrap | let l:stat .=  'W ' | endif " wrap line mode
-        let l:stat .= '%l:%c %P ' " line, column, scroll position
-        let l:stat .= (&fenc == "" ? &enc : &fenc).((exists("+bomb") && &bomb) ? '+BOM' : '').' ' " encoding
-        let l:stat .= &ff.' ' " file format
-        return l:stat
-    else | return ' %<%f' | endif
-endfunction
+fun! StatusMode()
+  let l:mode = mode()
+  let l:skk = eskk#is_enabled() ? get(g:eskk#statusline_mode_strings, eskk#get_current_instance().mode, ' ') : ' '
+  let l:result = ''
+  if l:mode ==# "i" | let l:result .= '%1* '.(l:skk == ' ' ? 'I' : l:skk)
+  elseif l:mode ==# "n" | let l:result .= '%2* N'
+  elseif l:mode ==# "R" | let l:result .= '%3* R'
+  elseif l:mode ==# "v" | let l:result .= '%4* V'
+  elseif l:mode ==# "V" | let l:result .= '%4* VL'
+  elseif l:mode ==# "\<C-V>" | let l:result .= '%4* VB'
+  endif
+  let l:result .= '%0*'
+  return l:result
+endfun
+
+fun! Status(winnum)
+  if a:winnum != winnr() | return ' %<%f' | endif
+  redraw
+  let l:stat = StatusMode()
+  let l:stat .= '%6*%( %H%M%R%)%0*' " help, modified, read only flags
+  let l:stat .= '%5*%( ' . fugitive#head() . '%)%0*' " git branch
+  let l:stat .= ' %<%f %=' " path to the file relative to current directory, end of left part
+  if exists("g:asyncdo") | let l:stat .= '%7* ~ %0*' | endif " async job indicator
+  if !&expandtab | let l:stat .= 'T ' | endif " expand tab mode
+  if &wrap | let l:stat .=  'W ' | endif " wrap line mode
+  let l:stat .= '%l:%c %P ' " line, column, scroll position
+  let l:stat .= (&fenc == "" ? &enc : &fenc).((exists("+bomb") && &bomb) ? '+BOM' : '').' ' " encoding
+  let l:stat .= &ff.' ' " file format
+  return l:stat
+endfun
 
 highlight User1 ctermbg=19 ctermfg=15
 highlight User2 ctermbg=19 ctermfg=10
@@ -259,4 +245,3 @@ highlight User4 ctermbg=19 ctermfg=13
 highlight User5 ctermbg=19 ctermfg=12
 highlight User6 ctermbg=19 ctermfg=11
 highlight User7 ctermbg=19 ctermfg=14
-

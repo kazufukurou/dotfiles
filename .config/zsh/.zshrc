@@ -93,3 +93,7 @@ if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
     echo -n "Starting WM.." && sleep 1 && exec hikari
 fi
 
+fzf_key_bindings="/usr/share/doc/fzf/key-bindings.zsh"
+fzf_completion="/usr/share/doc/fzf/completion.zsh"
+[ -e "$fzf_key_bindings" ] && . "$fzf_key_bindings"
+[ -e "$fzf_completion" ] && . "$fzf_completion"
