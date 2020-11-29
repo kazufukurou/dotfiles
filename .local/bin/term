@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # fix broken base16-shell theme after opening vim from vifm
-cmdterm="foot -t putty-256color"
+# cmdterm="foot -t rxvt-unicode-256color"
+cmdterm=foot
 cmdexec="$cmdterm zsh -i -c"
 cmdvim="$cmdterm -g 800x208 zsh -i -c"
 
