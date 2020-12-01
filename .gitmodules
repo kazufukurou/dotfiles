@@ -1,26 +1,10 @@
-[submodule ".config/vim/pack/bundle/start/vim-surround"]
-	path = .config/vim/pack/bundle/start/vim-surround
-	url = https://github.com/tpope/vim-surround
-	ignore = untracked
 [submodule ".config/vim/pack/bundle/start/vim-commentary"]
 	path = .config/vim/pack/bundle/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 	ignore = untracked
-[submodule ".config/vim/pack/bundle/start/vim-repeat"]
-	path = .config/vim/pack/bundle/start/vim-repeat
-	url = https://github.com/tpope/vim-repeat
-	ignore = untracked
 [submodule ".config/vim/pack/bundle/start/vim-fugitive"]
 	path = .config/vim/pack/bundle/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
-	ignore = untracked
-[submodule ".config/vim/pack/bundle/start/vim-abolish"]
-	path = .config/vim/pack/bundle/start/vim-abolish
-	url = https://github.com/tpope/vim-abolish
-	ignore = untracked
-[submodule ".config/vim/pack/bundle/start/vim-unimpaired"]
-	path = .config/vim/pack/bundle/start/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired
 	ignore = untracked
 [submodule ".config/vim/pack/bundle/start/vim-operator-flashy"]
 	path = .config/vim/pack/bundle/start/vim-operator-flashy
@@ -29,10 +13,6 @@
 [submodule ".config/vim/pack/bundle/start/vim-asterisk"]
 	path = .config/vim/pack/bundle/start/vim-asterisk
 	url = https://github.com/haya14busa/vim-asterisk
-	ignore = untracked
-[submodule ".config/vim/pack/bundle/start/delimitMate"]
-	path = .config/vim/pack/bundle/start/delimitMate
-	url = https://github.com/Raimondi/delimitMate
 	ignore = untracked
 [submodule ".config/vim/pack/bundle/start/vim-operator-user"]
 	path = .config/vim/pack/bundle/start/vim-operator-user
@@ -66,10 +46,6 @@
 	path = .config/vim/pack/bundle/start/kotlin-vim
 	url = https://github.com/udalov/kotlin-vim
 	ignore = untracked
-[submodule ".config/vim/pack/bundle/start/jedi-vim"]
-	path = .config/vim/pack/bundle/start/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim
-	ignore = untracked
 [submodule ".config/vim/pack/bundle/start/vim-arduino-syntax"]
 	path = .config/vim/pack/bundle/start/vim-arduino-syntax
 	url = https://github.com/sudar/vim-arduino-syntax
@@ -89,3 +65,9 @@
 [submodule ".config/vim/pack/bundle/start/fzf.vim"]
 	path = .config/vim/pack/bundle/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+[submodule ".config/vim/pack/bundle/start/vim-sandwich"]
+	path = .config/vim/pack/bundle/start/vim-sandwich
+	url = https://github.com/machakann/vim-sandwich
+[submodule ".config/vim/pack/bundle/start/vim-smartinput"]
+	path = .config/vim/pack/bundle/start/vim-smartinput
+	url = https://github.com/kana/vim-smartinput

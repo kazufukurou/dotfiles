@@ -147,8 +147,9 @@ let g:asterisk#keeppos = 1
 " vim-operator-flashy
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
-let g:operator#flashy#group = 'Visual'
+let g:operator#flashy#group = 'MyFlashy'
 let g:operator#flashy#flash_time = 200
+highlight default MyFlashy ctermbg=2 ctermfg=0
 
 " vim-minisnip
 let g:minisnip_trigger = '<C-s>'
