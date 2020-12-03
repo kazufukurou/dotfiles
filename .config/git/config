@@ -18,23 +18,20 @@
     aa = add --all
     b = branch
     bdg = "!git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs git branch -D"
-    c = commit -v
-    ca = commit -v -a
-    cam = commit -v -a --amend
-    camn = commit -v -a --amend --no-edit
+    c = commit --verbose
+    ca = commit --verbose --all
+    cam = commit --verbose --all --amend
+    camn = commit --verbose --all --amend --no-edit
     ch = cherry-pick
     cha = cherry-pick --abort
     chc = cherry-pick --continue
-    cm = commit -v --amend
-    cod = checkout develop
-    com = checkout master
-    co = checkout
-    cob = checkout -b
+    cl = clone
+    cm = commit --verbose --amend
     d = diff
     ds = diff --stat
     f = fetch
     fa = fetch --all --prune
-    l = log --pretty='%C(blue)%h%C(reset) %C(green)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso
+    l = log --pretty='%C(blue)%h%C(reset) %C(magenta)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso-strict-local
     m = merge
     ma = merge --abort
     mc = merge --continue
@@ -44,15 +41,24 @@
     pu = push
     puf = push --force-with-lease
     puu = push --set-upstream origin HEAD
+    r = restore
     rb = rebase
     rba = rebase --abort
     rbc = rebase --continue
     rbd = rebase develop
     rbm = rebase master
-    rh = reset HEAD
-    rhh = reset HEAD --hard
-    s = status -s
+    reh = reset HEAD
+    rehh = reset HEAD --hard
+    rs = restore --staged
+    s = status --short
+    sw = switch
+    swc = switch --create
+    swd = switch develop
+    swm = switch master
+    swt = switch --track
     sh = stash
+    sha = stash apply
+    shp = stash pop
     su = submodule
     suu = submodule update --init
 [diff]
