@@ -11,6 +11,7 @@ set noswapfile " don't create .swp files
 set nomodeline " modeline is not secure
 set mouse=nv
 set ttymouse=sgr
+set timeout timeoutlen=3000 ttimeoutlen=100
 set hidden " allow to have unwritten changes to a file and open a new file
 set hlsearch " highlight last search
 set incsearch " highlight search while typing
@@ -86,6 +87,7 @@ nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
 nnoremap <leader>st :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
 nnoremap <leader>sw :set wrap!<cr>
 nnoremap <leader>w :wa<cr>
+nnoremap <leader>z :q!<cr>
 nnoremap <up> <C-w>k
 nnoremap <down> <C-w>j
 nnoremap <left> <C-w>h
