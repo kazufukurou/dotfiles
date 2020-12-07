@@ -16,14 +16,14 @@ gh submodule foreach git pull origin master
 
 * asyncdo.vim - async task runner
 * editorconfig-vim - support editorconfig
-* eskk.vim - Japanese input (<C-j>)
+* eskk.vim - Japanese input (Ctrl-j)
 * fzf.vim - fuzzy search
 * kotlin-vim - Kotlin syntax
 * vim-android-sensible - build Android gradle projects
 * vim-arduino-syntax - Arduino syntax
 * vim-asterisk - improved \*
 * vim-commentary - comment stuff (gc gcc)
-* vim-cycle - toggle related words (<C-x> <C-a>)
+* vim-cycle - toggle related words (Ctrl-x Ctrl-a)
 * vim-fugitive - git tools
 * vim-java-unused-imports - highlight, remove unused imports (,ih ,id)
 * vim-minisnip - snippets
