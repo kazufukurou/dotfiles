@@ -22,6 +22,7 @@ set statusline="  %t%= %A %10u:%-7g %15s %20d  "
 set timefmt=%Y-%m-%d\ %H:%M
 set noiec " use KiB, MiB, ... instead of KB, MB, ...
 set tuioptions-=s " remove borders
+set classify= " don't show / after directory name
 
 " :mark mark /full/directory/path [filename]
 mark b ~/bin/
@@ -44,6 +45,7 @@ command zip zip -r %f.zip %f
 command run !! ./%f
 command make !!make
 command vgrep vim "+grep %a"
+command! fzfcd :set noquickview | :execute 'goto' fnameescape(term('fd | fzf 2>/dev/tty'))
 
 " The file type is for the default programs to be used with
 " a file extension.
@@ -186,6 +188,7 @@ nnoremap A cw<c-w>
 " toggle wrap setting on ,w key
 nnoremap ,w :set wrap!<cr>
 nnoremap ; :
+nnoremap ,f :fzfcd<cr>
 nnoremap ,p :!mpvcmd play %d/%f<cr>
 nnoremap ,a :!mpvcmd add %d/%f<cr>
 nnoremap ,e :!dtrx %f<cr>
