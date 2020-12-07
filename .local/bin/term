@@ -1,21 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-# fix broken base16-shell theme after opening vim from vifm
-# cmdterm="foot -t rxvt-unicode-256color"
-cmdterm=foot
-cmdexec="$cmdterm zsh -i -c"
-cmdvim="$cmdterm -g 800x208 zsh -i -c"
-
-if [ "$1" = "vimbdl" ]; then
-    $cmdexec "cd $VIMB_DOWNLOAD_PATH && curl -LJOC - -e '$VIMB_URI' $2; read -s -n 1"
-elif [ "$1" = "vimbedit" ]; then
-    $cmdvim "vim -c '$' $2"
-elif [ "$1" = "vedit" ]; then
-    file="$XDG_CACHE_HOME/vim/vedit"
-    wl-paste -n > $file
-    $cmdvim "vim -c '$' $file"
-    wl-copy "$(cat $file)"
-    rm $file
+if [ "$1" = "vedit" ]; then
+  file="$XDG_CACHE_HOME/vim/vedit"
+  wl-paste -n > $file
+  alacritty -d 80 8 --class mypopup -e zsh -i -c "vim -c '$' $file"
+  wl-copy "$(cat $file)"
+  rm $file
+elif [ "$1" = "run" ]; then
+  alacritty -d 40 8 --class mypopup -e zsh -i -c "print -rl -- ${(ko)commands} | fzf --info hidden | (nohup ${SHELL:-"/bin/sh"}  &) >/dev/null 2>&1"
 else
-    $cmdterm
+  alacritty
 fi
