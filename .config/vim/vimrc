@@ -20,7 +20,7 @@ set nonumber " dont show line numbers
 set norelativenumber " line numbers are relative to current current line
 set ruler " always show current position
 set cursorline " highlight current line
-set tabstop=4 shiftwidth=4 softtabstop=4 expandtab " insert 4 spaces when hit tab
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab " insert 4 spaces when hit tab
 set nowrap " don't wrap lines
 set autoindent " automatically inserts one extra level of indentation in some cases
 set ignorecase " ignore case when searching
@@ -71,8 +71,8 @@ inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
 nnoremap <leader>e :Lexplore<cr>
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>g :Rg<cr>
+nnoremap <leader>f :GFiles!<cr>
+nnoremap <leader>g :Rg!<cr>
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
 nnoremap <leader>is :SortImports<cr>
@@ -84,7 +84,7 @@ nnoremap <leader>p :cprev<cr>
 nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
 nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
 nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
-nnoremap <leader>st :set expandtab!<cr>:call TabHighlightModeMatch()<cr>
+nnoremap <leader>sp :set paste!<cr>
 nnoremap <leader>sw :set wrap!<cr>
 nnoremap <leader>w :wa<cr>
 nnoremap <leader>z :q!<cr>
@@ -110,23 +110,21 @@ fun! MakeAndroid(task, buildType)
   let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
   let l:flavor = substitute(l:line, '\n', '', '')
   call asyncdo#run(0, &makeprg, a:task.l:flavor.a:buildType)
+  let s:statusProgressTimer = timer_start(200, { tid -> execute('call UpdateStatusProgress()')}, { 'repeat': -1 })
 endfun
 
-" toggle tab vs space highlight mode
-highlight ExtraWhitespace ctermbg=19
-fun! TabHighlightModeMatch()
-  if &expandtab | match ExtraWhitespace /\t\|\s\+$/
-  else | match ExtraWhitespace /^\t*\zs \+\|\s\+$/
-  endif
-endfun
-augroup tabHighlight
+" open vim help on right of current window
+augroup vimrcHelp
   autocmd!
-  autocmd BufEnter * call TabHighlightModeMatch()
+  autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
 augroup END
 
-" highlight 120th column
-highlight OverLength ctermbg=1 ctermfg=15
-2match OverLength /\%121v/
+" highilght tabs and trailing spaces
+highlight ExtraWhitespace ctermbg=19
+augroup tabHighlight
+  autocmd!
+  autocmd BufEnter * if &readonly | match none | else | match ExtraWhitespace /\t\|\s\+$/ | endif
+augroup END
 
 " vim-java-unused-imports
 highlight link unusedimport Comment
@@ -135,7 +133,12 @@ highlight link unusedimport Comment
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " eskk
-let g:eskk#large_dictionary = { 'path': "~/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp' }
+let g:eskk#directory = "~/.config/eskk"
+let g:eskk#dictionary = { 'path': g:eskk#directory . '/skk-jisyo', 'sorted': 0, 'encoding': 'utf-8' }
+let g:eskk#large_dictionary = { 'path': g:eskk#directory . '/SKK-JISYO.L', 'sorted': 1, 'encoding': 'euc-jp' }
+let g:eskk#select_cand_keys = "abcdefg"
+let g:eskk#marker_henkan = "~"
+let g:eskk#marker_henkan_select = ">"
 
 " local variable highlighting
 let g:TypesFileIncludeLocals = 1
@@ -200,15 +203,30 @@ let g:import_sort_settings = {
   \ 'java': { 'import_prefix': 'import ' , 'import_groups': [] }
   \ }
 
-augroup statusline
+augroup statusLine
   autocmd!
-  autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,QuickFixCmdPost * call <sid>RefreshStatus()
+  autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,QuickFixCmdPost * call <sid>UpdateStatus()
 augroup END
 
-fun! s:RefreshStatus()
+fun! s:UpdateStatus()
   for nr in range(1, winnr('$'))
     call setwinvar(nr, '&statusline', '%!Status('.nr.')')
   endfor
+endfun
+
+let s:statusProgress = 0
+let s:statusProgressTimer = 0
+let s:statusProgressChars = ['⠦', '⠖', '⠲', '⠴']
+let s:statusProgressChar = ''
+fun! UpdateStatusProgress()
+  if exists("g:asyncdo")
+    let s:statusProgress = s:statusProgress < len(s:statusProgressChars) - 1 ? s:statusProgress + 1 : 0
+    let s:statusProgressChar = s:statusProgressChars[s:statusProgress]
+  else
+    let s:statusProgressChar = ''
+    call timer_stop(s:statusProgressTimer)
+  endif
+  call <sid>UpdateStatus()
 endfun
 
 fun! StatusMode()
@@ -233,9 +251,8 @@ fun! Status(winnum)
   let l:stat .= '%6*%( %H%M%R%)%0*' " help, modified, read only flags
   let l:stat .= '%5*%( ' . fugitive#head() . '%)%0*' " git branch
   let l:stat .= ' %<%f %=' " path to the file relative to current directory, end of left part
-  if exists("g:asyncdo") | let l:stat .= '%7* ~ %0*' | endif " async job indicator
-  if !&expandtab | let l:stat .= 'T ' | endif " expand tab mode
-  if &wrap | let l:stat .=  'W ' | endif " wrap line mode
+  if s:statusProgressChar != '' | let l:stat .= '%7* ' . s:statusProgressChar . ' %0*' | endif " show progress
+  if &wrap | let l:stat .=  'wrap ' | endif " wrap line mode
   let l:stat .= '%l:%c %P ' " line, column, scroll position
   let l:stat .= (&fenc == "" ? &enc : &fenc).((exists("+bomb") && &bomb) ? '+BOM' : '').' ' " encoding
   let l:stat .= &ff.' ' " file format
