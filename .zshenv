@@ -1,3 +1,4 @@
+# force path to have unique values
 typeset -U path
 path=(~/.local/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 
