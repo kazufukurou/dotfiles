@@ -1,0 +1,4 @@
+env:
+  TERM: rxvt-unicode-256color
+font:
+  size: 15.0
