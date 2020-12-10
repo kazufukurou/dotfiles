@@ -1,77 +1,79 @@
 [user]
-    name = Artyom Mironov
-    email = kazufukurou@gmail.com
+  name = Artyom Mironov
+  email = kazufukurou@gmail.com
 [core]
-    autocrlf = input
-    safecrlf = false
-    editor = $EDITOR
+  autocrlf = input
+  safecrlf = false
+  editor = $EDITOR
 [push]
-    default = simple
+  default = simple
 [color]
-    ui = true
-    status = auto
-    branch = auto
+  ui = true
+  status = auto
+  branch = auto
+[color "diff"]
+  context = 8
 [credential]
-    helper = cache --timeout=3600
+  helper = cache --timeout=3600
 [alias]
-    a = add
-    aa = add --all
-    b = branch
-    bdg = "!git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs git branch -D"
-    c = commit --verbose
-    ca = commit --verbose --all
-    cam = commit --verbose --all --amend
-    camn = commit --verbose --all --amend --no-edit
-    ch = cherry-pick
-    cha = cherry-pick --abort
-    chc = cherry-pick --continue
-    cl = clone
-    cm = commit --verbose --amend
-    d = diff
-    ds = diff --stat
-    f = fetch
-    fa = fetch --all --prune
-    l = log --pretty='%C(blue)%h%C(reset) %C(magenta)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso-strict-local
-    m = merge
-    ma = merge --abort
-    mc = merge --continue
-    mt = mergetool --no-prompt
-    pl = pull
-    plr = pull --rebase
-    pu = push
-    puf = push --force-with-lease
-    puu = push --set-upstream origin HEAD
-    r = restore
-    rb = rebase
-    rba = rebase --abort
-    rbc = rebase --continue
-    rbd = rebase develop
-    rbm = rebase master
-    reh = reset HEAD
-    rehh = reset HEAD --hard
-    rs = restore --staged
-    s = status --short
-    sw = switch
-    swc = switch --create
-    swd = switch develop
-    swm = switch master
-    swt = switch --track
-    sh = stash
-    sha = stash apply
-    shp = stash pop
-    su = submodule
-    suu = submodule update --init
+  a = add
+  aa = add --all
+  b = branch
+  bdg = "!git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs git branch -D"
+  c = commit --verbose
+  ca = commit --verbose --all
+  cam = commit --verbose --all --amend
+  camn = commit --verbose --all --amend --no-edit
+  ch = cherry-pick
+  cha = cherry-pick --abort
+  chc = cherry-pick --continue
+  cl = clone
+  cm = commit --verbose --amend
+  d = diff
+  ds = diff --stat
+  f = fetch
+  fa = fetch --all --prune
+  l = log --pretty='%C(blue)%h%C(reset) %C(magenta)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso-strict-local
+  m = merge
+  ma = merge --abort
+  mc = merge --continue
+  mt = mergetool --no-prompt
+  pl = pull
+  plr = pull --rebase
+  pu = push
+  puf = push --force-with-lease
+  puu = push --set-upstream origin HEAD
+  r = restore
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbd = rebase develop
+  rbm = rebase master
+  reh = reset HEAD
+  rehh = reset HEAD --hard
+  rs = restore --staged
+  s = status --short
+  sw = switch
+  swc = switch --create
+  swd = switch develop
+  swm = switch master
+  swt = switch --track
+  sh = stash
+  sha = stash apply
+  shp = stash pop
+  su = submodule
+  suu = submodule update --init
 [diff]
-    tool = vimdiff
+  tool = vimdiff
 [difftool]
-    prompt = false
+  prompt = false
 [merge]
-    tool = fugitive
+  tool = fugitive
 [mergetool]
-    keepBackup = false
+  keepBackup = false
 [mergetool "fugitive"]
-    cmd = vim -f -c Gdiff $MERGED
-    trustExitCode = true
-    prompt = false
+  cmd = vim -f -c Gdiff $MERGED
+  trustExitCode = true
+  prompt = false
 [pull]
-	ff = only
+  ff = only
