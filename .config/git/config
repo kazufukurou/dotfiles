@@ -19,6 +19,7 @@
   a = add
   aa = add --all
   b = branch
+  bd = branch -D
   bdg = "!git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs git branch -D"
   c = commit --verbose
   ca = commit --verbose --all
@@ -33,7 +34,7 @@
   ds = diff --stat
   f = fetch
   fa = fetch --all --prune
-  l = log --pretty='%C(blue)%h%C(reset) %C(magenta)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date=iso-strict-local
+  l = log --pretty='%C(blue)%h%C(reset) %C(magenta)%ad%C(reset) %s %C(green)%an%C(reset)%C(yellow)%d%C(reset)' --graph --date='format:%Y-%m-%d %H:%M'
   m = merge
   ma = merge --abort
   mc = merge --continue
