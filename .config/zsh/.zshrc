@@ -11,9 +11,9 @@ alias grep='grep -E --color=auto'
 alias ls='ls -l --almost-all --group-directories-first --human-readable --color=auto'
 alias lyrics='python3 ~/Repos/lyric-get/main_cli.py'
 alias m='mpvcmd start'
-alias mv='mv --interactive --verbose'
 alias mkdir='mkdir --parents --verbose'
 alias mnt='sudo mount -o gid=users,fmask=113,dmask=002'
+alias mv='mv --interactive --verbose'
 alias off='sudo poweroff'
 alias pkgc="sudo xbps-remove -Oo ; sudo vkpurge rm all"
 alias pkgi='sudo xbps-install -S'
@@ -107,7 +107,6 @@ PROMPT='
 ${vim_mode} %F{2}%(!.#.$) %f%b'
 
 # init ssh-agent
-ssh_auth_sock=~/.ssh/ssh_auth_sock
 if [ ! -S $ssh_auth_sock ]; then
   eval $(ssh-agent)
   ln -sf "$SSH_AUTH_SOCK" $ssh_auth_sock
@@ -124,6 +123,10 @@ ZSH_HIGHLIGHT_STYLES[alias]='fg=yellow,bold'
 source "/usr/share/doc/fzf/completion.zsh" 2> /dev/null
 source "/usr/share/doc/fzf/key-bindings.zsh" 2> /dev/null
 source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /dev/null
+# plugins for macOS
+source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+source "/usr/local/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
+source "/usr/local/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /dev/null
 
 # start WM
 mkdir -p "$XDG_RUNTIME_DIR"
