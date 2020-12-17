@@ -117,6 +117,14 @@ if [ ! -S "$ssh_auth_sock" ]; then
 fi
 export SSH_AUTH_SOCK="$ssh_auth_sock"
 
+# fix clearing base16 theme colors
+if [ "$TERM" != "linux" ] && infocmp $TERM | grep --silent 'oc='; then
+  tmp_terminfo=$(mktemp)
+  infocmp $TERM | sed -r 's/oc=[^,]+, ?//' > $tmp_terminfo
+  tic $tmp_terminfo
+  rm $tmp_terminfo
+fi
+
 # theme
 [ -n "$DISPLAY" ] && source "$XDG_CONFIG_HOME/base16-shell/.base16_theme" 2> /dev/null
 
