@@ -1,3 +1,6 @@
+alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
 alias adble='adb logcat "*:E" | grep '
 alias adbld='adb logcat "*:D" | grep '
 alias adblc='adb logcat -c'
@@ -107,11 +110,12 @@ PROMPT='
 ${vim_mode} %F{2}%(!.#.$) %f%b'
 
 # init ssh-agent
-if [ ! -S $ssh_auth_sock ]; then
+ssh_auth_sock="$HOME/.ssh/ssh_auth_sock"
+if [ ! -S "$ssh_auth_sock" ]; then
   eval $(ssh-agent)
-  ln -sf "$SSH_AUTH_SOCK" $ssh_auth_sock
+  ln -sf "$SSH_AUTH_SOCK" "$ssh_auth_sock"
 fi
-export SSH_AUTH_SOCK=$ssh_auth_sock
+export SSH_AUTH_SOCK="$ssh_auth_sock"
 
 # theme
 [ -n "$DISPLAY" ] && source "$XDG_CONFIG_HOME/base16-shell/.base16_theme" 2> /dev/null
