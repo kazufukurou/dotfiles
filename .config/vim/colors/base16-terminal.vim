@@ -1,3 +1,4 @@
+" https://github.com/chriskempson/base16-vim/blob/master/colors/base16-default-dark.vim
 " Terminal color definitions
 let s:cterm00        = "00"
 let g:base16_cterm00 = "00"
