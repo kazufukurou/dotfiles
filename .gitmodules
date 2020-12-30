@@ -58,10 +58,6 @@
 	path = .config/vim/pack/bundle/start/vim-android-sensible
 	url = https://github.com/kazufukurou/vim-android-sensible
 	ignore = untracked
-[submodule ".config/vim/pack/bundle/start/eskk.vim"]
-	path = .config/vim/pack/bundle/start/eskk.vim
-	url = https://github.com/tyru/eskk.vim.git
-	ignore = untracked
 [submodule ".config/vim/pack/bundle/start/fzf.vim"]
 	path = .config/vim/pack/bundle/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim

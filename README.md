@@ -16,7 +16,6 @@ gh submodule foreach git pull origin master
 
 * asyncdo.vim - async task runner
 * editorconfig-vim - support editorconfig
-* eskk.vim - Japanese input (Ctrl-j)
 * fzf.vim - fuzzy search
 * kotlin-vim - Kotlin syntax
 * vim-android-sensible - build Android gradle projects

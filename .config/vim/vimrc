@@ -133,14 +133,6 @@ highlight link unusedimport Comment
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" eskk
-let g:eskk#directory = "~/.config/eskk"
-let g:eskk#dictionary = { 'path': g:eskk#directory . '/skk-jisyo', 'sorted': 0, 'encoding': 'utf-8' }
-let g:eskk#large_dictionary = { 'path': g:eskk#directory . '/SKK-JISYO.L', 'sorted': 1, 'encoding': 'euc-jp' }
-let g:eskk#select_cand_keys = "abcdefg"
-let g:eskk#marker_henkan = "~"
-let g:eskk#marker_henkan_select = ">"
-
 " local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
@@ -232,9 +224,8 @@ endfun
 
 fun! StatusMode()
   let l:mode = mode()
-  let l:skk = eskk#is_enabled() ? get(g:eskk#statusline_mode_strings, eskk#get_current_instance().mode, ' ') : ' '
   let l:result = ''
-  if l:mode ==# "i" | let l:result .= '%1* '.(l:skk == ' ' ? 'I' : l:skk)
+  if l:mode ==# "i" | let l:result .= '%1* I'
   elseif l:mode ==# "n" | let l:result .= '%2* N'
   elseif l:mode ==# "R" | let l:result .= '%3* R'
   elseif l:mode ==# "v" | let l:result .= '%4* V'
