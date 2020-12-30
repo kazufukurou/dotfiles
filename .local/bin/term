@@ -3,7 +3,7 @@
 if [ "$1" = "vedit" ]; then
   file="$XDG_CACHE_HOME/vim/vedit"
   wl-paste -n > $file
-  alacritty -d 80 8 --class mypopup -e zsh -i -c "vim -c '$' $file"
+  alacritty -d 80 8 --class mypopup -e zsh -i -c "uim-fep -s none -e vim -c '$' $file"
   wl-copy "$(cat $file)"
   rm $file
 elif [ "$1" = apps ]; then
@@ -13,5 +13,5 @@ elif [ "$1" = apps ]; then
 elif [ "$1" = "run" ]; then
   alacritty -d 40 8 --class mypopup -e zsh -i -c "term apps"
 else
-  alacritty
+  alacritty -e uim-fep -s none
 fi
