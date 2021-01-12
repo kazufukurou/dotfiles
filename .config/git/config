@@ -1,6 +1,5 @@
 [user]
   name = Artyom Mironov
-  email = kazufukurou@gmail.com
 [core]
   autocrlf = input
   safecrlf = false
@@ -30,6 +29,7 @@
   chc = cherry-pick --continue
   cl = clone
   cm = commit --verbose --amend
+  co = checkout
   d = diff
   ds = diff --stat
   f = fetch
