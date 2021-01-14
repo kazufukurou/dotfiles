@@ -140,4 +140,4 @@ source "/usr/local/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /
 # start WM
 mkdir -p "$XDG_RUNTIME_DIR"
 chmod 0700 "$XDG_RUNTIME_DIR"
-[ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ] && echo -n "Starting WM.." && sleep 1 && exec hikari
+[ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ] && echo -n "Starting WM.." && sleep 1 && exec hikari
