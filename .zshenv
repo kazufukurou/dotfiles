@@ -27,3 +27,4 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 [ -e /usr/lib/jvm/oracle-jdk ] && export JAVA_HOME=/usr/lib/jvm/oracle-jdk
 [ -e /usr/lib/jvm/openjdk ] && export JAVA_HOME=/usr/lib/jvm/openjdk
 [ -e /usr/libexec/java_home ] && export JAVA_HOME=$(/usr/libexec/java_home)
+[ -n "$SSH_TTY" ] && export TERM=xterm-256color
