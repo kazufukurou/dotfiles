@@ -3,7 +3,10 @@
 if [ "$1" = "vedit" ]; then
   file="$XDG_CACHE_HOME/vim/vedit"
   wl-paste -n > $file
-  alacritty -d 80 8 --class mypopup -e zsh -i -c "uim-fep -s none -e vim -c '$' $file"
+  alacritty \
+    --option window.dimensions.columns=80 window.dimensions.lines=8 \
+    --class mypopup \
+    --command zsh -i -c "uim-fep -s none -e vim -c '$' $file"
   wl-copy "$(cat $file)"
   rm $file
 elif [ "$1" = apps ]; then
@@ -11,7 +14,10 @@ elif [ "$1" = apps ]; then
     $(rg Terminal=true /usr/share/applications --files-without-match) | \
     sort -u | fzf --info hidden | (nohup $SHELL &) > /dev/null 2>&1
 elif [ "$1" = "run" ]; then
-  alacritty -d 40 8 --class mypopup -e zsh -i -c "term apps"
+  alacritty \
+    --option window.dimensions.columns=40 window.dimensions.lines=8 \
+    --class mypopup \
+    --command zsh -i -c "term apps"
 else
-  alacritty -e uim-fep -s none
+  alacritty --command uim-fep -s none
 fi

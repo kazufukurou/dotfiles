@@ -1,2 +1,7 @@
 font:
   size: 15.0
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 500
