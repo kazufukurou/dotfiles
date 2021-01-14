@@ -1,6 +1,3 @@
-alias ..='cd ..'
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
 alias adble='adb logcat "*:E" | grep '
 alias adbld='adb logcat "*:D" | grep '
 alias adblc='adb logcat -c'
