@@ -29,7 +29,6 @@ set smartcase " search is case sensitive only if it contains an uppercase letter
 set gdefault " all matches in a line are substituted instead of one
 set showmatch " show matching brackets when text indicator is over them
 set nolist " don't show whitespaces
-set clipboard=unnamedplus " make yank copy to the global system clipboard
 set shortmess+=I " hide intro message
 set noshowmode " don't show mode on last line
 set laststatus=2 " always show the status line
@@ -43,9 +42,12 @@ set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
 set rtp+=/usr/local/opt/fzf " support fzf on macOS
 
+ " make yank copy to the global system clipboard
+let &clipboard = system('uname -s') =~ "Darwin" ? 'unnamed' : 'unnamedplus'
+
 syntax on
 filetype plugin indent on
-let base16colorspace=256
+let base16colorspace = 256
 colorscheme base16-terminal
 
 " netrw
