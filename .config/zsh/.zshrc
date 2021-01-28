@@ -21,6 +21,7 @@ alias pkgl='xbps-query -l'
 alias pkgr="sudo xbps-remove -R"
 alias pkgs='xbps-query -Rs'
 alias pkgu='sudo xbps-install -Su'
+alias quteproxy='qutebrowser -s content.proxy socks://localhost:8080'
 alias reb='sudo reboot'
 alias tunnel='ssh -C2qTnN -D 8080'
 alias umnt='sudo umount'
