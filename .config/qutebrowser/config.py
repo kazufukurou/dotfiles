@@ -1,3 +1,4 @@
+config.load_autoconfig()
 config.bind(';', 'set-cmd-text :')
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 config.set('content.cookies.accept', 'all', 'devtools://*')
