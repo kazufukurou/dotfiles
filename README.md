@@ -9,7 +9,7 @@ $ echo '*' >> .homegit/info/exclude
 
 # Update submodules
 ```
-gh submodule foreach git pull origin master
+gh su foreach git pull origin master
 ```
 
 # Vim plugins
