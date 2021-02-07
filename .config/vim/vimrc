@@ -74,8 +74,8 @@ inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
 nnoremap <leader>e :Lexplore<cr>
-nnoremap <leader>f :GFiles!<cr>
-nnoremap <leader>g :Rg!<cr>
+nnoremap <leader>f :Files!<cr>
+nnoremap <leader>g :MyRg!<cr>
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
 nnoremap <leader>is :SortImports<cr>
@@ -129,6 +129,11 @@ augroup tabHighlight
   autocmd!
   autocmd BufEnter * if &readonly | match none | else | match ExtraWhitespace /\t\|\s\+$/ | endif
 augroup END
+
+" fzf
+command! -bang -nargs=* MyRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- "
+  \ .shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " vim-java-unused-imports
 highlight link unusedimport Comment
