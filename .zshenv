@@ -5,7 +5,7 @@ path=(~/.local/bin ~/android-sdk/tools ~/android-sdk/platform-tools $path)
 export ANDROID_HOME="$HOME/android-sdk"
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export BROWSER=vimb
-export EDITOR=vim
+export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--color 16,fg:8,fg+:15,info:3,border:8"
 export FZF_DEFAULT_COMMAND="fd --hidden --type f --exclude .git"
 export GDK_DPI_SCALE=1.5
@@ -15,7 +15,6 @@ export KEYTIMEOUT=1
 export JavaScriptCoreUseJIT=0
 export LANG=en_US.utf8
 export LESSCHARSET=utf-8
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export VISUAL=$EDITOR
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"

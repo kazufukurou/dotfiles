@@ -1,21 +1,9 @@
-" make vim support XDG Base Directory specification
-set undodir=$XDG_CACHE_HOME/vim
-set directory=$XDG_CACHE_HOME/vim
-set backupdir=$XDG_CACHE_HOME/vim
-set viminfofile=$XDG_CACHE_HOME/vim/viminfo
-set runtimepath^=$XDG_CONFIG_HOME/vim
-set packpath^=$XDG_CONFIG_HOME/vim
-if !isdirectory(&directory) | call mkdir(&directory, "p") | endif
-
 set nobackup nowritebackup " don't create ~ files
 set noswapfile " don't create .swp files
 set nomodeline " modeline is not secure
 set mouse=nv
-set ttymouse=sgr
 set timeout timeoutlen=3000 ttimeoutlen=100
 set hidden " allow open new file while having unwritten changes in opened file
-set hlsearch " highlight last search
-set incsearch " highlight search while typing
 set scrolloff=4 " keep cursor few lines away edge when scrolling
 set nonumber " hide line numbers
 set norelativenumber " hide line numbers relative to current current line
@@ -23,7 +11,6 @@ set ruler " always show current position
 set cursorline " highlight current line
 set tabstop=2 shiftwidth=2 softtabstop=2 expandtab " insert 2 spaces when hit tab
 set nowrap " don't wrap lines
-set autoindent " automatically inserts one extra level of indentation in some cases
 set ignorecase " ignore case when searching
 set smartcase " search is case sensitive only if it contains an uppercase letter
 set gdefault " all matches in a line are substituted instead of one
@@ -32,6 +19,7 @@ set nolist " don't show whitespaces
 set shortmess+=I " hide intro message
 set noshowmode " don't show mode on last line
 set laststatus=2 " always show the status line
+set guicursor= " disable cursor styling
 set virtualedit+=block " allow block selection where is no actual characters
 set wildmode=longest,full " don't show all completions
 set wildignore+=*.class
@@ -46,7 +34,6 @@ set rtp+=/usr/local/opt/fzf " support fzf on macOS
 let &clipboard = system('uname -s') =~ "Darwin" ? 'unnamed' : 'unnamedplus'
 
 syntax on
-filetype plugin indent on
 let base16colorspace = 256
 colorscheme base16-terminal
 
@@ -158,10 +145,6 @@ let g:operator#flashy#group = 'MyFlashy'
 let g:operator#flashy#flash_time = 200
 highlight default MyFlashy ctermbg=2 ctermfg=0
 
-" vim-minisnip
-let g:minisnip_trigger = '<C-s>'
-let g:minisnip_dir = $XDG_CONFIG_HOME."/vim/minisnip"
-
 " vim-cycle
 nmap <silent> <C-a> <Plug>CycleNext
 nmap <silent> <C-x> <Plug>CyclePrev
@@ -232,8 +215,9 @@ endfun
 
 fun! StatusMode()
   let l:mode = mode()
-  let l:result = ''
+  let l:result = ' '
   if l:mode ==# "i" | let l:result .= '%1* I'
+  elseif l:mode ==# "c" | let l:result .= '%2* C'
   elseif l:mode ==# "n" | let l:result .= '%2* N'
   elseif l:mode ==# "R" | let l:result .= '%3* R'
   elseif l:mode ==# "v" | let l:result .= '%4* V'

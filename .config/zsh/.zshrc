@@ -27,11 +27,11 @@ alias quteproxy='qutebrowser -s content.proxy socks://localhost:8080'
 alias reb='sudo reboot'
 alias tunnel='ssh -C2qTnN -D 8080'
 alias umnt='sudo umount'
-alias v='vim'
-alias vg='vim "+Gedit:"'
-alias vv='vim $XDG_CONFIG_HOME/vim/vimrc'
-alias vz='vim $ZDOTDIR/.zshrc'
-alias vze='vim $HOME/.zshenv'
+alias v='$EDITOR'
+alias vg='$EDITOR "+Gedit:"'
+alias vv='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
+alias vz='$EDITOR $ZDOTDIR/.zshrc'
+alias vze='$EDITOR $HOME/.zshenv'
 
 h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
 d2h() { echo "obase=16; $@" | bc }

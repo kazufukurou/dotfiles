@@ -25,7 +25,6 @@ gh su foreach git pull origin master
 * vim-cycle - toggle related words (Ctrl-x Ctrl-a)
 * vim-fugitive - git tools
 * vim-java-unused-imports - highlight, remove unused imports (,ih ,id)
-* vim-minisnip - snippets
 * vim-operator-flashy - flash yanked area
 * vim-operator-user - library to define operators, used by vim-operator-flashy
 * vim-sandwich - add, delete, replace text surroundings (sae" sd" sr"')

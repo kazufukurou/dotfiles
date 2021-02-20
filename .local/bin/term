@@ -6,14 +6,14 @@ if [ "$1" = "vedit" ]; then
   alacritty \
     --option window.dimensions.columns=80 window.dimensions.lines=8 \
     --class mypopup \
-    --command zsh -i -c "uim-fep -s none -e vim -c '$' $file"
+    --command zsh -i -c "uim-fep -s none -e $EDITOR -c '$' $file"
   wl-copy "$(cat $file)"
   rm $file
 elif [ "$1" = "quteedit" ]; then
   alacritty \
     --option window.dimensions.columns=80 window.dimensions.lines=8 \
     --class mypopup \
-    --command zsh -i -c "uim-fep -s none -e vim $2"
+    --command zsh -i -c "uim-fep -s none -e $EDITOR $2"
 elif [ "$1" = apps ]; then
   rg --no-filename --only-matching -r '$2' '.*Exec=(.*/)?([^ ]+)' \
     $(rg Terminal=true /usr/share/applications --files-without-match) | \

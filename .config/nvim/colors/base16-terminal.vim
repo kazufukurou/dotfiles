@@ -1,4 +1,3 @@
-" https://github.com/chriskempson/base16-vim/blob/master/colors/base16-default-dark.vim
 " Terminal color definitions
 let s:cterm00        = "00"
 let g:base16_cterm00 = "00"
@@ -97,7 +96,7 @@ call <sid>hi("NonText",       s:cterm03, "", "")
 call <sid>hi("LineNr",        s:cterm03, s:cterm01, "")
 call <sid>hi("SignColumn",    s:cterm03, s:cterm01, "")
 call <sid>hi("StatusLine",    s:cterm04, s:cterm02, "none")
-call <sid>hi("StatusLineNC",  s:cterm03, s:cterm02, "none")
+call <sid>hi("StatusLineNC",  s:cterm03, s:cterm01, "none")
 call <sid>hi("VertSplit",     s:cterm02, s:cterm02, "none")
 call <sid>hi("ColorColumn",   "", s:cterm01, "none")
 call <sid>hi("CursorColumn",  "", s:cterm01, "none")

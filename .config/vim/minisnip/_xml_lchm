@@ -1,2 +1,0 @@
-app:layout_constraintHeight_min="{{++}}dp"
-app:layout_constraintHeight_max="{{++}}dp"

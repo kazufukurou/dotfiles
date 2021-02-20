@@ -1,7 +1,7 @@
 colorscheme base16
 set syscalls " don't use standard utilites for file operations
 set slowfs=curlftpfs " don't do too much requests to slow file systems
-set vicmd=vim
+set vicmd=$EDITOR
 set trash " use trash
 set trashdir=~/.local/share/Trash
 set fusehome=/tmp/vifm_FUSE " if no FUSE_HOME set
