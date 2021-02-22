@@ -54,4 +54,5 @@ c.colors.webpage.prefers_color_scheme_dark = True
 c.editor.command = ['term', 'quteedit', '{file}']
 c.fonts.default_size = '14pt'
 c.hints.border = 'none'
+c.input.insert_mode.auto_load = True
 c.tabs.position = 'left'
