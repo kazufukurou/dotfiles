@@ -22,12 +22,13 @@ alias pkgl='xbps-query -l'
 alias pkgr="sudo xbps-remove -R"
 alias pkgs='xbps-query -Rs'
 alias pkgu='sudo xbps-install -Su'
+alias qutebrowserproxy='qutebrowser -s content.proxy socks://localhost:8080'
 alias rm='rm --verbose'
-alias quteproxy='qutebrowser -s content.proxy socks://localhost:8080'
 alias reb='sudo reboot'
 alias tunnel='ssh -C2qTnN -D 8080'
 alias umnt='sudo umount'
 alias v='$EDITOR'
+alias vimbproxy='HTTP_PROXY=socks://localhost:8080 vimb'
 alias vg='$EDITOR "+Gedit:"'
 alias vv='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
 alias vz='$EDITOR $ZDOTDIR/.zshrc'
@@ -35,8 +36,8 @@ alias vze='$EDITOR $HOME/.zshenv'
 
 h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
 d2h() { echo "obase=16; $@" | bc }
+edict() { grep "^$@.*" ~/Downloads/edict2u ; }
 md5dir() { find "$@" -type f -exec md5sum {} \; > "$@.md5" ; }
-yaku() { grep "^$@.*" ~/Downloads/edict2u ; }
 
 unoflash() {
   arduino-cli compile -b arduino:avr:uno

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-HTTP_PROXY='socks://localhost:8080' vimb
