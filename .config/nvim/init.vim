@@ -98,9 +98,9 @@ endfun
 fun! MakeAndroid(task, buildType)
   if filereadable("tags") && a:task == 'install' | call system('ctagsup') | endif
   let l:buildGradle = gradle#findGradleFile()
-  let l:line = system('sed -n "/^ *productFlavors/,/}/p" '.l:buildGradle.' | tr -s "\n {" ":" | cut -d: -f3')
+  let l:line = system('sed -n "/^ *productFlavors/,/}/p" ' . l:buildGradle . ' | tr -s "\n {" ":" | cut -d: -f3')
   let l:flavor = substitute(l:line, '\n', '', '')
-  call asyncdo#run(0, &makeprg, a:task.l:flavor.a:buildType)
+  call asyncdo#run(0, &makeprg, a:task . l:flavor . a:buildType)
   let s:statusProgressTimer = timer_start(200, { tid -> execute('call UpdateStatusProgress()')}, { 'repeat': -1 })
 endfun
 
@@ -194,7 +194,7 @@ augroup END
 
 fun! s:UpdateStatus()
   for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
   endfor
 endfun
 
@@ -213,34 +213,21 @@ fun! UpdateStatusProgress()
   call <sid>UpdateStatus()
 endfun
 
-fun! StatusMode()
-  let l:mode = mode()
-  let l:result = ' '
-  if l:mode ==# "i" | let l:result .= '%1* I'
-  elseif l:mode ==# "c" | let l:result .= '%2* C'
-  elseif l:mode ==# "n" | let l:result .= '%2* N'
-  elseif l:mode ==# "R" | let l:result .= '%3* R'
-  elseif l:mode ==# "v" | let l:result .= '%4* V'
-  elseif l:mode ==# "V" | let l:result .= '%4* VL'
-  elseif l:mode ==# "\<C-V>" | let l:result .= '%4* VB'
-  endif
-  let l:result .= '%0*'
-  return l:result
-endfun
-
 fun! Status(winnum)
-  if a:winnum != winnr() | return ' %<%f' | endif
+  let l:path = '%<%f %=' " path to the file relative to current directory, end of left part
+  if a:winnum != winnr() | return ' ' . l:path | endif
   redraw
-  let l:stat = StatusMode()
-  let l:stat .= '%6*%( %H%M%R%)%0*' " help, modified, read only flags
-  let l:stat .= '%5*%( ' . fugitive#head() . '%)%0*' " git branch
-  let l:stat .= ' %<%f %=' " path to the file relative to current directory, end of left part
-  if s:statusProgressChar != '' | let l:stat .= '%7* ' . s:statusProgressChar . ' %0*' | endif " show progress
-  if &wrap | let l:stat .=  'wrap ' | endif " wrap line mode
-  let l:stat .= '%l:%c %P ' " line, column, scroll position
-  let l:stat .= (&fenc == "" ? &enc : &fenc).((exists("+bomb") && &bomb) ? '+BOM' : '').' ' " encoding
-  let l:stat .= &ff.' ' " file format
-  return l:stat
+  let l:modes = { "i": '1*I', "c": '2*C', "n": '2*N', "R": '3*R', "v": '4*V', "V": '4*VL', "\<C-V>": '4*VB' }
+  let l:mode = ' %' . get(l:modes, mode(), '') . '%0* '
+  let l:flags = '%6*%(%H%M%R %)%0*'
+  let l:branch = '%5*%(%{fugitive#head()} %)%0*'
+  let l:progress = '%7*%(' . s:statusProgressChar . ' %)%0*'
+  let l:wrap = &wrap ? 'wrap ' : ''
+  let l:lineColScroll = '%l:%c %P '
+  let l:encoding = &fenc == "" ? &enc : &fenc
+  let l:bom = exists("+bomb") && &bomb ? '+BOM ' : ' '
+  let l:format = &ff . ' '
+  return l:mode . l:flags . l:branch . l:path . l:progress . l:wrap . l:lineColScroll . l:encoding . l:bom . l:format
 endfun
 
 highlight User1 ctermbg=19 ctermfg=15
