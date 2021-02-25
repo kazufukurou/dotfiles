@@ -18,7 +18,7 @@ set smartcase " unless it contains at least one uppercase
 set nohlsearch " don't highlight search results automatically
 set incsearch " use increment searching (search while typing)
 set scrolloff=4 " try to leave some space from cursor to upper/lower border in lists
-set statusline="  %t%= %A %10u:%-7g %15s %20d  "
+set statusline=" %t%= %A %10u:%-7g %15s %20d "
 set timefmt=%Y-%m-%d\ %H:%M
 set noiec " use KiB, MiB, ... instead of KB, MB, ...
 set tuioptions-=s " remove borders
@@ -101,8 +101,8 @@ filextype *.html,*.htm vimb %f %i &
 filetype *.o nm %f | less
 
 " Image
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.gif imv -s shrink -n %f * &> /dev/null &
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.webp,*.gif,*.xpm imv -s shrink -n %f * &> /dev/null &
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.webp,*.gif,*.xpm convert -identify %f -verbose /dev/null
 
 " SVG
 filextype *.svg inkview %f &> /dev/null &
