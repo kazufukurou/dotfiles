@@ -217,8 +217,8 @@ fun! Status(winnum)
   let l:path = '%<%f %=' " path to the file relative to current directory, end of left part
   if a:winnum != winnr() | return ' ' . l:path | endif
   redraw
-  let l:modes = { "i": '1*I', "c": '2*C', "n": '2*N', "R": '3*R', "v": '4*V', "V": '4*VL', "\<C-V>": '4*VB' }
-  let l:mode = ' %' . get(l:modes, mode(), '') . '%0* '
+  let l:modes = { 'i': '1*∙', 'n': '2*∙', 'R': '6*∙', 'v': '4*⡾', 'V': '4*⠶', "\<C-V>": '4*⣿' }
+  let l:mode = ' %' . get(l:modes, mode(), '3*∙') . '%0* '
   let l:flags = '%6*%(%H%M%R %)%0*'
   let l:branch = '%5*%(%{fugitive#head()} %)%0*'
   let l:progress = '%7*%(' . s:statusProgressChar . ' %)%0*'
@@ -231,7 +231,7 @@ fun! Status(winnum)
 endfun
 
 highlight User1 ctermbg=19 ctermfg=15
-highlight User2 ctermbg=19 ctermfg=10
+highlight User2 ctermbg=19 ctermfg=8
 highlight User3 ctermbg=19 ctermfg=9
 highlight User4 ctermbg=19 ctermfg=13
 highlight User5 ctermbg=19 ctermfg=12
