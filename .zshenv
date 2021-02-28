@@ -23,6 +23,8 @@ export XDG_RUNTIME_DIR="$HOME/.runtime"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+export GTK_CSD=0
+export LD_PRELOAD="/usr/lib/libgtk3-nocsd.so.0"
 [ -e /usr/lib/jvm/oracle-jdk ] && export JAVA_HOME=/usr/lib/jvm/oracle-jdk
 [ -e /usr/lib/jvm/openjdk ] && export JAVA_HOME=/usr/lib/jvm/openjdk
 [ -e /usr/libexec/java_home ] && export JAVA_HOME=$(/usr/libexec/java_home)

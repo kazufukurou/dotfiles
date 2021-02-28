@@ -144,4 +144,4 @@ source "/usr/local/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /
 # start WM
 mkdir -p "$XDG_RUNTIME_DIR"
 chmod 0700 "$XDG_RUNTIME_DIR"
-[ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ] && echo -n "Starting WM.." && sleep 1 && exec wayfire
+[ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ] && echo -n "Starting WM.." && sleep 1 && exec wayfire --config "$XDG_CONFIG_HOME/wayfire/wayfire.ini"
