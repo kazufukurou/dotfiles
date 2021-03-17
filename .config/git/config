@@ -1,9 +1,11 @@
 [user]
   name = Artyom Mironov
+  email = artyommironov@gmail.com
 [core]
   autocrlf = input
   safecrlf = false
   editor = $EDITOR
+  excludesFile = ~/.config/git/ignore
 [push]
   default = simple
 [color]
