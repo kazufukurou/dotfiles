@@ -37,14 +37,6 @@ syntax on
 let base16colorspace = 256
 colorscheme base16-terminal
 
-" netrw
-let g:netrw_banner = 0 " hide help
-let g:netrw_preview = 1 " open previews vertically
-let g:netrw_liststyle = 0
-let g:netrw_winsize = 20
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-
 " leader
 let mapleader = ','
 let maplocalleader = ','
@@ -131,19 +123,10 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
-" vim-asterisk
-map * <Plug>(asterisk-z*)
-map # <Plug>(asterisk-z#)
-map g* <Plug>(asterisk-gz*)
-map g# <Plug>(asterisk-gz#)
-let g:asterisk#keeppos = 1
 
-" vim-operator-flashy
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-let g:operator#flashy#group = 'MyFlashy'
-let g:operator#flashy#flash_time = 200
-highlight default MyFlashy ctermbg=2 ctermfg=0
+" vim-highlightedyank
+let g:highlightedyank_highlight_duration = 300
+highlight HighlightedyankRegion ctermbg=2 ctermfg=0
 
 " vim-cycle
 nmap <silent> <C-a> <Plug>CycleNext
@@ -186,6 +169,29 @@ let g:import_sort_settings = {
   \ 'kotlin': { 'import_prefix': 'import ', 'import_groups': [] },
   \ 'java': { 'import_prefix': 'import ' , 'import_groups': [] }
   \ }
+
+" netrw
+let g:netrw_banner = 0 " hide help
+let g:netrw_preview = 1 " open previews vertically
+let g:netrw_liststyle = 0
+let g:netrw_winsize = 20
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_keepdir = 0 " keep current directory and browsing directory synced
+let g:netrw_localcopydircmd = 'cp -r' " enable recursive copy of directories
+let g:netrw_list_hide = '^\.\.\=/\=$' " hide './' and '../' directories
+
+fun! NetrwMapping()
+  nmap <buffer> J j
+  nmap <buffer> K k
+  nmap <buffer> H -
+  nmap <buffer> L <CR>
+endfun
+
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
 
 augroup statusLine
   autocmd!

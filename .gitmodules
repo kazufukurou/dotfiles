@@ -4,15 +4,6 @@
 [submodule ".config/nvim/pack/site/start/vim-fugitive"]
 	path = .config/nvim/pack/site/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
-[submodule ".config/nvim/pack/site/start/vim-operator-flashy"]
-	path = .config/nvim/pack/site/start/vim-operator-flashy
-	url = https://github.com/haya14busa/vim-operator-flashy
-[submodule ".config/nvim/pack/site/start/vim-asterisk"]
-	path = .config/nvim/pack/site/start/vim-asterisk
-	url = https://github.com/haya14busa/vim-asterisk
-[submodule ".config/nvim/pack/site/start/vim-operator-user"]
-	path = .config/nvim/pack/site/start/vim-operator-user
-	url = https://github.com/kana/vim-operator-user
 [submodule ".config/nvim/pack/site/start/vim-cycle"]
 	path = .config/nvim/pack/site/start/vim-cycle
 	url = https://github.com/bootleq/vim-cycle
@@ -46,3 +37,6 @@
 [submodule ".config/nvim/pack/site/start/vim-smartinput"]
 	path = .config/nvim/pack/site/start/vim-smartinput
 	url = https://github.com/kana/vim-smartinput
+[submodule ".config/nvim/pack/site/start/vim-highlightedyank"]
+	path = .config/nvim/pack/site/start/vim-highlightedyank
+	url = https://github.com/machakann/vim-highlightedyank.git
