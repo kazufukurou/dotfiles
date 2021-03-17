@@ -1,24 +1,18 @@
 #!/bin/sh
 
-usage() {
-    echo "Usage: `basename $0` <start|play|next|prev>"
-    echo "  or   `basename $0` <play|add> PATH"
-    exit 1
-}
-
-socket=$HOME/.config/mpv/socket
-
-if [ $# -eq 2 ]; then
-    if [ "$1" = "play" ]; then echo "loadfile \"$2\"" | socat - "$socket"
-    elif [ "$1" = "add" ]; then echo "loadfile \"$2\" append-play" | socat - "$socket"
-    else usage
-    fi
-elif [ $# -eq 1 ]; then
-    if [ "$1" = "start" ]; then mpv --shuffle --idle=yes --input-ipc-server=$socket
-    elif [ "$1" = "play" ]; then echo 'cycle pause' | socat - "$socket"
-    elif [ "$1" = "next" ]; then echo 'playlist-next' | socat - "$socket"
-    elif [ "$1" = "prev" ]; then echo 'playlist-prev' | socat - "$socket"
-    else usage
-    fi
-else usage
+if [ $# -eq 0 ]; then
+  echo "Usage: `basename $0` [--start|--start-shuffle|--play|--next|--prev|--add] PATH"
+  exit 1
+else
+  socket=$HOME/.config/mpv/socket
+  [ "$1" = "--start" ] && mpv --idle=yes --input-ipc-server=$socket
+  [ "$1" = "--start-shuffle" ] && mpv --shuffle --idle=yes --input-ipc-server=$socket
+  [ "$1" = "--next" ] && echo 'playlist-next' | socat - "$socket"
+  [ "$1" = "--prev" ] && echo 'playlist-prev' | socat - "$socket"
+  [ "$1" = "--play" ] && echo 'cycle pause' | socat - "$socket"
+  [ "$1" = "--add" ] && path="$2" || path="$1"
+  if [ -f "$path" ] || [ -d "$path" ]; then
+    [ "$1" = "--add" ] && param="append-play" || param=""
+    echo "loadfile \"$path\" $param" | socat - "$socket"
+  fi
 fi

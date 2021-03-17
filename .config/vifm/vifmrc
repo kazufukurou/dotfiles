@@ -40,11 +40,11 @@ mark h ~/
 " %D the other window directory name.
 " %m run the command in a menu window
 command df df -h %m 2> /dev/null
-command diff vim -d %f %F
+command diff $EDITOR -d %f %F
 command zip zip -r %f.zip %f
 command run !! ./%f
 command make !!make
-command vgrep vim "+grep %a"
+command vgrep $EDITOR "+grep %a"
 command! fzfcd :set noquickview | :execute 'goto' fnameescape(term('fd | fzf 2>/dev/tty'))
 
 " The file type is for the default programs to be used with
@@ -84,7 +84,7 @@ filextype *.ps,*.ps.gz gv %c %i &
 filextype *.djvu apvlv %f
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mpvcmd play %d/%f
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape mpvcmd %d/%f
 fileviewer *.wav,*.mp3,*.flac,*.ogg,*.m4a,*.ape ffmpeg -i
 
 " Video
@@ -189,9 +189,9 @@ nnoremap A cw<c-w>
 nnoremap ,w :set wrap!<cr>
 nnoremap ; :
 nnoremap ,f :fzfcd<cr>
-nnoremap ,p :!mpvcmd play %d/%f<cr>
-nnoremap ,a :!mpvcmd add %d/%f<cr>
+nnoremap ,p :!mpvcmd %d/%f<cr>
+nnoremap ,a :!mpvcmd --add %d/%f<cr>
 nnoremap ,e :!dtrx %f<cr>
-nnoremap ,v :!vim %f<cr>
+nnoremap ,v :!$EDITOR %f<cr>
 " open terminal in current directory
 nnoremap ,t :!term 2> /dev/null &<cr>
