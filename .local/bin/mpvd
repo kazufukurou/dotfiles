@@ -1,0 +1,20 @@
+#!/bin/bash
+
+socket=$HOME/.config/mpv/socket
+if [ "$1" = "--help" ]; then
+  echo "Usage: `basename $0` [OPTION].."
+  echo "   or: `basename $0` [--add] PATH"
+  echo "   or: `basename $0` [--play|--next|--prev|--help]"
+elif [ "$1" = "--play" ]; then
+  echo "cycle pause" | socat - "$socket"
+elif [ "$1" = "--next" ] || [ "$1" = "--prev" ]; then
+  echo "playlist${1:1}" | socat - "$socket"
+else
+  [ "$1" = "--add" ] && path="$2" || path="$1"
+  [ "$1" = "--add" ] && param="append-play" || param=""
+  if [ -e "$path" ]; then
+    echo "loadfile \"$PWD/$path\" $param" | socat - "$socket"
+  else
+    mpv --idle=yes --input-ipc-server=$socket $@
+  fi
+fi

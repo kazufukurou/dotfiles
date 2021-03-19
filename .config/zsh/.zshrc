@@ -11,7 +11,7 @@ alias grep='grep -E --color=auto'
 alias idea='$HOME/idea/bin/idea.sh'
 alias ls='ls -l --almost-all --group-directories-first --human-readable --color=auto'
 alias lyrics='python3 ~/Repos/lyric-get/main_cli.py'
-alias m='mpvcmd'
+alias m='mpvd'
 alias mkdir='mkdir --parents --verbose'
 alias mnt='sudo mount -o gid=users,fmask=113,dmask=002'
 alias mv='mv --interactive --verbose'
@@ -141,6 +141,10 @@ source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 source "/usr/local/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
 source "/usr/local/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /dev/null
+
+# change fzf ALT-C key binding to CTRL-N
+zle -N fzf-cd-widget
+bindkey '^N' fzf-cd-widget
 
 # start WM
 mkdir -p "$XDG_RUNTIME_DIR"
