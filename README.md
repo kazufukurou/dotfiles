@@ -27,4 +27,3 @@ gh su foreach git pull origin master
 * vim-highlightedyank - flash yanked area
 * vim-sandwich - add, delete, replace text surroundings (sae" sd" sr"')
 * vim-smartinput - auto input matching braces
-* vimport-sort - sort imports (,is)

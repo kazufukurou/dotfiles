@@ -10,9 +10,6 @@
 [submodule ".config/nvim/pack/site/start/vim-java-unused-imports"]
 	path = .config/nvim/pack/site/start/vim-java-unused-imports
 	url = https://github.com/akhaku/vim-java-unused-imports
-[submodule ".config/nvim/pack/site/start/vimport-sort"]
-	path = .config/nvim/pack/site/start/vimport-sort
-	url = https://github.com/Jacoby6000/vimport-sort
 [submodule ".config/nvim/pack/site/start/asyncdo.vim"]
 	path = .config/nvim/pack/site/start/asyncdo.vim
 	url = https://github.com/hauleth/asyncdo.vim

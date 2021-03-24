@@ -57,12 +57,12 @@ nnoremap <leader>f :Files!<cr>
 nnoremap <leader>g :MyRg!<cr>
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
-nnoremap <leader>is :SortImports<cr>
 nnoremap <leader>d <C-]>
 nnoremap <leader>tn :tnext<cr>
 nnoremap <leader>tp :tnext<cr>
 nnoremap <leader>n :cnext<cr>
 nnoremap <leader>p :cprev<cr>
+nnoremap <leader>rf :call MakeAndroid('ktlintFormat', '')<cr>
 nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
 nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
 nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
@@ -113,6 +113,7 @@ augroup END
 command! -bang -nargs=* MyRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- "
   \ .shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+autocmd! FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " vim-java-unused-imports
 highlight link unusedimport Comment
@@ -163,12 +164,6 @@ let g:cycle_default_groups = [
   \ [['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'], 'hard_case'],
   \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
   \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
-
-" vimport-sort
-let g:import_sort_settings = {
-  \ 'kotlin': { 'import_prefix': 'import ', 'import_groups': [] },
-  \ 'java': { 'import_prefix': 'import ' , 'import_groups': [] }
-  \ }
 
 " netrw
 let g:netrw_banner = 0 " hide help
