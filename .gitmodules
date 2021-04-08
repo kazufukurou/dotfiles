@@ -37,3 +37,6 @@
 [submodule ".config/nvim/pack/site/start/vim-highlightedyank"]
 	path = .config/nvim/pack/site/start/vim-highlightedyank
 	url = https://github.com/machakann/vim-highlightedyank.git
+[submodule ".config/nvim/pack/site/start/vim-dirvish"]
+	path = .config/nvim/pack/site/start/vim-dirvish
+	url = https://github.com/justinmk/vim-dirvish.git

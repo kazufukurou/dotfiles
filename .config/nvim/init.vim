@@ -52,7 +52,6 @@ nnoremap Y y$
 inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
-nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>f :Files!<cr>
 nnoremap <leader>g :MyRg!<cr>
 nnoremap <leader>ih :UnusedImports<cr>
@@ -165,28 +164,20 @@ let g:cycle_default_groups = [
   \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
   \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
 
-" netrw
-let g:netrw_banner = 0 " hide help
-let g:netrw_preview = 1 " open previews vertically
-let g:netrw_liststyle = 0
-let g:netrw_winsize = 20
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_keepdir = 0 " keep current directory and browsing directory synced
-let g:netrw_localcopydircmd = 'cp -r' " enable recursive copy of directories
-let g:netrw_list_hide = '^\.\.\=/\=$' " hide './' and '../' directories
+" vim-dirvish
+let g:loaded_netrwPlugin = 1 " disable netrw
+let g:dirvish_mode = ':sort ,^.*[\/],'
 
-fun! NetrwMapping()
-  nmap <buffer> J j
-  nmap <buffer> K k
-  nmap <buffer> H -
-  nmap <buffer> L <CR>
-endfun
-
-augroup netrw_mapping
+augroup dirvishConfig
   autocmd!
-  autocmd filetype netrw call NetrwMapping()
+  autocmd FileType dirvish nnoremap <buffer><silent> x :call DirvishOpen()<cr>
+  autocmd FileType dirvish nmap <nowait><buffer> m <Plug>(dirvish_arg)
+  autocmd FileType dirvish xmap <nowait><buffer> m <Plug>(dirvish_arg)
 augroup END
+
+fun! DirvishOpen()
+  exec '!x "' . getline('.') . '"'
+endfun
 
 augroup statusLine
   autocmd!

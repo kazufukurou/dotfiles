@@ -22,6 +22,7 @@ gh su foreach git pull origin master
 * vim-arduino-syntax - Arduino syntax
 * vim-commentary - comment stuff (gc gcc)
 * vim-cycle - toggle related words (Ctrl-x Ctrl-a)
+* vim-dirvish - file browser (-)
 * vim-fugitive - git tools
 * vim-java-unused-imports - highlight, remove unused imports (,ih ,id)
 * vim-highlightedyank - flash yanked area
