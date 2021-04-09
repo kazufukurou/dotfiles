@@ -75,9 +75,6 @@ nnoremap <down> <C-w>j
 nnoremap <left> <C-w>h
 nnoremap <right> <C-w>l
 
-" save as root
-command! SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
-
 fun! ToggleQf()
   let nr = winnr("$")
   cwindow
