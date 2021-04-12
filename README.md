@@ -7,11 +7,6 @@ $ git --git-dir=.homegit --work-tree=$HOME checkout -f
 $ echo '*' >> .homegit/info/exclude
 ```
 
-# Update submodules
-```
-gh su foreach git pull origin master
-```
-
 # Vim plugins
 
 * asyncdo.vim - async task runner

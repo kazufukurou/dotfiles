@@ -30,7 +30,7 @@ set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
 set rtp+=/usr/local/opt/fzf " support fzf on macOS
 
- " make yank copy to the global system clipboard
+" make yank copy to the global system clipboard
 let &clipboard = system('uname -s') =~ "Darwin" ? 'unnamed' : 'unnamedplus'
 
 syntax on
@@ -70,6 +70,7 @@ nnoremap <leader>sw :set wrap!<cr>
 nnoremap <leader>w :wa<cr>
 nnoremap <leader>q :qa!<cr>
 nnoremap <leader>z :wqa!<cr>
+nnoremap <leader>? :help<space>
 nnoremap <up> <C-w>k
 nnoremap <down> <C-w>j
 nnoremap <left> <C-w>h
@@ -120,7 +121,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " local variable highlighting
 let g:TypesFileIncludeLocals = 1
 
-
 " vim-highlightedyank
 let g:highlightedyank_highlight_duration = 300
 highlight HighlightedyankRegion ctermbg=2 ctermfg=0
@@ -163,7 +163,7 @@ let g:cycle_default_groups = [
 
 " vim-dirvish
 let g:loaded_netrwPlugin = 1 " disable netrw
-let g:dirvish_mode = ':sort ,^.*[\/],'
+let g:dirvish_mode = ':sort ,^.*[\/],' " sort directories on top
 
 augroup dirvishConfig
   autocmd!

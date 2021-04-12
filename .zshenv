@@ -15,6 +15,7 @@ export KEYTIMEOUT=1
 export JavaScriptCoreUseJIT=0
 export LANG=en_US.utf8
 export LESSCHARSET=utf-8
+export MANPAGER='nvim +Man!'
 export VISUAL=$EDITOR
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
