@@ -13,6 +13,7 @@ set tabstop=2 shiftwidth=2 softtabstop=2 expandtab " insert 2 spaces when hit ta
 set nowrap " don't wrap lines
 set ignorecase " ignore case when searching
 set smartcase " search is case sensitive only if it contains an uppercase letter
+set splitright " split new window to right of current window
 set gdefault " all matches in a line are substituted instead of one
 set showmatch " show matching brackets when text indicator is over them
 set nolist " don't show whitespaces
@@ -161,20 +162,21 @@ let g:cycle_default_groups = [
   \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
   \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
 
-" vim-dirvish
+" vim-dirvish, vim-dirvish-dovish
 let g:loaded_netrwPlugin = 1 " disable netrw
 let g:dirvish_mode = ':sort ,^.*[\/],' " sort directories on top
 
 augroup dirvishConfig
   autocmd!
-  autocmd FileType dirvish nnoremap <buffer><silent> x :call DirvishOpen()<cr>
+
+  autocmd FileType dirvish silent! unmap <buffer> p
+  autocmd FileType dirvish nmap <buffer><silent> p <Plug>(dovish_copy)
+  autocmd FileType dirvish nmap <buffer><silent> P <Plug>(dovish_move)
+  autocmd FileType dirvish nnoremap <buffer><silent> i :call dirvish#open("p", 1)<cr>
+  autocmd FileType dirvish nnoremap <buffer><silent> x :exe '!x "' . getline('.') . '"'<cr>
   autocmd FileType dirvish nmap <nowait><buffer> m <Plug>(dirvish_arg)
   autocmd FileType dirvish xmap <nowait><buffer> m <Plug>(dirvish_arg)
 augroup END
-
-fun! DirvishOpen()
-  exec '!x "' . getline('.') . '"'
-endfun
 
 augroup statusLine
   autocmd!
