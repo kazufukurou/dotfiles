@@ -13,7 +13,8 @@ set tabstop=2 shiftwidth=2 softtabstop=2 expandtab " insert 2 spaces when hit ta
 set nowrap " don't wrap lines
 set ignorecase " ignore case when searching
 set smartcase " search is case sensitive only if it contains an uppercase letter
-set splitright " split new window to right of current window
+set splitright " split new window to the right of current window
+set splitbelow " split new window below current window
 set gdefault " all matches in a line are substituted instead of one
 set showmatch " show matching brackets when text indicator is over them
 set nolist " don't show whitespaces
@@ -50,14 +51,18 @@ nnoremap ; :
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
+nnoremap > >>
+nnoremap < <<
 inoremap <esc> <esc>`^
 inoremap <C-space> <C-x><C-]>
 nnoremap <leader>. :call ToggleQf()<cr>
+nnoremap <leader>b :Buffers!<cr>
 nnoremap <leader>f :Files!<cr>
 nnoremap <leader>g :MyRg!<cr>
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
 nnoremap <leader>d <C-]>
+nnoremap <leader>l :Lines!<cr>
 nnoremap <leader>tn :tnext<cr>
 nnoremap <leader>tp :tnext<cr>
 nnoremap <leader>n :cnext<cr>
@@ -168,8 +173,9 @@ let g:dirvish_mode = ':sort ,^.*[\/],' " sort directories on top
 
 augroup dirvishConfig
   autocmd!
-
   autocmd FileType dirvish silent! unmap <buffer> p
+  autocmd FileType dirvish nmap <buffer> h <Plug>(dirvish_up)
+  autocmd FileType dirvish nnoremap <silent> <buffer> l :<C-U>.call dirvish#open("edit", 0)<cr>
   autocmd FileType dirvish nmap <buffer><silent> p <Plug>(dovish_copy)
   autocmd FileType dirvish nmap <buffer><silent> P <Plug>(dovish_move)
   autocmd FileType dirvish nnoremap <buffer><silent> i :call dirvish#open("p", 1)<cr>
