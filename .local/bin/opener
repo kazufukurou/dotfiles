@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $(uname -s) == "Darwin" ]] ; then
+  open "$1"
+else
+  fileType=$(file -b --mime-type "$1")
+  case "$fileType" in
+    audio/*) mpvd "$1" ;;
+    application/pdf) zathura "$1" ;;
+    application/*zip*) dtrx "$1" ;;
+    inode/directory) mpvd "$1" ;;
+    image/*) imv "$1" ;;
+    text/html) qutebrowser "$1" ;;
+    video/*) mpv "$1" ;;
+  esac
+fi

@@ -179,7 +179,7 @@ augroup dirvishConfig
   autocmd FileType dirvish nmap <buffer><silent> p <Plug>(dovish_copy)
   autocmd FileType dirvish nmap <buffer><silent> P <Plug>(dovish_move)
   autocmd FileType dirvish nnoremap <buffer><silent> i :call dirvish#open("p", 1)<cr>
-  autocmd FileType dirvish nnoremap <buffer><silent> x :exe '!x "' . getline('.') . '"'<cr>
+  autocmd FileType dirvish nnoremap <buffer><silent> x :exe '!opener "' . getline('.') . '"'<cr>
   autocmd FileType dirvish nmap <nowait><buffer> m <Plug>(dirvish_arg)
   autocmd FileType dirvish xmap <nowait><buffer> m <Plug>(dirvish_arg)
 augroup END
