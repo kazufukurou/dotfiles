@@ -14,6 +14,7 @@ export HISTSIZE=100000
 export KEYTIMEOUT=1
 export JavaScriptCoreUseJIT=0
 export LANG=en_US.utf8
+export LC_ALL=en_US.UTF-8
 export LESSCHARSET=utf-8
 export MANPAGER='nvim +Man!'
 export VISUAL=$EDITOR
