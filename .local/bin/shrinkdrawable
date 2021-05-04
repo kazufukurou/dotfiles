@@ -1,20 +1,20 @@
 #!/bin/bash
 
 if [ $# -eq 1 ]; then
-    a=$(grep -oE 'android:pathData=".*"' $1)
+  a=$(grep -oE 'android:pathData=".*"' $1)
 
-    IFS=',| |"'
-    for b in ${a[@]} ; do
-        if [[ $b =~ [0-9]+\.[0-9]{3} ]]; then
-            [[ $b =~ ^[A-Z] ]] && c=${b:0:1} || c=""
-            [[ $b =~ ^[A-Z] ]] && d=${b:1} || d=$b
-            e=$(printf "$c%.*f\n" 2 $d)
-            printf "%s %s\n" $b $e
-            sed -i "s/\([^0-9]\)${b/\./\\.}\([^0-9]\)/\1${e/\./\\.}\2/g" $1
-        fi
-    done
-    sed -i "s/\.00//g" $1
-    sed -i "s/\.\([0-9]\)0/\.\1/g" $1
+  IFS=',| |"'
+  for b in ${a[@]} ; do
+    if [[ $b =~ [0-9]+\.[0-9]{3} ]]; then
+      [[ $b =~ ^[A-Z] ]] && c=${b:0:1} || c=""
+      [[ $b =~ ^[A-Z] ]] && d=${b:1} || d=$b
+      e=$(printf "$c%.*f\n" 2 $d)
+      printf "%s %s\n" $b $e
+      sed -i "s/\([^0-9]\)${b/\./\\.}\([^0-9]\)/\1${e/\./\\.}\2/g" $1
+    fi
+  done
+  sed -i "s/\.00//g" $1
+  sed -i "s/\.\([0-9]\)0/\.\1/g" $1
 else
-    echo "usage: $(basename $0) <drawable>"
+  echo "usage: $(basename $0) <drawable>"
 fi

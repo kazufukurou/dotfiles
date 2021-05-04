@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [ $# -eq 2 ]; then
-    dir="/etc/udev/rules.d"
-    file="$dir/51-android.rules"
-    mkdir -p "$dir"
-    touch "$file"
-    echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"$1\", ATTR{idProduct}==\"$2\", MODE=\"0666\"" >> "$file"
-    udevadm control --reload-rules
+  dir="/etc/udev/rules.d"
+  file="$dir/51-android.rules"
+  mkdir -p "$dir"
+  touch "$file"
+  echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"$1\", ATTR{idProduct}==\"$2\", MODE=\"0666\"" >> "$file"
+  udevadm control --reload-rules
 else
-    echo "Usage: `basename $0` VENDOR PRODUCT"
+  echo "Usage: `basename $0` VENDOR PRODUCT"
 fi

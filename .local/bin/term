@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$1" = "vedit" ]; then
+vedit() {
   file="$XDG_CACHE_HOME/vim/vedit"
   wl-paste -n > $file
   alacritty \
@@ -9,20 +9,31 @@ if [ "$1" = "vedit" ]; then
     --command zsh -i -c "uim-fep -u anthy-utf8 -s none -e $EDITOR -c '$' $file"
   wl-copy "$(cat $file)"
   rm $file
-elif [ "$1" = "quteedit" ]; then
+}
+
+quteedit() {
   alacritty \
     --option window.dimensions.columns=80 window.dimensions.lines=8 \
     --class mypopup \
     --command zsh -i -c "uim-fep -u anthy-utf8 -s none -e $EDITOR $2"
-elif [ "$1" = apps ]; then
-  rg --no-filename --only-matching -r '$2' '.*Exec=(.*/)?([^ ]+)' \
-    $(rg Terminal=true /usr/share/applications --files-without-match) | \
-    sort -u | fzf --info hidden | (nohup $SHELL &) > /dev/null 2>&1
-elif [ "$1" = "run" ]; then
+}
+
+apps() {
+  (echo idea && \
+    rg --no-filename --only-matching -r '$2' '.*Exec=(.*/)?([^ ]+)' \
+    $(rg Terminal=true /usr/share/applications --files-without-match) \
+  ) | sort -u | fzf --info hidden | (nohup $SHELL &) > /dev/null 2>&1
+}
+
+run() {
   alacritty \
     --option window.dimensions.columns=40 window.dimensions.lines=8 \
     --class mypopup \
     --command zsh -i -c "term apps"
-else
+}
+
+main() {
   alacritty --command uim-fep -u anthy-utf8 -s none
-fi
+}
+
+"${1:-main}"
