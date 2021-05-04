@@ -42,4 +42,4 @@
 	url = https://github.com/justinmk/vim-dirvish.git
 [submodule ".config/nvim/pack/site/start/vim-dirvish-dovish"]
 	path = .config/nvim/pack/site/start/vim-dirvish-dovish
-	url = https://github.com/roginfarrer/vim-dirvish-dovish.git
+	url = https://github.com/artyommironov/vim-dirvish-dovish
