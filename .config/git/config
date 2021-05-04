@@ -59,7 +59,7 @@
   sw = switch
   swc = switch --create
   swd = switch develop
-  swm = switch master
+  swm = "!git switch $(git symbolic-ref refs/remotes/origin/HEAD | cut -d / -f 4)"
   swt = switch --track
   sh = stash
   sha = stash apply
