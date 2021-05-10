@@ -18,6 +18,7 @@ $ echo '*' >> .homegit/info/exclude
 * vim-commentary - comment stuff (gc gcc)
 * vim-cycle - toggle related words (Ctrl-x Ctrl-a)
 * vim-dirvish - file browser (-)
+* vim-dirvish-dovish - file operations (dd yy p P a A r)
 * vim-fugitive - git tools
 * vim-java-unused-imports - highlight, remove unused imports (,ih ,id)
 * vim-highlightedyank - flash yanked area
