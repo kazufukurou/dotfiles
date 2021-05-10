@@ -5,7 +5,6 @@ vedit() {
   wl-paste -n > $file
   alacritty \
     --option window.dimensions.columns=80 window.dimensions.lines=8 \
-    --class mypopup \
     --command zsh -i -c "uim-fep -u anthy-utf8 -s none -e $EDITOR -c '$' $file"
   wl-copy "$(cat $file)"
   rm $file
@@ -14,7 +13,6 @@ vedit() {
 quteedit() {
   alacritty \
     --option window.dimensions.columns=80 window.dimensions.lines=8 \
-    --class mypopup \
     --command zsh -i -c "uim-fep -u anthy-utf8 -s none -e $EDITOR $2"
 }
 
@@ -28,7 +26,6 @@ apps() {
 run() {
   alacritty \
     --option window.dimensions.columns=40 window.dimensions.lines=8 \
-    --class mypopup \
     --command zsh -i -c "term apps"
 }
 

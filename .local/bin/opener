@@ -4,13 +4,17 @@ if [[ $(uname -s) == "Darwin" ]] ; then
   open "$1"
 else
   fileType=$(file -b --mime-type "$1")
+  fileDir="${1%/*}"
+  fileName="${1##*/}"
+  fileNameWithoutExt="${fileName%.*}"
   case "$fileType" in
     audio/*) mpvd "$1" ;;
     application/pdf) zathura "$1" ;;
-    application/*zip*) dtrx "$1" ;;
+    application/zip | application/x-rar) 7z -o"$fileDir/$fileNameWithoutExt" x "$1" ;;
     inode/directory) mpvd "$1" ;;
-    image/*) imv "$1" ;;
+    image/*) imv -n "$fileName" "$fileDir" &> /dev/null ;;
     text/html) qutebrowser "$1" ;;
     video/*) mpv "$1" ;;
+    *) echo $fileType
   esac
 fi
