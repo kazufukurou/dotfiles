@@ -24,7 +24,7 @@
 	url = https://github.com/editorconfig/editorconfig-vim
 [submodule ".config/nvim/pack/site/start/vim-android-sensible"]
 	path = .config/nvim/pack/site/start/vim-android-sensible
-	url = https://github.com/kazufukurou/vim-android-sensible
+	url = https://github.com/artyommironov/vim-android-sensible
 [submodule ".config/nvim/pack/site/start/fzf.vim"]
 	path = .config/nvim/pack/site/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
