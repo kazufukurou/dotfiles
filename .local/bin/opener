@@ -9,10 +9,11 @@ else
   fileNameWithoutExt="${fileName%.*}"
   case "$fileType" in
     audio/*) mpvd "$1" ;;
+    application/msword) libreoffice "$1" ;;
     application/pdf) zathura "$1" ;;
-    application/zip | application/x-rar) 7z -o"$fileDir/$fileNameWithoutExt" x "$1" ;;
+    */zip | */x-rar | */x-7z-compressed) 7z -o"$fileDir/$fileNameWithoutExt" x "$1" ;;
     inode/directory) mpvd "$1" ;;
-    image/*) imv -n "$fileName" "$fileDir" &> /dev/null ;;
+    image/*) imv -u nearest_neighbour -n "$fileName" "$fileDir" &> /dev/null ;;
     text/html) qutebrowser "$1" ;;
     video/*) mpv "$1" ;;
     *) echo $fileType
