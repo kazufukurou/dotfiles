@@ -1,36 +1,39 @@
-set nobackup nowritebackup " don't create ~ files
-set noswapfile " don't create .swp files
-set nomodeline " modeline is not secure
-set mouse=nv
-set timeout timeoutlen=3000 ttimeoutlen=100
+set cursorline " highlight current line
+set gdefault " all matches in a line are substituted instead of one
+set guicursor= " disable cursor styling
 set hidden " allow open new file while having unwritten changes in opened file
-set scrolloff=4 " keep cursor few lines away edge when scrolling
+set ignorecase " ignore case when searching
+set laststatus=2 " always show the status line
+set mouse=nv
+set nobackup nowritebackup " don't create ~ files
+set nolist " don't show whitespaces
+set nomodeline " modeline is not secure
 set nonumber " hide line numbers
 set norelativenumber " hide line numbers relative to current current line
-set ruler " always show current position
-set cursorline " highlight current line
-set tabstop=2 shiftwidth=2 softtabstop=2 expandtab " insert 2 spaces when hit tab
-set nowrap " don't wrap lines
-set ignorecase " ignore case when searching
-set smartcase " search is case sensitive only if it contains an uppercase letter
-set splitright " split new window to the right of current window
-set splitbelow " split new window below current window
-set gdefault " all matches in a line are substituted instead of one
-set showmatch " show matching brackets when text indicator is over them
-set nolist " don't show whitespaces
-set shortmess+=I " hide intro message
 set noshowmode " don't show mode on last line
-set laststatus=2 " always show the status line
-set guicursor= " disable cursor styling
+set noswapfile " don't create .swp files
+set nowrap " don't wrap lines
+set rtp+=/usr/local/opt/fzf " support fzf on macOS
+set ruler " always show current position
+set scrolloff=4 " keep cursor few lines away edge when scrolling
+set shortmess+=c " hide insert completion messages
+set shortmess+=I " hide intro message
+set showmatch " show matching brackets when text indicator is over them
+set signcolumn=yes " show signcolumn
+set smartcase " search is case sensitive only if it contains an uppercase letter
+set splitbelow " split new window below current window
+set splitright " split new window to the right of current window
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab " insert 2 spaces when hit tab
+set timeout timeoutlen=3000 ttimeoutlen=100
+set updatetime=300
 set virtualedit+=block " allow block selection where is no actual characters
-set wildmode=longest,full " don't show all completions
+set wildignore+=*.apk,*.zip,*.so,*.jar
 set wildignore+=*.class
 set wildignore+=*.mkv,*.avi,*mp3,*.flac,*.png,*.jpg,*.jpeg,*.gif
-set wildignore+=*.apk,*.zip,*.so,*.jar
-set wildignore+=mapping*.txt
 set wildignore+=*/build/*,*/.gradle/*,*/.idea/*,*/assets/*
 set wildignore+=.git,.hg,.gradle
-set rtp+=/usr/local/opt/fzf " support fzf on macOS
+set wildignore+=mapping*.txt
+set wildmode=longest,full " don't show all completions
 
 " make yank copy to the global system clipboard
 let &clipboard = system('uname -s') =~ "Darwin" ? 'unnamed' : 'unnamedplus'
@@ -45,7 +48,7 @@ let maplocalleader = ','
 
 " bindings
 nnoremap <space> <nop>
-inoremap <C-c> <nop>
+inoremap <c-c> <nop>
 nnoremap Q @q
 nnoremap ; :
 nnoremap j gj
@@ -54,21 +57,31 @@ nnoremap Y y$
 nnoremap > >>
 nnoremap < <<
 inoremap <esc> <esc>`^
-inoremap <C-space> <C-x><C-]>
+inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <leader>. :call ToggleQf()<cr>
 nnoremap <leader>b :Buffers!<cr>
 nnoremap <leader>f :Files!<cr>
 nnoremap <leader>g :MyRg!<cr>
 nnoremap <leader>ih :UnusedImports<cr>
 nnoremap <leader>id :UnusedImportsRemove<cr>
-nnoremap <leader>d <C-]>
+nnoremap <leader>h :help<space>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <leader>cf  <Plug>(coc-format-selected)
+xmap <leader>cf  <Plug>(coc-format-selected)
 nnoremap <leader>l :Lines!<cr>
 nnoremap <leader>tn :tnext<cr>
 nnoremap <leader>tp :tnext<cr>
 nnoremap <leader>n :cnext<cr>
 nnoremap <leader>p :cprev<cr>
 nnoremap <leader>rf :call MakeAndroid('ktlintFormat', '')<cr>
-nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
+nnoremap <leader>rr :make<cr>
+" nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
 nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
 nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
 nnoremap <leader>sp :set paste!<cr>
@@ -76,11 +89,10 @@ nnoremap <leader>sw :set wrap!<cr>
 nnoremap <leader>w :wa<cr>
 nnoremap <leader>q :qa!<cr>
 nnoremap <leader>z :wqa!<cr>
-nnoremap <leader>? :help<space>
-nnoremap <up> <C-w>k
-nnoremap <down> <C-w>j
-nnoremap <left> <C-w>h
-nnoremap <right> <C-w>l
+nnoremap <up> <c-w>k
+nnoremap <down> <c-w>j
+nnoremap <left> <c-w>h
+nnoremap <right> <c-w>l
 
 fun! ToggleQf()
   let nr = winnr("$")
@@ -91,12 +103,11 @@ endfun
 
 " build and install android project
 fun! MakeAndroid(task, buildType)
-  if filereadable("tags") && a:task == 'install' | call system('ctagsup') | endif
   let l:buildGradle = gradle#findGradleFile()
   let l:line = system('sed -n "/^ *productFlavors/,/}/p" ' . l:buildGradle . ' | tr -s "\n {" ":" | cut -d: -f3')
   let l:flavor = substitute(l:line, '\n', '', '')
   call asyncdo#run(0, &makeprg, a:task . l:flavor . a:buildType)
-  let s:statusProgressTimer = timer_start(200, { tid -> execute('call UpdateStatusProgress()')}, { 'repeat': -1 })
+  call UpdateAsyncDoProgress()
 endfun
 
 " open vim help on right of current window
@@ -143,29 +154,28 @@ let g:cycle_default_groups = [
   \ [['on', 'off']],
   \ [['yes', 'no']],
   \ [['var', 'val']],
-  \ [['if', 'when']],
   \ [['true', 'false']],
   \ [['width', 'height']],
   \ [['horizontal', 'vertical']],
-  \ [['extends', 'implements']],
-  \ [['public', 'protected', 'private']],
-  \ [['left', 'right', 'top', 'bottom']],
-  \ [['@Nullable', '@NonNull'], 'hard_case'],
-  \ [['View', 'TextView', 'ImageView'], 'hard_case'],
-  \ [['LinearLayout', 'RelativeLayout', 'FrameLayout'], 'hard_case'],
-  \ [['wrap_content', 'match_parent'], 'hard_case', 'match_case'],
-  \ [['WRAP_CONTENT', 'MATCH_PARENT'], 'hard_case', 'match_case'],
-  \ [['center_vertical', 'center_horizontal'], 'hard_case', 'match_case'],
-  \ [['CENTER_VERTICAL', 'CENTER_HORIZONTAL'], 'hard_case', 'match_case'],
-  \ [['isEmpty', 'isNotEmpty', 'isBlank', 'isNotBlank'], 'hard_case'],
-  \ [['boolean', 'int', 'long', 'float', 'double']],
-  \ [['Boolean', 'Int', 'Long', 'Float', 'Double', 'String'], 'hard_case', 'match_case'],
-  \ [['booleanArrayOf', 'intArrayOf', 'longArrayOf', 'floatArrayOf', 'doubleArrayOf'], 'hard_case', 'match_case'],
-  \ [['BooleanArray', 'IntArray', 'LongArry', 'FloatArry', 'DoubleArray', 'ShortArray'], 'hard_case', 'match_case'],
-  \ [['layout_alignTop', 'layout_alignBottom', 'layout_alignLeft', 'layout_alignRight'], 'hard_case'],
-  \ [['layout_above', 'layout_below', 'layout_toLeftOf', 'layout_toRightOf'], 'hard_case'],
-  \ [['layout_marginLeft', 'layout_marginRight', 'layout_marginTop', 'layout_marginBottom']],
-  \ [['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']]]
+  \ [['left', 'right', 'top', 'bottom']]]
+
+" coc.nvim
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to format on enter
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+fun! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfun
 
 " vim-dirvish, vim-dirvish-dovish
 let g:loaded_netrwPlugin = 1 " disable netrw
@@ -179,7 +189,7 @@ augroup dirvishConfig
   autocmd FileType dirvish nmap <buffer><silent> p <Plug>(dovish_copy)
   autocmd FileType dirvish nmap <buffer><silent> P <Plug>(dovish_move)
   autocmd FileType dirvish nnoremap <buffer><silent> i :call dirvish#open("p", 1)<cr>
-  autocmd FileType dirvish nnoremap <buffer><silent> x :exe '!opener "' . getline('.') . '"'<cr>
+  autocmd FileType dirvish nnoremap <buffer><silent> x :silent :execute '!opener "' . getline('.') . '"'<cr>
   autocmd FileType dirvish nmap <nowait><buffer> m <Plug>(dirvish_arg)
   autocmd FileType dirvish xmap <nowait><buffer> m <Plug>(dirvish_arg)
 augroup END
@@ -195,17 +205,16 @@ fun! s:UpdateStatus()
   endfor
 endfun
 
-let s:statusProgress = 0
-let s:statusProgressTimer = 0
-let s:statusProgressChars = ['⠦', '⠖', '⠲', '⠴']
-let s:statusProgressChar = ''
-fun! UpdateStatusProgress()
+let s:asyncdoProgress = ''
+fun! UpdateAsyncDoProgress()
   if exists("g:asyncdo")
-    let s:statusProgress = s:statusProgress < len(s:statusProgressChars) - 1 ? s:statusProgress + 1 : 0
-    let s:statusProgressChar = s:statusProgressChars[s:statusProgress]
+    let l:progressChars = ['⠋', '⠙', '⠸', '⠴', '⠦', '⠇']
+    let l:progress = index(progressChars, s:asyncdoProgress)
+    let l:progress = l:progress < len(l:progressChars) - 1 ? l:progress + 1 : 0
+    let s:asyncdoProgress = l:progressChars[l:progress]
+    call timer_start(300, { tid -> execute('call UpdateAsyncDoProgress()') })
   else
-    let s:statusProgressChar = ''
-    call timer_stop(s:statusProgressTimer)
+    let s:asyncdoProgress = ''
   endif
   call <sid>UpdateStatus()
 endfun
@@ -218,13 +227,14 @@ fun! Status(winnum)
   let l:mode = ' %' . get(l:modes, mode(), '3*∙') . '%0* '
   let l:flags = '%6*%(%H%M%R %)%0*'
   let l:branch = '%5*%(%{fugitive#head()} %)%0*'
-  let l:progress = '%7*%(' . s:statusProgressChar . ' %)%0*'
+  let l:progress = '%7*%(' . s:asyncdoProgress . ' %)%0*'
+  let l:coc = '%{coc#status()} '
   let l:wrap = &wrap ? 'wrap ' : ''
   let l:lineColScroll = '%l:%c %P '
   let l:encoding = &fenc == "" ? &enc : &fenc
   let l:bom = exists("+bomb") && &bomb ? '+BOM ' : ' '
   let l:format = &ff . ' '
-  return l:mode . l:flags . l:branch . l:path . l:progress . l:wrap . l:lineColScroll . l:encoding . l:bom . l:format
+  return l:mode . l:flags . l:branch . l:path . l:progress . l:coc . l:wrap . l:lineColScroll . l:encoding . l:bom . l:format
 endfun
 
 highlight User1 ctermbg=19 ctermfg=15

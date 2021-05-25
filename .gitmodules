@@ -43,3 +43,12 @@
 [submodule ".config/nvim/pack/site/start/vim-dirvish-dovish"]
 	path = .config/nvim/pack/site/start/vim-dirvish-dovish
 	url = https://github.com/artyommironov/vim-dirvish-dovish
+[submodule ".config/nvim/pack/site/start/vim-godot"]
+	path = .config/nvim/pack/site/start/vim-godot
+	url = https://github.com/habamax/vim-godot.git
+[submodule ".config/nvim/pack/site/start/vim-love-efm"]
+	path = .config/nvim/pack/site/start/vim-love-efm
+	url = https://github.com/alols/vim-love-efm
+[submodule ".config/nvim/pack/site/start/coc.nvim"]
+	path = .config/nvim/pack/site/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
