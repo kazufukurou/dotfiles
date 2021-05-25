@@ -59,7 +59,7 @@
   sw = switch
   swc = switch --create
   swd = switch develop
-  swm = "!git switch $([ -f \"$(git rev-parse --git-dir)/refs/heads/master\" ] && echo master || echo main)"
+  swm = "!git switch master || git switch main"
   swt = switch --track
   sh = stash
   sha = stash apply
