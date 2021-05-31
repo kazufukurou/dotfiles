@@ -1,0 +1,4 @@
+#!/bin/bash
+
+text=$(grep "^$QUTE_SELECTED_TEXT.*" ~/Downloads/edict2u | awk '{printf "%s\\n", $0}')
+echo "jseval alert(\"$text\")" >> "$QUTE_FIFO"

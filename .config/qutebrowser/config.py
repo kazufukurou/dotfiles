@@ -1,5 +1,6 @@
 config.load_autoconfig()
 config.bind(';', 'set-cmd-text :')
+config.bind(',t', 'spawn --userscript translate')
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 config.set('content.cookies.accept', 'all', 'devtools://*')
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
