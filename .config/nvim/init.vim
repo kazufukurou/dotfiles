@@ -79,11 +79,10 @@ nnoremap <leader>tn :tnext<cr>
 nnoremap <leader>tp :tnext<cr>
 nnoremap <leader>n :cnext<cr>
 nnoremap <leader>p :cprev<cr>
-nnoremap <leader>rf :call MakeAndroid('ktlintFormat', '')<cr>
-nnoremap <leader>rr :make<cr>
-" nnoremap <leader>rr :call MakeAndroid('install', 'Debug')<cr>
-nnoremap <leader>rt :call MakeAndroid('test', '')<cr>
-nnoremap <leader>rl :call MakeAndroid('ktlintCheck', '')<cr>
+nnoremap <leader>rf :call MakeLintFormat()<cr>
+nnoremap <leader>rr :call MakeRun()<cr>
+nnoremap <leader>rt :call MakeTest()<cr>
+nnoremap <leader>rl :call MakeLint()<cr>
 nnoremap <leader>sp :set paste!<cr>
 nnoremap <leader>sw :set wrap!<cr>
 nnoremap <leader>w :wa<cr>
@@ -101,13 +100,49 @@ fun! ToggleQf()
   if nr == nr2 | cclose | endif
 endfun
 
-" build and install android project
+fun! MakeAsync(args)
+  call asyncdo#run(0, &makeprg, a:args)
+  call UpdateAsyncDoProgress()
+endfun
+
+fun! MakeRun()
+  if (&filetype == "kotlin")
+    call MakeAndroid('install', 'Debug')
+  else
+    call MakeAsync('')
+  endif
+endfun
+
+fun! MakeLint()
+  if (&filetype == "kotlin")
+    MakeAndroid('ktlintCheck', '')
+  else
+    call MakeAsync('')
+  endif
+endfun
+
+fun! MakeLint()
+  if (&filetype == "kotlin")
+    MakeAndroid('ktlintFormat', '')
+  else
+    call MakeAsync('')
+  endif
+endfun
+
+fun! MakeTest()
+  if (&filetype == "kotlin")
+    call MakeAndroid('test', '')
+  else
+    call MakeAsync('')
+  endif
+endfun
+
+" run gradle task in Android project
 fun! MakeAndroid(task, buildType)
   let l:buildGradle = gradle#findGradleFile()
   let l:line = system('sed -n "/^ *productFlavors/,/}/p" ' . l:buildGradle . ' | tr -s "\n {" ":" | cut -d: -f3')
   let l:flavor = substitute(l:line, '\n', '', '')
-  call asyncdo#run(0, &makeprg, a:task . l:flavor . a:buildType)
-  call UpdateAsyncDoProgress()
+  call MakeAsync(a:task . l:flavor . a:buildType)
 endfun
 
 " open vim help on right of current window
@@ -208,7 +243,7 @@ endfun
 let s:asyncdoProgress = ''
 fun! UpdateAsyncDoProgress()
   if exists("g:asyncdo")
-    let l:progressChars = ['⠋', '⠙', '⠸', '⠴', '⠦', '⠇']
+    let l:progressChars = ['-', '\', '|', '/']
     let l:progress = index(progressChars, s:asyncdoProgress)
     let l:progress = l:progress < len(l:progressChars) - 1 ? l:progress + 1 : 0
     let s:asyncdoProgress = l:progressChars[l:progress]
@@ -223,7 +258,7 @@ fun! Status(winnum)
   let l:path = '%<%f %=' " path to the file relative to current directory, end of left part
   if a:winnum != winnr() | return ' ' . l:path | endif
   redraw
-  let l:modes = { 'i': '1*∙', 'n': '2*∙', 'R': '6*∙', 'v': '4*⡾', 'V': '4*⠶', "\<C-V>": '4*⣿' }
+  let l:modes = { 'i': '1*I', 'n': '2*N', 'R': '6*R', 'v': '4*v', 'V': '4*V', "\<C-V>": '4*ʌ' }
   let l:mode = ' %' . get(l:modes, mode(), '3*∙') . '%0* '
   let l:flags = '%6*%(%H%M%R %)%0*'
   let l:branch = '%5*%(%{fugitive#head()} %)%0*'
