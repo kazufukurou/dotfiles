@@ -40,9 +40,9 @@ alias vv='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
 alias vz='$EDITOR $ZDOTDIR/.zshrc'
 alias vze='$EDITOR $HOME/.zshenv'
 
-h2d() { echo "ibase=16; $(echo $@ | tr '[a-z]' '[A-Z]')" | bc }
-d2h() { echo "obase=16; $@" | bc }
-edict() { grep "^$@.*" ~/Downloads/edict2u ; }
+h2d() { echo $((0x$@)) }
+d2h() { echo $(([##16]$@)) }
+e() { grep "^$@.*" ~/Downloads/edict2u ; }
 md5dir() { find "$@" -type f -exec md5sum {} \; > "$@.md5" ; }
 
 unoflash() {
