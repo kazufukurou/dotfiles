@@ -8,8 +8,12 @@ alias g='git'
 alias gethosts='sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -o "/etc/hosts"'
 alias gh='git --git-dir=$HOME/.homegit --work-tree=$HOME'
 alias grep='grep -E --color=auto'
-alias ls='ls -l --almost-all --group-directories-first --human-readable --color=auto'
+alias ls='ls -v -l --almost-all --group-directories-first --human-readable --color=auto'
 alias lyrics='python3 ~/Repos/lyric-get/main_cli.py'
+alias k='$EDITOR'
+alias kr='$EDITOR $XDG_CONFIG_HOME/kak/kakrc'
+alias kz='$EDITOR $ZDOTDIR/.zshrc'
+alias kze='$EDITOR $HOME/.zshenv'
 alias m='mpvd --shuffle'
 alias mkdir='mkdir --parents --verbose'
 alias mnt='sudo mount -o gid=users,fmask=113,dmask=002'
@@ -25,20 +29,9 @@ alias pkgu='sudo xbps-install -Su'
 alias qutebrowserproxy='qutebrowser -s content.proxy socks://localhost:8080'
 alias rm='rm --verbose'
 alias reb='sudo reboot'
-alias tp='trash-put'
-alias te='trash-empty'
-alias tl='trash-list'
-alias tre='trash-restore'
-alias trm='trash-rm'
 alias tunnel='ssh -C2qTnN -D 8080'
 alias umnt='sudo umount'
-alias v='$EDITOR'
-alias vg='$EDITOR +Gedit:'
-alias vimbproxy='HTTP_PROXY=socks://localhost:8080 vimb'
-alias vu='gh su foreach git pull origin HEAD'
-alias vv='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
-alias vz='$EDITOR $ZDOTDIR/.zshrc'
-alias vze='$EDITOR $HOME/.zshenv'
+alias up='gh su foreach git pull origin HEAD'
 
 h2d() { echo $((0x$@)) }
 d2h() { echo $(([##16]$@)) }
@@ -85,36 +78,10 @@ zstyle ':vcs_info:*' unstagedstr '%F{1}-%f'
 zstyle ':vcs_info:*' enable git
 precmd () { vcs_info }
 
-# vim mode
-vim_ins_mode="%F{10}I%f"
-vim_cmd_mode="%F{8}N%f"
-vim_mode=$vim_ins_mode
-
-# register functions for updating vim mode
-zle -N zle-keymap-select
-zle -N zle-line-finish
-
-# update vim mode
-zle-keymap-select() {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
-}
-
-# set vim insert mode on after line read
-zle-line-finish() {
-  vim_mode=$vim_ins_mode
-}
-
-# set vim insert mode on ^C
-TRAPINT() {
-  vim_mode=$vim_ins_mode
-  return $(( 128 + $1 ))
-}
-
 # prompt
 PROMPT='
 %F{5}%n@%m%f %B%F{4}%~ %f%(1j.%F{2}%j %f.)${vcs_info_msg_0_}
-${vim_mode} %F{2}%(!.#.$) %f%b'
+%F{2}%(!.#.$) %f%b'
 
 # init ssh-agent
 ssh_auth_sock="$HOME/.ssh/ssh_auth_sock"
@@ -123,17 +90,6 @@ if [ ! -S "$ssh_auth_sock" ]; then
   ln -sf "$SSH_AUTH_SOCK" "$ssh_auth_sock"
 fi
 export SSH_AUTH_SOCK="$ssh_auth_sock"
-
-# fix clearing base16 theme colors
-if [ "$TERM" != "linux" ] && infocmp $TERM | grep --silent 'oc='; then
-  tmp_terminfo=$(mktemp)
-  infocmp $TERM | sed -r 's/oc=[^,]+, ?//' > $tmp_terminfo
-  tic $tmp_terminfo
-  rm $tmp_terminfo
-fi
-
-# theme
-[ -n "$DISPLAY" ] && source "$XDG_CONFIG_HOME/base16-shell/.base16_theme" 2> /dev/null
 
 # plugins
 typeset -A ZSH_HIGHLIGHT_STYLES

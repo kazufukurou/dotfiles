@@ -1,9 +1,39 @@
 font:
   size: 15.0
+
 window:
   decorations: none
+
 cursor:
   style:
     shape: Block
     blinking: Always
   blink_interval: 500
+
+colors:
+  # Default colors
+  primary:
+    background: '0x202020'
+    foreground: '0xd0d0d0'
+
+  # Normal colors
+  normal:
+    black:   '0x303030'
+    red:     '0xff7070'
+    green:   '0xa0d0a0'
+    yellow:  '0xffd070'
+    blue:    '0x60a0d0'
+    magenta: '0xd0a0d0'
+    cyan:    '0x60d0d0'
+    white:   '0xd0d0d0'
+
+  # Bright colors
+  bright:
+    black:   '0x606060'
+    red:     '0xff7070'
+    green:   '0xa0d0a0'
+    yellow:  '0xffd070'
+    blue:    '0x60a0d0'
+    magenta: '0xd0a0d0'
+    cyan:    '0x60d0d0'
+    white:   '0xffffff'

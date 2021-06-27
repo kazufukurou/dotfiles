@@ -1,8 +1,0 @@
-set editing-mode vi
-set show-mode-in-prompt on
-set vi-ins-mode-string \1\033[1;32m\2I \1\033[0m\2
-set vi-cmd-mode-string \1\033[1;30m\2N \1\033[0m\2
-set show-all-if-ambiguous on
-
-"\e[A": history-search-backward
-"\e[B": history-search-forward

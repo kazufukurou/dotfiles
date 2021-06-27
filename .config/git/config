@@ -13,7 +13,7 @@
   status = auto
   branch = auto
 [color "diff"]
-  context = 8
+  context = brightblack
 [credential]
   helper = cache --timeout=3600
 [alias]
@@ -67,16 +67,10 @@
   su = submodule
   suu = submodule update --init
 [diff]
-  tool = vimdiff
+  tool = $EDITOR
 [difftool]
   prompt = false
 [merge]
   tool = fugitive
-[mergetool]
-  keepBackup = false
-[mergetool "fugitive"]
-  cmd = vim -f -c Gdiff $MERGED
-  trustExitCode = true
-  prompt = false
 [pull]
   ff = only
