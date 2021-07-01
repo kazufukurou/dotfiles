@@ -1,0 +1,75 @@
+colorscheme my
+
+# show 3 rows and columns around the cursor
+set-option global scrolloff 3,3
+# indent with 2 spaces
+set-option global indentwidth 2
+# hide clippy
+set-option global ui_options ncurses_assistant=none
+
+# highlight trailing whitespace
+add-highlighter global/ regex \h+$ 0:Error
+
+# paste from system clipboard
+# map global normal <ret> <a-a>
+# map global normal <space> <a-i>
+map global normal <a-a> ''
+map global normal <a-i> ''
+map global normal <backspace> ': edit .<ret>'
+
+# user mappings
+map global user c ':comment-line<ret>' -docstring 'comment line'
+map global user b ': buffer<ret>' -docstring 'explore buffers'
+map global user f ': find-file ' -docstring 'open file'
+map global user p '<a-!>wl-paste -n<ret>' -docstring 'paste from system clipboard after selection'
+map global user P '!wl-paste -n<ret>' -docstring 'paste from system clipboard before selection'
+map global user y '<a-|> wl-copy<ret>' -docstring 'yank to system clipboard'
+map global user q ': quit!<ret>' -docstring 'quit without saving'
+map global user w ': write-all<ret>' -docstring 'write all'
+map global user z ': write-all-quit<ret>' -docstring 'write all and quit'
+map global user / '/(?i)' -docstring 'case-insensitive search'
+
+define-command find-file -params 1 -shell-script-candidates %{ fd --type file } %{ edit %arg{1} }
+
+# make man readonly
+hook global WinSetOption filetype=man %{ set buffer readonly true }
+
+# explore.kak show hidden files by default
+set-option global explore_files_show_hidden true
+
+# explore.kak option to hold full selected files paths
+declare-option -hidden str explore_files_paths
+
+# explore.kak fix hidden file sort order
+define-command -hidden -override explore-files -params 0..1 %{
+  explore-files-display "ls -v --dereference --group-directories-first --indicator-style=slash %sh(test $kak_opt_explore_files_show_hidden = true && echo --almost-all)" %arg(1)
+}
+
+# explore.kak delete selected files
+define-command -hidden explore-files-delete-ask %{
+  explore-files-paths
+  prompt "Trash '%reg(.)'? " '%sh{ test $kak_text = y && echo explore-files-delete || echo nop }'
+}
+
+define-command -hidden explore-files-delete %{
+  echo %sh{ trash-put "$kak_opt_explore_files_paths" }
+  execute-keys dd
+}
+
+# explore.kak delete selected files
+define-command -hidden explore-files-run %{
+  explore-files-paths
+  echo %sh{ opener "$kak_opt_explore_files_paths" }
+}
+
+# explore.kak print full path of selected files
+define-command -hidden explore-files-paths %{
+  execute-keys '<a-s>;<a-x>_'
+  set-option current explore_files_paths "%val(bufname)/%reg(.)"
+}
+
+# explore.kak mappings
+hook global WinSetOption filetype=directory %{
+  map window normal r ': explore-files-run<ret>'
+  map window normal d ': explore-files-delete-ask<ret>'
+}

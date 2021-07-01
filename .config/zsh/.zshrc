@@ -36,6 +36,7 @@ alias up='gh su foreach git pull origin HEAD'
 h2d() { echo $((0x$@)) }
 d2h() { echo $(([##16]$@)) }
 e() { grep "^$@.*" ~/Downloads/edict2u ; }
+f() { fff "$@"; cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" }
 md5dir() { find "$@" -type f -exec md5sum {} \; > "$@.md5" ; }
 
 unoflash() {
