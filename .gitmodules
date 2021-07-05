@@ -1,3 +1,0 @@
-[submodule ".config/kak/autoload/explore.kak"]
-	path = .config/kak/autoload/explore.kak
-	url = https://github.com/Delapouite/explore.kak
