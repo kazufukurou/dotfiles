@@ -3,7 +3,7 @@
 if [[ $(uname -s) == "Darwin" ]] ; then
   open "$1"
 else
-  fileType=$(file -b --mime-type "$1")
+  fileType=$(file --brief --dereference --mime-type "$1")
   fileDir="${1%/*}"
   fileName="${1##*/}"
   fileNameWithoutExt="${fileName%.*}"
