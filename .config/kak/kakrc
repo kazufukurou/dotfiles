@@ -10,17 +10,16 @@ set-option global ui_options ncurses_assistant=none
 # highlight trailing whitespace
 add-highlighter global/ regex \h+$ 0:Error
 
-# paste from system clipboard
+# fix default mappings
 map global normal / /(?i)
 map global normal <minus> <a-i>
 map global normal _ <a-a>
-map normal = <a-s>
+map global normal = <a-s>
 map global normal + <a-.>
 map global normal \' <a-semicolon>
 map global normal D C
 map global normal C <a-C>
 map global normal <a-a> ''
-# map global normal <a-c> ''
 map global normal <a-i> ''
 map global normal <a-s> ''
 map global normal <a-.> ''
