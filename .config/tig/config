@@ -1,0 +1,5 @@
+set focus-child = no
+
+color cursor default black
+color title-focus default black
+color title-blur blue black
