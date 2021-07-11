@@ -14,7 +14,6 @@ alias k='$EDITOR'
 alias kr='$EDITOR $XDG_CONFIG_HOME/kak/kakrc'
 alias kz='$EDITOR $ZDOTDIR/.zshrc'
 alias kze='$EDITOR $HOME/.zshenv'
-alias m='mpvd --shuffle'
 alias mkdir='mkdir --parents --verbose'
 alias mnt='sudo mount -o gid=users,fmask=113,dmask=002'
 alias mv='mv --interactive --verbose'
@@ -33,10 +32,10 @@ alias tunnel='ssh -C2qTnN -D 8080'
 alias umnt='sudo umount'
 alias up='gh su foreach git pull origin HEAD'
 
-h2d() { echo $((0x$@)) }
-d2h() { echo $(([##16]$@)) }
+h2d() { echo $((0x$@)); }
+d2h() { echo $(([##16]$@)); }
 e() { grep "^$@.*" ~/Downloads/edict2u ; }
-f() { fff "$@"; cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" }
+f() { fff "$@"; cd "$(cat "$XDG_CACHE_HOME/fff/.fff_d")"; }
 md5dir() { find "$@" -type f -exec md5sum {} \; > "$@.md5" ; }
 
 unoflash() {

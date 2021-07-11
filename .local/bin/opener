@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 if [[ $(uname -s) == "Darwin" ]] ; then
   open "$1"
 else
+  fileInfo=$(file --brief --dereference "$1")
   fileType=$(file --brief --dereference --mime-type "$1")
   fileDir="${1%/*}"
   fileName="${1##*/}"
@@ -16,6 +19,11 @@ else
     image/*) imv -u nearest_neighbour -n "$fileName" "$fileDir" &> /dev/null ;;
     text/html) qutebrowser "$1" ;;
     video/*) mpv "$1" ;;
-    *) echo $fileType
+    *)
+      case "$fileInfo" in
+        Audio\ file*) mpvd "$1" ;;
+        *) echo "$fileType" ;;
+      esac
+      ;;
   esac
 fi

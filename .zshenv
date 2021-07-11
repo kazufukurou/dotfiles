@@ -24,6 +24,7 @@ export VISUAL=$EDITOR
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
+export TERM_RESULT="$XDG_CACHE_HOME/term_result"
 export WAYFIRE_CONFIG_FILE="$XDG_CONFIG_HOME/wayfire/wayfire.conf"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export _JAVA_AWT_WM_NONREPARENTING=1

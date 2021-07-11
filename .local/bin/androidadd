@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ $# -eq 2 ]; then
   dir="/etc/udev/rules.d"
@@ -8,5 +8,5 @@ if [ $# -eq 2 ]; then
   echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"$1\", ATTR{idProduct}==\"$2\", MODE=\"0666\"" >> "$file"
   udevadm control --reload-rules
 else
-  echo "Usage: `basename $0` VENDOR PRODUCT"
+  echo "Usage: $(basename $0) VENDOR PRODUCT"
 fi

@@ -1,30 +1,30 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 socket=$HOME/.config/mpv/socket
 if [[ $1 == "--help" ]]; then
-  echo "Usage: `basename $0` [PATH].."
-  echo "   or: `basename $0` [--play|--next|--prev|--help]"
+  app=$(basename $0)
+  echo "Usage: $app [PATH].."
+  echo "   or: $app [--play|--next|--prev|--help]"
 elif [[ $1 == "--play" ]]; then
-  echo "cycle pause" | socat - $socket
-elif [[ $1 =~ ^--(next|prev)$ ]] ; then
-  echo "playlist${1:1}" | socat - $socket
+  echo "cycle pause" | socat - "$socket"
+elif [[ $1 =~ ^--(next|prev)$ ]]; then
+  echo "playlist${1:1}" | socat - "$socket"
 else
   file="$1"
-  echo $file
   [[ -n $file && $file != /* ]] && file="$PWD/$file"
   dir="${file%/*}"
   paths=("$dir"/*)
   mapfile -t shuffledPaths < <(shuf -e "${paths[@]}")
   if [[ -e $file ]]; then
-    echo "stop" | socat - $socket
-    echo "loadfile \"$file\" append" | socat - $socket
+    echo "stop" | socat - "$socket"
+    echo "loadfile \"$file\" append" | socat - "$socket"
     for path in "${shuffledPaths[@]}"; do
-      [[ $path != $file ]] && echo "loadfile \"$path\" append" | socat - $socket
+      [[ $path != $file ]] && echo "loadfile \"$path\" append" | socat - "$socket"
     done
-    echo "playlist-play-index 0" | socat - $socket
+    echo "playlist-play-index 0" | socat - "$socket"
     [[ $? -ne 0 ]] && mpv "$file"
   else
-    mpv --idle=yes --input-ipc-server=$socket $@
+    mpv --idle=yes --input-ipc-server="$socket" $@
   fi
 fi
 exit 0

@@ -1,9 +1,6 @@
 font:
   size: 15.0
 
-window:
-  decorations: none
-
 cursor:
   style:
     shape: Block

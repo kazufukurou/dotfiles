@@ -1,28 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-main() {
-  alacritty -e uim-fep -u anthy-utf8 -s none
-}
+set -euo pipefail
 
-run() {
-  alacritty -o window.dimensions.columns=40 window.dimensions.lines=8 -e term apps
-}
+uim="uim-fep -u anthy-utf8 -s none"
 
-quteedit() {
-  alacritty \
-    -o window.dimensions.columns=40 window.dimensions.lines=1 \
-    -e uim-fep -u anthy-utf8 -s none -e term edit $1
-}
+show() { alacritty -o window.dimensions.columns="$1" window.dimensions.lines="$2" $3; }
+main() { show 0 0 "-e $uim"; }
+apps() { show 40 8 "-e term get_apps"; }
+edit() { show 80 1 "-e $uim -e term get_edit $1"; }
+files() { show 120 30 "-e term get_files"; }
+matches() { show 120 30 "-e term get_matches"; }
+filepicker() { show 120 30 "-e fff -p"; }
 
-apps() {
-  (echo idea && \
-    rg --no-filename --only-matching -r '$2' '.*Exec=(.*/)?([^ ]+)' \
-    $(rg Terminal=true /usr/share/applications --files-without-match) \
-  ) | sort -u | fzf --info hidden | (nohup $SHELL &) > /dev/null 2>&1
-}
+get_apps() { print_apps | sort -u | fzf --info hidden | (nohup $SHELL &) > /dev/null 2>&1; }
+get_edit() { echo "" | fzf --info hidden --print-query --query "$(cat $1)" > "$1"; }
+get_files() { fzf > "$TERM_RESULT"; }
+get_matches() { rg_all | fzf --delimiter=':' --nth='3..' > "$TERM_RESULT"; }
 
-edit() {
-  rlwrap -S "> " -pBlue -P "$(cat $1)" -o cat > $1
-}
-
-"${1:-main}" "$2"
+rg_all() { rg --line-number --no-column --no-heading --color=never ''; }
+rg_gui_apps() { rg Terminal=true /usr/share/applications --files-without-match; }
+rg_app_cmds() { rg --no-filename --only-matching -r '$2' '.*Exec=(.*/)?([^ ]+)' $(rg_gui_apps); }
+print_apps() { echo idea && rg_app_cmds; }
+"${1:-main}" "${2:-}"

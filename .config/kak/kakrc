@@ -26,17 +26,48 @@ map global normal <a-.> ''
 map global normal <a-semicolon> ''
 
 # user mappings
-map global user c ':comment-line<ret>' -docstring 'comment line'
-map global user f ': find-file ' -docstring 'open file'
+map global user c ': comment-line<ret>' -docstring 'comment line'
+map global user f ': find-file<ret>' -docstring 'find file'
+map global user F ': pick-file<ret>' -docstring 'pick file'
+map global user g ': find-text<ret>' -docstring 'find text'
 map global user p '<a-!>wl-paste -n<ret>' -docstring 'paste from system clipboard after selection'
 map global user P '!wl-paste -n<ret>' -docstring 'paste from system clipboard before selection'
 map global user y '<a-|> wl-copy<ret>' -docstring 'yank to system clipboard'
 map global user q ': quit!<ret>' -docstring 'quit without saving'
 map global user w ': write-all<ret>' -docstring 'write all'
 map global user z ': write-all-quit<ret>' -docstring 'write all and quit'
+declare-user-mode run
+map global user r ': enter-user-mode run<ret>' -docstring 'run mode'
+map global run r ': make<ret>' -docstring 'make'
+map global run l ': lint<ret>' -docstring 'lint'
 
-define-command find-file -params 1 -shell-script-candidates %{ fd --type file } %{ edit %arg{1} }
+define-command pick-file -docstring 'pick file' %{nop %sh{
+  file=$(term filepicker && cat "$XDG_CACHE_HOME/fff/opened_file")
+  printf %s\\n "eval -client $kak_client edit -existing '%{$file}'" | kak -p "$kak_session"
+}}
+
+define-command find-file -docstring 'find file' %{nop %sh{
+  term files > "$TERM_RESULT"
+  file=$(cat "$TERM_RESULT")
+  printf %s\\n "eval -client $kak_client edit -existing '%{$file}'" | kak -p "$kak_session"
+  rm -r "$TERM_RESULT"
+}}
+
+define-command find-text -docstring 'find text' %{nop %sh{
+  term matches > "$TERM_RESULT"
+  file=$(cat "$TERM_RESULT" | cut -d: -f1)
+  line=$(cat "$TERM_RESULT" | cut -d: -f2)
+  printf %s\\n "eval -client $kak_client edit -existing '%{$file}' '$line'" | kak -p "$kak_session"
+  rm -r "$TERM_RESULT"
+}}
 
 # make man readonly
 hook global WinSetOption filetype=man %{ set buffer readonly true }
 
+hook global BufSetOption filetype=sh %{
+  set-option buffer lintcmd "shellcheck -fgcc -Cnever"
+}
+
+hook global BufSetOption filetype=lua %{
+  set-option buffer makecmd "love ."
+}

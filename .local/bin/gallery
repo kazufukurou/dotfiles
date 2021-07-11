@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 dir="$XDG_CACHE_HOME/gallery"
 index="$dir/index.html"
@@ -17,8 +17,8 @@ echo '<!DOCTYPE HTML>
 body { background-color: #808080; }
 img { width: 160px; }
 .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
 }
 </style>
 </head>
@@ -27,7 +27,7 @@ img { width: 160px; }
 
 shopt -s nullglob
 for file in *.{jpg,png,svg}; do
-    echo "<img src="$(pwd)/$file"/>" >> "$index"
+  echo '<img src="'$(pwd)$file'"/>' >> "$index"
 done
 
 echo '

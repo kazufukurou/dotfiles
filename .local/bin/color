@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 for i in $(seq 0 ${1:-15}) ; do
   printf "$(tput setaf $i) %3s $(tput setab $i)   $(tput sgr0)" $i
