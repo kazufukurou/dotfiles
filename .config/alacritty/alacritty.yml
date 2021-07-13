@@ -34,3 +34,7 @@ colors:
     magenta: '0xd0a0d0'
     cyan:    '0x60d0d0'
     white:   '0xffffff'
+
+key_bindings:
+  - { key: V, mods: Control|Shift, mode: ~Vi, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
