@@ -32,7 +32,6 @@ map global user F ': pick-file<ret>' -docstring 'pick file'
 map global user g ': find-text<ret>' -docstring 'find text'
 map global user p '<a-!>wl-paste -n<ret>' -docstring 'paste from system clipboard after selection'
 map global user P '!wl-paste -n<ret>' -docstring 'paste from system clipboard before selection'
-map global user y '<a-|> wl-copy<ret>' -docstring 'yank to system clipboard'
 map global user q ': quit!<ret>' -docstring 'quit without saving'
 map global user w ': write-all<ret>' -docstring 'write all'
 map global user z ': write-all-quit<ret>' -docstring 'write all and quit'
@@ -59,6 +58,12 @@ define-command find-text -docstring 'find text' %{nop %sh{
   line=$(cat "$TERM_RESULT" | cut -d: -f2)
   printf %s\\n "eval -client $kak_client edit -existing '%{$file}' '$line'" | kak -p "$kak_session"
   rm -r "$TERM_RESULT"
+}}
+
+# sync yank register with system clipboard
+hook global RegisterModified '"' %{ nop %sh{
+  copy() { [ "$(uname)" = "Darwin" ] && pbcopy || wl-copy > /dev/null 2>&1 ; }
+  printf %s "$kak_main_reg_dquote" | copy
 }}
 
 # make man readonly
