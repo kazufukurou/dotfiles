@@ -16,6 +16,7 @@ map global normal <minus> <a-i>
 map global normal _ <a-a>
 map global normal = <a-s>
 map global normal + <a-.>
+map global normal ^ <a-j>
 map global normal \' <a-semicolon>
 map global normal D C
 map global normal C <a-C>
@@ -30,8 +31,6 @@ map global user c ': comment-line<ret>' -docstring 'comment line'
 map global user f ': find-file<ret>' -docstring 'find file'
 map global user F ': pick-file<ret>' -docstring 'pick file'
 map global user g ': find-text<ret>' -docstring 'find text'
-map global user p '<a-!>wl-paste -n<ret>' -docstring 'paste from system clipboard after selection'
-map global user P '!wl-paste -n<ret>' -docstring 'paste from system clipboard before selection'
 map global user q ': quit!<ret>' -docstring 'quit without saving'
 map global user w ': write-all<ret>' -docstring 'write all'
 map global user z ': write-all-quit<ret>' -docstring 'write all and quit'
@@ -39,6 +38,11 @@ declare-user-mode run
 map global user r ': enter-user-mode run<ret>' -docstring 'run mode'
 map global run r ': make<ret>' -docstring 'make'
 map global run l ': lint<ret>' -docstring 'lint'
+evaluate-commands %sh{
+  [ "$(uname)" = "Darwin" ] && paste="pbpaste" || paste="wl-paste -n"
+  printf "map global user -docstring 'paste (after) from clipboard' p '<a-!>%s<ret>'\n" "$paste"
+  printf "map global user -docstring 'paste (before) from clipboard' P '!%s<ret>'\n" "$paste"
+}
 
 define-command pick-file -docstring 'pick file' %{nop %sh{
   file=$(term filepicker && cat "$XDG_CACHE_HOME/fff/opened_file")
